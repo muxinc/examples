@@ -1,0 +1,5 @@
+{
+  "version": 2,
+  "name": "mux-playground",
+  "builds": [{ "src": "videojs/package.json", "use": "@now/static-build" }]
+}

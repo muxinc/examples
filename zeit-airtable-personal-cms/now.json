@@ -1,0 +1,36 @@
+{
+  "version": 2,
+  "alias": ["airtable-video-cms.now.sh"],
+  "name": "airtable-video-cms",
+  "env": {
+    "AIRTABLE_API_KEY": "@airtable-api-key",
+    "MUX_TOKEN_ID": "@mux-token-id",
+    "MUX_TOKEN_SECRET": "@mux-token-secret"
+  },
+  "builds": [
+    { "src": "api/*.js", "use": "@now/node" },
+    { "src": "next.config.js", "use": "@now/next" }
+  ],
+  "routes": [
+    {
+      "src": "/api/videos",
+      "dest": "/api/list-videos.js",
+      "methods": ["GET"]
+    },
+    {
+      "src": "/api/videos",
+      "dest": "/api/add-video.js",
+      "methods": ["POST"]
+    },
+    {
+      "src": "/api/videos/?(?<id>[^/]*)",
+      "dest": "/api/get-video.js?id=$id",
+      "methods": ["GET"]
+    },
+    {
+      "src": "/_mux",
+      "dest": "/api/mux-callback.js",
+      "methods": ["POST"]
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "scripts": {
+    "now-build": "parcel build index.html --public-url /videojs/"
+  },
+  "dependencies": {
+    "parcel": "^1.11.0",
+    "video.js": "^7.4.1"
+  }
+}

@@ -1,0 +1,46 @@
+Arguments: 
+  /Users/mmcc/.nvm/versions/node/v9.11.1/bin/node /Users/mmcc/.yarn/bin/yarn.js add hlsjs
+
+PATH: 
+  /Users/mmcc/.nvm/versions/node/v9.11.1/bin:/Users/mmcc/.yarn/bin:/Users/mmcc/.config/yarn/global/node_modules/.bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/local/go/bin:/Library/Frameworks/Mono.framework/Versions/Current/Commands:/Users/mmcc/.yarn/bin:/Users/mmcc/.config/yarn/global/node_modules/.bin:/Users/mmcc/Library/Android/sdk/emulator:/Users/mmcc/Library/Android/sdk/tools:/Users/mmcc/Library/Android/sdk/tools/bin:/Users/mmcc/Library/Android/sdk/platform-tools:/Users/mmcc/Library/Android/sdk/emulator:/Users/mmcc/Library/Android/sdk/tools:/Users/mmcc/Library/Android/sdk/tools/bin:/Users/mmcc/Library/Android/sdk/platform-tools
+
+Yarn version: 
+  1.12.3
+
+Node version: 
+  9.11.1
+
+Platform: 
+  darwin x64
+
+Trace: 
+  Error: https://registry.yarnpkg.com/hlsjs: Not found
+      at Request.params.callback [as _callback] (/Users/mmcc/.yarn/lib/cli.js:65894:18)
+      at Request.self.callback (/Users/mmcc/.yarn/lib/cli.js:129018:22)
+      at Request.emit (events.js:180:13)
+      at Request.<anonymous> (/Users/mmcc/.yarn/lib/cli.js:129990:10)
+      at Request.emit (events.js:180:13)
+      at IncomingMessage.<anonymous> (/Users/mmcc/.yarn/lib/cli.js:129912:12)
+      at Object.onceWrapper (events.js:272:13)
+      at IncomingMessage.emit (events.js:185:15)
+      at endReadableNT (_stream_readable.js:1106:12)
+      at process._tickCallback (internal/process/next_tick.js:178:19)
+
+npm manifest: 
+  {
+    "name": "hlsjs",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+      "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "author": "",
+    "license": "ISC"
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile

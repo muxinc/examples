@@ -1,0 +1,9 @@
+{
+  "scripts": {
+    "now-build": "parcel build index.html --public-url /hlsjs/"
+  },
+  "dependencies": {
+    "hls.js": "^0.12.2",
+    "parcel": "^1.11.0"
+  }
+}
