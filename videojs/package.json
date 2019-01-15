@@ -4,6 +4,7 @@
   },
   "dependencies": {
     "parcel": "^1.11.0",
+    "sass": "^1.16.0",
     "video.js": "^7.4.1"
   }
 }
