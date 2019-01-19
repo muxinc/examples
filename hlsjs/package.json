@@ -1,6 +1,7 @@
 {
   "scripts": {
-    "now-build": "parcel build index.html --public-url /hlsjs/"
+    "now-build": "parcel build index.html --public-url /hlsjs/",
+    "start": "yarn parcel serve index.html"
   },
   "dependencies": {
     "hls.js": "^0.12.2",

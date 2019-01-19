@@ -1,6 +1,7 @@
 {
   "version": 2,
   "name": "mux-playground",
+  "alias": ["mux-playground.now.sh"],
   "builds": [
     { "src": "videojs/package.json", "use": "@now/static-build" },
     { "src": "hlsjs/package.json", "use": "@now/static-build" },
