@@ -1,5 +1,6 @@
 import Hls from 'hls.js';
 import '../common/style.scss';
+import './hlsjs.scss';
 
 const container = document.getElementById('app');
 const params = new URLSearchParams(window.location.search.substring(1));

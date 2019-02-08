@@ -1,6 +1,7 @@
 {
   "scripts": {
-    "now-build": "parcel build index.html --public-url /videojs/"
+    "now-build": "parcel build index.html --public-url /videojs/",
+    "start": "yarn parcel serve index.html"
   },
   "dependencies": {
     "parcel": "^1.11.0",

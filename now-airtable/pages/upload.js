@@ -1,4 +1,5 @@
 import Router from 'next/router';
+import Layout from '../components/layout';
 
 let UpChunk;
 if (typeof window !== 'undefined') {
@@ -46,7 +47,7 @@ class Upload extends React.Component {
   };
 
   uploadFinished = event => {
-    console.log('finished', event);
+    console.log('finished!!', event);
     this.setState({ progress: 100, status: 'uploaded' });
 
     this.pollAsset();
@@ -60,46 +61,50 @@ class Upload extends React.Component {
     this.setState({ description: e.target.value });
   };
 
-  finishEditing = () => {
-    this.setState({ status: 'pick_file' });
-  };
-
-  onAddFile = e => {
-    console.log('this thing happened');
+  upload = () => {
     this.uploader = UpChunk.createUpload({
       endpoint: this.getUploadUrl,
-      file: e.target.files[0],
+      file: this.file,
       chunkSize: 5120,
     });
-
     this.setState({ status: 'uploading' });
 
     this.uploader.on('progress', this.updateProgress);
     this.uploader.on('success', this.uploadFinished);
   };
 
+  onAddFile = e => {
+    this.file = e.target.files[0];
+  };
+
   pollAsset = async () => {
+    console.log('aww yeah we pollin now');
     const res = await fetch(
       `https://airtable-video-cms.now.sh/api/videos/${this.state.video.id}`
     );
-    const video = res.json();
-    if (video.status === 'processing') {
-      setTimeout(() => this.pollAsset(), 750);
+    const video = await res.json();
+
+    if (
+      video.status === 'waiting for upload' ||
+      video.status === 'processing'
+    ) {
+      setTimeout(this.pollAsset, 750);
     }
 
-    this.state.video = video;
+    this.setState(video);
   };
 
   render() {
-    if (this.state.status === 'ready') {
-    }
+    console.log(this.state.status);
     return (
-      <div>
+      <Layout>
+        <h1>Upload a new video</h1>
         {this.state.error && <div className="error">{this.state.error}</div>}
         {this.state.status === 'editing_details' && (
-          <div>
+          <div className="form">
             <input
               type="text"
+              className="title"
               onChange={this.changeTitle}
               value={this.state.title}
               placeholder="Some Great Title"
@@ -109,12 +114,9 @@ class Upload extends React.Component {
               placeholder="Wow what an interesting description."
               value={this.state.description}
             />
-            <button onClick={this.finishEditing}>Pick a file</button>
+            <input type="file" onChange={this.onAddFile} />
+            <button onClick={this.upload}>Upload</button>
           </div>
-        )}
-
-        {this.state.status === 'pick_file' && (
-          <input type="file" onChange={this.onAddFile} />
         )}
 
         {this.state.status === 'uploading' && (
@@ -122,6 +124,7 @@ class Upload extends React.Component {
         )}
 
         {(this.state.status === 'uploaded' ||
+          this.state.status === 'waiting for upload' ||
           this.state.status === 'processing') && (
           <div className="processing">
             Your file is uploaded! Waiting for the asset to be playable...
@@ -137,7 +140,34 @@ class Upload extends React.Component {
             )}
           </div>
         )}
-      </div>
+
+        <style jsx>{`
+          .form {
+            display: flex;
+            flex-direction: column;
+          }
+
+          .form input,
+          .form textarea,
+          .form button {
+            margin: 0.5em 0;
+            padding: 0.5em;
+            border: 1px solid #ccc;
+          }
+
+          .form textarea {
+            height: 100px;
+          }
+
+          .form button {
+            display: block;
+            background-color: #fff;
+            padding: 1em 0;
+            cursor: pointer;
+            text-align: center;
+          }
+        `}</style>
+      </Layout>
     );
   }
 }

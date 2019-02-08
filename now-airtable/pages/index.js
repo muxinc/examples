@@ -1,6 +1,7 @@
 import fetch from 'isomorphic-unfetch';
 import Link from 'next/link';
 import Layout from '../components/layout';
+import { colors } from '../utils/theme';
 
 const Thumbnail = video => (
   <div>
@@ -20,13 +21,15 @@ const Thumbnail = video => (
 
 const Index = ({ videos }) => (
   <Layout>
-    <h1>MeTube</h1>
-    <p>Total Videos: {videos.length}</p>
+    <h1>MeTube: Now + Airtable + Mux</h1>
+    <p>
+      Total Videos: <span className="total">{videos.length}</span>
+    </p>
 
     <ul>
       {videos.map(video => (
         <li key={video.id} className={video.status}>
-          <Link href={{ pathname: '/show', query: { id: video.id } }}>
+          <Link href={{ pathname: '/show', query: { id: video.id } }} prefetch>
             <a>
               <strong>{video.title}</strong>
               <Thumbnail {...video} />
@@ -52,10 +55,15 @@ const Index = ({ videos }) => (
         display: block;
         width: 200px;
         list-style: none;
+        margin: 0.5em;
       }
 
       .ready {
-        color: green;
+        color: ${colors.success()};
+      }
+
+      .total {
+        color: ${colors.success()};
       }
     `}</style>
   </Layout>
@@ -64,6 +72,8 @@ const Index = ({ videos }) => (
 Index.getInitialProps = async ({ req }) => {
   const res = await fetch('https://airtable-video-cms.now.sh/api/videos');
   const allVideos = await res.json();
+
+  console.log(allVideos);
 
   const ready = allVideos.filter(v => v.status === 'ready');
   return { videos: ready };

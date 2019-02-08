@@ -1,5 +1,5 @@
 export default ({ children }) => (
-  <div>
+  <div className="container">
     {children}
 
     <style jsx global>{`
@@ -7,6 +7,13 @@ export default ({ children }) => (
         background: #000;
         font: 11px menlo;
         color: #fff;
+      }
+    `}</style>
+
+    <style jsx>{`
+      .container {
+        max-width: 720px;
+        margin: 0 auto;
       }
     `}</style>
   </div>

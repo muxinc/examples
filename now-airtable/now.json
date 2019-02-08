@@ -4,6 +4,7 @@
   "name": "airtable-video-cms",
   "env": {
     "AIRTABLE_API_KEY": "@airtable-api-key",
+    "AIRTABLE_BASE": "@airtable-base",
     "MUX_TOKEN_ID": "@mux-token-id",
     "MUX_TOKEN_SECRET": "@mux-token-secret"
   },

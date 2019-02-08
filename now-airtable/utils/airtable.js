@@ -3,10 +3,10 @@ const { invert } = require('lodash');
 
 Airtable.configure({
   endpointUrl: 'https://api.airtable.com',
-  apiKey: 'keydMdrSd0ASJRviv',
+  apiKey: process.env.AIRTABLE_TOKEN,
 });
 
-const base = Airtable.base('appcyzLQQXjEDGegb');
+const base = Airtable.base(process.env.AIRTABLE_BASE);
 
 const TABLE_NAME = 'Videos';
 
@@ -66,8 +66,9 @@ const listVideos = async page => {
   let videos = [];
 
   await base(TABLE_NAME)
-    .select()
+    .select({ sort: [{ field: 'ID', direction: 'desc' }] })
     .eachPage((records, fetchNextPage) => {
+      console.log(records);
       videos = [...videos, ...records.map(view)];
 
       fetchNextPage();

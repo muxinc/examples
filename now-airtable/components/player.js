@@ -22,7 +22,18 @@ class Player extends React.Component {
   }
 
   render() {
-    return <video ref={this.player} preload="true" controls />;
+    return (
+      <div>
+        <video ref={this.player} preload="true" controls />
+
+        <style jsx>{`
+          video {
+            max-width: 100%;
+            margin: 0 auto;
+          }
+        `}</style>
+      </div>
+    );
   }
 }
 
