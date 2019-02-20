@@ -1,0 +1,28 @@
+.NavArrow {
+  margin: 0 24px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.NavArrow__wrapper {
+  height: 100%;
+  justify-content: space-around;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.NavArrow__text {
+  color: #c8c7c7;
+  opacity: 0.4;
+  font-size: 0.8em;
+  margin: 11px 0;
+}
+
+.NavArrow_img {
+  margin: 15px 0 0 0;
+}

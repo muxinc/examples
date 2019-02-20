@@ -1,0 +1,94 @@
+.NavBar {
+  display: flex;
+  align-items: center;
+  height: 60px;
+  min-height: 60px;
+  color: #fff;
+  border: solid 1px #222222;
+  background-color: #323232;
+  justify-content: flex-start;
+  padding: 0 15px;
+
+  .NavBar__logoContainer {
+    margin: 0 0 0 auto;
+    width: 47%;
+  }
+
+  form {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-around;
+    padding: 20px;
+  }
+}
+
+.NavBar__formItem {
+  display: flex;
+  flex-grow: 3;
+  align-items: center;
+  text-align: right;
+  margin: 10px 0;
+
+  label {
+    width: 100px;
+    margin: 0 20px 0 0;
+  }
+
+  input {
+    font-size: 1em;
+    flex-grow: 1;
+    height: 30px;
+  }
+}
+
+.NavBar__submitButtonContainer {
+  flex-grow: 1;
+  text-align: right;
+
+  .NavBar__submitButton {
+    width: 100%;
+    max-width: 300px;
+    height: 38px;
+    color: #ffffff;
+    border: none;
+    background-color: #ff5500;;
+    text-transform: uppercase;
+    font-size: 1em;
+    margin: 10px 0 10px 10px;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}
+
+.NavBar__LoginContainer {
+  .GoogleLoginText {
+    padding: 7px;
+  }
+
+  .NavBar__googleLoginButton {
+    font-family: 'Roboto-Medium', sans-serif;
+    display: flex;
+    align-items: center;
+    padding: 0;
+    background-color: #323232;
+    color: white;
+    font-size: 0.8em;
+    text-align: left;
+    border-color: transparent;
+
+    &:hover {
+      cursor: pointer;
+    }
+
+    &:focus {
+      outline: 0;
+    }
+  }
+}
+
+.NavBar__profileImage {
+  border-radius: 20px;
+}

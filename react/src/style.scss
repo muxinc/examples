@@ -1,0 +1,38 @@
+html, body {
+  font-family: 'Roboto Mono', monospace;
+  background-color: #383838;
+  margin: 0;
+  height: 100%;
+}
+
+.container {
+  height: 100%;
+  display: flex;
+  flex: 1;
+
+  &__image {
+    width: 100px;
+    height: auto;
+  }
+}
+
+.left {
+  text-align: left;
+}
+
+#root{
+  height: calc(100% - 120px);
+  width: 100%;
+  //display: flex;
+  //flex-direction: column;
+  //flex: 1;
+}
+
+.Home {
+  width: 100%;
+}
+
+// VideoJS overrides
+.vjs-resize-manager {
+  border: 0; // Safari iframes have a white border;
+}

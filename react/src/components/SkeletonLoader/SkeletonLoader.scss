@@ -1,0 +1,22 @@
+.SkeletonLoaderContainer {
+  width: 100%;
+  height: 100%;
+}
+
+.SkeletonLoader {
+  width: 100%;
+  height: 100%;
+  background-image: linear-gradient( 90deg, rgba(244, 244, 244, 0), rgba(244, 244, 244, 0.5) 50%, rgba(244, 244, 244, 0) 80% );
+  background-repeat: repeat-y;
+  background-size: 25% 100%;
+  background-position: 0 0;
+
+  animation: shine 2s infinite;
+}
+
+@keyframes shine {
+  to {
+    background-position:
+      150% 0; /* move highlight to right */
+  }
+}

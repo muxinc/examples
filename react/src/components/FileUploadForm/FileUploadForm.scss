@@ -1,0 +1,38 @@
+.FileUploadForm {
+  display: flex;
+  text-align: center;
+  align-items: center;
+  margin: 5px 0;
+  flex-direction: column;
+
+  input[type="file"] {
+    display: none;
+  }
+
+  .FileUploadForm__label {
+    color: #fff;
+    font-weight: 200;
+    font-size: 0.8em;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  .react-spinner {
+    top: 42%;
+    height: 15px;
+  }
+}
+
+.FileUploadForm__text {
+  color: #ffffff;
+  margin: 6px 0 0 0;
+  font-size: 0.8em;
+}
+
+.FileUploadForm__uploadButton {
+  width: 100%;
+  min-height: 40px;
+}
+
