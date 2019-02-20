@@ -1,0 +1,49 @@
+.Login, .Login__container {
+  height: 100%;
+  align-items: center;
+  justify-content: space-around;
+  display: flex;
+  flex-flow: column;
+  flex: 1;
+}
+
+.Login__textContainer {
+  .Login__googleLoginText {
+    padding: 7px;
+    color: #fff;
+    width: 255px;
+    text-align: center;
+    font-size: 1.2rem;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.5;
+    letter-spacing: normal;
+  }
+}
+
+.Login__googleLoginButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 15px;
+  margin: 0 auto;
+  color: white;
+  font-size: 0.8em;
+  background-color: #4D87EC;
+  border-color: #383838;
+
+  .Login__googleLoginButtonText {
+    padding: 0 0 0 10px;
+    font-size: 0.9rem;
+    font-family: 'Roboto-Medium', sans-serif;
+  }
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  &:focus {
+    outline: 0;
+  }
+}

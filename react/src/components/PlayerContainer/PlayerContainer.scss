@@ -1,0 +1,24 @@
+.PlayerContainer {
+  display: block;
+  align-items: center;
+  background-color: #000000;
+}
+
+.PlayerContainer__statusContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  margin: 0 auto;
+}
+
+.PlayerContainer__statusMessage {
+  color: #fff;
+  font-weight: 200;
+  letter-spacing: 2px;
+  margin: 0 10px;
+  text-align: center;
+  display: flex;
+  min-height: 232px;
+  align-items: center;
+}

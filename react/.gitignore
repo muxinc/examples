@@ -1,0 +1,21 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+coverage
+
+# Dependency directories
+node_modules
+
+# Optional npm cache directory
+.npm
+
+# Prod Bundle
+# build
+
+# IntelliJ
+.idea
+*.iws
+*.iml
+*.ipr
+.idea/
