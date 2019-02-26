@@ -1,8 +1,9 @@
 {
   "scripts": {
-    "api-start": "micro",
-    "api-dev": "micro-dev",
-    "deploy": "now && now alias set"
+    "api-start": "yarn micro",
+    "api-dev": "yarn micro-dev",
+    "ui-dev": "yarn next",
+    "deploy": "eval `cat .env` && now -e NODE_ENV=production -e AIRTABLE_API_KEY -e AIRTABLE_BASE -e MANAGEMENT_PASSWORD -e MUX_TOKEN_ID -e MUX_TOKEN_SECRET && now alias set"
   },
   "dependencies": {
     "@mux/mux-node": "^2.2.0",
@@ -13,11 +14,12 @@
     "lodash": "^4.17.11",
     "micro": "^9.3.3",
     "micro-basic-auth": "^1.1.1",
-    "next": "^7.0.2",
-    "react": "^16.7.0",
-    "react-dom": "^16.7.0"
+    "next": "^8.0.0",
+    "react": "^16.8.1",
+    "react-dom": "^16.8.1"
   },
   "devDependencies": {
-    "micro-dev": "^3.0.0"
+    "micro-dev": "^3.0.0",
+    "node-env-run": "3.0.2"
   }
 }

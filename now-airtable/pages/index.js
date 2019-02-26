@@ -2,6 +2,7 @@ import fetch from 'isomorphic-unfetch';
 import Link from 'next/link';
 import Layout from '../components/layout';
 import { colors } from '../utils/theme';
+import { path } from '../utils/config';
 
 const Thumbnail = video => (
   <div>
@@ -70,10 +71,8 @@ const Index = ({ videos }) => (
 );
 
 Index.getInitialProps = async ({ req }) => {
-  const res = await fetch('https://airtable-video-cms.now.sh/api/videos');
+  const res = await fetch(path(req, '/api/videos'));
   const allVideos = await res.json();
-
-  console.log(allVideos);
 
   const ready = allVideos.filter(v => v.status === 'ready');
   return { videos: ready };

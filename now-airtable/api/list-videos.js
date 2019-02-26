@@ -5,11 +5,10 @@ const decorate = require('../utils/decorate');
 module.exports = decorate(async (req, res) => {
   try {
     const videos = await listVideos();
-    console.log(videos);
 
     send(res, 200, videos);
   } catch (err) {
-    console.log(err);
+    console.error(err);
     send(res, 500, { error: 'shrug emoji' });
   }
 });

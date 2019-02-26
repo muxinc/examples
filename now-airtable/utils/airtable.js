@@ -68,7 +68,6 @@ const listVideos = async page => {
   await base(TABLE_NAME)
     .select({ sort: [{ field: 'ID', direction: 'desc' }] })
     .eachPage((records, fetchNextPage) => {
-      console.log(records);
       videos = [...videos, ...records.map(view)];
 
       fetchNextPage();
