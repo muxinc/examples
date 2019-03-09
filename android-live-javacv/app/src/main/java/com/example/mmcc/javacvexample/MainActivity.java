@@ -40,6 +40,7 @@ public class MainActivity extends Activity implements OnClickListener {
     private final static String CLASS_LABEL = "MainActivity";
     private final static String LOG_TAG = CLASS_LABEL;
 
+    /* This isn't a live RTMP endpoint. You should replace this line with your own! */
     private String ffmpeg_link = "rtmp://live.mux.com/app/f5212894-e8ee-9eba-02e9-ac21c6249e0b";
 
     long startTime = 0;
