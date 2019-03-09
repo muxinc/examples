@@ -12,6 +12,7 @@ There are no management routes for deleting or editing assets, but you should ju
 
 - A copy of the [Airtable template](https://airtable.com/universe/expKKXTgmWJ76BmVL/airtable-personal-video-cms).
 - Your Airtable API key and base ID from above.
+- A Zeit account.
 - Mux Access Token.
 
 ## Mux features used
