@@ -1,10 +1,8 @@
 // next.config.js
 module.exports = {
-  exportPathMap: async function(defaultPathMap) {
-    console.log(defaultPathMap);
-    return {
-      '/': { page: '/' },
-      '/foo': { page: '/show.js' },
-    };
+  target: 'serverless',
+  env: {
+    baseUrl: process.env.BASE_URL,
+    dev: process.env.NODE_ENV !== 'production',
   },
 };

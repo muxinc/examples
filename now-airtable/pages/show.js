@@ -1,8 +1,11 @@
 import fetch from 'isomorphic-unfetch';
+import Link from 'next/link';
+import getConfig from 'next/config';
+
 import Player from '../components/player';
 import Layout from '../components/layout';
-import Link from 'next/link';
 import { colors } from '../utils/theme';
+import { path } from '../utils/config';
 
 const Show = ({ video }) => (
   <Layout>
@@ -36,10 +39,8 @@ const Show = ({ video }) => (
   </Layout>
 );
 
-Show.getInitialProps = async ({ query }) => {
-  const res = await fetch(
-    `https://airtable-video-cms.now.sh/api/videos/${query.id}`
-  );
+Show.getInitialProps = async ({ req, query }) => {
+  const res = await fetch(path(req, `/api/videos/${query.id}`));
   const video = await res.json();
 
   return { video };

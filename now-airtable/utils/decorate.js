@@ -14,7 +14,7 @@ const authOptions = {
 
 const ALLOWED_DOMAINS = [
   'http://localhost:3000',
-  'https://airtable-video-cms.now.sh/api/upload',
+  'https://airtable-video-cms.now.sh',
 ];
 
 const checkOrigin = origin =>

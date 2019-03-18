@@ -1,10 +1,7 @@
 const Airtable = require('airtable');
 const { invert } = require('lodash');
 
-Airtable.configure({
-  endpointUrl: 'https://api.airtable.com',
-  apiKey: process.env.AIRTABLE_TOKEN,
-});
+Airtable.configure({ apiKey: process.env.AIRTABLE_TOKEN });
 
 const base = Airtable.base(process.env.AIRTABLE_BASE);
 
@@ -68,7 +65,6 @@ const listVideos = async page => {
   await base(TABLE_NAME)
     .select({ sort: [{ field: 'ID', direction: 'desc' }] })
     .eachPage((records, fetchNextPage) => {
-      console.log(records);
       videos = [...videos, ...records.map(view)];
 
       fetchNextPage();

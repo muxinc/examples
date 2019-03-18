@@ -1,5 +1,6 @@
 import Router from 'next/router';
 import Layout from '../components/layout';
+import { path } from '../utils/config';
 
 let UpChunk;
 if (typeof window !== 'undefined') {
@@ -22,7 +23,7 @@ class Upload extends React.Component {
   }
 
   getUploadUrl = async () => {
-    const res = await fetch('https://airtable-video-cms.now.sh/api/videos', {
+    const res = await fetch(path(undefined, '/api/videos'), {
       method: 'POST',
       body: JSON.stringify({
         title: this.state.title,
@@ -41,13 +42,10 @@ class Upload extends React.Component {
   };
 
   updateProgress = event => {
-    console.log('progress', event);
-    console.log(this.state);
     this.setState({ progress: event.detail });
   };
 
   uploadFinished = event => {
-    console.log('finished!!', event);
     this.setState({ progress: 100, status: 'uploaded' });
 
     this.pollAsset();
@@ -78,9 +76,8 @@ class Upload extends React.Component {
   };
 
   pollAsset = async () => {
-    console.log('aww yeah we pollin now');
     const res = await fetch(
-      `https://airtable-video-cms.now.sh/api/videos/${this.state.video.id}`
+      path(undefined, `/api/videos/${this.state.video.id}`)
     );
     const video = await res.json();
 
@@ -95,7 +92,6 @@ class Upload extends React.Component {
   };
 
   render() {
-    console.log(this.state.status);
     return (
       <Layout>
         <h1>Upload a new video</h1>
