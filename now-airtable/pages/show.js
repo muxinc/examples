@@ -1,7 +1,9 @@
 import fetch from 'isomorphic-unfetch';
+import Link from 'next/link';
+import getConfig from 'next/config';
+
 import Player from '../components/player';
 import Layout from '../components/layout';
-import Link from 'next/link';
 import { colors } from '../utils/theme';
 import { path } from '../utils/config';
 

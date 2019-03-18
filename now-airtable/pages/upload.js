@@ -22,7 +22,7 @@ class Upload extends React.Component {
     };
   }
 
-  getUploadUrl = async (req) => {
+  getUploadUrl = async () => {
     const res = await fetch(path(undefined, '/api/videos'), {
       method: 'POST',
       body: JSON.stringify({
@@ -77,7 +77,7 @@ class Upload extends React.Component {
 
   pollAsset = async () => {
     const res = await fetch(
-      `${BASE_URL}/api/videos/${this.state.video.id}`
+      path(undefined, `/api/videos/${this.state.video.id}`)
     );
     const video = await res.json();
 

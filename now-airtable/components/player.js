@@ -24,7 +24,14 @@ class Player extends React.Component {
   render() {
     return (
       <div>
-        <video ref={this.player} preload="true" controls />
+        <video
+          ref={this.player}
+          preload="true"
+          controls
+          poster={`https://image.mux.com/${
+            this.props.playbackId
+          }/thumbnail.jpg`}
+        />
 
         <style jsx>{`
           video {

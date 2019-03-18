@@ -8,15 +8,15 @@
   "dependencies": {
     "@mux/mux-node": "^2.2.0",
     "@mux/upchunk": "^1.0.5",
-    "airtable": "^0.5.8",
-    "hls.js": "^0.12.2",
+    "airtable": "^0.5.9",
+    "hls.js": "^0.12.3",
     "isomorphic-unfetch": "^3.0.0",
     "lodash": "^4.17.11",
     "micro": "^9.3.3",
     "micro-basic-auth": "^1.1.1",
-    "next": "^8.0.0",
-    "react": "^16.8.1",
-    "react-dom": "^16.8.1"
+    "next": "^8.0.3",
+    "react": "^16.8.4",
+    "react-dom": "^16.8.4"
   },
   "devDependencies": {
     "micro-dev": "^3.0.0",

@@ -1,24 +1,9 @@
 import fetch from 'isomorphic-unfetch';
 import Link from 'next/link';
 import Layout from '../components/layout';
+import Thumbnail from '../components/thumbnail';
 import { colors } from '../utils/theme';
 import { path } from '../utils/config';
-
-const Thumbnail = video => (
-  <div>
-    {video.playbackId ? (
-      <img src={`https://image.mux.com/${video.playbackId}/thumbnail.jpg`} />
-    ) : (
-      <span>No thumbnail for some reason</span>
-    )}
-
-    <style jsx>{`
-      img {
-        max-width: 100%;
-      }
-    `}</style>
-  </div>
-);
 
 const Index = ({ videos }) => (
   <Layout>
@@ -33,7 +18,7 @@ const Index = ({ videos }) => (
           <Link href={{ pathname: '/show', query: { id: video.id } }} prefetch>
             <a>
               <strong>{video.title}</strong>
-              <Thumbnail {...video} />
+              <Thumbnail video={video} />
             </a>
           </Link>
         </li>
