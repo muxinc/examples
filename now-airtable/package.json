@@ -20,6 +20,7 @@
   },
   "devDependencies": {
     "micro-dev": "^3.0.0",
-    "node-env-run": "3.0.2"
+    "node-env-run": "3.0.2",
+    "now": "^14.1.1"
   }
 }
