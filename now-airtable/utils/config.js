@@ -16,8 +16,8 @@ const getBaseUrl = req => {
   return '';
 };
 
-const path = (req, path) => getBaseUrl(req) + path;
+const getRequestPath = (req, path) => getBaseUrl(req) + path;
 
 module.exports = {
-  path,
+  getRequestPath,
 };

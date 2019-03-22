@@ -3,7 +3,7 @@ import Link from 'next/link';
 import Layout from '../components/layout';
 import Thumbnail from '../components/thumbnail';
 import { colors } from '../utils/theme';
-import { path } from '../utils/config';
+import { getRequestPath } from '../utils/config';
 
 const Index = ({ videos }) => (
   <Layout>
@@ -56,7 +56,7 @@ const Index = ({ videos }) => (
 );
 
 Index.getInitialProps = async ({ req }) => {
-  const res = await fetch(path(req, '/api/videos'));
+  const res = await fetch(getRequestPath(req, '/api/videos'));
   const allVideos = await res.json();
 
   const ready = allVideos.filter(v => v.status === 'ready');

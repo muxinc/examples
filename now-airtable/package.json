@@ -3,7 +3,8 @@
     "api-start": "yarn micro",
     "api-dev": "yarn micro-dev",
     "ui-dev": "yarn next",
-    "deploy": "eval `cat .env` && now -e NODE_ENV=production -e AIRTABLE_API_KEY -e AIRTABLE_BASE -e MANAGEMENT_PASSWORD -e MUX_TOKEN_ID -e MUX_TOKEN_SECRET && now alias set"
+    "deploy:staging": "eval `cat .env` && now -e NODE_ENV=production -e AIRTABLE_API_KEY -e AIRTABLE_BASE -e MANAGEMENT_PASSWORD -e MUX_TOKEN_ID -e MUX_TOKEN_SECRET",
+    "deploy": "yarn deploy:staging && now alias set"
   },
   "dependencies": {
     "@mux/mux-node": "^2.2.0",

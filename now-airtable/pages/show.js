@@ -1,11 +1,10 @@
 import fetch from 'isomorphic-unfetch';
 import Link from 'next/link';
-import getConfig from 'next/config';
 
 import Player from '../components/player';
 import Layout from '../components/layout';
 import { colors } from '../utils/theme';
-import { path } from '../utils/config';
+import { getRequestPath } from '../utils/config';
 
 const Show = ({ video }) => (
   <Layout>
@@ -40,7 +39,7 @@ const Show = ({ video }) => (
 );
 
 Show.getInitialProps = async ({ req, query }) => {
-  const res = await fetch(path(req, `/api/videos/${query.id}`));
+  const res = await fetch(getRequestPath(req, `/api/videos/${query.id}`));
   const video = await res.json();
 
   return { video };

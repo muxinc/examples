@@ -1,6 +1,6 @@
 import Router from 'next/router';
 import Layout from '../components/layout';
-import { path } from '../utils/config';
+import { getRequestPath } from '../utils/config';
 
 let UpChunk;
 if (typeof window !== 'undefined') {
@@ -23,7 +23,7 @@ class Upload extends React.Component {
   }
 
   getUploadUrl = async () => {
-    const res = await fetch(path(undefined, '/api/videos'), {
+    const res = await fetch(getRequestPath(undefined, '/api/videos'), {
       method: 'POST',
       body: JSON.stringify({
         title: this.state.title,
@@ -77,7 +77,7 @@ class Upload extends React.Component {
 
   pollAsset = async () => {
     const res = await fetch(
-      path(undefined, `/api/videos/${this.state.video.id}`)
+      getRequestPath(undefined, `/api/videos/${this.state.video.id}`)
     );
     const video = await res.json();
 
