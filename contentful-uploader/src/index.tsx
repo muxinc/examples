@@ -28,7 +28,7 @@ interface MuxContentfulObject {
 interface AppState {
   value?: MuxContentfulObject;
   uploadProgress?: number;
-  uploadError?: string;
+  error: string | false;
 }
 
 class App extends React.Component<AppProps, AppState> {
@@ -36,8 +36,6 @@ class App extends React.Component<AppProps, AppState> {
     mode: 'cors' | 'no-cors';
     headers: Headers;
   };
-
-  configured: boolean;
 
   constructor(props: AppProps) {
     super(props);
@@ -48,8 +46,6 @@ class App extends React.Component<AppProps, AppState> {
       muxAccessTokenSecret: string;
     };
 
-    this.configured = (!!muxAccessTokenId && !!muxAccessTokenSecret);
-
     this.muxBaseReqOptions = {
       mode: 'cors',
       headers: this.requestHeaders(muxAccessTokenId, muxAccessTokenSecret),
@@ -57,6 +53,9 @@ class App extends React.Component<AppProps, AppState> {
 
     this.state = {
       value: props.sdk.field.getValue(),
+      error:
+        (!muxAccessTokenId || !muxAccessTokenSecret) &&
+        "It doesn't look like you've specified your Mux Access Token ID or Secret in the extension configuration.",
     };
   }
 
@@ -93,10 +92,7 @@ class App extends React.Component<AppProps, AppState> {
 
   requestHeaders = (tokenId: string, tokenSecret: string) => {
     let headers = new Headers();
-    headers.set(
-      'Authorization',
-      'Basic ' + btoa(`${tokenId}:${tokenSecret}`)
-    );
+    headers.set('Authorization', 'Basic ' + btoa(`${tokenId}:${tokenSecret}`));
     headers.set('Content-Type', 'application/json');
 
     return headers;
@@ -117,6 +113,12 @@ class App extends React.Component<AppProps, AppState> {
       method: 'POST',
     });
 
+    if (res.status === 401) {
+      throw Error(
+        'Looks like something is wrong with the Mux Access Token specified in the config. Are you sure the token ID and secret in the extension settings match the access token you created?'
+      );
+    }
+
     const { data: muxUpload } = await res.json();
 
     await this.props.sdk.field.setValue({
@@ -126,7 +128,7 @@ class App extends React.Component<AppProps, AppState> {
     return muxUpload.url;
   };
 
-  onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  onChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.currentTarget.files && e.currentTarget.files[0];
     this.setState({ uploadProgress: 1 });
 
@@ -134,19 +136,25 @@ class App extends React.Component<AppProps, AppState> {
       throw Error("Looks like a file wasn't selected");
     }
 
-    const upload = createUpload({
-      file,
-      endpoint: this.getUploadUrl,
-      chunkSize: 5120, // Uploads the file in ~5mb chunks
-    });
+    try {
+      const endpoint = await this.getUploadUrl();
 
-    upload.on('error', this.onUploadError);
-    upload.on('progress', this.onUploadProgress);
-    upload.on('success', this.onUploadSuccess);
+      const upload = createUpload({
+        file,
+        endpoint,
+        chunkSize: 5120, // Uploads the file in ~5mb chunks
+      });
+
+      upload.on('error', this.onUploadError);
+      upload.on('progress', this.onUploadProgress);
+      upload.on('success', this.onUploadSuccess);
+    } catch (error) {
+      this.setState({ error: error.message });
+    }
   };
 
   onUploadError = (progress: CustomEvent) => {
-    this.setState({ uploadError: progress.detail });
+    this.setState({ error: progress.detail });
   };
 
   onUploadProgress = (progress: CustomEvent) => {
@@ -216,15 +224,8 @@ class App extends React.Component<AppProps, AppState> {
   };
 
   render = () => {
-    if (!this.configured) {
-      return (
-        <Note noteType={Note.Type.NEGATIVE}>It doesn't look like you've specified your Mux Access Token ID or Secret in the extension configuration.</Note>
-      );
-    }
-    if (this.state.uploadError) {
-      return (
-        <Note noteType={Note.Type.NEGATIVE}>{this.state.uploadError}</Note>
-      );
+    if (this.state.error) {
+      return <Note noteType={Note.Type.NEGATIVE}>{this.state.error}</Note>;
     }
 
     if (this.state.value) {

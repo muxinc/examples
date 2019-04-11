@@ -3,10 +3,6 @@
   "alias": "contentful.mux.dev",
   "builds": [
     {
-      "src": "/static-styles/*.css",
-      "use": "@now/static"
-    },
-    {
       "src": "*.md",
       "use": "@now/md",
       "config": {
@@ -18,7 +14,7 @@
             "content": "Add beautiful video streaming to your Contentful dashboard! Mux Video extension that's installed in minutes"
           }
         ],
-        "css": ["/static-styles/base.css", "/static-styles/mux.css"]
+        "css": ["https://static.mux.com/css/mux-markdown.css"]
       }
     },
     {

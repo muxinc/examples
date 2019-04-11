@@ -1,7 +1,7 @@
 {
   "id": "mux-contentful-uploader",
   "name": "Mux Contentful Uploader",
-  "src": "https://contentful.mux.dev",
+  "src": "https://contentful.mux.dev/extension",
   "fieldTypes": ["Object"],
   "parameters": {
     "installation": [

@@ -37,7 +37,8 @@
     "login": "contentful login",
     "logout": "contentful logout",
     "help": "contentful-extension-scripts help",
-    "now-build": "npm run build"
+    "now-build": "npm run build",
+    "install-extension": "eval `cat .env` && contentful extension create --installation-parameters '{\"muxAccessTokenId\": \"'$MUX_TOKEN_ID'\", \"muxAccessTokenSecret\": \"'$MUX_TOKEN_SECRET'\"}'"
   },
   "browserslist": [
     "last 5 Chrome version",
