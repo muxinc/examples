@@ -42,9 +42,17 @@ Note: by default this installs the hosted version of our extension. If you'd lik
 
 ## Install via the Contentful interface
 
-Navigation to Space settings > Extensions, then click "Add new".
+Navigation to Space settings > Extensions, then click the "Add extension" dropdown and select "Install from Github".
 
-Make sure `src` is checked, then set the value to `https://contentful.mux.dev/extension`.
+![Install from Github](screenshots/contentful-install-from-github.png)
+
+In the modal, give the URL for this repo's `extension.json` file:
+
+```
+https://github.com/muxinc/examples/blob/master/contentful-uploader/extension.json
+```
+
+It should then open up a page with your new extension's configuration. Update the two required fields with your Mux Access Token ID/Secret, then hit "save".
 
 ## Setting up your content model
 
@@ -56,7 +64,7 @@ Select "Mux Contentful Uploader"
 
 ![Uploader Appearance](screenshots/contentful-appearance.png)
 
-Congratulations, now you've got your very own best-in-class video platform! 🤘🏻
+Congratulations, now you've got the upload side of your very own best-in-class video platform! 🤘🏻
 
 ## Using your new Video field in clients
 

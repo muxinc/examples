@@ -8,7 +8,7 @@
       {
         "id": "muxAccessTokenId",
         "name": "Mux Access Token ID",
-        "description": "You can create access tokens here: https://dashboard.mux.com/settings/access-tokens)",
+        "description": "You can create access tokens here: https://dashboard.mux.com/settings/access-tokens",
         "type": "Symbol",
         "required": true
       },

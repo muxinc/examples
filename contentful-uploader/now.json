@@ -3,6 +3,10 @@
   "alias": "contentful.mux.dev",
   "builds": [
     {
+      "src": "screenshots/*.png",
+      "use": "@now/static"
+    },
+    {
       "src": "*.md",
       "use": "@now/md",
       "config": {
