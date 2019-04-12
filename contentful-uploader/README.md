@@ -1,4 +1,4 @@
-![Contentful + Mux](https://banner-generator-cj08cfagy.now.sh/?text=Contentful)
+![Contentful + Mux](https://banner.mux.dev/?image=Contentful)
 
 # Contentful Video Streaming Plugin
 
