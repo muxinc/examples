@@ -1,4 +1,4 @@
-[![Mux Examples](banner.png)](https://mux.com)
+[![Mux Examples](https://banner.mux.dev/Examples.svg)](https://mux.com)
 
 # Mux Examples
 
@@ -6,10 +6,11 @@ Get to know Mux by looking through examples! Contributions are always welcome, e
 
 ## Examples
 
-| Name                                                    | Description                                                                                                                                                                   | Tags         | Languages  |
-| ------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ | ---------- |
-| <nobr>[android-live-javacv](android-live-javacv)</nobr> | Small modifications to a JavaCV example that allows you to publish an RTMP stream directly to Mux.                                                                            | Live, Mobile | Java       |
-| [now-airtable](now-airtable)                            | [Zeit Now](https://zeit.co/now) + [Airtable](https://airtable.com/). Build your own personal Video CMS using Now, [Next.js](https://nextjs.org/), and your own Airtable base. | VOD, CMS     | JavaScript |
+| Name                                                    | Description                                                                                                                                                                   | Tags                  | Languages  |
+| ------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------- | ---------- |
+| <nobr>[android-live-javacv](android-live-javacv)</nobr> | Small modifications to a JavaCV example that allows you to publish an RTMP stream directly to Mux.                                                                            | Live, Mobile          | Java       |
+| [contentful-uploader](contentful-uploader)              | Contentful UI extension that allows you to add Video to your [Contentful](https://contentful.com) space.                                                                      | VOD, CMS, Integration | JavaScript |
+| [now-airtable](now-airtable)                            | [Zeit Now](https://zeit.co/now) + [Airtable](https://airtable.com/). Build your own personal Video CMS using Now, [Next.js](https://nextjs.org/), and your own Airtable base. | VOD, CMS              | JavaScript |
 
 ## Examples in the wild
 

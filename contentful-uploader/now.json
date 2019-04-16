@@ -1,0 +1,34 @@
+{
+  "version": 2,
+  "alias": "contentful.mux.dev",
+  "builds": [
+    {
+      "src": "screenshots/*.png",
+      "use": "@now/static"
+    },
+    {
+      "src": "*.md",
+      "use": "@now/md",
+      "config": {
+        "title": "Contentful Mux Video Plugin",
+        "language": "en",
+        "meta": [
+          {
+            "name": "description",
+            "content": "Add beautiful video streaming to your Contentful dashboard! Mux Video extension that's installed in minutes"
+          }
+        ],
+        "css": ["https://static.mux.com/css/mux-markdown.css"]
+      }
+    },
+    {
+      "src": "package.json",
+      "use": "@now/static-build",
+      "config": { "distDir": "build" }
+    }
+  ],
+  "routes": [
+    { "src": "/", "dest": "/README.html" },
+    { "src": "/extension", "dest": "index.html" }
+  ]
+}
