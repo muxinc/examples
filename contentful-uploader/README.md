@@ -1,4 +1,4 @@
-![Contentful + Mux](https://banner.mux.dev/?image=Contentful)
+![Contentful + Mux](https://banner.mux.dev/Contentful.svg)
 
 # Contentful Video Streaming Plugin
 

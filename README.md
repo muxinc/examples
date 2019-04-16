@@ -1,4 +1,4 @@
-[![Mux Examples](banner.png)](https://mux.com)
+[![Mux Examples](https://banner.mux.dev/Examples.svg)](https://mux.com)
 
 # Mux Examples
 
