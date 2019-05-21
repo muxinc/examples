@@ -1,5 +1,6 @@
-# Lambda for Signed Playback
+# Lambda for Mux Signed Playback
 
+Streaming video from [Mux](https://mux.com/) requires a playback ID.
 Mux Playback IDs have two types: `public` and `signed`. 
 `public` playback URLs can be watched anywhere, any time. 
 `signed` playback URLs require a Mux [signing key](https://docs.mux.com/reference#url-signing-keys)
@@ -44,3 +45,4 @@ The handler reference will be `dist/lambda.handler`.
 ## Tools
 
 - [AWS Lambda](https://aws.amazon.com/lambda/)
+- [@mux/mux-node](https://github.com/muxinc/mux-node-sdk)
