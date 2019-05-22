@@ -30,11 +30,11 @@ Pass `playbackId` and other configuration in the body of the request.
 
 ## Deployment
 1. Run `yarn build` to bundle all js code and create a zip file that can be uploaded to AWS Lambda.
-2. Create a new empty function in AWS Lambda.
-3. Change the inline code option to "Upload a zip file" and upload the zip created in the dist folder. 
+2. Create a new empty function in AWS Lambda. Be sure to select Node.js for the runtime option.
+3. Add API Gateway as a trigger in the designer section.
+4. Change the code entry type option under the Function code section to "Upload a .zip file" and upload the zip created in the dist folder. 
 The handler reference will be `dist/lambda.handler`.
-4. Set environment variables `MUX_ACCESS_TOKEN` and `MUX_SECRET`.
-5. Add API Gateway as a trigger.
+5. Generate a [Mux access token and secret](https://docs.mux.com/docs) if you have not already. Set environment variables `MUX_ACCESS_TOKEN` and `MUX_SECRET` accordingly.
 6. Create a test event to confirm that your lambda works.
 
 ## Mux features used
