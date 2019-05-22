@@ -35,7 +35,15 @@ Pass `playbackId` and other configuration in the body of the request.
 4. Change the code entry type option under the Function code section to "Upload a .zip file" and upload the zip created in the dist folder. 
 The handler reference will be `dist/lambda.handler`.
 5. Generate a [Mux access token and secret](https://docs.mux.com/docs) if you have not already. Set environment variables `MUX_ACCESS_TOKEN` and `MUX_SECRET` accordingly.
-6. Create a test event to confirm that your lambda works.
+6. Create a test event to confirm that your lambda works. For example:
+```json
+{
+  "httpMethod": "POST",
+  "body": {
+      "playbackId": "your-playback-id-here"
+  }
+}
+```
 
 ## Mux features used
 
