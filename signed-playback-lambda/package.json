@@ -1,0 +1,17 @@
+{
+  "name": "signed-playback-lambda",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "zip": "zip -r dist/lambda.zip dist/lambda.js",
+    "build": "webpack; yarn zip"
+  },
+  "dependencies": {
+    "@mux/mux-node": "^2.2.0"
+  },
+  "devDependencies": {
+    "webpack": "^4.32.0",
+    "webpack-cli": "^3.3.2"
+  }
+}

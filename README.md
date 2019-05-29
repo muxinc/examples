@@ -11,6 +11,7 @@ Get to know Mux by looking through examples! Contributions are always welcome, e
 | <nobr>[android-live-javacv](android-live-javacv)</nobr> | Small modifications to a JavaCV example that allows you to publish an RTMP stream directly to Mux.                                                                            | Live, Mobile          | Java       |
 | [contentful-uploader](contentful-uploader)              | Contentful UI extension that allows you to add Video to your [Contentful](https://contentful.com) space.                                                                      | VOD, CMS, Integration | JavaScript |
 | [now-airtable](now-airtable)                            | [Zeit Now](https://zeit.co/now) + [Airtable](https://airtable.com/). Build your own personal Video CMS using Now, [Next.js](https://nextjs.org/), and your own Airtable base. | VOD, CMS              | JavaScript |
+| [signed-playback-lambda](signed-playback-lambda)        | AWS Lambda that allows you to generate signed Mux playback URLs.														  | VOD, Serverless       | JavaScript |
 
 ## Examples in the wild
 
