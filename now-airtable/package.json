@@ -12,7 +12,7 @@
     "airtable": "^0.5.9",
     "hls.js": "^0.12.3",
     "isomorphic-unfetch": "^3.0.0",
-    "lodash": "^4.17.13",
+    "lodash": "^4.17.15",
     "micro": "^9.3.3",
     "micro-basic-auth": "^1.1.1",
     "next": "^8.0.3",
