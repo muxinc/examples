@@ -1,0 +1,15 @@
+{
+  "name": "netlify-mux-signing",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:dylanjha/netlify-mux-signing.git",
+  "author": "Dylan Jhaveri <dylanjhaveri@gmail.com>",
+  "license": "MIT",
+  "private": false,
+  "dependencies": {
+    "@mux/mux-node": "^2.4.0"
+  },
+  "devDependencies": {
+    "netlify-lambda": "^1.6.3"
+  }
+}
