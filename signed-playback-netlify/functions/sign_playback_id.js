@@ -3,7 +3,7 @@ import { signPlaybackId } from '../src/mux_signatures';
 
 exports.handler = async (event, context) => {
   try {
-    const { queryStringParameters = '{}' } = event;
+    const { queryStringParameters } = event;
     const { playbackId } = queryStringParameters;
     if (!playbackId) {
       return { statusCode: 400, body: JSON.stringify({errors: [{message: 'Missing playbackId in query string'}]}) };
