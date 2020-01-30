@@ -4,6 +4,12 @@ An example app for live streaming from an iOS device using the [Mux](http://mux.
 
 [![Swift Version](https://img.shields.io/badge/language-swift%204.0-brightgreen.svg)](https://developer.apple.com/swift) [![GitHub license](https://img.shields.io/badge/license-MIT-lightgrey.svg)](https://github.com/muxinc/example-ios-live-streaming/blob/master/LICENSE)
 
+This is what the app looks like - you paste in a Mux stream key and start streaming from your device:
+
+
+
+
+
 ## Welcome
 
 Our sample app uses a couple open source projects and Xcode configurations in order to get live streaming up and running quickly. To make this easy, we recommend using the [CocoaPods](http://cocoapods.org) dependency manager for iOS. Once you have cloned this repo and installed CocoaPods, you are a couple steps away from streaming.
