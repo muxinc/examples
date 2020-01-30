@@ -4,11 +4,15 @@ An example app for live streaming from an iOS device using the [Mux](http://mux.
 
 [![Swift Version](https://img.shields.io/badge/language-swift%204.0-brightgreen.svg)](https://developer.apple.com/swift) [![GitHub license](https://img.shields.io/badge/license-MIT-lightgrey.svg)](https://github.com/muxinc/example-ios-live-streaming/blob/master/LICENSE)
 
+## Demo
+
 This is what the app looks like - you paste in a Mux stream key and start streaming from your device:
 
+![Screen Recording](/screenshots/screen-recording.gif)
 
+And your stream is live on the Mux dashboard:
 
-
+![Mux Dashboard](/screenshots/mux-dashboard.png)
 
 ## Welcome
 

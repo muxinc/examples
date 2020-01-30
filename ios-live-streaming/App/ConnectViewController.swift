@@ -101,9 +101,11 @@ public class ConnectViewController: UIViewController {
             self.view.addSubview(startButton)
         }
         
-        self._textBox = UITextView(frame: CGRect(x: 20, y: self.view.bounds.size.height - 60, width: self.view.bounds.size.width - 40, height: 100))
+        self._textBox = UITextView(frame: CGRect(x: 20, y: self.view.bounds.size.height - 100, width: self.view.bounds.size.width - 40, height: 100))
         if let textBox = self._textBox {
             textBox.text = "Note: streaming from a simulator will not work because the simulator does not have access to a camera."
+            textBox.backgroundColor = UIColor.white
+            textBox.textColor = UIColor.black
             self.view.addSubview(textBox)
         }
     }
