@@ -31,7 +31,9 @@ import LFLiveKit
 // MARK: - types
 
 public let MuxLiveApiProductionHostname = "api.mux.com"
-public let MuxLiveRtmpProductionUrl = "rtmp://live.mux.com/app/"
+// LFLiveKit doesn't support rtmps, so use the RTMP global fallback for now.
+// See: https://github.com/LaiFengiOS/LFLiveKit/issues/237
+public let MuxLiveRtmpProductionUrl = "rtmp://global-live.mux.com:5222/app/"
 
 /// Stream state
 public enum MuxLiveState: Int, CustomStringConvertible {
