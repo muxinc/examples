@@ -1,22 +1,22 @@
-import Link from 'next/link'
-import Layout from '../../components/layout'
-import VideoPlayer from '../../components/video-player'
-import Spinner from '../../components/spinner'
-import { MUX_HOME_PAGE_URL } from '../../constants'
-import { useRouter } from 'next/router'
+import Link from 'next/link';
+import { useRouter } from 'next/router';
+import Layout from '../../components/layout';
+import VideoPlayer from '../../components/video-player';
+import Spinner from '../../components/spinner';
+import { MUX_HOME_PAGE_URL } from '../../constants';
 
-export function getStaticProps({ params: { id: playbackId } }) {
-  const src = `https://stream.mux.com/${playbackId}.m3u8`
-  const poster = `https://image.mux.com/${playbackId}/thumbnail.png`
+export function getStaticProps ({ params: { id: playbackId } }) {
+  const src = `https://stream.mux.com/${playbackId}.m3u8`;
+  const poster = `https://image.mux.com/${playbackId}/thumbnail.png`;
 
-  return { props: { playbackId, src, poster } }
+  return { props: { playbackId, src, poster } };
 }
 
-export function getStaticPaths() {
+export function getStaticPaths () {
   return {
     paths: [],
     fallback: true,
-  }
+  };
 }
 
 const Code = ({ children }) => (
@@ -29,19 +29,20 @@ const Code = ({ children }) => (
           serif;
         color: #ff2b61;
       }
-    `}</style>
+    `}
+    </style>
   </>
-)
+);
 
-export default function Playback({ playbackId, src, poster }) {
-  const router = useRouter()
+export default function Playback ({ src, poster }) {
+  const router = useRouter();
 
   if (router.isFallback) {
     return (
       <Layout>
         <Spinner />
       </Layout>
-    )
+    );
   }
 
   return (
@@ -86,7 +87,7 @@ export default function Playback({ playbackId, src, poster }) {
             data-size="large"
             target="_blank"
             rel="noopener noreferrer"
-            href={`https://twitter.com/intent/tweet?text=Check%20out%20the%20video%20I%20uploaded%20with%20Next.js%2C%20%40Vercel%2C%20and%20%40muxhq%20`}
+            href="https://twitter.com/intent/tweet?text=Check%20out%20the%20video%20I%20uploaded%20with%20Next.js%2C%20%40Vercel%2C%20and%20%40muxhq%20"
           >
             Tweet this
           </a>
@@ -118,7 +119,8 @@ export default function Playback({ playbackId, src, poster }) {
           justify-content: center;
           margin: 40px 0;
         }
-      `}</style>
+      `}
+      </style>
     </Layout>
-  )
+  );
 }

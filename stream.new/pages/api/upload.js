@@ -1,8 +1,9 @@
-import Mux from '@mux/mux-node'
-const { Video } = new Mux()
+import Mux from '@mux/mux-node';
 
-export default async function uploadHandler(req, res) {
-  const { method } = req
+const { Video } = new Mux();
+
+export default async function uploadHandler (req, res) {
+  const { method } = req;
 
   switch (method) {
     case 'POST':
@@ -10,19 +11,19 @@ export default async function uploadHandler(req, res) {
         const upload = await Video.Uploads.create({
           new_asset_settings: { playback_policy: 'public' },
           cors_origin: '*',
-        })
+        });
         res.json({
           id: upload.id,
           url: upload.url,
-        })
+        });
       } catch (e) {
-        res.statusCode = 500
-        console.error('Request error', e)
-        res.json({ error: 'Error creating upload' })
+        res.statusCode = 500;
+        console.error('Request error', e); // eslint-disable-line no-console
+        res.json({ error: 'Error creating upload' });
       }
-      break
+      break;
     default:
-      res.setHeader('Allow', ['POST'])
-      res.status(405).end(`Method ${method} Not Allowed`)
+      res.setHeader('Allow', ['POST']);
+      res.status(405).end(`Method ${method} Not Allowed`);
   }
 }

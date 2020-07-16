@@ -1,7 +1,7 @@
-export default function Button({ children, ...otherProps }) {
+export default function Button ({ children, ...otherProps }) {
   return (
     <>
-      <button {...otherProps}>{children}</button>
+      <button type="button" {...otherProps}>{children}</button>
       <style jsx>{`
         button {
           padding: 16px 16px;
@@ -24,7 +24,8 @@ export default function Button({ children, ...otherProps }) {
             rgb(255, 85, 128)
           );
         }
-      `}</style>
+      `}
+      </style>
     </>
-  )
+  );
 }

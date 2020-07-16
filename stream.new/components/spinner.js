@@ -1,4 +1,4 @@
-export default function Spinner({ size = 6, color = '#999' }) {
+export default function Spinner ({ size = 6, color = '#999' }) {
   return (
     <>
       <div className="spinner" />
@@ -44,7 +44,8 @@ export default function Spinner({ size = 6, color = '#999' }) {
             transform: rotate(360deg);
           }
         }
-      `}</style>
+      `}
+      </style>
     </>
-  )
+  );
 }

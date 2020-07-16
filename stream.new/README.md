@@ -1,10 +1,10 @@
-# Mux Video
+# stream.new
 
-This example uses Mux Video, an API-first platform for video. The example features video uploading and playback in a Next.js application.
+This example uses Mux Video Direct Uploads and NextJS. This is a functioning application at https://stream.new. Feel free to use it!
 
 ## Demo
 
-### [https://with-mux-video.now.sh/](https://with-mux-video.now.sh/)
+### [https://stream.new/](https://stream.new/)
 
 ## Deploy your own
 

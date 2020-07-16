@@ -1,4 +1,4 @@
-export default function ErrorMessage({ message }) {
+export default function ErrorMessage ({ message }) {
   return (
     <>
       <div className="message">{message || 'Unknown error'}</div>
@@ -10,7 +10,8 @@ export default function ErrorMessage({ message }) {
           text-align: center;
           border-radius: 4px;
         }
-      `}</style>
+      `}
+      </style>
     </>
-  )
+  );
 }

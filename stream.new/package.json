@@ -5,7 +5,9 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "lint": "yarn eslint . --ext .js,.jsx",
+    "format": "yarn lint"
   },
   "dependencies": {
     "@mux/mux-node": "^2.8.0",
@@ -16,5 +18,13 @@
     "react-dom": "^16.13.1",
     "react-dropzone": "^11.0.2",
     "swr": "^0.2.0"
+  },
+  "devDependencies": {
+    "babel-eslint": "^10.1.0",
+    "eslint": "^7.4.0",
+    "eslint-config-airbnb": "^18.2.0",
+    "eslint-plugin-import": "^2.22.0",
+    "eslint-plugin-jsx-a11y": "^6.3.1",
+    "eslint-plugin-react": "^7.20.3"
   }
 }

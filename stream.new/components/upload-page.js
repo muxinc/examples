@@ -1,7 +1,7 @@
-import Layout from './layout'
-import { MUX_HOME_PAGE_URL } from '../constants'
+import Layout from './layout';
+import { MUX_HOME_PAGE_URL } from '../constants';
 
-export default function UploadPage({ children }) {
+export default function UploadPage ({ children }) {
   return (
     <Layout
       title="stream.new"
@@ -53,7 +53,8 @@ export default function UploadPage({ children }) {
           text-align: center;
           min-height: 230px;
         }
-      `}</style>
+      `}
+      </style>
     </Layout>
-  )
+  );
 }

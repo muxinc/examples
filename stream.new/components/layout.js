@@ -1,7 +1,7 @@
-import Head from 'next/head'
-import { MUX_HOME_PAGE_URL } from '../constants'
+import Head from 'next/head';
+import { MUX_HOME_PAGE_URL } from '../constants';
 
-export default function Layout({
+export default function Layout ({
   title,
   description,
   metaTitle,
@@ -33,7 +33,7 @@ export default function Layout({
             type="text/javascript"
             async
             src="https://platform.twitter.com/widgets.js"
-          ></script>
+          />
         )}
       </Head>
 
@@ -156,7 +156,8 @@ export default function Layout({
             height: 60px;
           }
         }
-      `}</style>
+      `}
+      </style>
 
       <style jsx global>{`
         html,
@@ -179,7 +180,8 @@ export default function Layout({
         * {
           box-sizing: border-box;
         }
-      `}</style>
+      `}
+      </style>
     </div>
-  )
+  );
 }
