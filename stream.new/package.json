@@ -14,6 +14,7 @@
     "next": "latest",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "react-dropzone": "^11.0.2",
     "swr": "^0.2.0"
   }
 }

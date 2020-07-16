@@ -4,8 +4,8 @@ import { MUX_HOME_PAGE_URL } from '../constants'
 export default function UploadPage({ children }) {
   return (
     <Layout
-      title="Welcome to Mux + Next.js"
-      description="Get started by uploading a video"
+      title="stream.new"
+      description="Upload a video and share a URL"
     >
       <div className="wrapper">
         <div className="about-mux">
@@ -17,17 +17,8 @@ export default function UploadPage({ children }) {
             >
               Mux
             </a>{' '}
-            provides APIs for developers working with video. This example is
-            useful if you want to build:
+            provides APIs for developers working with video.
           </p>
-          <ul>
-            <li>A video on demand service like Youtube or Netflix</li>
-            <li>
-              A platform that supports user uploaded videos like Tiktok or
-              Instagram
-            </li>
-            <li>Video into your custom CMS</li>
-          </ul>
           <p>
             Uploading a video uses the Mux{' '}
             <a href="https://docs.mux.com/docs/direct-upload">

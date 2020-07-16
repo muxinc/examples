@@ -94,7 +94,7 @@ export default function Playback({ playbackId, src, poster }) {
         <p>
           To learn more,{' '}
           <a
-            href="https://github.com/vercel/next.js/tree/canary/examples/with-mux-video"
+            href="https://github.com/muxinc/examples/stream.new"
             target="_blank"
             rel="noopener noreferrer"
           >
