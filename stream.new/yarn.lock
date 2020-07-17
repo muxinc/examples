@@ -1006,16 +1006,16 @@
     lodash "^4.17.19"
     to-fast-properties "^2.0.0"
 
-"@mux/mux-node@^2.8.0":
-  version "2.8.1"
-  resolved "https://registry.yarnpkg.com/@mux/mux-node/-/mux-node-2.8.1.tgz#64f01f6385a9e0ff29335d6aa84fea86196f4469"
-  integrity sha512-C67e5DOSSORodAB9d49xi72NKMz8JPOoMb4P/e1dfjpKT8bFQYzjHH0RDFvOnjcZghnU6Frn7DhgjFSoz+9Qlw==
+"@mux/mux-node@^3.0":
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/@mux/mux-node/-/mux-node-3.0.0.tgz#ca13a5403e32906306ca1fe6a0497b2da3fb05f8"
+  integrity sha512-YDbSbV5yGtxTWmNpvUzlOwdtHPPyNFvp/QSxrF/i4S73AmlyATCmCWFLs/BuX9SUBnh06b9+M2SJkL0qaGAriw==
   dependencies:
     axios "^0.18.0"
     esdoc-ecmascript-proposal-plugin "^1.0.0"
     jsonwebtoken "^8.4.0"
 
-"@mux/upchunk@^2.0.0":
+"@mux/upchunk@^2.0":
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/@mux/upchunk/-/upchunk-2.0.0.tgz#0eb34fc2d4c952283f375ab733b8e68e0ccdcab5"
   integrity sha512-3K3+qtidmvZL6B7fFGl0fIvC5LMsY+OjPLfIV6f56s0ii0qPI2iwivAKmdndyJiUaRbw4pydve8lVEvJg+4ndw==

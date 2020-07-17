@@ -10,8 +10,8 @@
     "format": "yarn lint"
   },
   "dependencies": {
-    "@mux/mux-node": "^2.8.0",
-    "@mux/upchunk": "^2.0.0",
+    "@mux/mux-node": "^3.0",
+    "@mux/upchunk": "^2.0",
     "got": "^11.5.1",
     "hls.js": "^0.13.2",
     "micro": "^9.3.4",

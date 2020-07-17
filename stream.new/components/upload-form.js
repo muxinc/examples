@@ -58,11 +58,11 @@ const UploadForm = () => {
       setErrorMessage(err.detail);
     });
 
-    upload.on('progress', (progressEvt) => {
+    upChunk.on('progress', (progressEvt) => {
       setProgress(Math.floor(progressEvt.detail));
     });
 
-    upload.on('success', () => {
+    upChunk.on('success', () => {
       setIsPreparing(true);
     });
   };
