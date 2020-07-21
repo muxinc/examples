@@ -1,12 +1,16 @@
 {
   "env": {
     "MUX_TOKEN_ID": "@next_example_mux_token_id",
-    "MUX_TOKEN_SECRET": "@next_example_mux_token_secret"
+    "MUX_TOKEN_SECRET": "@next_example_mux_token_secret",
+    "MUX_WEBHOOK_SIGNATURE_SECRET": "@next_example_mux_signature_secret",
+    "SLACK_WEBHOOK_ASSET_READY": "@next_example_mux_slack_webhook_asset_ready"
   },
   "build": {
     "env": {
       "MUX_TOKEN_ID": "@next_example_mux_token_id",
-      "MUX_TOKEN_SECRET": "@next_example_mux_token_secret"
+      "MUX_TOKEN_SECRET": "@next_example_mux_token_secret",
+      "MUX_WEBHOOK_SIGNATURE_SECRET": "@next_example_mux_signature_secret",
+      "SLACK_WEBHOOK_ASSET_READY": "@next_example_mux_slack_webhook_asset_ready"
     }
   }
 }
