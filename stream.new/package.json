@@ -13,7 +13,7 @@
     "@mux/mux-node": "^3.0",
     "@mux/upchunk": "^2.0",
     "got": "^11.5.1",
-    "hls.js": "^0.13.2",
+    "hls.js": "^0.14",
     "micro": "^9.3.4",
     "next": "latest",
     "react": "^16.13.1",

@@ -36,7 +36,7 @@ export default function Playback ({ src, poster }) {
       image={poster}
       loadTwitterWidget
     >
-      <div className="flash-message">This video is ready for playback</div>
+      <div className="flash-message">This video was uploaded on <a href="/">stream.new</a></div>
       <VideoPlayer src={src} poster={poster} />
       <p>
         Go{' '}
