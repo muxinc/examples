@@ -7,6 +7,7 @@ module.exports = {
       jsx: true,
     },
   },
+  ignorePatterns: ["next.config.js"],
   globals: {
     document: true,
     window: true,
