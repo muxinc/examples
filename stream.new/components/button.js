@@ -1,28 +1,19 @@
-export default function Button ({ children, ...otherProps }) {
+export default function Button ({ buttonLink, children, ...otherProps }) {
   return (
     <>
-      <button type="button" {...otherProps}>{children}</button>
+      {buttonLink ? <a {...otherProps}>{children}</a> : <button type="button" {...otherProps}>{children}</button>}
       <style jsx>{`
-        button {
-          padding: 16px 16px;
-          border-radius: 4px;
-          font-size: 22px;
-          background-image: linear-gradient(
-            to right,
-            rgb(255, 61, 48),
-            rgb(255, 43, 97)
-          );
-          color: white;
-          line-height: 22px;
-          border: none;
-          cursor: pointer;
+        a {
+          text-docoration: none;
+          display: inline-block;
         }
-        button:hover {
-          background-image: linear-gradient(
-            to left,
-            rgb(253, 95, 85),
-            rgb(255, 85, 128)
-          );
+        a, button {
+          font-size: 26px;
+          line-height: 33px;
+          background: #fff;
+          border: 2px solid #222222;
+          padding: 10px 20px;
+          border-radius: 50px;
         }
       `}
       </style>

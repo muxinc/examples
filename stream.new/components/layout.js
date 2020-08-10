@@ -1,5 +1,6 @@
 import Head from 'next/head';
-import { MUX_HOME_PAGE_URL } from '../constants';
+import { useDropzone } from 'react-dropzone';
+// import { MUX_HOME_PAGE_URL } from '../constants';
 
 export default function Layout ({
   title,
@@ -7,13 +8,17 @@ export default function Layout ({
   metaTitle,
   metaDescription,
   image,
+  alignTop,
+  footerLinks = [],
+  onFileDrop,
   children,
-  loadTwitterWidget,
 }) {
+  const { getRootProps, isDragActive } = useDropzone({ onDrop: onFileDrop });
+
   return (
-    <div className="container">
+    <div className="container" {...getRootProps()}>
       <Head>
-        <title>Mux + Next.js</title>
+        <title>stream.new</title>
         <link rel="icon" href="/favicon.ico" />
         {metaTitle && <meta property="og:title" content={metaTitle} />}
         {metaTitle && <meta property="twitter:title" content={metaTitle} />}
@@ -28,132 +33,88 @@ export default function Layout ({
           <meta property="twitter:card" content="summary_large_image" />
         )}
         {image && <meta property="twitter:image" content={image} />}
-        {loadTwitterWidget && (
-          <script
-            type="text/javascript"
-            async
-            src="https://platform.twitter.com/widgets.js"
-          />
-        )}
       </Head>
+      <div className={`drag-overlay ${isDragActive ? 'active' : ''}`}><h1>Upload to stream.new</h1></div>
 
       <main>
-        <h1 className="title">{title}</h1>
-        <p className="description">{description}</p>
         <div className="grid">{children}</div>
       </main>
-
       <footer>
-        <a href={MUX_HOME_PAGE_URL} target="_blank" rel="noopener noreferrer">
-          Powered by <img src="/mux.svg" alt="Mux Logo" className="logo" />
-        </a>
+        {footerLinks.map((link, idx) => <div key={idx} className="footer-link">{link}</div>)} {/* eslint-disable-line react/no-array-index-key */}
       </footer>
 
       <style jsx>{`
         .container {
           min-height: 100vh;
           min-height: -webkit-fill-available;
-          padding: 0 0.5rem;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+        }
+        .drag-overlay {
+          height: 100%;
+          width: 100%;
+          position: absolute;
+          z-index: 1;
+          background-color:  rgba(226, 253, 255, 0.95);
+          transition: 0.5s;
+          visibility: hidden;
           display: flex;
           flex-direction: column;
           justify-content: center;
           align-items: center;
         }
 
+        .drag-overlay h1 {
+          font-size: 96px;
+          line-height: 120px;
+        }
+
+        .drag-overlay.active {
+          visibility: visible;
+        }
+
         main {
-          padding: 1rem 0 5rem 0;
+          padding: 20px;
           flex: 1;
           display: flex;
           flex-direction: column;
-          justify-content: center;
+          justify-content: ${(alignTop && 'flex-start') || 'center'};
           align-items: center;
         }
 
         footer {
           width: 100%;
-          height: 100px;
-          border-top: 1px solid #eaeaea;
           display: flex;
-          justify-content: center;
           align-items: center;
+          justify-content: space-between;
+          padding-left: 30px;
+          padding-right: 30px;
+          padding-bottom: 30px;
         }
 
-        footer img {
-          margin-left: 0.5rem;
-          width: 71px;
+        .footer-link {
+          font-size: 26px;
+          line-height: 33px;
         }
 
-        footer a {
-          display: flex;
-          justify-content: center;
-          align-items: center;
-        }
-
-        a {
-          color: inherit;
+        .footer-link :global(a), .footer-link :global(a:visited) {
           text-decoration: none;
-        }
-
-        .title a {
-          color: #0070f3;
-          text-decoration: none;
-        }
-
-        .title a:hover,
-        .title a:focus,
-        .title a:active {
-          text-decoration: underline;
-        }
-
-        .title {
-          margin: 0;
-          line-height: 1.15;
-          font-size: 4rem;
-        }
-
-        .title,
-        .description {
-          text-align: center;
-        }
-
-        .description {
-          line-height: 1.5;
-          font-size: 1.5rem;
-        }
-
-        code {
-          background: #fafafa;
-          border-radius: 5px;
-          padding: 0.75rem;
-          font-size: 1.1rem;
-          font-family: Menlo, Monaco, Lucida Console, Liberation Mono,
-            DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace;
         }
 
         .grid {
           display: flex;
-          align-items: center;
+          flex-direction: column;
+          align-items: flex-start;
           justify-content: center;
-          flex-wrap: wrap;
-
           max-width: 800px;
-          margin-top: 1rem;
+          background: aquamarine;
         }
 
-        .logo {
-          height: 1em;
-        }
-
-        @media (max-width: 600px) {
+        @media only screen and (min-width: 756px) {
           .grid {
-            width: 100%;
-            flex-direction: column;
-          }
-          .title {
-            font-size: 2.5rem;
-          }
-          footer {
-            height: 60px;
+            align-items: center;
           }
         }
       `}
@@ -164,17 +125,28 @@ export default function Layout ({
         body {
           padding: 0;
           margin: 0;
-          font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
-            Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue,
-            sans-serif;
+          font-family: Akkurat;
+          color: #383838;
         }
 
-        a {
-          color: #ff2b61;
+        h1 {
+          font-family: Akkurat;
+          font-style: normal;
+          font-weight: normal;
+          font-size: 36px;
+          line-height: 45px;
+          margin: 0;
+          text-align: left;
+          color: #383838;
         }
 
-        p {
-          line-height: 1.4rem;
+        h2 {
+          font-family: Akkurat;
+          font-style: normal;
+          font-weight: normal;
+          font-size: 26px;
+          line-height: 33px;
+          color: #383838;
         }
 
         * {

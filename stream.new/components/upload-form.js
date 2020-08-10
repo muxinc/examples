@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState, useCallback } from 'react';
 import Router from 'next/router';
+import Link from 'next/link';
 import * as UpChunk from '@mux/upchunk';
 import useSwr from 'swr';
 import { useDropzone } from 'react-dropzone';
@@ -108,15 +109,18 @@ const UploadForm = () => {
             <Spinner />
           </>
         ) : (
-          <div {...getRootProps()} className={`drop-area ${isDragActive ? 'active' : ''}`}>
-            <label htmlFor="file-input">
-              <Button type="button" onClick={() => inputRef.current.click()}>
-                Select a video file
-              </Button>
-              <input id="file-input" type="file" {...getInputProps()} onChange={onInputChange} ref={inputRef} />
-            </label>
-            <p>(or drag a video file)</p>
-          </div>
+          <>
+            <div {...getRootProps()} className={`drop-area ${isDragActive ? 'active' : ''}`}>
+              <label htmlFor="file-input">
+                <Button type="button" onClick={() => inputRef.current.click()}>
+                  Select a video file
+                </Button>
+                <input id="file-input" type="file" {...getInputProps()} onChange={onInputChange} ref={inputRef} />
+              </label>
+              <p>(or drag a video file)</p>
+            </div>
+            <p><span>or</span> <Link href="/record"><a>record in your browser</a></Link></p>
+          </>
         )}
       </div>
       <style jsx>{`
@@ -126,10 +130,11 @@ const UploadForm = () => {
         .drop-area {
           padding: 30px 80px;
           display: inline-block;
+          background: #ffe5e5;
           transition: background-color 0.1s linear;
         }
         .drop-area.active {
-          background: #ffe5e5
+          background: #e4bfbf;
         }
         p {
           margin-bottom: 0;
