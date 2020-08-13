@@ -4,6 +4,10 @@
  * See: https://www.gatsbyjs.org/docs/gatsby-config/
  */
 
+require("dotenv").config({
+  path: `.env.${process.env.NODE_ENV}`,
+})
+
 module.exports = {
   /* Your site config here */
   plugins: [
@@ -11,11 +15,14 @@ module.exports = {
       resolve: "gatsby-source-graphql",
       options: {
         // Arbitrary name for the remote schema Query type
-        typeName: "mux",
+        typeName: "OneGraph",
         // Field under which the remote schema will be accessible. You'll use this in your Gatsby query
-        fieldName: "mux",
+        fieldName: "onegraph",
         // Url to query from - this is the onegraph Mux API
         url: "https://serve.onegraph.com/dynamic?app_id=0b33e830-7cde-4b90-ad7e-2a39c57c0e11",
+        headers: {
+          Authorization: `bearer ${process.env.ONEGRAPH_API_TOKEN}`,
+        },
       },
     },
   ],
