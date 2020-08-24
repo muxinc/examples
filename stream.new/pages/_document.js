@@ -5,12 +5,10 @@ class MyDocument extends Document {
     return (
       <Html lang="en">
         <Head>
-          <link
-            rel="preload"
-            href="https://static.mux.com/fonts/fonts.css"
-            as="font"
-            crossOrigin=""
-          />
+          <style>
+            @import url(https://static.mux.com/fonts/fonts.css);
+          </style>
+          <link rel="preload" href="https://static.mux.com/fonts/fonts.css" as="fonts" />
         </Head>
         <body>
           <Main />

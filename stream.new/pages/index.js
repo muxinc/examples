@@ -1,31 +1,33 @@
-import { useCallback, useRef } from 'react';
+import { useCallback, useState, useRef } from 'react';
 import Link from 'next/link';
 import Layout from '../components/layout';
 import Button from '../components/button';
-import Globe from '../components/globe';
-
-const InfoLink = () => <Link href="/about"><a>Info</a></Link>;
-const GlobeLink = () => <Link href="/"><a><Globe /></a></Link>;
+import UploadProgressFullpage from '../components/upload-progress-fullpage';
 
 export default function Index () {
+  const [file, setFile] = useState(null);
   const inputRef = useRef(null);
 
   const onDrop = useCallback((acceptedFiles) => {
     if (acceptedFiles && acceptedFiles[0]) {
-      console.log('debug startUpload'); // eslint-disable-line no-console
+      setFile(acceptedFiles[0]);
     } else {
       console.warn('got a drop event but no file'); // eslint-disable-line no-console
     }
   }, []);
 
   const onInputChange = () => {
+    setFile(inputRef.current.files[0]);
     console.log('debug input changed'); // eslint-disable-line no-console
   };
+
+  if (file) {
+    return <UploadProgressFullpage file={file} />;
+  }
 
   return (
     <Layout
       alignTop
-      footerLinks={[<InfoLink />, <GlobeLink />]}
       onFileDrop={onDrop}
     >
       <div className="drop-notice">

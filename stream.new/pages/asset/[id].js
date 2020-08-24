@@ -1,15 +1,13 @@
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import Router, { useRouter } from 'next/router';
-import Link from 'next/link';
 import useSwr from 'swr';
-import Spinner from '../../components/spinner';
-import ErrorMessage from '../../components/error-message';
-import UploadPage from '../../components/upload-page';
+import Layout from '../../components/layout';
 
 const fetcher = (url) => fetch(url).then((res) => res.json());
 
 export default function Asset () {
   const router = useRouter();
+  const [isDarkMode, setIsDarkMode] = useState(true);
 
   const { data, error } = useSwr(
     () => (router.query.id ? `/api/asset/${router.query.id}` : null),
@@ -24,6 +22,13 @@ export default function Asset () {
       Router.push(`/v/${asset.playback_id}`);
     }
   }, [asset]);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setIsDarkMode((val) => !val);
+    }, 3000);
+    return () => clearInterval(interval);
+  }, []);
 
   let errorMessage;
 
@@ -41,24 +46,21 @@ export default function Asset () {
   }
 
   return (
-    <UploadPage>
-      {errorMessage ? (
-        <>
-          <ErrorMessage message={errorMessage} />
-          <p>
-            Go{' '}
-            <Link href="/">
-              <a>back home</a>
-            </Link>{' '}
-            to upload another video.
-          </p>
-        </>
-      ) : (
-        <>
-          <div>Preparing...</div>
-          <Spinner />
-        </>
-      )}
-    </UploadPage>
+    <Layout footerLinks={[]} darkMode={isDarkMode}>
+      {
+        errorMessage
+          ? <div>{errorMessage}</div>
+          : <div className="preparing">Preparing</div>
+      }
+      <style jsx>{`
+        .preparing {
+          font-size: 96px;
+          line-height: 120px;
+          color: ${isDarkMode ? '#fff' : '#111'};
+          transition: color 1s ease;
+        }
+      `}
+      </style>
+    </Layout>
   );
 }

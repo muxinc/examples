@@ -1,6 +1,11 @@
 import Head from 'next/head';
+import Link from 'next/link';
 import { useDropzone } from 'react-dropzone';
+import Globe from './globe';
 // import { MUX_HOME_PAGE_URL } from '../constants';
+
+const InfoLink = () => <Link href="/about"><a>Info</a></Link>;
+const GlobeLink = () => <Link href="/"><a><Globe /></a></Link>;
 
 export default function Layout ({
   title,
@@ -9,8 +14,9 @@ export default function Layout ({
   metaDescription,
   image,
   alignTop,
-  footerLinks = [],
+  footerLinks = [<InfoLink />, <GlobeLink />],
   onFileDrop,
+  darkMode,
   children,
 }) {
   const { getRootProps, isDragActive } = useDropzone({ onDrop: onFileDrop });
@@ -51,6 +57,8 @@ export default function Layout ({
           flex-direction: column;
           justify-content: center;
           align-items: center;
+          background: ${darkMode ? '#000' : '#fff'};
+          transition: background 1s ease;
         }
         .drag-overlay {
           height: 100%;
@@ -100,6 +108,7 @@ export default function Layout ({
         }
 
         .footer-link :global(a), .footer-link :global(a:visited) {
+          color: ${darkMode ? '#ccc' : '#383838'};
           text-decoration: none;
         }
 
@@ -109,7 +118,6 @@ export default function Layout ({
           align-items: flex-start;
           justify-content: center;
           max-width: 800px;
-          background: aquamarine;
         }
 
         @media only screen and (min-width: 756px) {
@@ -122,7 +130,9 @@ export default function Layout ({
 
       <style jsx global>{`
         html,
-        body {
+        body,
+        a,
+        a:visited {
           padding: 0;
           margin: 0;
           font-family: Akkurat;
