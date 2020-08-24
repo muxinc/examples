@@ -1,3 +1,4 @@
+/* global navigator MediaRecorder Blob File */
 import { useRef, useState } from 'react';
 import Layout from './layout';
 import Button from './button';
@@ -24,14 +25,15 @@ function Recorder () {
         videoRef.current.srcObject = stream;
         recorderRef.current.start();
         setRecording(true);
-        recorderRef.current.onstop = function (e) {
+        recorderRef.current.onstop = function onRecorderStop () {
           const blob = new Blob(chunks, { type: 'video/webm' });
           const file = new File([blob], 'video-from-camera');
-          startUpload(file);
+          console.log('TODO - startUpload', file); // eslint-disable-line no-console
+          // startUpload(file);
         };
         recorderRef.current.ondataavailable = (evt) => chunks.push(evt.data);
       } catch (err) {
-        console.error(err);
+        console.error(err); // eslint-disable-line no-console
         if (recorderRef.current) {
           recorderRef.current.stop();
         }
@@ -54,7 +56,7 @@ function Recorder () {
   );
 }
 
-export default function RecordPage ({ children }) {
+export default function RecordPage () {
   return (
     <Layout
       title="stream.new"

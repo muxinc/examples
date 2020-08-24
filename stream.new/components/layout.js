@@ -1,6 +1,7 @@
 import Head from 'next/head';
 import Link from 'next/link';
 import { useDropzone } from 'react-dropzone';
+import { breakpoints } from '../style-vars';
 import Globe from './globe';
 // import { MUX_HOME_PAGE_URL } from '../constants';
 
@@ -40,7 +41,7 @@ export default function Layout ({
         )}
         {image && <meta property="twitter:image" content={image} />}
       </Head>
-      {/* <div className={`drag-overlay ${isDragActive ? 'active' : ''}`}><h1>Upload to stream.new</h1></div> */}
+      <div className={`drag-overlay ${isDragActive ? 'active' : ''}`}><h1>Upload to stream.new</h1></div>
 
       <main>
         <div className="grid">{children}</div>
@@ -67,20 +68,20 @@ export default function Layout ({
           z-index: 1;
           background-color:  rgba(226, 253, 255, 0.95);
           transition: 0.5s;
-          visibility: hidden;
-          display: flex;
+          display: none;
           flex-direction: column;
           justify-content: center;
           align-items: center;
         }
 
         .drag-overlay h1 {
-          font-size: 96px;
-          line-height: 120px;
+          font-size: 46px;
+          line-height: 46px;
+          text-align: center;
         }
 
         .drag-overlay.active {
-          visibility: visible;
+          display: flex;
         }
 
         main {
@@ -120,9 +121,13 @@ export default function Layout ({
           max-width: 800px;
         }
 
-        @media only screen and (min-width: 756px) {
+        @media only screen and (min-width: ${breakpoints.md}px) {
           .grid {
             align-items: center;
+          }
+          .drag-overlay h1 {
+            font-size: 96px;
+            line-height: 120px;
           }
         }
       `}

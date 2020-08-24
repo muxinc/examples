@@ -1,5 +1,6 @@
 import { useCallback, useState, useRef } from 'react';
 import Link from 'next/link';
+import { breakpoints } from '../style-vars';
 import Layout from '../components/layout';
 import Button from '../components/button';
 import UploadProgressFullpage from '../components/upload-progress-fullpage';
@@ -78,7 +79,7 @@ export default function Index () {
           display: none;
         }
 
-        @media only screen and (min-width: 756px) {
+        @media only screen and (min-width: ${breakpoints.md}px) {
           .drop-notice {
             display: block;
             text-align: center;

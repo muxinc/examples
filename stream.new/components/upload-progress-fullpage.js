@@ -40,7 +40,6 @@ export default function UploadProgressFullpage ({ file }) {
 
   const startUpload = (_file) => {
     if (isUploading) {
-      console.warn('already uploading'); // eslint-disable-line no-console
       return;
     }
 
@@ -55,7 +54,6 @@ export default function UploadProgressFullpage ({ file }) {
     });
 
     upChunk.on('progress', (progressEvt) => {
-      console.log('debug progressEvt', progressEvt.detail);
       setProgress(Math.floor(progressEvt.detail));
     });
 
@@ -74,7 +72,6 @@ export default function UploadProgressFullpage ({ file }) {
   }, [upload]);
 
   useEffect(() => {
-    console.log('debug going to start', file); // eslint-disable-line no-console
     if (file) {
       startUpload(file);
     }

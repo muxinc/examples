@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import Router, { useRouter } from 'next/router';
 import useSwr from 'swr';
+import { breakpoints } from '../../style-vars';
 import Layout from '../../components/layout';
 
 const fetcher = (url) => fetch(url).then((res) => res.json());
@@ -54,10 +55,13 @@ export default function Asset () {
       }
       <style jsx>{`
         .preparing {
-          font-size: 96px;
+          font-size: 62px;
           line-height: 120px;
           color: ${isDarkMode ? '#fff' : '#111'};
           transition: color 1s ease;
+        }
+        @media only screen and (min-width: ${breakpoints.md}px) {
+          font-size: 96px;
         }
       `}
       </style>
