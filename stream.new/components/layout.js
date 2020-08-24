@@ -40,7 +40,7 @@ export default function Layout ({
         )}
         {image && <meta property="twitter:image" content={image} />}
       </Head>
-      <div className={`drag-overlay ${isDragActive ? 'active' : ''}`}><h1>Upload to stream.new</h1></div>
+      {/* <div className={`drag-overlay ${isDragActive ? 'active' : ''}`}><h1>Upload to stream.new</h1></div> */}
 
       <main>
         <div className="grid">{children}</div>

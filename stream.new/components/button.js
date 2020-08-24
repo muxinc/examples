@@ -1,10 +1,12 @@
-export default function Button ({ buttonLink, children, ...otherProps }) {
+import { forwardRef } from 'react';
+
+export default forwardRef(function Button ({ buttonLink, children, onClick, href, ...otherProps }, ref) { // eslint-disable-line prefer-arrow-callback
   return (
     <>
-      {buttonLink ? <a {...otherProps}>{children}</a> : <button type="button" {...otherProps}>{children}</button>}
+      {buttonLink ? <a {...otherProps} href={href} ref={ref} onClick={onClick}>{children}</a> : <button type="button" onClick={onClick} ref={ref} {...otherProps}>{children}</button>}
       <style jsx>{`
         a {
-          text-docoration: none;
+          text-decoration: none;
           display: inline-block;
         }
         a, button {
@@ -19,4 +21,4 @@ export default function Button ({ buttonLink, children, ...otherProps }) {
       </style>
     </>
   );
-}
+});

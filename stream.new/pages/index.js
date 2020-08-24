@@ -43,13 +43,14 @@ export default function Index () {
       <div className="cta">
         <label htmlFor="file-input">
           <Button type="button" onClick={() => inputRef.current.click()}>
-            Upload a video
+            <span className="cta-text-mobile">Add a video</span>
+            <span className="cta-text-desktop">Upload a video</span>
           </Button>
           <input id="file-input" type="file" onChange={onInputChange} ref={inputRef} />
         </label>
       </div>
-      <div className="cta">
-        <Link href="/record"><Button buttonLink>Record from camera</Button></Link>
+      <div className="cta cta-record">
+        <Link href="/record" passHref><Button buttonLink>Record from camera</Button></Link>
       </div>
       <style jsx>{`
         input {
@@ -62,16 +63,39 @@ export default function Index () {
           display: none;
         }
         .drop-notice {
-          text-align: center;
+          display: none;
         }
         .cta {
           margin-top: 30px;
         }
+        .cta-text-mobile {
+          display: inline-block;
+        }
+        .cta-text-desktop {
+          display: none;
+        }
+        .cta-record {
+          display: none;
+        }
+
         @media only screen and (min-width: 756px) {
+          .drop-notice {
+            display: block;
+            text-align: center;
+          }
           .headline-mobile {
             display: none;
           }
           .headline-desktop {
+            display: block;
+          }
+          .cta-text-mobile {
+            display: none;
+          }
+          .cta-text-desktop {
+            display: inline-block;
+          }
+          .cta-record {
             display: block;
           }
         }
