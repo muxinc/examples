@@ -100,6 +100,7 @@ export default function Layout ({
           padding-left: 30px;
           padding-right: 30px;
           padding-bottom: 30px;
+          height: 120px;
         }
 
         .footer-link {
