@@ -28,30 +28,31 @@ export default function Index () {
 
   return (
     <Layout
-      alignTop
       onFileDrop={onDrop}
     >
       <div className="drop-notice">
         <h2>Drag and drop a file anywhere</h2>
       </div>
-      <div className="headline-mobile">
-        <h1>Add a video.</h1>
-        <h1>Stream it anywhere.</h1>
-      </div>
-      <div className="headline-desktop">
-        <h1>Add a video. Stream it anywhere.</h1>
-      </div>
-      <div className="cta">
-        <label htmlFor="file-input">
-          <Button type="button" onClick={() => inputRef.current.click()}>
-            <span className="cta-text-mobile">Add a video</span>
-            <span className="cta-text-desktop">Upload a video</span>
-          </Button>
-          <input id="file-input" type="file" onChange={onInputChange} ref={inputRef} />
-        </label>
-      </div>
-      <div className="cta cta-record">
-        <Link href="/record" passHref><Button buttonLink>Record from camera</Button></Link>
+      <div className="create-video-actions">
+        <div className="headline-mobile">
+          <h1>Add a video.</h1>
+          <h1>Stream it anywhere.</h1>
+        </div>
+        <div className="headline-desktop">
+          <h1>Add a video. Stream it anywhere.</h1>
+        </div>
+        <div className="cta">
+          <label htmlFor="file-input">
+            <Button type="button" onClick={() => inputRef.current.click()}>
+              <span className="cta-text-mobile">Add a video</span>
+              <span className="cta-text-desktop">Upload a video</span>
+            </Button>
+            <input id="file-input" type="file" onChange={onInputChange} ref={inputRef} />
+          </label>
+        </div>
+        <div className="cta cta-record">
+          <Link href="/record" passHref><Button buttonLink>Record from camera</Button></Link>
+        </div>
       </div>
       <style jsx>{`
         input {
@@ -83,6 +84,13 @@ export default function Index () {
           .drop-notice {
             display: block;
             text-align: center;
+          }
+          .create-video-actions {
+            padding-top: 20vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
           }
           .headline-mobile {
             display: none;

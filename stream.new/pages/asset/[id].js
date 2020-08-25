@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 import Router, { useRouter } from 'next/router';
 import useSwr from 'swr';
-import { breakpoints } from '../../style-vars';
 import Layout from '../../components/layout';
+import { transitionDuration } from '../../style-vars';
 
 const fetcher = (url) => fetch(url).then((res) => res.json());
 
@@ -50,18 +50,16 @@ export default function Asset () {
     <Layout footerLinks={[]} darkMode={isDarkMode}>
       {
         errorMessage
-          ? <div>{errorMessage}</div>
-          : <div className="preparing">Preparing</div>
+          ? <div><h1>{errorMessage}</h1></div>
+          : <div className="preparing"><h1>Preparing</h1></div>
       }
       <style jsx>{`
         .preparing {
-          font-size: 62px;
-          line-height: 120px;
+          flex-grow: 1;
+          display: flex;
+          align-items: center;
           color: ${isDarkMode ? '#fff' : '#111'};
-          transition: color 1s ease;
-        }
-        @media only screen and (min-width: ${breakpoints.md}px) {
-          font-size: 96px;
+          transition: color ${transitionDuration} ease;
         }
       `}
       </style>

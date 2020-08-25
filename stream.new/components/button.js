@@ -5,6 +5,9 @@ export default forwardRef(function Button ({ buttonLink, children, onClick, href
     <>
       {buttonLink ? <a {...otherProps} href={href} ref={ref} onClick={onClick}>{children}</a> : <button type="button" onClick={onClick} ref={ref} {...otherProps}>{children}</button>}
       <style jsx>{`
+        button {
+          cursor: pointer;
+        }
         a {
           text-decoration: none;
           display: inline-block;

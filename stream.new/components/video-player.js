@@ -1,14 +1,22 @@
-import { useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Hls from 'hls.js';
 
-export default function VideoPlayer ({ src, poster }) {
+const noop = () => {};
+
+export default function VideoPlayer ({ src, poster, onLoaded = noop }) {
   const videoRef = useRef(null);
+  const [isVertical, setIsVertical] = useState(null);
 
   useEffect(() => {
     const video = videoRef.current;
     let hls;
     if (video) {
       video.controls = true;
+      video.addEventListener('loadedmetadata', (event) => {
+        const [w, h] = [event.srcElement.videoWidth, event.srcElement.videoHeight];
+        setIsVertical((w / h) < 1);
+        onLoaded();
+      });
 
       if (video.canPlayType('application/vnd.apple.mpegurl')) {
         // This will run in safari, where HLS is supported natively
@@ -37,7 +45,9 @@ export default function VideoPlayer ({ src, poster }) {
       <video ref={videoRef} poster={poster} />
       <style jsx>{`
         video {
-          width: 800px;
+          display: ${isVertical === null ? 'none' : 'block'};
+          width: ${isVertical ? '500px' : '1000px'};
+          height: ${isVertical ? '80vh' : 'auto'};
           max-width: 100%;
           cursor: pointer;
           padding-top: 40px;

@@ -1,7 +1,7 @@
 import Head from 'next/head';
 import Link from 'next/link';
 import { useDropzone } from 'react-dropzone';
-import { breakpoints } from '../style-vars';
+import { breakpoints, transitionDuration } from '../style-vars';
 import Globe from './globe';
 // import { MUX_HOME_PAGE_URL } from '../constants';
 
@@ -14,7 +14,6 @@ export default function Layout ({
   metaTitle,
   metaDescription,
   image,
-  alignTop,
   footerLinks = [<InfoLink />, <GlobeLink />],
   onFileDrop,
   darkMode,
@@ -44,7 +43,7 @@ export default function Layout ({
       <div className={`drag-overlay ${isDragActive ? 'active' : ''}`}><h1>Upload to stream.new</h1></div>
 
       <main>
-        <div className="grid">{children}</div>
+        {children}
       </main>
       <footer>
         {footerLinks.map((link, idx) => <div key={idx} className="footer-link">{link}</div>)} {/* eslint-disable-line react/no-array-index-key */}
@@ -58,8 +57,8 @@ export default function Layout ({
           flex-direction: column;
           justify-content: center;
           align-items: center;
-          background: ${darkMode ? '#000' : '#fff'};
-          transition: background 1s ease;
+          background: ${darkMode ? '#111' : '#f8f8f8'};
+          transition: background ${transitionDuration} ease;
         }
         .drag-overlay {
           height: 100%;
@@ -89,8 +88,8 @@ export default function Layout ({
           flex: 1;
           display: flex;
           flex-direction: column;
-          justify-content: ${(alignTop && 'flex-start') || 'center'};
           align-items: center;
+          max-width: 1100px;
         }
 
         footer {
@@ -113,18 +112,7 @@ export default function Layout ({
           text-decoration: none;
         }
 
-        .grid {
-          display: flex;
-          flex-direction: column;
-          align-items: flex-start;
-          justify-content: center;
-          max-width: 800px;
-        }
-
         @media only screen and (min-width: ${breakpoints.md}px) {
-          .grid {
-            align-items: center;
-          }
           .drag-overlay h1 {
             font-size: 96px;
             line-height: 120px;
@@ -166,6 +154,15 @@ export default function Layout ({
 
         * {
           box-sizing: border-box;
+        }
+
+        @media only screen and (min-width: ${breakpoints.md}px) {
+          h1 {
+            font-size: 64px;
+            line-height: 80px;
+            text-align: left;
+            color: #383838;
+          }
         }
       `}
       </style>
