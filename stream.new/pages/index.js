@@ -1,5 +1,4 @@
 import { useCallback, useState, useRef } from 'react';
-import Link from 'next/link';
 import { breakpoints } from '../style-vars';
 import Layout from '../components/layout';
 import Button from '../components/button';
@@ -49,9 +48,6 @@ export default function Index () {
             </Button>
             <input id="file-input" type="file" onChange={onInputChange} ref={inputRef} />
           </label>
-        </div>
-        <div className="cta cta-record">
-          <Link href="/record" passHref><Button buttonLink>Record from camera</Button></Link>
         </div>
       </div>
       <style jsx>{`
