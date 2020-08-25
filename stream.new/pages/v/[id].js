@@ -29,7 +29,16 @@ export default function Playback ({ shareUrl, src, poster }) {
   const router = useRouter();
 
   if (router.isFallback) {
-    return <FullpageSpinner />;
+    return (
+      <Layout
+        metaTitle="View this video created on stream.new"
+        image={poster}
+        footerLinks={[<InfoLink />, <HomeLink />]}
+        darkMode
+      >
+        <FullpageSpinner />;
+      </Layout>
+    );
   }
 
   return (
@@ -39,23 +48,26 @@ export default function Playback ({ shareUrl, src, poster }) {
       footerLinks={[<InfoLink />, <HomeLink />]}
       darkMode
     >
+      {!isLoaded && <FullpageSpinner />}
       <div className="wrapper">
         <VideoPlayer src={src} poster={poster} onLoaded={() => setIsLoaded(true)} />
         <div className="share-url">{shareUrl}</div>
       </div>
       <style jsx>{`
-        @media only screen and (min-width: ${breakpoints.md}px) {
-          .wrapper {
-            flex-grow: 1;
-            display: ${isLoaded ? 'flex' : 'none'};
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-          }
+        .wrapper {
+          display: ${isLoaded ? 'flex' : 'none'};
         }
         .share-url {
           word-break: break-word;
           color: #777;
+        }
+        @media only screen and (min-width: ${breakpoints.md}px) {
+          .wrapper {
+            flex-grow: 1;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+          }
         }
       `}
       </style>

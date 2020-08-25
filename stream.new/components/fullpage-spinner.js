@@ -1,12 +1,12 @@
-import Layout from './layout';
 import Spinner from './spinner';
 
-export default function FullpageSpinner ({ darkMode }) {
+/*
+ *  Use this as a direct child of a <Layout /> component
+ */
+export default function FullpageSpinner () {
   return (
-    <Layout darkMode={darkMode}>
-      <div className="wrapper">
-        <Spinner />
-      </div>
+    <div className="wrapper">
+      <Spinner />
       <style jsx>{`
         .wrapper {
           justify-content: center;
@@ -16,6 +16,6 @@ export default function FullpageSpinner ({ darkMode }) {
         }
       `}
       </style>
-    </Layout>
+    </div>
   );
 }
