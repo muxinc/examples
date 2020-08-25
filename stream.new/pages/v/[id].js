@@ -56,6 +56,8 @@ export default function Playback ({ shareUrl, src, poster }) {
       <style jsx>{`
         .wrapper {
           display: ${isLoaded ? 'flex' : 'none'};
+          flex-direction: column;
+          flex-grow: 1;
         }
         .share-url {
           word-break: break-word;
@@ -63,8 +65,6 @@ export default function Playback ({ shareUrl, src, poster }) {
         }
         @media only screen and (min-width: ${breakpoints.md}px) {
           .wrapper {
-            flex-grow: 1;
-            flex-direction: column;
             align-items: center;
             justify-content: center;
           }

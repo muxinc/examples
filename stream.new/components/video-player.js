@@ -50,7 +50,7 @@ export default function VideoPlayer ({ src, poster, onLoaded = noop }) {
         video {
           display: ${isVertical === null ? 'none' : 'block'};
           width: ${isVertical ? '500px' : '1000px'};
-          height: ${isVertical ? '80vh' : 'auto'};
+          height: ${isVertical ? '70vh' : 'auto'};
           max-width: 100%;
           cursor: pointer;
           padding-top: 40px;
