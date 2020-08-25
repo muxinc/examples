@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
-import Layout from '../../components/layout';
+import FullpageSpinner from '../../components/fullpage-spinner';
 import VideoPlayer from '../../components/video-player';
-import Spinner from '../../components/spinner';
+import Layout from '../../components/layout';
 import { breakpoints } from '../../style-vars';
 
 export function getStaticProps ({ params: { id: playbackId } }) {
@@ -29,11 +29,7 @@ export default function Playback ({ shareUrl, src, poster }) {
   const router = useRouter();
 
   if (router.isFallback) {
-    return (
-      <Layout>
-        <Spinner />
-      </Layout>
-    );
+    return <FullpageSpinner />;
   }
 
   return (
