@@ -1,14 +1,16 @@
 import { useState, useEffect } from 'react';
 import Router, { useRouter } from 'next/router';
+import Link from 'next/link';
 import useSwr from 'swr';
 import Layout from '../../components/layout';
+import Button from '../../components/button';
 import { transitionDuration } from '../../style-vars';
 
 const fetcher = (url) => fetch(url).then((res) => res.json());
 
 export default function Asset () {
   const router = useRouter();
-  const [isDarkMode, setIsDarkMode] = useState(true);
+  const [isDarkMode, setIsDarkMode] = useState(false);
 
   const { data, error } = useSwr(
     () => (router.query.id ? `/api/asset/${router.query.id}` : null),
@@ -17,6 +19,16 @@ export default function Asset () {
   );
 
   const asset = data && data.asset;
+
+  let errorMessage;
+
+  if (error) {
+    errorMessage = 'Error fetching api';
+  }
+
+  if (data && data.error) {
+    errorMessage = data.error;
+  }
 
   useEffect(() => {
     if (asset && asset.playback_id && asset.status === 'ready') {
@@ -31,28 +43,27 @@ export default function Asset () {
     return () => clearInterval(interval);
   }, []);
 
-  let errorMessage;
-
-  if (error) {
-    errorMessage = 'Error fetching api';
-  }
-
-  if (data && data.error) {
-    errorMessage = data.error;
-  }
-
   if (asset && asset.status === 'errored') {
     const message = asset.errors && asset.errors.messages[0];
     errorMessage = `Error creating this asset: ${message}`;
   }
 
+  if (errorMessage) {
+    return (
+      <Layout darkMode={false}>
+        <div><h1>{errorMessage}</h1></div>
+        <div>
+          <Link href="/">
+            <Button>Home</Button>
+          </Link>
+        </div>
+      </Layout>
+    );
+  }
+
   return (
     <Layout footerLinks={[]} darkMode={isDarkMode}>
-      {
-        errorMessage
-          ? <div><h1>{errorMessage}</h1></div>
-          : <div className="preparing"><h1>Preparing</h1></div>
-      }
+      <div className="preparing"><h1>Preparing</h1></div>
       <style jsx>{`
         .preparing {
           flex-grow: 1;
