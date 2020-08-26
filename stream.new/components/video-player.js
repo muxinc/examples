@@ -3,7 +3,7 @@ import Hls from 'hls.js';
 
 const noop = () => {};
 
-export default function VideoPlayer ({ src, poster, onLoaded = noop }) {
+export default function VideoPlayer ({ src, poster, onLoaded = noop, onError = noop }) {
   const videoRef = useRef(null);
   const [isVertical, setIsVertical] = useState(null);
 
@@ -13,12 +13,15 @@ export default function VideoPlayer ({ src, poster, onLoaded = noop }) {
     onLoaded();
   };
 
+  const error = (event) => onError(event);
+
   useEffect(() => {
     const video = videoRef.current;
     let hls;
     if (video) {
       video.controls = true;
       video.addEventListener('canplay', canplay);
+      video.addEventListener('error', error);
 
       if (video.canPlayType('application/vnd.apple.mpegurl')) {
         // This will run in safari, where HLS is supported natively
@@ -37,6 +40,7 @@ export default function VideoPlayer ({ src, poster, onLoaded = noop }) {
 
     return () => {
       video.removeEventListener('loadedMetadata', canplay);
+      video.removeEventListener('error', error);
       if (hls) {
         hls.destroy();
       }

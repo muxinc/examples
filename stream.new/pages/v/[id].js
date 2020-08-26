@@ -26,6 +26,7 @@ export function getStaticPaths () {
 
 export default function Playback ({ shareUrl, src, poster }) {
   const [isLoaded, setIsLoaded] = useState(false);
+  const [errorMessage, setErrorMessage] = useState(null);
   const router = useRouter();
 
   if (router.isFallback) {
@@ -41,6 +42,11 @@ export default function Playback ({ shareUrl, src, poster }) {
     );
   }
 
+  const onError = (evt) => {
+    setErrorMessage('This video does not exist');
+    console.error('Error', evt); // eslint-disable-line no-console
+  };
+
   return (
     <Layout
       metaTitle="View this video created on stream.new"
@@ -48,12 +54,16 @@ export default function Playback ({ shareUrl, src, poster }) {
       footerLinks={[<InfoLink />, <HomeLink />]}
       darkMode
     >
-      {!isLoaded && <FullpageSpinner />}
+      {errorMessage && <h1 className="error-message">{errorMessage}</h1>}
+      {!isLoaded && !errorMessage && <FullpageSpinner />}
       <div className="wrapper">
-        <VideoPlayer src={src} poster={poster} onLoaded={() => setIsLoaded(true)} />
+        <VideoPlayer src={src} poster={poster} onLoaded={() => setIsLoaded(true)} onError={onError} />
         <div className="share-url">{shareUrl}</div>
       </div>
       <style jsx>{`
+        .error-message {
+          color: #ccc;
+        }
         .wrapper {
           display: ${isLoaded ? 'flex' : 'none'};
           flex-direction: column;
