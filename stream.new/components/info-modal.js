@@ -11,10 +11,13 @@ export default function InfoModal ({ close }) {
         <div className="footer-link"><a role="presentation" onClick={close}>Close</a></div>
       </footer>
       <style jsx>{`
+        .wrapper {
+          padding: 20px;
+          flex-grow: 1;
+          display: flex;
+        }
         @media only screen and (min-width: ${breakpoints.md}px) {
           .wrapper {
-            flex-grow: 1;
-            display: flex;
             align-items: center;
           }
           h1 {
