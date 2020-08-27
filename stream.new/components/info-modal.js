@@ -19,12 +19,15 @@ export default function InfoModal ({ close }) {
         @media only screen and (min-width: ${breakpoints.md}px) {
           .wrapper {
             align-items: center;
+            justify-content:center;
           }
           h1 {
             text-align: center;
+            max-width: 1100px;
           }
         }
         .container {
+          width: 100%;
           display: flex;
           flex-direction: column;
           background: #f8f8f8;
