@@ -93,6 +93,26 @@ vercel secrets add stream_new_webhook_signature <MUX_WEBHOOK_SIGNATURE_SECRET>
 vercel secrets add stream_new_slack_webhook_ready <SLACK_WEBHOOK_ASSET_READY>
 ```
 
+### Videos to test:
+
+When developing, if you make any changes to the video player, make sure it works and looks good with videos of various dimensions:
+
+Horizontal
+
+- http://localhost:3000/v/Hi6we01h00uVvZc00GzvVXZW8C02Y8QC8OX7
+
+
+Vertical
+
+- http://localhost:3000/v/UNDUU7tU7vYt02CRMDTlZd1qKjvk41LN6yI5LbHgtxo8
+
+Super vertical
+
+- http://localhost:3000/v/seK501Bf00kyqSnGdMwQFi3lgqgdoS00qm5PAiV7Yjf2ew
+
+Also be sure to check: Safari, Mobile Safari, Chrome, Firefox because they all behave a little differently.
+
+
 After all of this is set up the flow will be:
 
 1. Asset is uploaded

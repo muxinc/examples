@@ -25,7 +25,6 @@ export function getStaticPaths () {
 }
 
 export default function Playback ({ shareUrl, src, poster }) {
-  const [isLoaded, setIsLoaded] = useState(false);
   const [errorMessage, setErrorMessage] = useState(null);
   const router = useRouter();
 
@@ -55,9 +54,8 @@ export default function Playback ({ shareUrl, src, poster }) {
       darkMode
     >
       {errorMessage && <h1 className="error-message">{errorMessage}</h1>}
-      {!isLoaded && !errorMessage && <FullpageSpinner />}
       <div className="wrapper">
-        <VideoPlayer src={src} poster={poster} onLoaded={() => setIsLoaded(true)} onError={onError} />
+        <VideoPlayer src={src} poster={poster} onError={onError} />
         <div className="share-url">{shareUrl}</div>
       </div>
       <style jsx>{`
@@ -65,7 +63,7 @@ export default function Playback ({ shareUrl, src, poster }) {
           color: #ccc;
         }
         .wrapper {
-          display: ${isLoaded ? 'flex' : 'none'};
+          display: flex;
           flex-direction: column;
           flex-grow: 1;
         }

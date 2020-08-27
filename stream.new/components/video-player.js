@@ -1,16 +1,43 @@
 import { useState, useEffect, useRef } from 'react';
 import Hls from 'hls.js';
+import { breakpoints } from '../style-vars';
 
 const noop = () => {};
 
-export default function VideoPlayer ({ src, poster, onLoaded = noop, onError = noop }) {
+/*
+ * We need to set the width/height of the player depending on what the dimensions of
+ * the underlying video source is.
+ *
+ * On most platforms we know the dimensions on 'loadedmetadata'
+ * However, on Desktop Safari we don't know the dimensions until 'canplay'
+ *
+ * The smart thing to do here seems to be to keep the `video` element `display: none` until
+ * we know the dimensions. This works great, except that on Mobile Safari we don't get any
+ * of those callbacks until *the user interacts with the player*
+ *
+ * Therefore, we're kind of stuck here. We have to show the player and then adjust the dimensions
+ * as soon as we get those callbacks.
+ *
+ * For that reason, vertical videos sort of "jump" and re-size right after loaded.
+ *
+ */
+export default function VideoPlayer ({ src, poster, onError = noop }) {
   const videoRef = useRef(null);
-  const [isVertical, setIsVertical] = useState(null);
+  const [playerWidth, setPlayerWidth] = useState('1000px');
+  const [playerHeight, setPlayerHeight] = useState('auto');
 
   const canplay = (event) => {
     const [w, h] = [event.target.videoWidth, event.target.videoHeight];
-    setIsVertical((w / h) < 1);
-    onLoaded();
+    if (w && h) {
+      const vertical = (w / h) < 1;
+      if (vertical) {
+        setPlayerWidth('auto');
+        setPlayerHeight('70vh');
+      } else {
+        setPlayerWidth('1000px');
+        setPlayerHeight('auto');
+      }
+    }
   };
 
   const error = (event) => onError(event);
@@ -19,8 +46,8 @@ export default function VideoPlayer ({ src, poster, onLoaded = noop, onError = n
     const video = videoRef.current;
     let hls;
     if (video) {
-      video.controls = true;
       video.addEventListener('canplay', canplay);
+      video.addEventListener('loadedmetadata', canplay);
       video.addEventListener('error', error);
 
       if (video.canPlayType('application/vnd.apple.mpegurl')) {
@@ -39,7 +66,8 @@ export default function VideoPlayer ({ src, poster, onLoaded = noop, onError = n
     }
 
     return () => {
-      video.removeEventListener('loadedMetadata', canplay);
+      video.removeEventListener('canplay', canplay);
+      video.addEventListener('loadedmetadata', canplay);
       video.removeEventListener('error', error);
       if (hls) {
         hls.destroy();
@@ -49,16 +77,22 @@ export default function VideoPlayer ({ src, poster, onLoaded = noop, onError = n
 
   return (
     <>
-      <video ref={videoRef} poster={poster} />
+      <video ref={videoRef} poster={poster} controls />
       <style jsx>{`
         video {
-          display: ${isVertical === null ? 'none' : 'block'};
-          width: ${isVertical ? '500px' : '1000px'};
-          height: ${isVertical ? '70vh' : 'auto'};
+          display: block;
+          width: ${playerWidth};
+          height: ${playerHeight};
           max-width: 100%;
+          max-height: 50vh;
           cursor: pointer;
-          padding-top: 40px;
-          padding-bottom: 40px;
+          margin-top: 40px;
+          margin-bottom: 40px;
+        }
+        @media only screen and (min-width: ${breakpoints.md}px) {
+          video {
+            max-height: 80vh;
+          }
         }
       `}
       </style>
