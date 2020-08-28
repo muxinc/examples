@@ -9,45 +9,43 @@ const noop = () => {};
  * the underlying video source is.
  *
  * On most platforms we know the dimensions on 'loadedmetadata'
- * However, on Desktop Safari we don't know the dimensions until 'canplay'
+ * On Desktop Safari we don't know the dimensions until 'canplay'
  *
- * The smart thing to do here seems to be to keep the `video` element `display: none` until
- * we know the dimensions. This works great, except that on Mobile Safari we don't get any
- * of those callbacks until *the user interacts with the player*
+ * At first, I tried to get the dimensions of the video from these callbacks, that worked
+ * great except for on moble Safari. On Mobile Safari none of those callbacks fire until
+ * there is some user interaction :(
  *
- * Therefore, we're kind of stuck here. We have to show the player and then adjust the dimensions
- * as soon as we get those callbacks.
+ * BUT! There is a brilliant hack here. We can create a `display: none` `img` element in the
+ * DOM, load up the poster image.
  *
- * For that reason, vertical videos sort of "jump" and re-size right after loaded.
+ * Since the poster image will have the same dimensions of the video, now we know if the video
+ * is vertical and now we can style the proper width/height so the layout doesn't have a sudden
+ * jump or resize.
  *
  */
-export default function VideoPlayer ({ src, poster, onError = noop }) {
+export default function VideoPlayer ({ src, poster, onLoaded, onError = noop }) {
   const videoRef = useRef(null);
-  const [playerWidth, setPlayerWidth] = useState('1000px');
-  const [playerHeight, setPlayerHeight] = useState('auto');
-
-  const canplay = (event) => {
-    const [w, h] = [event.target.videoWidth, event.target.videoHeight];
-    if (w && h) {
-      const vertical = (w / h) < 1;
-      if (vertical) {
-        setPlayerWidth('auto');
-        setPlayerHeight('70vh');
-      } else {
-        setPlayerWidth('1000px');
-        setPlayerHeight('auto');
-      }
-    }
-  };
+  const imageRef = useRef(null);
+  const [isVertical, setIsVertical] = useState();
 
   const error = (event) => onError(event);
+
+  const onImageLoad = (event) => {
+    event.persist();
+    const [w, h] = [event.target.width, event.target.height];
+    if (w && h) {
+      setIsVertical((w / h) < 1);
+      onLoaded();
+    } else {
+      onLoaded();
+      console.error('Error getting img dimensions', event); // eslint-disable-line no-console
+    }
+  };
 
   useEffect(() => {
     const video = videoRef.current;
     let hls;
     if (video) {
-      video.addEventListener('canplay', canplay);
-      video.addEventListener('loadedmetadata', canplay);
       video.addEventListener('error', error);
 
       if (video.canPlayType('application/vnd.apple.mpegurl')) {
@@ -66,8 +64,6 @@ export default function VideoPlayer ({ src, poster, onError = noop }) {
     }
 
     return () => {
-      video.removeEventListener('canplay', canplay);
-      video.addEventListener('loadedmetadata', canplay);
       video.removeEventListener('error', error);
       if (hls) {
         hls.destroy();
@@ -78,11 +74,15 @@ export default function VideoPlayer ({ src, poster, onError = noop }) {
   return (
     <>
       <video ref={videoRef} poster={poster} controls />
+      <img ref={imageRef} src={poster} onLoad={onImageLoad} alt="Thumbnail" />
       <style jsx>{`
+        img {
+          display: none;
+        }
         video {
           display: block;
-          width: ${playerWidth};
-          height: ${playerHeight};
+          width: ${isVertical ? 'auto' : '1000px'};
+          height: ${isVertical ? '600px' : 'auto'};
           max-width: 100%;
           max-height: 50vh;
           cursor: pointer;
