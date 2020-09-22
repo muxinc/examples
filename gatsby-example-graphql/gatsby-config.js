@@ -19,10 +19,7 @@ module.exports = {
         // Field under which the remote schema will be accessible. You'll use this in your Gatsby query
         fieldName: "onegraph",
         // Url to query from - this is the onegraph Mux API
-        url: "https://serve.onegraph.com/dynamic?app_id=0b33e830-7cde-4b90-ad7e-2a39c57c0e11",
-        headers: {
-          Authorization: `bearer ${process.env.ONEGRAPH_API_TOKEN}`,
-        },
+        url: `https://serve.onegraph.com/dynamic?app_id=${process.env.ONEGRAPH_APP_ID}`,
       },
     },
   ],
