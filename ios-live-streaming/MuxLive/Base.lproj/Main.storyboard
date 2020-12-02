@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="rRV-nQ-XHY">
+    <device id="retina6_0" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Broadcast View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController modalPresentationStyle="fullScreen" id="BYZ-38-t0r" userLabel="Broadcast View Controller" customClass="BroadcastViewController" customModule="MuxLive" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jAy-u8-iwL" customClass="MuxButton" customModule="MuxLive" customModuleProvider="target">
+                                <rect key="frame" x="20" y="760" width="350" height="30"/>
+                                <color key="backgroundColor" red="0.98433929679999999" green="0.1451357603" blue="0.5685722232" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="tintColor" systemColor="labelColor"/>
+                                <state key="normal" title="Go Live!"/>
+                                <connections>
+                                    <action selector="goLiveButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="mK3-Oe-pIf"/>
+                                </connections>
+                            </button>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="XnV-Vw-Dug">
+                                <rect key="frame" x="267" y="64" width="103" height="32"/>
+                                <segments>
+                                    <segment title="Back"/>
+                                    <segment title="Front"/>
+                                </segments>
+                                <color key="selectedSegmentTintColor" red="0.98433929679999999" green="0.1451357603" blue="0.5685722232" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <connections>
+                                    <action selector="changeCameraToggle:" destination="BYZ-38-t0r" eventType="valueChanged" id="Fp7-6j-usk"/>
+                                </connections>
+                            </segmentedControl>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hWM-8f-2y3" customClass="MuxButton" customModule="MuxLive" customModuleProvider="target">
+                                <rect key="frame" x="20" y="64" width="30" height="30"/>
+                                <color key="backgroundColor" red="0.98433929679999999" green="0.1451357603" blue="0.5685722232" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="tintColor" systemColor="labelColor"/>
+                                <state key="normal" title="⚙️"/>
+                                <connections>
+                                    <action selector="closeButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="KSm-sI-aYf"/>
+                                </connections>
+                            </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Txe-iw-B1V" customClass="MTHKView" customModule="HaishinKit">
+                                <rect key="frame" x="20" y="115" width="350" height="625"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0 kbps" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hi8-yD-DcT">
+                                        <rect key="frame" x="296" y="598" width="44" height="17"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <color key="textColor" red="0.98433929679999999" green="0.1451357603" blue="0.5685722232" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0 fps" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y7w-60-PSf">
+                                        <rect key="frame" x="10" y="598" width="33" height="17"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <color key="textColor" red="0.98433929679999999" green="0.1451357603" blue="0.5685722232" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemGray2Color"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="hi8-yD-DcT" secondAttribute="trailing" constant="10" id="AWy-NT-flO"/>
+                                    <constraint firstAttribute="bottom" secondItem="Y7w-60-PSf" secondAttribute="bottom" constant="10" id="C70-OW-oou"/>
+                                    <constraint firstAttribute="bottom" secondItem="hi8-yD-DcT" secondAttribute="bottom" constant="10" id="Rad-1B-mSv"/>
+                                    <constraint firstItem="Y7w-60-PSf" firstAttribute="leading" secondItem="Txe-iw-B1V" secondAttribute="leading" constant="10" id="Z7X-36-EAK"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="hWM-8f-2y3" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="0hD-tw-Otr"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="jAy-u8-iwL" secondAttribute="bottom" constant="20" id="35d-sX-Za9"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="XnV-Vw-Dug" secondAttribute="trailing" constant="20" id="Eyy-Cl-yge"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Txe-iw-B1V" secondAttribute="trailing" constant="20" id="Gsc-T6-aSz"/>
+                            <constraint firstItem="XnV-Vw-Dug" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="20" id="IDI-IQ-lc2"/>
+                            <constraint firstItem="Txe-iw-B1V" firstAttribute="top" secondItem="XnV-Vw-Dug" secondAttribute="bottom" constant="20" id="SKU-Lu-KYK"/>
+                            <constraint firstItem="jAy-u8-iwL" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="TdZ-no-dS8"/>
+                            <constraint firstItem="jAy-u8-iwL" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="bDh-ID-uAB"/>
+                            <constraint firstItem="hWM-8f-2y3" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="20" id="dHQ-46-kwY"/>
+                            <constraint firstItem="Txe-iw-B1V" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="imc-E1-c9z"/>
+                            <constraint firstItem="jAy-u8-iwL" firstAttribute="top" secondItem="Txe-iw-B1V" secondAttribute="bottom" constant="20" id="vBM-o6-DcW"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="jAy-u8-iwL" secondAttribute="trailing" constant="20" id="ycx-Of-0q4"/>
+                        </constraints>
+                    </view>
+                    <extendedEdge key="edgesForExtendedLayout"/>
+                    <navigationItem key="navigationItem" id="SoV-qd-Imw"/>
+                    <connections>
+                        <outlet property="bitrateLabel" destination="hi8-yD-DcT" id="u2G-NQ-VKb"/>
+                        <outlet property="cameraSelector" destination="XnV-Vw-Dug" id="hXS-lS-q3I"/>
+                        <outlet property="fpsLabel" destination="Y7w-60-PSf" id="rXd-15-XLa"/>
+                        <outlet property="previewView" destination="Txe-iw-B1V" id="EaD-6G-zWr"/>
+                        <outlet property="startStopButton" destination="jAy-u8-iwL" id="Pr1-g0-nod"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="21.538461538461537" y="720.14218009478668"/>
+        </scene>
+        <!--Connect View Controller-->
+        <scene sceneID="WJD-CC-u5u">
+            <objects>
+                <viewController id="rRV-nQ-XHY" customClass="ConnectViewController" customModule="MuxLive" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="1ev-Cm-fdr">
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7oV-Qt-GAK" customClass="MuxButton" customModule="MuxLive" customModuleProvider="target">
+                                <rect key="frame" x="50" y="459" width="290" height="30"/>
+                                <color key="backgroundColor" red="0.98433929679999999" green="0.1451357603" blue="0.5685722232" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="tintColor" systemColor="labelColor"/>
+                                <state key="normal" title="Start Camera"/>
+                                <connections>
+                                    <action selector="startCamera:" destination="rRV-nQ-XHY" eventType="touchUpInside" id="h5K-iQ-1Aj"/>
+                                </connections>
+                            </button>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Stream Key" textAlignment="center" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="R9Y-6f-M7T" customClass="MuxTextField" customModule="MuxLive" customModuleProvider="target">
+                                <rect key="frame" x="50" y="405" width="290" height="34"/>
+                                <color key="backgroundColor" systemColor="tertiarySystemGroupedBackgroundColor"/>
+                                <color key="tintColor" systemColor="labelColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="1" translatesAutoresizingMaskIntoConstraints="NO" id="BXR-7i-Apn">
+                                <rect key="frame" x="50" y="94" width="290" height="32"/>
+                                <segments>
+                                    <segment title="1080p"/>
+                                    <segment title="720p"/>
+                                    <segment title="540p"/>
+                                    <segment title="360p"/>
+                                </segments>
+                                <color key="selectedSegmentTintColor" red="0.98433929679999999" green="0.1451357603" blue="0.5685722232" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </segmentedControl>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="small-mux-logo" translatesAutoresizingMaskIntoConstraints="NO" id="213-Lh-aok">
+                                <rect key="frame" x="120" y="321" width="150" height="64"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="150" id="agv-FG-cXq"/>
+                                </constraints>
+                                <edgeInsets key="layoutMargins" top="8" left="8" bottom="8" right="8"/>
+                            </imageView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="nMK-5P-fzQ"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="nMK-5P-fzQ" firstAttribute="trailing" secondItem="BXR-7i-Apn" secondAttribute="trailing" constant="50" id="Aum-Do-BTN"/>
+                            <constraint firstItem="R9Y-6f-M7T" firstAttribute="top" secondItem="213-Lh-aok" secondAttribute="bottom" constant="20" id="Dqu-zT-h6B"/>
+                            <constraint firstItem="nMK-5P-fzQ" firstAttribute="trailing" secondItem="R9Y-6f-M7T" secondAttribute="trailing" constant="50" id="HKj-jD-r74"/>
+                            <constraint firstItem="nMK-5P-fzQ" firstAttribute="trailing" secondItem="7oV-Qt-GAK" secondAttribute="trailing" constant="50" id="OYN-hT-qza"/>
+                            <constraint firstItem="7oV-Qt-GAK" firstAttribute="top" secondItem="R9Y-6f-M7T" secondAttribute="bottom" constant="20" id="RSE-2S-04g"/>
+                            <constraint firstItem="R9Y-6f-M7T" firstAttribute="centerY" secondItem="1ev-Cm-fdr" secondAttribute="centerY" id="SAe-dh-u8E"/>
+                            <constraint firstItem="R9Y-6f-M7T" firstAttribute="centerX" secondItem="1ev-Cm-fdr" secondAttribute="centerX" id="XGv-Ha-CUZ"/>
+                            <constraint firstItem="7oV-Qt-GAK" firstAttribute="leading" secondItem="nMK-5P-fzQ" secondAttribute="leading" constant="50" id="cnZ-zs-R7w"/>
+                            <constraint firstItem="R9Y-6f-M7T" firstAttribute="leading" secondItem="nMK-5P-fzQ" secondAttribute="leading" constant="50" id="dj4-nw-jcV"/>
+                            <constraint firstItem="BXR-7i-Apn" firstAttribute="leading" secondItem="nMK-5P-fzQ" secondAttribute="leading" constant="50" id="e6g-p3-gbv"/>
+                            <constraint firstItem="213-Lh-aok" firstAttribute="centerX" secondItem="1ev-Cm-fdr" secondAttribute="centerX" id="gTr-wi-mWt"/>
+                            <constraint firstItem="7oV-Qt-GAK" firstAttribute="centerX" secondItem="1ev-Cm-fdr" secondAttribute="centerX" id="oUX-w8-eM6"/>
+                            <constraint firstItem="BXR-7i-Apn" firstAttribute="top" secondItem="nMK-5P-fzQ" secondAttribute="top" constant="50" id="rPK-GQ-5fG"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="presetSelector" destination="BXR-7i-Apn" id="6Fx-7U-KeJ"/>
+                        <outlet property="streamKeyTextBox" destination="R9Y-6f-M7T" id="cfD-R1-EeR"/>
+                        <segue destination="BYZ-38-t0r" kind="show" identifier="startCamera" id="wng-rD-jWt"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="C2Q-ur-h20" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-836.23188405797111" y="720.53571428571422"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="small-mux-logo" width="200" height="64"/>
+        <systemColor name="labelColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGray2Color">
+            <color red="0.68235294117647061" green="0.68235294117647061" blue="0.69803921568627447" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="tertiarySystemGroupedBackgroundColor">
+            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
+</document>

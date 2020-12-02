@@ -1,0 +1,428 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 51;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		6A22A247256D9CC800F98F38 /* MuxButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A22A246256D9CC800F98F38 /* MuxButton.swift */; };
+		6A723F7F256D5A120034280E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A723F7E256D5A120034280E /* AppDelegate.swift */; };
+		6A723F81256D5A120034280E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A723F80256D5A120034280E /* SceneDelegate.swift */; };
+		6A723F83256D5A120034280E /* BroadcastViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A723F82256D5A120034280E /* BroadcastViewController.swift */; };
+		6A723F86256D5A120034280E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6A723F84256D5A120034280E /* Main.storyboard */; };
+		6A723F88256D5A140034280E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6A723F87256D5A140034280E /* Assets.xcassets */; };
+		6A723F8B256D5A140034280E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6A723F89256D5A140034280E /* LaunchScreen.storyboard */; };
+		6AAAF210257564B7001AEA8E /* ConnectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AAAF20F257564B7001AEA8E /* ConnectViewController.swift */; };
+		6AAAF21425757538001AEA8E /* MuxTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AAAF21325757538001AEA8E /* MuxTextField.swift */; };
+		BF81AC273AF43F3812EF49A1 /* Pods_MuxLive.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 81485609C84C52F3B5EC0D46 /* Pods_MuxLive.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		6A22A246256D9CC800F98F38 /* MuxButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MuxButton.swift; sourceTree = "<group>"; };
+		6A723F7B256D5A120034280E /* MuxLive.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MuxLive.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		6A723F7E256D5A120034280E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		6A723F80256D5A120034280E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		6A723F82256D5A120034280E /* BroadcastViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BroadcastViewController.swift; sourceTree = "<group>"; };
+		6A723F85256D5A120034280E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		6A723F87256D5A140034280E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		6A723F8A256D5A140034280E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		6A723F8C256D5A140034280E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6AAAF20F257564B7001AEA8E /* ConnectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectViewController.swift; sourceTree = "<group>"; };
+		6AAAF21325757538001AEA8E /* MuxTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MuxTextField.swift; sourceTree = "<group>"; };
+		81485609C84C52F3B5EC0D46 /* Pods_MuxLive.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MuxLive.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A845C096E2F42F6107C470D7 /* Pods-MuxLive.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MuxLive.debug.xcconfig"; path = "Target Support Files/Pods-MuxLive/Pods-MuxLive.debug.xcconfig"; sourceTree = "<group>"; };
+		F8076D5757B1F7AB43F56A65 /* Pods-MuxLive.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MuxLive.release.xcconfig"; path = "Target Support Files/Pods-MuxLive/Pods-MuxLive.release.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		6A723F78256D5A120034280E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BF81AC273AF43F3812EF49A1 /* Pods_MuxLive.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		0FD2546CAADB73382D6A3DE1 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				A845C096E2F42F6107C470D7 /* Pods-MuxLive.debug.xcconfig */,
+				F8076D5757B1F7AB43F56A65 /* Pods-MuxLive.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		6A723F72256D5A120034280E = {
+			isa = PBXGroup;
+			children = (
+				6A723F7D256D5A120034280E /* MuxLive */,
+				6A723F7C256D5A120034280E /* Products */,
+				0FD2546CAADB73382D6A3DE1 /* Pods */,
+				EA200AD27F854EB611A3001D /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		6A723F7C256D5A120034280E /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				6A723F7B256D5A120034280E /* MuxLive.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		6A723F7D256D5A120034280E /* MuxLive */ = {
+			isa = PBXGroup;
+			children = (
+				6A723F7E256D5A120034280E /* AppDelegate.swift */,
+				6A723F80256D5A120034280E /* SceneDelegate.swift */,
+				6A723F82256D5A120034280E /* BroadcastViewController.swift */,
+				6AAAF20F257564B7001AEA8E /* ConnectViewController.swift */,
+				6A723F84256D5A120034280E /* Main.storyboard */,
+				6A22A246256D9CC800F98F38 /* MuxButton.swift */,
+				6AAAF21325757538001AEA8E /* MuxTextField.swift */,
+				6A723F87256D5A140034280E /* Assets.xcassets */,
+				6A723F89256D5A140034280E /* LaunchScreen.storyboard */,
+				6A723F8C256D5A140034280E /* Info.plist */,
+			);
+			path = MuxLive;
+			sourceTree = "<group>";
+		};
+		EA200AD27F854EB611A3001D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				81485609C84C52F3B5EC0D46 /* Pods_MuxLive.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		6A723F7A256D5A120034280E /* MuxLive */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6A723F8F256D5A140034280E /* Build configuration list for PBXNativeTarget "MuxLive" */;
+			buildPhases = (
+				33E5020CF494E32D894B65E1 /* [CP] Check Pods Manifest.lock */,
+				6A723F77256D5A120034280E /* Sources */,
+				6A723F78256D5A120034280E /* Frameworks */,
+				6A723F79256D5A120034280E /* Resources */,
+				CE1168E7B508F1FD66D8E783 /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MuxLive;
+			productName = MuxLive;
+			productReference = 6A723F7B256D5A120034280E /* MuxLive.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		6A723F73256D5A120034280E /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1220;
+				LastUpgradeCheck = 1220;
+				TargetAttributes = {
+					6A723F7A256D5A120034280E = {
+						CreatedOnToolsVersion = 12.2;
+					};
+				};
+			};
+			buildConfigurationList = 6A723F76256D5A120034280E /* Build configuration list for PBXProject "MuxLive" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 6A723F72256D5A120034280E;
+			productRefGroup = 6A723F7C256D5A120034280E /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				6A723F7A256D5A120034280E /* MuxLive */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		6A723F79256D5A120034280E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6A723F8B256D5A140034280E /* LaunchScreen.storyboard in Resources */,
+				6A723F88256D5A140034280E /* Assets.xcassets in Resources */,
+				6A723F86256D5A120034280E /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		33E5020CF494E32D894B65E1 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-MuxLive-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		CE1168E7B508F1FD66D8E783 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MuxLive/Pods-MuxLive-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MuxLive/Pods-MuxLive-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MuxLive/Pods-MuxLive-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		6A723F77256D5A120034280E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6AAAF21425757538001AEA8E /* MuxTextField.swift in Sources */,
+				6AAAF210257564B7001AEA8E /* ConnectViewController.swift in Sources */,
+				6A22A247256D9CC800F98F38 /* MuxButton.swift in Sources */,
+				6A723F83256D5A120034280E /* BroadcastViewController.swift in Sources */,
+				6A723F7F256D5A120034280E /* AppDelegate.swift in Sources */,
+				6A723F81256D5A120034280E /* SceneDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		6A723F84256D5A120034280E /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6A723F85256D5A120034280E /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		6A723F89256D5A140034280E /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6A723F8A256D5A140034280E /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		6A723F8D256D5A140034280E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		6A723F8E256D5A140034280E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		6A723F90256D5A140034280E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = A845C096E2F42F6107C470D7 /* Pods-MuxLive.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = Q2RFVSRNGB;
+				INFOPLIST_FILE = MuxLive/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.mux.MuxLive;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		6A723F91256D5A140034280E /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = F8076D5757B1F7AB43F56A65 /* Pods-MuxLive.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = Q2RFVSRNGB;
+				INFOPLIST_FILE = MuxLive/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.mux.MuxLive;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		6A723F76256D5A120034280E /* Build configuration list for PBXProject "MuxLive" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6A723F8D256D5A140034280E /* Debug */,
+				6A723F8E256D5A140034280E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6A723F8F256D5A140034280E /* Build configuration list for PBXNativeTarget "MuxLive" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6A723F90256D5A140034280E /* Debug */,
+				6A723F91256D5A140034280E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 6A723F73256D5A120034280E /* Project object */;
+}
