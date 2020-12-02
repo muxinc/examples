@@ -1,9 +1,4 @@
-//
-//  AppDelegate.swift
-//  MuxLive
-//
 //  Copyright Mux Inc. 2020.
-//
 
 import UIKit
 import AVFoundation
