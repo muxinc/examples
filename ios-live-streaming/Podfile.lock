@@ -1,32 +1,28 @@
 PODS:
-  - Alamofire (4.9.1)
+  - HaishinKit (1.1.1):
+    - Logboard (~> 2.2.1)
   - Hue (5.0.0)
-  - LFLiveKit (2.6)
-  - NextLevel (0.16.1)
-  - RPCircularProgress (0.5.0)
+  - Loaf (0.7.0)
+  - Logboard (2.2.1)
 
 DEPENDENCIES:
-  - Alamofire (~> 4.7)
-  - Hue (~> 5.0)
-  - LFLiveKit (~> 2.6)
-  - NextLevel (~> 0.16)
-  - RPCircularProgress (= 0.5.0)
+  - HaishinKit (~> 1.1.0)
+  - Hue (~> 5.0.0)
+  - Loaf
 
 SPEC REPOS:
-  trunk:
-    - Alamofire
+  https://github.com/CocoaPods/Specs.git:
+    - HaishinKit
     - Hue
-    - LFLiveKit
-    - NextLevel
-    - RPCircularProgress
+    - Loaf
+    - Logboard
 
 SPEC CHECKSUMS:
-  Alamofire: 85e8a02c69d6020a0d734f6054870d7ecb75cf18
+  HaishinKit: a42ed059e002ef6b49e81a18916e67d46364ffb4
   Hue: c129cb67be7d093a82bbbc30ce8a96757bf6f37a
-  LFLiveKit: 2219563721f8aa0f188effc3395a06e2d53b23f2
-  NextLevel: 38f7771c35b66f0caccdc2a3e130d8fb20652ede
-  RPCircularProgress: 4499d4a1453dfbd3fe5bd8c6f344fd51cff3ad00
+  Loaf: d69937cd00649f3fa260beb8b7aef0a1feb861ef
+  Logboard: 7ac9d3b127327c5fe1c438597f219dcf3c42aac4
 
-PODFILE CHECKSUM: fae79d68b5e3edd75fd1e559dca38a690cffc628
+PODFILE CHECKSUM: 70f3ccb1a2700dea63df2702091f67512d4aaae7
 
-COCOAPODS: 1.8.4
+COCOAPODS: 1.9.1

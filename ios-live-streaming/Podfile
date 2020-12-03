@@ -1,11 +1,13 @@
-use_frameworks!
+source 'https://github.com/CocoaPods/Specs.git'
+
+platform :ios, '13.0'
 
 target 'MuxLive' do
-  platform :ios, '11.0'
+  use_frameworks!
 
-  pod 'Alamofire', '~> 4.7'
-  pod 'LFLiveKit', '~> 2.6'
-  pod 'NextLevel', '~> 0.16'
-  pod 'RPCircularProgress', '0.5.0'
-  pod 'Hue', '~> 5.0'
+  # Pods for MuxLive
+  pod 'HaishinKit', '~> 1.1.0'
+  pod 'Hue', '~> 5.0.0'
+  pod 'Loaf'
+
 end
