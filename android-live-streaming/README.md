@@ -48,7 +48,7 @@ Mux will provides basic support for the features shown in this example. Please r
 
 # Documentation
 
-This project uses [rtmp-rtsp-stream-client-java RTMP library](https://github.com/pedroSG94/rtmp-rtsp-stream-client-java) to reliably broadcast a live stream from an Android device to an RTMP endooint, in this case, [Mux](https://mux.com/).
+This project uses [rtmp-rtsp-stream-client-java RTMP library](https://github.com/pedroSG94/rtmp-rtsp-stream-client-java) to reliably broadcast a live stream from an Android device to an RTMP endpoint, in this case, [Mux](https://mux.com/).
 
 ## Code Overview
 
@@ -66,7 +66,7 @@ Most of the application is implemented in BroadcastActivity.swift, it's fairly s
 
 #### onCreate()
 
-When the application is started, the main entrypoint, `onCreate()` is called. First, this then performs basic boilerplate to setup the UI elements, including the `surfaceView`, which is used as the preview for the camera. 
+When the application is started, the main entrypoint, `onCreate()` is called. First, this performs basic boilerplate to setup the UI elements, including the `surfaceView`, which is used as the preview for the camera. 
 
 ```java
     // Init the Surface View for the camera preview
@@ -74,7 +74,7 @@ When the application is started, the main entrypoint, `onCreate()` is called. Fi
     surfaceView.getHolder().addCallback(this);
 ```
 
-Next is instantiates the `RTMPCamera1`, passing in a reference to the preview, and setting up a callback for the FPS change events. 
+Next it instantiates the `RTMPCamera1`, passing in a reference to the preview, and setting up a callback for the FPS change events. 
 
 ```java
     // Setup the camera
