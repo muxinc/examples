@@ -33,8 +33,7 @@ class ConnectViewController: UIViewController, UITextFieldDelegate {
         return false
     }
 
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?)
-    {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.destination is BroadcastViewController
         {
             let vc = segue.destination as? BroadcastViewController
@@ -44,14 +43,19 @@ class ConnectViewController: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func startCamera(_ sender: Any) {
-        if streamKeyTextBox.text == "" && defaultStreamKey == "" {
-            Loaf("Enter a Stream Key!", state: Loaf.State.warning, location: .top,  sender: self).show(.short)
-            return
-        } else {
+            
+        streamKey = streamKeyTextBox.text!
+        
+        // Use the hardwired default stream key if it exists, and there's nothing in the text box
+        if streamKey == "" && defaultStreamKey != "" {
             streamKey = defaultStreamKey
         }
         
-        streamKey = streamKeyTextBox.text!
+        if streamKey == "" {
+            Loaf("Enter a Stream Key!", state: Loaf.State.warning, location: .top,  sender: self).show(.short)
+            return
+        }
+        
         performSegue(withIdentifier: "startCamera", sender: sender)
     }
 }
