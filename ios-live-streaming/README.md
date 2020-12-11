@@ -46,7 +46,7 @@ Please note that broadcasting from an iOS simulator is not possible - you'll nee
 
 ## Dependencies
 
-The project requires iOS 13 or higher, and should work on most iPhone and iPad devices. Dependencies deliberately minimal, and are managed using Cocoapods.
+The project requires iOS 13 or higher, and should work on most iPhone and iPad devices. Dependencies are deliberately minimal, and are managed using Cocoapods.
 
 # Support
 
@@ -60,9 +60,13 @@ This project uses [HaishinKit RTMP library](https://github.com/shogo4405/Haishin
 
 ## Code Overview
 
+This project is relatively simple, most of the code consists of two view controllers, `ConnectViewController.swift`, and `BroadcastViewController.swift`.
+
+Below is an overview of the codebase, but it's often best to just get stuck in and read the code - it's short, and liberally documented.
+
 ### AppDelegate.swift
 
-When you're implementing your own application using HaishinKit, please be sure to add the boilerplate code from `application` function to your application - this will ensure that your application is able to attatch to the different audio devices that your iPhone or iPad might have.
+When you're implementing your own application using HaishinKit, please be sure to add the boilerplate code from the `application` function to your application - this will ensure that your application is able to attatch to the different audio devices that your iPhone or iPad might have.
 
 ### ConnectViewController.swift
 
@@ -70,7 +74,7 @@ This View Controller acts as the entrypoint of the application, and allows the u
 
 ### BroadcastViewController.swift
 
-Most of the application is implemented in BroadcastViewController.swift, it's fairly short, around 250 lines right now, and is deliberately not broken into multiple files or classes. Here's an overview of how it works. 
+Most of the application is implemented in `BroadcastViewController.swift`, it's fairly short, around 250 lines right now, and is deliberately not broken into multiple files or classes. Here's an overview of how it works. 
 
 #### viewDidLoad()
 
