@@ -52,7 +52,7 @@ This project uses [rtmp-rtsp-stream-client-java RTMP library](https://github.com
 
 ## Code Overview
 
-This project is relative simple, due to the fairly comprehensive feature set in rtmp-rtsp-stream-client-java. It consists of two main java classes, `ConfigureActivity.java`, and `BroadcastActivity.java`.
+This project is relatively simple, due to the fairly comprehensive feature set in rtmp-rtsp-stream-client-java. It consists of two main java classes, `ConfigureActivity.java`, and `BroadcastActivity.java`.
 
 Below is an overview of the codebase, but it's often best to just get stuck in and read the code - it's short, and liberally documented.
 
