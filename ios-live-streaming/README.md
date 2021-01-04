@@ -56,7 +56,7 @@ Mux will provides basic support for the features shown in this example. Please r
 
 ## Overview
 
-This project uses [HaishinKit RTMP library](https://github.com/shogo4405/HaishinKit.swift) to reliably broadcast a live stream from an iOS device to an RTMP endooint, in this case, [Mux](https://mux.com/).
+This project uses [HaishinKit RTMP library](https://github.com/shogo4405/HaishinKit.swift) to reliably broadcast a live stream from an iOS device to an RTMP endpoint, in this case, [Mux](https://mux.com/).
 
 ## Code Overview
 
