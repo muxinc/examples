@@ -36,6 +36,12 @@ This app replaced the previous Android example which used JavaCV, and lived in t
 
 Just clone this repo, and open the directory in Android Studio > 4, select the "app" project, connect a device, and just click the play button.
 
+## Prerequisites
+
+To use this application, you'll need a [Mux account](https://dashboard.mux.com/signup?type=video) and an [RTMP stream key](https://docs.mux.com/guides/video/start-live-streaming#2-create-a-unique-live-stream).
+
+If you're new to Mux or live streaming in general, you can follow our [Start Live Streaming guide](https://docs.mux.com/guides/video/start-live-streaming) for a tutorial on getting your first live stream created, and obtaining an RTMP stream key.
+
 ## Dependencies
 
 * Min SDK version 21
