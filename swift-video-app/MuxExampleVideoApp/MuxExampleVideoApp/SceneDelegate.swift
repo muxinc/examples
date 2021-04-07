@@ -6,11 +6,13 @@
 //
 
 import UIKit
+import AVKit
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
-
+    var videoViewController: ViewController? = nil
+    var avPlayerSavedReference: AVPlayer? = nil
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
@@ -39,9 +41,23 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func sceneWillEnterForeground(_ scene: UIScene) {
         // Called as the scene transitions from the background to the foreground.
         // Use this method to undo the changes made on entering the background.
+        //
+        // Now that the application is coming into the foreground, we should
+        // have a avPlayerSavedReference (from the last time it went into the background)
+        // Let's re-attached our avPlayerSavedReference onto our ViewController
+        if (videoViewController != nil && avPlayerSavedReference != nil) {
+            videoViewController!.player = avPlayerSavedReference;
+            avPlayerSavedReference = nil;
+        }
     }
 
     func sceneDidEnterBackground(_ scene: UIScene) {
+        // Detach our avPlayer from the view controller, but save
+        // a reference to it so we can re-attach it later
+        if (videoViewController != nil) {
+            avPlayerSavedReference = videoViewController!.player
+            videoViewController?.player = nil
+        }
         // Called as the scene transitions from the foreground to the background.
         // Use this method to save data, release shared resources, and store enough scene-specific state information
         // to restore the scene back to its current state.
