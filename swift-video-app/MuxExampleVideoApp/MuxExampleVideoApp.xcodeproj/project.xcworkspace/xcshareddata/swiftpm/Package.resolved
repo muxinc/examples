@@ -1,0 +1,25 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "MUXSDKStats",
+        "repositoryURL": "https://github.com/muxinc/mux-stats-sdk-avplayer.git",
+        "state": {
+          "branch": null,
+          "revision": "4c32f29f706d674df937b939f17809c254a570e6",
+          "version": "2.2.0"
+        }
+      },
+      {
+        "package": "MuxCore",
+        "repositoryURL": "https://github.com/muxinc/stats-sdk-objc.git",
+        "state": {
+          "branch": null,
+          "revision": "dce787e34f53a648f42b8b3f1711f7122bdb1506",
+          "version": "3.2.0"
+        }
+      }
+    ]
+  },
+  "version": 1
+}

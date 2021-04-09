@@ -46,6 +46,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // have a avPlayerSavedReference (from the last time it went into the background)
         // Let's re-attached our avPlayerSavedReference onto our ViewController
         if (videoViewController != nil && avPlayerSavedReference != nil) {
+            avPlayerSavedReference?.currentItem?.preferredPeakBitRate = 0
             videoViewController!.player = avPlayerSavedReference;
             avPlayerSavedReference = nil;
         }
@@ -56,6 +57,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // a reference to it so we can re-attach it later
         if (videoViewController != nil) {
             avPlayerSavedReference = videoViewController!.player
+            if (avPlayerSavedReference != nil) {
+                avPlayerSavedReference?.currentItem?.preferredPeakBitRate = 300000
+            }
             videoViewController?.player = nil
         }
         // Called as the scene transitions from the foreground to the background.
