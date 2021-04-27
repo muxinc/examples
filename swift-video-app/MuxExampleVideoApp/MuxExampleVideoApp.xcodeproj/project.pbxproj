@@ -15,7 +15,7 @@
 		FA8188F7261E2C2D00FBF62B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA8188F5261E2C2D00FBF62B /* LaunchScreen.storyboard */; };
 		FA818902261E2C2D00FBF62B /* MuxExampleVideoAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA818901261E2C2D00FBF62B /* MuxExampleVideoAppTests.swift */; };
 		FA81890D261E2C2D00FBF62B /* MuxExampleVideoAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA81890C261E2C2D00FBF62B /* MuxExampleVideoAppUITests.swift */; };
-		FAED236C261E3EE400474A86 /* MUXSDKStats in Frameworks */ = {isa = PBXBuildFile; productRef = FAED236B261E3EE400474A86 /* MUXSDKStats */; };
+		FAC5AC5E263889170052F8A3 /* MUXSDKStats in Frameworks */ = {isa = PBXBuildFile; productRef = FAC5AC5D263889170052F8A3 /* MUXSDKStats */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,7 +57,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FAED236C261E3EE400474A86 /* MUXSDKStats in Frameworks */,
+				FAC5AC5E263889170052F8A3 /* MUXSDKStats in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -147,7 +147,7 @@
 			);
 			name = MuxExampleVideoApp;
 			packageProductDependencies = (
-				FAED236B261E3EE400474A86 /* MUXSDKStats */,
+				FAC5AC5D263889170052F8A3 /* MUXSDKStats */,
 			);
 			productName = MuxExampleVideoApp;
 			productReference = FA8188E7261E2C2A00FBF62B /* MuxExampleVideoApp.app */;
@@ -221,7 +221,7 @@
 			);
 			mainGroup = FA8188DE261E2C2A00FBF62B;
 			packageReferences = (
-				FAED236A261E3EE300474A86 /* XCRemoteSwiftPackageReference "mux-stats-sdk-avplayer" */,
+				FAC5AC5C263889170052F8A3 /* XCRemoteSwiftPackageReference "mux-stats-sdk-avplayer" */,
 			);
 			productRefGroup = FA8188E8261E2C2A00FBF62B /* Products */;
 			projectDirPath = "";
@@ -603,20 +603,20 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		FAED236A261E3EE300474A86 /* XCRemoteSwiftPackageReference "mux-stats-sdk-avplayer" */ = {
+		FAC5AC5C263889170052F8A3 /* XCRemoteSwiftPackageReference "mux-stats-sdk-avplayer" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/muxinc/mux-stats-sdk-avplayer.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 2.2.0;
+				minimumVersion = 2.2.1;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		FAED236B261E3EE400474A86 /* MUXSDKStats */ = {
+		FAC5AC5D263889170052F8A3 /* MUXSDKStats */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = FAED236A261E3EE300474A86 /* XCRemoteSwiftPackageReference "mux-stats-sdk-avplayer" */;
+			package = FAC5AC5C263889170052F8A3 /* XCRemoteSwiftPackageReference "mux-stats-sdk-avplayer" */;
 			productName = MUXSDKStats;
 		};
 /* End XCSwiftPackageProductDependency section */

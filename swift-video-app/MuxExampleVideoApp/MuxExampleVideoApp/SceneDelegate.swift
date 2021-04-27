@@ -57,9 +57,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // a reference to it so we can re-attach it later
         if (videoViewController != nil) {
             avPlayerSavedReference = videoViewController!.player
-            if (avPlayerSavedReference != nil) {
-                avPlayerSavedReference?.currentItem?.preferredPeakBitRate = 300000
-            }
             videoViewController?.player = nil
         }
         // Called as the scene transitions from the foreground to the background.
