@@ -14,6 +14,7 @@ Get to know Mux by looking through examples! Contributions are always welcome, e
 | [now-airtable](now-airtable)                            | [Zeit Now](https://zeit.co/now) + [Airtable](https://airtable.com/). Build your own personal Video CMS using Now, [Next.js](https://nextjs.org/), and your own Airtable base. | VOD, CMS              | JavaScript |
 | [signed-playback-lambda](signed-playback-lambda)        | AWS Lambda that allows you to generate signed Mux playback URLs.														  | VOD, Serverless       | JavaScript |
 | [gatsy-example-graphql](gatsby-example-graphql)         | Gatsby project that uses Mux's OneGraph-powered GraphQL API | JAMstack, VOD, GraphQL       | JavaScript |
+| [swift-video-app](swift-video-app)                      | Swift app that uses Mux Video, Mux Data and plays audio when the app goes into the background | VOD, Mobile | Swift |
 
 ## Examples in the wild
 
