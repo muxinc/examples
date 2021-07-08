@@ -1,0 +1,34 @@
+# Look for an EditorConfig plugin for your tool of choice
+# http://EditorConfig.org
+
+# top-most EditorConfig file
+root = true
+
+# All files
+# - use UTF-8
+# - use Unix-style newlines with a newline ending every file
+# - indent by spaces
+# - get whitespace-trimmed
+[*]
+charset = utf-8
+end_of_line = lf
+insert_final_newline = true
+indent_style = space
+trim_trailing_whitespace = true
+
+# JavaScript, JSON, Typescript
+[*.{js,json,ts,jsx,tsx}]
+indent_size = 2
+
+# CSS, and related
+[*.{css,sass,scss,less}]
+indent_size = 2
+
+# YAML
+[*.{yaml,yml}]
+indent_style = space
+indent_size = 2
+
+# Markdown
+[*.md]
+indent_size = 2

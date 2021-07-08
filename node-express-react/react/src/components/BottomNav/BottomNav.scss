@@ -1,0 +1,40 @@
+.BottomNav {
+  display: flex;
+  align-items: center;
+  background-color: #323232;
+  border: solid 1px #222222;
+  width: 100%;
+  min-height: 120px;
+  position: fixed;
+  bottom: 0;
+
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.BottomNav__controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 10px;
+}
+
+.BottomNav__text {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  text-align: center;
+  color: #fff;
+  margin: 0 0 10px 0;
+
+  .BottomNav__arrow {
+    color: #c8c7c7;
+    opacity: 0.2;
+    margin: 0 12px;
+  }
+}
