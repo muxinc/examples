@@ -1,7 +1,8 @@
 # Mux Webhooks Example
 
-This project uses [Elixir](https://elixir-lang.org/) and the [Phoenix web framework](https://www.phoenixframework.org/)
-to build an app that listens for webhooks from your Mux account.
+This project uses [Elixir](https://elixir-lang.org/), [the Phoenix web framework](https://www.phoenixframework.org/),
+and the official [Mux Elixir SDK](https://github.com/muxinc/mux-elixir) to build an app that listens for webhooks
+from your Mux account.
 
 See [the docs](https://docs.mux.com/guides/video/listen-for-webhooks) for a complete list of webhook event types.
 
