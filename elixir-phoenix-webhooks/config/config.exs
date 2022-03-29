@@ -46,9 +46,12 @@ config :phoenix, :json_library, Jason
 
 # Configure Mux API credentials
 config :mux,
-  access_token_id: "MUX-ACCESS-TOKEN-ID", # Replace with your Access Token ID
-  access_token_secret: "MUX-ACCESS-TOKEN-SECRET", # Replace with your Access Token Secret
-  webhook_signing_secret: "WEBHOOK-SIGNING-SECRET" # Replace with your Signing Secret
+  # Replace with your Access Token ID
+  access_token_id: "MUX-ACCESS-TOKEN-ID",
+  # Replace with your Access Token Secret
+  access_token_secret: "MUX-ACCESS-TOKEN-SECRET",
+  # Replace with your Signing Secret
+  webhook_signing_secret: "WEBHOOK-SIGNING-SECRET"
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
