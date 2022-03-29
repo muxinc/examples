@@ -8,8 +8,7 @@ config :mux_webhooks, MuxWebhooksWeb.Endpoint,
   server: false
 
 # In test we don't send emails.
-config :mux_webhooks, MuxWebhooks.Mailer,
-  adapter: Swoosh.Adapters.Test
+config :mux_webhooks, MuxWebhooks.Mailer, adapter: Swoosh.Adapters.Test
 
 # Print only warnings and errors during test
 config :logger, level: :warn
