@@ -20,10 +20,11 @@ defmodule MuxWebhooksWeb.Router do
     get "/", PageController, :index
   end
 
-  # Other scopes may use custom stacks.
-  # scope "/api", MuxWebhooksWeb do
-  #   pipe_through :api
-  # end
+  scope "/api", MuxWebhooksWeb do
+    pipe_through :api
+
+    post "/webhooks/mux", MuxWebhooksController, :index
+  end
 
   # Enables LiveDashboard only for development
   #
