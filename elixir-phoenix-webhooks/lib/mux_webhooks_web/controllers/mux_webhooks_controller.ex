@@ -4,31 +4,31 @@ defmodule MuxWebhooksWeb.MuxWebhooksController do
 
   plug MuxWebhooksWeb.MuxWebhookVerification when action == :index
 
-  def index(conn, %{"type" => "video.asset.created"}) do
+  def index(conn, %{"type" => "video.asset.created"} = params) do
     %{"data" => %{"id" => asset_id}} = params
     Logger.debug("Asset #{asset_id} created")
     send_ok_resp(conn)
   end
 
-  def index(conn, %{"type" => "video.asset.ready"}) do
+  def index(conn, %{"type" => "video.asset.ready"} = params) do
     %{"data" => %{"id" => asset_id}} = params
     Logger.debug("Asset #{asset_id} ready")
     send_ok_resp(conn)
   end
 
-  def index(conn, %{"type" => "video.asset.errored"}) do
+  def index(conn, %{"type" => "video.asset.errored"} = params) do
     %{"data" => %{"id" => asset_id}} = params
     Logger.alert("Asset #{asset_id} errored")
     send_ok_resp(conn)
   end
 
-  def index(conn, %{"type" => "video.asset.updated"}) do
+  def index(conn, %{"type" => "video.asset.updated"} = params) do
     %{"data" => %{"id" => asset_id}} = params
     Logger.debug("Asset #{asset_id} updated")
     send_ok_resp(conn)
   end
 
-  def index(conn, %{"type" => "video.asset.deleted"}) do
+  def index(conn, %{"type" => "video.asset.deleted"} = params) do
     %{"data" => %{"id" => asset_id}} = params
     Logger.debug("Asset #{asset_id} deleted")
     send_ok_resp(conn)
