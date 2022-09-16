@@ -2,11 +2,10 @@ import * as path from "path";
 import { PersonalizeEventsClient, PutItemsCommand, PutEventsCommand, PutUsersCommand } from "@aws-sdk/client-personalize-events";
 import { loadSync } from "protobufjs";
 
-// import Mux from "@mux/mux-node";
 import { KinesisStreamEvent, Context } from "aws-lambda";
 import IVideoView from "./VideoView";
 
-const personalizeClient = new PersonalizeEventsClient({ region: "us-east-1" });
+const personalizeClient = new PersonalizeEventsClient({ region: process.env.AWS_REGION });
 const protoFile = path.resolve(process.env.LAMBDA_TASK_ROOT as string, "video_view.proto")
 const root = loadSync(protoFile)
 const VideoView = root.lookupType("video_view.v1.VideoView");
@@ -57,7 +56,7 @@ exports.handler = async function (event: KinesisStreamEvent, context: Context): 
       const interactionResponse = await personalizeClient.send(
         new PutEventsCommand({
           sessionId,
-          trackingId: "5c627ed6-9114-46ab-a5c2-2b362b8044c7", // Replace this with your own event tracking ID
+          trackingId: process.env.PERSONALIZE_TRACKING_ID,
           userId,
           eventList: [{
             eventType: "Watch",

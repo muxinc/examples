@@ -10,6 +10,9 @@ import * as lambda from 'aws-cdk-lib/aws-lambda';
 import * as nodelambda from 'aws-cdk-lib/aws-lambda-nodejs';
 import * as lambdaEventSource from 'aws-cdk-lib/aws-lambda-event-sources'
 import * as kinesis from 'aws-cdk-lib/aws-kinesis';
+
+const MUX_AWS_ACCOUNT_ID = "910609115197";
+
 export class MuxExampleAwsRecommendationsStack extends Stack {
   constructor(scope: Construct, id: string, props?: StackProps) {
     super(scope, id, props);
@@ -170,8 +173,8 @@ export class MuxExampleAwsRecommendationsStack extends Stack {
      * Kinesis role. Get the external ID value from your Mux dashboard.
      */
     const kinesisRole = new iam.Role(this, "mux-kinesis-role", {
-      assumedBy: new iam.AccountPrincipal("910609115197"),
-      externalIds: ["YOUR_UNIQUE_EXTERNAL_ID_HERE"],
+      assumedBy: new iam.AccountPrincipal(MUX_AWS_ACCOUNT_ID),
+      externalIds: [process.env.MUX_STREAMING_EXPORTS_EXTERNAL_ID as string],
       description: `This role provides the Mux external AWS account access to our AWS account in order to write view data to our Kinesis stream`
     });
 
@@ -231,10 +234,9 @@ export class MuxExampleAwsRecommendationsStack extends Stack {
       timeout: Duration.seconds(300),
       role: kinesisHandlerRole,
       environment: {
-        MUX_TOKEN_ID: "",
-        MUX_TOKEN_SECRET: "",
         ITEMS_DATASET_ARN: itemsDataset.attrDatasetArn,
-        USERS_DATASET_ARN: usersDataset.ref
+        USERS_DATASET_ARN: usersDataset.ref,
+        PERSONALIZE_TRACKING_ID: process.env.PERSONALIZE_TRACKING_ID as string // Replace this with your own event tracking ID
       },
     });
 
