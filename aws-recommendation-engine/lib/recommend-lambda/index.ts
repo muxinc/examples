@@ -1,7 +1,7 @@
 import { PersonalizeRuntimeClient, GetRecommendationsCommand, PredictedItem } from "@aws-sdk/client-personalize-runtime";
 
 import { APIGatewayEvent, Context } from "aws-lambda";
-const personalizeClient = new PersonalizeRuntimeClient({ region: "us-east-1" });
+const personalizeClient = new PersonalizeRuntimeClient({ region: process.env.AWS_REGION });
 
 const MOST_POPULAR_RECOMMENDER = "arn:aws:personalize:::recipe/aws-vod-most-popular";
 const BECAUSE_YOU_WATCHED_X_RECOMMENDER = "arn:aws:personalize:::recipe/aws-vod-because-you-watched-x";
