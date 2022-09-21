@@ -1,9 +1,8 @@
-# Welcome to your CDK TypeScript project
+# Mux AWS recommendation engine example
 
-This is a blank project for CDK development with TypeScript.
+This repository contains an example implementation of how you can set up Mux streaming exports and Amazon Personalize to build your own content recommendation engine.
 
-The `cdk.json` file tells the CDK Toolkit how to execute your app.
-
+For a detailed walkthrough on how you can use this repository, check out the [corollary blog post](https://mux.com/blog/amazon-personalize-video-recommendation-engine) over on the Mux blog.
 ## Useful commands
 
 * `npm run build`   compile typescript to js
@@ -12,39 +11,11 @@ The `cdk.json` file tells the CDK Toolkit how to execute your app.
 * `cdk deploy`      deploy this stack to your default AWS account/region
 * `cdk diff`        compare deployed stack with current state
 * `cdk synth`       emits the synthesized CloudFormation template
-
-
-## Importing incremental items to AWS Personalize
-List of endpoints: https://docs.aws.amazon.com/general/latest/gr/personalize.html
-
-Can use the Node SDK: https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-personalize-events/classes/putitemscommand.html
-
-
-https://docs.aws.amazon.com/personalize/latest/dg/API_UBS_PutItems.html
-
-```js
-  // https://personalize-events.us-east-1.amazonaws.com/items
-  POST /items HTTP/1.1
-  Content-type: application/json
-
-  {
-    "datasetArn": "string",
-    "items": [ 
-        { 
-          "itemId": "string",
-          "properties": "string"
-        }
-    ]
-  }
-```
-
-## Personalization ingest example pipeline w/ kinesis
-
-https://github.com/aws-samples/amazon-personalize-ingestion-pipeline
-
-## References
-
-https://github.com/aws-samples/amazon-personalize-ingestion-pipeline
-https://github.com/CloudedThings/100-Days-in-Cloud/blob/main/Labs/80-Amazon-Rekognition-CDK-deployed/index.py
-https://github.com/aws-samples/amazon-rekognition-large-scale-processing
-https://docs.aws.amazon.com/personalize/latest/dg/recording-events.html#event-record-api
+## References and resources
+* https://docs.aws.amazon.com/general/latest/gr/personalize.html
+* https://github.com/aws-samples/amazon-personalize-ingestion-pipeline
+* https://github.com/CloudedThings/100-Days-in-Cloud/blob/main/Labs/80-Amazon-Rekognition-CDK-deployed/index.py
+* https://github.com/aws-samples/amazon-rekognition-large-scale-processing
+* https://docs.aws.amazon.com/personalize/latest/dg/recording-events.html#event-record-api
+* https://docs.aws.amazon.com/personalize/latest/dg/API_UBS_PutItems.html
+* https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-personalize-events/classes/putitemscommand.html
