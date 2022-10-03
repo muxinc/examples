@@ -1,0 +1,176 @@
+syntax = "proto2";
+
+package video_view.v1;
+
+message VideoView {
+  // Definitions match Google Timestamp and Duration well-known-types
+  // google/protobuf/duration.proto
+  message Duration {
+    optional int64 seconds = 1;
+    optional int32 nanos = 2;
+  }
+
+  // google/protobuf/timestamp.proto
+  message Timestamp {
+    optional int64 seconds = 1;
+    optional int32 nanos = 2;
+  }
+
+  // Device orientation info
+  message OrientationInfo {
+    required double x = 1;
+    required double y = 2;
+    required double z = 3;
+  }
+
+  // Rendition info
+  message RenditionInfo {
+    optional int64 width = 1;
+    optional int64 height = 2;
+    optional double fps = 3;
+    optional int64 bitrate = 4;
+  }
+
+  message Event {
+    required uint64 sequence_number = 7;
+    required Timestamp server_time = 1;
+    required Timestamp viewer_time = 2;
+    required Duration playhead_time = 3;
+    required string type = 4;
+    optional OrientationInfo orientation_info = 5;
+    optional RenditionInfo rendition_info = 6;
+  }
+
+  required string view_id = 1;
+  required string property_id = 2;
+  required Timestamp view_start = 3; // Timestamp when view started
+  required Timestamp view_end = 4; // Timestamp when view ended
+  repeated Event events = 5; // Events associated with the video-view
+
+  // Basic exported fields
+  optional int32 asn = 6;
+  optional string browser = 7;
+  optional string browser_version = 8;
+  optional string cdn = 9;
+  optional string city = 10;
+  optional string continent_code = 11;
+  optional string country = 12;
+  optional string country_name = 13;
+  optional string custom_1 = 14;
+  optional string custom_2 = 15;
+  optional string custom_3 = 16;
+  optional string custom_4 = 17;
+  optional string custom_5 = 18;
+  optional int32 error_type = 19;
+  optional bool exit_before_video_start = 20;
+  optional string experiment_name = 21;
+  optional double latitude = 22;
+  optional double longitude = 23;
+  optional float max_downscale_percentage = 24;
+  optional float max_upscale_percentage = 25;
+  optional string mux_api_version = 26;
+  optional string mux_embed_version = 27;
+  optional string mux_viewer_id = 28;
+  optional string operating_system = 29;
+  optional string operating_system_version = 30;
+  optional int32 page_load_time = 31;
+  optional string page_type = 32;
+  optional string page_url = 33;
+  optional float playback_success_score = 34;
+  optional bool player_autoplay = 35;
+  optional string player_error_code = 36;
+  optional string player_error_message = 37;
+  optional int32 player_height = 38;
+  optional string player_instance_id = 39;
+  optional string player_language = 40;
+  optional string player_mux_plugin_name = 41;
+  optional string player_mux_plugin_version = 42;
+  optional string player_name = 43;
+  optional string player_poster = 44;
+  optional bool player_preload = 45;
+  optional bool player_remote_played = 46;
+  optional string player_software = 47;
+  optional string player_software_version = 48;
+  optional string player_source_domain = 49;
+  optional int64 player_source_duration = 50;
+  optional int32 player_source_height = 51;
+  optional string player_source_url = 52;
+  optional int32 player_source_width = 53;
+  optional int32 player_startup_time = 54;
+  optional string player_version = 55;
+  optional int32 player_view_count = 56;
+  optional int32 player_width = 57;
+  optional int32 rebuffer_count = 58;
+  optional int32 rebuffer_duration = 59;
+  optional float rebuffer_frequency = 60;
+  optional float rebuffer_percentage = 61;
+  optional string region = 62;
+  optional string session_id = 63;
+  optional float smoothness_score = 64;
+  optional string source_hostname = 65;
+  optional string source_type = 66;
+  optional float startup_time_score = 67;
+  optional string sub_property_id = 68;
+  optional bool used_fullscreen = 69;
+  optional string video_content_type = 70;
+  optional int32 video_duration = 71;
+  optional string video_encoding_variant = 72;
+  optional string video_id = 73;
+  optional string video_language = 74;
+  optional string video_producer = 75;
+  optional float video_quality_score = 76;
+  optional string video_series = 77;
+  optional int32 video_startup_time = 78;
+  optional string video_title = 79;
+  optional string video_variant_id = 80;
+  optional string video_variant_name = 81;
+  optional float view_downscaling_percentage = 82;
+  optional int64 view_max_playhead_position = 83;
+  optional int64 view_playing_time = 84;
+  optional int32 view_seek_count = 85;
+  optional int32 view_seek_duration = 86;
+  optional string view_session_id = 87;
+  optional int32 view_total_content_playback_time = 88;
+  optional float view_total_downscaling = 89;
+  optional float view_total_upscaling = 90;
+  optional float view_upscaling_percentage = 91;
+  optional string viewer_application_engine = 92;
+  optional string viewer_connection_type = 93;
+  optional string viewer_device_category = 94;
+  optional string viewer_device_manufacturer = 95;
+  optional string viewer_device_name = 96;
+  optional float viewer_experience_score = 97;
+  optional string viewer_os_architecture = 98;
+  optional string viewer_user_agent = 99;
+  optional string viewer_user_id = 100;
+  optional int32 watch_time = 101;
+  optional bool watched = 102;
+  optional double weighted_average_bitrate = 103;
+
+  // ad metrics
+  optional string preroll_ad_asset_hostname = 104;
+  optional string preroll_ad_tag_hostname = 105;
+  optional bool preroll_played = 106;
+  optional bool preroll_requested = 107;
+  optional int32 requests_for_first_preroll = 108;
+  optional int32 video_startup_preroll_load_time = 109;
+  optional int32 video_startup_preroll_request_time = 110;
+
+  // request metrics fields
+  optional int32 max_request_latency = 111;
+  optional int32 request_latency = 112;
+  optional int32 request_throughput = 113;
+
+  optional string stream_type = 114;
+  reserved 115;
+
+  // Mux Video fields
+  optional string asset_id = 116;
+  optional string live_stream_id = 117;
+  optional string playback_id = 118;
+
+  optional int32 live_stream_latency = 119;
+  optional string environment_id = 120;
+  optional string viewer_device_model = 121;
+  reserved 200 to 299;
+}

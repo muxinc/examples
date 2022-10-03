@@ -1,0 +1,17 @@
+{
+  "Records": [{
+    "Sns": {
+      "Type": "Notification",
+      MessageId: '88daf6f7-3f55-5fda-85dc-adc9596a88ba',
+      TopicArn: 'arn:aws:sns:us-east-1:618963333842:AmazonRekognitionMuxVideo',
+      Subject: null,
+      Message: '{"JobId":"9864ee6a6d33bc4c3a195ab868720ea532567617e5049631d16e93478411da61","Status":"SUCCEEDED","API":"StartLabelDetection","JobTag":"string","Timestamp":1657037823845,"Video":{"S3ObjectName":"hackweek-mux-video-ad-final.mp4","S3Bucket":"dk-videos-bucket"}}',
+      Timestamp: '2022-07-05T16:17:03.978Z',
+      SignatureVersion: '1',
+      Signature: 'LXrafz0da/y67FFTR323zUDxWSKtut9evVgolpI1KhtyG8nsWxlMEcaCACDve//0Ar9SDMcTnSdUt8RckwheYjdEIJpUb9SsmEWqlkU77qN5vDBk5rP/Bf92cBxiranSZLx9Y3cZjQAvSSUvbVz0VWJRn8U6TXd9yE0CsQQG+Qm6hJQNpVm740o2XxG6oIynd+JWBdS342/vmsQypnFy0uI3UD4lOknqKKF8TgzQN9xNLM/IOdln+oHBx3XWESCLJI1PLHcuG3CV1xKGq1+UaGIIHJa+JpnhBHtJNwxGKR8CBvYeogbhZVBbAYXrSXWUUbp9RNT6kT/HDbhAhOL1lw==',
+      SigningCertUrl: 'https://sns.us-east-1.amazonaws.com/SimpleNotificationService-7ff5318490ec183fbaddaa2a969abfda.pem',
+      UnsubscribeUrl: 'https://sns.us-east-1.amazonaws.com/?Action=Unsubscribe&SubscriptionArn=arn:aws:sns:us-east-1:618963333842:AmazonRekognitionMuxVideo:ff670b88-c438-4ecb-a3ad-543dd6fd4979',
+      MessageAttributes: {}
+    }
+  }]
+}
