@@ -16,6 +16,7 @@ Get to know Mux by looking through examples! Contributions are always welcome, e
 | [gatsy-example-graphql](gatsby-example-graphql)         | Gatsby project that uses Mux's OneGraph-powered GraphQL API | JAMstack, VOD, GraphQL       | JavaScript |
 | [swift-video-app](swift-video-app)                      | Swift app that uses Mux Video, Mux Data and plays audio when the app goes into the background | VOD, Mobile | Swift |
 | [aws-recommendation-engine](aws-recommendation-engine)  | An example of using Mux Data streaming exports to recommend content with Amazon Personalize | VOD, Serverless | TypeScript |
+| [nextjs-mdx-player](nextjs-mdx-player)                  | A [Next.js](https://nextjs.org/) app configured to support [MDX](https://mdxjs.com) to illustrate supporting [MuxPlayer](https://www.mux.com/player) in blog posts. | VOD, CMS | JavaScript |
 
 ## Examples in the wild
 
