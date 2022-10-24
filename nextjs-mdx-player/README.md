@@ -1,4 +1,6 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app). It has been modified to illustrate how to embed the Mux Player into blog posts in the .mdx file format.
+This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app). It has been modified to illustrate how to embed the [Mux Player](https://www.mux.com/player) into blog posts in the [.mdx](https://mdxjs.com) file format.
+
+`utils/blogPosts.js` uses [mdx-bundler](https://github.com/kentcdodds/mdx-bundler) to process all `.mdx` files in the `blog` directory. And `pages/posts/[slug].js` renders the `<MDX Component />` and imports `<MuxPlayer />` for [Component Substitution](https://github.com/kentcdodds/mdx-bundler#component-substitution).
 
 ## Getting Started
 
@@ -6,8 +8,6 @@ First, run the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
@@ -17,9 +17,8 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 To learn more about Next.js, take a look at the following resources:
 
 - [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+- [Mux Player](https://www.mux.com/player) - a video component that integrates with [Mux](https://www.mux.com).
+- [MDX](https://mdxjs.com) - JSX + markdown
 
 ## Deploy on Vercel
 

@@ -1,6 +1,6 @@
 import Head from "next/head";
 import Link from "next/link";
-import { getSortedPostsData } from "../lib/utils/blogPosts";
+import { getPostsData } from "../utils/blogPosts";
 
 import styles from "../styles/Home.module.css";
 
@@ -16,13 +16,11 @@ export default function Home({ allPostsData }) {
       <main className={styles.main}>
         <h2 className={styles.heading}>Blog</h2>
         <ul className={styles.list}>
-          {allPostsData.map(({ slug, date, title }) => (
+          {allPostsData.map(({ slug, title }) => (
             <li className={styles.listItem} key={slug}>
               <Link href={`/posts/${slug}`}>
                 <a>{title}</a>
               </Link>
-              <br />
-              {date}
             </li>
           ))}
         </ul>
@@ -32,7 +30,7 @@ export default function Home({ allPostsData }) {
 }
 
 export async function getStaticProps() {
-  const allPostsData = getSortedPostsData();
+  const allPostsData = getPostsData();
 
   return {
     props: {

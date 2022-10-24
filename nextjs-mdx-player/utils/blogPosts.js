@@ -5,7 +5,7 @@ import { bundleMDX } from "mdx-bundler";
 
 const blogDirectory = path.join(process.cwd(), "blog");
 
-export function getSortedPostsData() {
+export function getPostsData() {
   const fileNames = fs.readdirSync(blogDirectory);
 
   const allPostsData = fileNames.map((fileName) => {
@@ -22,13 +22,7 @@ export function getSortedPostsData() {
     };
   });
 
-  return allPostsData.sort((a, b) => {
-    if (a.date < b.date) {
-      return 1;
-    } else {
-      return -1;
-    }
-  });
+  return allPostsData;
 }
 
 export function getAllPostSlugs() {
