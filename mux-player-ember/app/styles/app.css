@@ -28,3 +28,10 @@ button {
 body {
   background: #f3f3f3;
 }
+
+mux-player {
+  width: 100%;
+  max-width: 800px;
+  margin: 40px auto;
+  display: block;
+}

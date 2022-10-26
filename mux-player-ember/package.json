@@ -65,5 +65,8 @@
   },
   "ember": {
     "edition": "octane"
+  },
+  "dependencies": {
+    "@mux/mux-player": "latest"
   }
 }
