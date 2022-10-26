@@ -17,6 +17,7 @@ Get to know Mux by looking through examples! Contributions are always welcome, e
 | [swift-video-app](swift-video-app)                      | Swift app that uses Mux Video, Mux Data and plays audio when the app goes into the background | VOD, Mobile | Swift |
 | [aws-recommendation-engine](aws-recommendation-engine)  | An example of using Mux Data streaming exports to recommend content with Amazon Personalize | VOD, Serverless | TypeScript |
 | [nextjs-mdx-player](nextjs-mdx-player)                  | A [Next.js](https://nextjs.org/) app configured to support [MDX](https://mdxjs.com) to illustrate supporting [MuxPlayer](https://www.mux.com/player) in blog posts. | VOD, CMS | JavaScript |
+| [mux-player-ember](mux-player-emberer)                  | An [ember](https://emberjs.com/) app with [MuxPlayer](https://www.mux.com/player) installed. | VOD | JavaScript |
 
 ## Examples in the wild
 
