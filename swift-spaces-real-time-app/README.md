@@ -4,19 +4,9 @@ This is an iOS and iPadOS app written in Swift demonstrating using the Spaces SD
 
 Note: The Spaces SDK is Beta software and may contain issues or missing functionality. We recommend against submitting apps based on it to the App Store.
 
-## Installation
-
-### Adding the SDK using Swift Package Manager
-
-You can add the SDK using Swift Package Manager via Xcode by following the steps described (here)[https://developer.apple.com/documentation/xcode/adding-package-dependencies-to-your-app]. Use this [Swift Package URL](https://github.com/muxinc/mux-spaces-sdk-swift-distribution) when adding the SDK in Xcode.
-
-### Adding the SDK manually
-
-Follow the steps here to add the SDK manually.
-
 ## Getting Started
 
-A step-by-step Getting Started guide for the SDK can be found (here)[https://www.notion.so/mux/External-Real-Time-Video-Getting-Started-Guide-for-iOS-6b06eaf12764462d9782868316665082].
+The Spaces Swift SDK is available [here](https://github.com/muxinc/mux-spaces-sdk-swift-distribution). A step-by-step Getting Started guide that builds a simplified version of this example app can be found (here)[https://www.notion.so/mux/External-Real-Time-Video-Getting-Started-Guide-for-iOS-6b06eaf12764462d9782868316665082].
 
 ## Need help?
 
