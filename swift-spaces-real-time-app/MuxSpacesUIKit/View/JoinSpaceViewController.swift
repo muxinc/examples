@@ -33,10 +33,8 @@ class JoinSpaceViewController: UIViewController {
 
     var cancellables: [AnyCancellable] = []
 
-    @Published var isAudioPublishingEnabled: Bool = false
-    @Published var isVideoPublishingEnabled: Bool = false
-    var cameraCaptureOptions: CameraCaptureOptions = CameraCaptureOptions()
-    var audioCaptureOptions: AudioCaptureOptions = AudioCaptureOptions()
+    @Published var cameraCaptureOptions: CameraCaptureOptions? = CameraCaptureOptions()
+    @Published var audioCaptureOptions: AudioCaptureOptions? = AudioCaptureOptions()
 
     deinit {
         cancellables.forEach { $0.cancel() }
@@ -110,7 +108,11 @@ class JoinSpaceViewController: UIViewController {
 
             guard let toggle = sender as? UISwitch else { return }
 
-            self.isAudioPublishingEnabled = toggle.isOn
+            if toggle.isOn {
+                self.audioCaptureOptions = AudioCaptureOptions()
+            } else {
+                self.audioCaptureOptions = nil
+            }
         }
         audioToggle.addTarget(
             targetAction,
@@ -154,7 +156,11 @@ class JoinSpaceViewController: UIViewController {
 
             guard let toggle = sender as? UISwitch else { return }
 
-            self.isVideoPublishingEnabled = toggle.isOn
+            if toggle.isOn {
+                self.cameraCaptureOptions = CameraCaptureOptions()
+            } else {
+                self.cameraCaptureOptions = nil
+            }
         }
         videoToggle.addTarget(
             targetAction,
@@ -214,16 +220,16 @@ class JoinSpaceViewController: UIViewController {
 
         captureDeviceSelectionControl.selectedSegmentIndex = 0
 
-        $isVideoPublishingEnabled
-            .map { !$0 }
+        $cameraCaptureOptions
+            .map { return $0 == nil }
             .assign(
                 to: \.isHidden,
                 on: captureDeviceSelectionLabel
             )
             .store(in: &cancellables)
 
-        $isVideoPublishingEnabled
-            .map { !$0 }
+        $cameraCaptureOptions
+            .map { return $0 == nil }
             .assign(
                 to: \.isHidden,
                 on: captureDeviceSelectionControl
@@ -293,7 +299,7 @@ class JoinSpaceViewController: UIViewController {
             let optionToggle = UISwitch()
             optionToggle.translatesAutoresizingMaskIntoConstraints = false
             optionToggle.isEnabled = true
-            optionToggle.isOn = audioCaptureOptions[keyPath: option.1]
+            optionToggle.isOn = audioCaptureOptions?[keyPath: option.1] ?? false
 
             let targetAction = TargetActionSender { [weak self] (sender: AnyObject) in
 
@@ -301,7 +307,7 @@ class JoinSpaceViewController: UIViewController {
 
                 guard let toggle = sender as? UISwitch else { return }
 
-                self.audioCaptureOptions[keyPath: option.1] = toggle.isOn
+                self.audioCaptureOptions?[keyPath: option.1] = toggle.isOn
 
             }
 
@@ -337,16 +343,16 @@ class JoinSpaceViewController: UIViewController {
             )
         }
 
-        $isAudioPublishingEnabled
-            .map { !$0 }
+        $audioCaptureOptions
+            .map { $0 == nil }
             .assign(
                 to: \.isHidden,
                 on: audioOptionsLabel
             )
             .store(in: &cancellables)
 
-        $isAudioPublishingEnabled
-            .map { !$0 }
+        $audioCaptureOptions
+            .map { $0 == nil }
             .assign(
                 to: \.isHidden,
                 on: audioOptionsStackView
@@ -357,11 +363,11 @@ class JoinSpaceViewController: UIViewController {
     @objc func handleCaptureDeviceSelectionControlValueChanged(_ sender: UISegmentedControl) {
         switch sender.selectedSegmentIndex {
         case 0:
-            self.cameraCaptureOptions.specifier = .position(.front)
+            self.cameraCaptureOptions?.specifier = .position(.front)
         case 1:
-            self.cameraCaptureOptions.specifier = .position(.back)
+            self.cameraCaptureOptions?.specifier = .position(.back)
         default:
-            self.cameraCaptureOptions.specifier = .position(.front)
+            self.cameraCaptureOptions?.specifier = .position(.front)
         }
     }
 
@@ -428,8 +434,16 @@ class JoinSpaceViewController: UIViewController {
 
     func joinSpace() {
 
+        let spacesToken = ProcessInfo.processInfo.spacesToken
+
+        guard !spacesToken.isEmpty else {
+            self.displayJoinSpaceErrorAlert()
+            return
+        }
+
         // Initialize a Space with a pre-generated token
-        guard let space = try? Space.make() else {
+        guard let space = try? Space(token: spacesToken) else {
+            self.displayJoinSpaceErrorAlert()
             return
         }
 
@@ -470,24 +484,16 @@ class JoinSpaceViewController: UIViewController {
             .store(in: &cancellables)
 
         // We're all setup, lets join the space!
-        space.join()
+        viewModel.joinSpace()
     }
 
     func displayParticipantsViewController(
         viewModel: ParticipantsViewModel
     ) {
-        let participantsViewController = UIStoryboard(
-            name: "Main",
-            bundle: nil
-        )
-        .instantiateViewController(
-            withIdentifier: "ParticipantsViewController"
-        ) as! ParticipantsViewController
-
-        participantsViewController.viewModel = viewModel
-
         navigationController?.pushViewController(
-            participantsViewController,
+            UIStoryboard.makeParticipantsViewController(
+                viewModel: viewModel
+            ),
             animated: true
         )
     }

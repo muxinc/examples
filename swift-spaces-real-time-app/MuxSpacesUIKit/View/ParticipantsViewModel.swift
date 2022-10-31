@@ -21,9 +21,6 @@ class ParticipantsViewModel {
     var audioCaptureOptions: AudioCaptureOptions?
     var videoCaptureOptions: CameraCaptureOptions?
 
-    var audioPublishingEnabled: Bool = false
-    var videoPublishingEnabled: Bool = false
-
     // MARK: - Initialization
 
     init(
@@ -124,7 +121,7 @@ class ParticipantsViewModel {
             .store(in: &cancellables)
     }
 
-    // MARK: - Update Attendee Cells with Participant State
+    // MARK: - Update Participant Cell State
 
     func participant(
         from connectionID: Participant.ConnectionID

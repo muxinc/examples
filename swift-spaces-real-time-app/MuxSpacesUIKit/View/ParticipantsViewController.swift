@@ -17,13 +17,48 @@ typealias ParticipantsDataSource = UICollectionViewDiffableDataSource<
         Participant.ConnectionID
 >
 
+extension UIStoryboard {
+    static func makeParticipantsViewController(
+        viewModel: ParticipantsViewModel
+    ) -> ParticipantsViewController {
+        return UIStoryboard(
+            name: "Main",
+            bundle: .main
+        )
+        .instantiateViewController(
+            identifier: "ParticipantsViewController",
+            creator: { coder in
+                ParticipantsViewController(
+                    coder: coder,
+                    viewModel: viewModel
+                )
+            }
+        )
+    }
+}
+
 class ParticipantsViewController: UIViewController {
 
     // TODO: Dynamic layouts based on # of participants
     @IBOutlet var participantsView: UICollectionView!
     var dataSource: ParticipantsDataSource?
 
-    var viewModel: ParticipantsViewModel!
+    var viewModel: ParticipantsViewModel
+
+    // MARK: - Initialization
+
+    @available(*, unavailable)
+    required init?(coder: NSCoder) {
+        fatalError("\(#function) is not available.")
+    }
+
+    required init?(
+        coder: NSCoder,
+        viewModel:ParticipantsViewModel
+    ) {
+        self.viewModel = viewModel
+        super.init(coder: coder)
+    }
 
     // MARK: - View Lifecycle
 
@@ -35,7 +70,7 @@ class ParticipantsViewController: UIViewController {
             animated: false
         )
 
-        let attendeeCellRegistration = UICollectionView.CellRegistration<
+        let participantVideoCellRegistration = UICollectionView.CellRegistration<
             ParticipantVideoCell,
                 Participant.ConnectionID
         >(
@@ -46,7 +81,7 @@ class ParticipantsViewController: UIViewController {
             collectionView: participantsView
         ) { (collectionView: UICollectionView, indexPath: IndexPath, item: Participant.ConnectionID) -> UICollectionViewCell? in
             return collectionView.dequeueConfiguredReusableCell(
-                using: attendeeCellRegistration,
+                using: participantVideoCellRegistration,
                 for: indexPath,
                 item: item
             )

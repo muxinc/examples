@@ -1,14 +1,15 @@
 //
-//  ParticipantsViewModel+Spaces.swift
+//  ParticipantsViewModel+Space.swift
 //
 
 import Foundation
 import MuxSpaces
 
 extension ParticipantsViewModel {
+
     // MARK: - Join space handling
 
-    func join() {
+    func joinSpace() {
         space.join()
     }
 
