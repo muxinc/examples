@@ -6,7 +6,9 @@ Note: The Spaces SDK is Beta software and may contain issues or missing function
 
 ## Getting Started
 
-The Spaces Swift SDK is available [here](https://github.com/muxinc/mux-spaces-sdk-swift-distribution). A step-by-step Getting Started guide that builds a simplified version of this example app can be found (here)[https://www.notion.so/mux/External-Real-Time-Video-Getting-Started-Guide-for-iOS-6b06eaf12764462d9782868316665082].
+You'll need to install the Spaces SDK in order to use the sample app. The SDK is available [here](https://github.com/muxinc/mux-spaces-sdk-swift-distribution). Installation instructions are available [here](https://www.notion.so/mux/External-Real-Time-Video-Getting-Started-Guide-for-iOS-6b06eaf12764462d9782868316665082#d0e14e10da944723adefd69064ca4a5e).
+
+A step-by-step Getting Started guide that builds a simplified version of this example app can be found [here](https://www.notion.so/mux/External-Real-Time-Video-Getting-Started-Guide-for-iOS-6b06eaf12764462d9782868316665082).
 
 ## Need help?
 
