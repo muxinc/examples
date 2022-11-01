@@ -31,6 +31,8 @@ class JoinSpaceViewController: UIViewController {
     var captureDeviceSelectionLabel: UILabel = UILabel()
     var captureDeviceSelectionControl: UISegmentedControl = UISegmentedControl()
 
+    var participantsViewModel: ParticipantsViewModel?
+
     var cancellables: [AnyCancellable] = []
 
     @Published var cameraCaptureOptions: CameraCaptureOptions? = CameraCaptureOptions()
@@ -102,6 +104,7 @@ class JoinSpaceViewController: UIViewController {
         audioLabel.textColor = .label
         audioToggle.translatesAutoresizingMaskIntoConstraints = false
         audioToggle.isEnabled = true
+        audioToggle.isOn = audioCaptureOptions != nil
 
         let targetAction = TargetActionSender { [weak self] sender in
             guard let self = self else { return }
@@ -150,6 +153,7 @@ class JoinSpaceViewController: UIViewController {
         videoLabel.textColor = .label
         videoToggle.translatesAutoresizingMaskIntoConstraints = false
         videoToggle.isEnabled = true
+        videoToggle.isOn = cameraCaptureOptions != nil
 
         let targetAction = TargetActionSender {  [weak self] sender in
             guard let self = self else { return }
@@ -432,32 +436,27 @@ class JoinSpaceViewController: UIViewController {
         ])
     }
 
-    func joinSpace() {
-
+    func setupSpace() -> ParticipantsViewModel? {
         let spacesToken = ProcessInfo.processInfo.spacesToken
 
-        guard !spacesToken.isEmpty else {
-            self.displayJoinSpaceErrorAlert()
-            return
-        }
-
-        // Initialize a Space with a pre-generated token
-        guard let space = try? Space(token: spacesToken) else {
-            self.displayJoinSpaceErrorAlert()
-            return
-        }
-
-        // Initialize a view model that will translate
-        // Space state changes to changes in the app UI
-        let viewModel = ParticipantsViewModel(
-            space: space,
+        return ParticipantsViewModel.make(
+            with: spacesToken,
             audioCaptureOptions: audioCaptureOptions,
             videoCaptureOptions: cameraCaptureOptions
         )
+    }
+
+    func joinSpace() {
+
+        guard let viewModel = self
+            .participantsViewModel ?? self.setupSpace() else {
+            self.displayJoinSpaceErrorAlert()
+            return
+        }
 
         // Setup an event handler for joining the space
         // successfully
-        space
+        viewModel.space
             .events
             .joinSuccesses
             .sink { [weak self] joinSuccess in
@@ -472,7 +471,7 @@ class JoinSpaceViewController: UIViewController {
 
         // Setup an event handler in case there is an error
         // when joining the space
-        space
+        viewModel.space
             .events
             .joinFailures
             .sink { [weak self] joinError in

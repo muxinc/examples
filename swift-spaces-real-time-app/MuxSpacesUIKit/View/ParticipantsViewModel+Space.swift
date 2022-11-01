@@ -7,6 +7,38 @@ import MuxSpaces
 
 extension ParticipantsViewModel {
 
+    // MARK: - Convenience constructor
+
+    static func make(
+        with token: String,
+        audioCaptureOptions: AudioCaptureOptions?,
+        videoCaptureOptions: CameraCaptureOptions?
+    ) -> ParticipantsViewModel? {
+
+        // Check that the token is not empty
+        // before proceeding
+        guard !token.isEmpty else {
+            return nil
+        }
+
+        // Initialize a Space with a pre-generated token
+        guard let space = try? Space(
+            token: token
+        ) else {
+            return nil
+        }
+
+        // Initialize a view model that will translate
+        // Space state changes to changes in the app UI
+        let viewModel = ParticipantsViewModel(
+            space: space,
+            audioCaptureOptions: audioCaptureOptions,
+            cameraCaptureOptions: videoCaptureOptions
+        )
+
+        return viewModel
+    }
+
     // MARK: - Join space handling
 
     func joinSpace() {
@@ -22,6 +54,9 @@ extension ParticipantsViewModel {
     // MARK: - Leave space handling
 
     func leaveSpace() {
+
+        self.publishedAudioTrack = nil
+        self.publishedVideoTrack = nil
 
         /// Delete the contents of the collection view
         self.snapshot.deleteAllItems()
@@ -74,13 +109,13 @@ extension ParticipantsViewModel {
 
     func publishVideoIfNeeded() {
         
-        guard let videoCaptureOptions else {
+        guard let cameraCaptureOptions else {
             print("Skipping publishing a video track")
             return
         }
 
         let videoTrack = space.makeCameraCaptureVideoTrack(
-            options: videoCaptureOptions
+            options: cameraCaptureOptions
         )
 
         space.publishTrack(

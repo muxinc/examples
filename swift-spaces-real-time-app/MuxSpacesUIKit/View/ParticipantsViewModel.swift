@@ -19,18 +19,18 @@ class ParticipantsViewModel {
     var publishedVideoTrack: VideoTrack?
 
     var audioCaptureOptions: AudioCaptureOptions?
-    var videoCaptureOptions: CameraCaptureOptions?
+    var cameraCaptureOptions: CameraCaptureOptions?
 
     // MARK: - Initialization
 
     init(
         space: Space,
         audioCaptureOptions: AudioCaptureOptions?,
-        videoCaptureOptions: CameraCaptureOptions?
+        cameraCaptureOptions: CameraCaptureOptions?
     ) {
         self.space = space
         self.audioCaptureOptions = audioCaptureOptions
-        self.videoCaptureOptions = videoCaptureOptions
+        self.cameraCaptureOptions = cameraCaptureOptions
 
         self.snapshot = ParticipantsSnapshot.make()
 
