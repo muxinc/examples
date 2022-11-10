@@ -98,6 +98,7 @@ class ParticipantsViewController: UIViewController {
 
     override func viewWillDisappear(_ animated: Bool) {
         self.viewModel.leaveSpace()
+        self.dataSource = nil
         super.viewWillDisappear(animated)
     }
 

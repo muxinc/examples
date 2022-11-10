@@ -31,7 +31,7 @@ class JoinSpaceViewController: UIViewController {
     var captureDeviceSelectionLabel: UILabel = UILabel()
     var captureDeviceSelectionControl: UISegmentedControl = UISegmentedControl()
 
-    var participantsViewModel: ParticipantsViewModel?
+    var space: Space?
 
     var cancellables: [AnyCancellable] = []
 
@@ -436,23 +436,37 @@ class JoinSpaceViewController: UIViewController {
         ])
     }
 
-    func setupSpace() -> ParticipantsViewModel? {
-        let spacesToken = ProcessInfo.processInfo.spacesToken
+    func setupSpace() -> Space? {
+        let token = ProcessInfo.processInfo.spacesToken
 
-        return ParticipantsViewModel.make(
-            with: spacesToken,
-            audioCaptureOptions: audioCaptureOptions,
-            videoCaptureOptions: cameraCaptureOptions
-        )
+        // Check that the token is not empty
+        // before proceeding
+        guard !token.isEmpty else {
+            return nil
+        }
+
+        // Initialize a Space with a pre-generated token
+        guard let space = try? Space(
+            token: token
+        ) else {
+            return nil
+        }
+
+        return space
     }
 
     func joinSpace() {
 
-        guard let viewModel = self
-            .participantsViewModel ?? self.setupSpace() else {
+        guard let space = self.space ?? setupSpace() else {
             self.displayJoinSpaceErrorAlert()
             return
         }
+
+        let viewModel = ParticipantsViewModel(
+            space: space,
+            audioCaptureOptions: audioCaptureOptions,
+            cameraCaptureOptions: cameraCaptureOptions
+        )
 
         // Setup an event handler for joining the space
         // successfully
@@ -467,7 +481,7 @@ class JoinSpaceViewController: UIViewController {
                     viewModel: viewModel
                 )
             }
-            .store(in: &cancellables)
+            .store(in: &viewModel.cancellables)
 
         // Setup an event handler in case there is an error
         // when joining the space
@@ -478,12 +492,16 @@ class JoinSpaceViewController: UIViewController {
 
                 guard let self = self else { return }
 
+                viewModel.tearDownEventHandlers()
+
                 self.displayJoinSpaceErrorAlert()
             }
-            .store(in: &cancellables)
+            .store(in: &viewModel.cancellables)
 
         // We're all setup, lets join the space!
         viewModel.joinSpace()
+
+        self.space = space
     }
 
     func displayParticipantsViewController(

@@ -33,84 +33,10 @@ class ParticipantsViewModel {
         self.cameraCaptureOptions = cameraCaptureOptions
 
         self.snapshot = ParticipantsSnapshot.make()
-
-        setupEventHandlers()
     }
 
     deinit {
         cancellables.forEach { $0.cancel() }
-    }
-
-    // MARK: - Setup Observers on Space State Updates
-
-    func setupEventHandlers() {
-        /// Setup observers that will update your views state
-        /// based on events that are produced by the space
-        ///
-        space
-            .events
-            .joinSuccesses
-            .sink { [weak self] _ in
-                guard let self = self else {
-                    return
-                }
-
-                self.handleJoinSuccess()
-            }
-            .store(in: &cancellables)
-
-        Combine.Publishers.Merge5(
-            /// Participant joined events trigger a new
-            /// cell to be added for each new participant
-            space.events
-                .participantJoined
-                .map(\.participant.connectionID),
-            /// When the SDK subscribes to a new video track,
-            /// the participants video becomes available to display
-            space.events
-                .videoTrackSubscriptions
-                .map(\.participant.connectionID),
-            /// When the SDK unsubscribes from a video track,
-            /// the participants video should be taken down
-            /// this update is handled in ParticipantsViewModel
-            space.events
-                .videoTrackUnsubscriptions
-                .map(\.participant.connectionID),
-            // We only want to know when our own tracks are
-            // published
-            space.events
-                .videoTrackPublications
-                .filter { $0.participant.isLocal }
-                .map(\.participant.connectionID),
-            // We only want to know when our own tracks are
-            // published
-            space.events
-                .videoTrackUnpublications
-                .filter { $0.participant.isLocal }
-                .map(\.participant.connectionID)
-        )
-        .sink(receiveValue: { [weak self] (connectionID: Participant.ConnectionID) in
-            guard let self = self else { return }
-
-            self.snapshot.upsertParticipant(
-                connectionID
-            )
-        })
-        .store(in: &cancellables)
-
-        /// Each participant leaving will cause the applicable cell
-        /// to be removed.
-        space.events
-            .participantLeft
-            .map(\.participant.connectionID)
-            .sink(receiveValue: { [weak self] (connectionID: Participant.ConnectionID) in
-                guard let self = self else { return }
-
-                self.snapshot.removeParticipant(
-                    connectionID
-                )
-            })
-            .store(in: &cancellables)
     }
 
     func configureUpdates(
