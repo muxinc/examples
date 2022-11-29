@@ -1,16 +1,44 @@
 //
-//  ParticipantsViewModel+Space.swift
+//  Created for MuxSpacesUIKit.
+//  
+//  Copyright © 2022 Mux, Inc.
+//  Licensed under the MIT License.
 //
 
 import Combine
+
 import Foundation
+
 import MuxSpaces
 
-extension ParticipantsViewModel {
+protocol SpaceController: AnyObject {
+    var space: Space { get }
+
+    var publishedAudioTrack: AudioTrack? { get set }
+    var publishedVideoTrack: VideoTrack? { get set }
+
+    var audioCaptureOptions: AudioCaptureOptions? { get }
+    var cameraCaptureOptions: CameraCaptureOptions? { get }
+
+    func upsertParticipant(
+        _ connectionID: Participant.ConnectionID
+    )
+
+    func removeParticipant(
+        _ connectionID: Participant.ConnectionID
+    )
+
+    func resetSnapshot()
+}
+
+extension SpaceController {
 
     // MARK: - Setup Observers on Space State Updates
 
-    func setupEventHandlers() {
+    func setupEventHandlers() -> Set<AnyCancellable> {
+
+        var cancellables: Set<AnyCancellable> = []
+
         /// Setup observers that will update your views state
         /// based on events that are produced by the space
         ///
@@ -59,7 +87,7 @@ extension ParticipantsViewModel {
         .sink(receiveValue: { [weak self] (connectionID: Participant.ConnectionID) in
             guard let self = self else { return }
 
-            self.snapshot.upsertParticipant(
+            self.upsertParticipant(
                 connectionID
             )
         })
@@ -73,24 +101,23 @@ extension ParticipantsViewModel {
             .sink(receiveValue: { [weak self] (connectionID: Participant.ConnectionID) in
                 guard let self = self else { return }
 
-                self.snapshot.removeParticipant(
+                self.removeParticipant(
                     connectionID
                 )
             })
             .store(in: &cancellables)
-    }
 
-    func tearDownEventHandlers() {
-        /// Tear down observers
-        cancellables.forEach { $0.cancel() }
+        return cancellables
     }
 
     // MARK: - Join space handling
 
-    func joinSpace() {
-        setupEventHandlers()
+    func joinSpace() -> Set<AnyCancellable> {
+        let cancellables = setupEventHandlers()
 
         space.join()
+
+        return cancellables
     }
 
     func handleJoinSuccess() {
@@ -106,16 +133,11 @@ extension ParticipantsViewModel {
         self.publishedAudioTrack = nil
         self.publishedVideoTrack = nil
 
-        /// Delete the contents of the collection view
-        self.snapshot.deleteAllItems()
-
         /// Calling `leave` will unpublish your local tracks
         /// and tear down any open space connections
         /// The SDK will also take care of shutting down the camera
         /// down the camera and mic
         space.leave()
-
-        tearDownEventHandlers()
     }
 
     // MARK: - Publish and Unpublish Tracks
@@ -146,7 +168,7 @@ extension ParticipantsViewModel {
     }
 
     func unpublishAudio() {
-        guard let publishedAudioTrack = publishedAudioTrack else {
+        guard let publishedAudioTrack else {
             return
         }
 
@@ -156,7 +178,7 @@ extension ParticipantsViewModel {
     }
 
     func publishVideoIfNeeded() {
-        
+
         guard let cameraCaptureOptions else {
             print("Skipping publishing a video track")
             return
@@ -177,4 +199,13 @@ extension ParticipantsViewModel {
         }
     }
 
+    func unpublishVideo() {
+        guard let publishedVideoTrack else {
+            return
+        }
+
+        space.unpublishTrack(
+            publishedVideoTrack
+        )
+    }
 }

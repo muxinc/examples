@@ -17,9 +17,22 @@ typealias ParticipantsDataSource = UICollectionViewDiffableDataSource<
         Participant.ConnectionID
 >
 
-extension UIStoryboard {
-    static func makeParticipantsViewController(
-        viewModel: ParticipantsViewModel
+class ParticipantsViewController: UIViewController {
+
+    // TODO: Dynamic layouts based on # of participants
+    @IBOutlet var participantsView: UICollectionView!
+    var dataSource: ParticipantsDataSource?
+
+    var viewModel: ParticipantsViewModel
+
+    var cancellables: Set<AnyCancellable> = []
+
+    // MARK: - Initialization
+
+    static func make(
+        space: Space,
+        audioCaptureOptions: AudioCaptureOptions?,
+        cameraCaptureOptions: CameraCaptureOptions?
     ) -> ParticipantsViewController {
         return UIStoryboard(
             name: "Main",
@@ -30,22 +43,13 @@ extension UIStoryboard {
             creator: { coder in
                 ParticipantsViewController(
                     coder: coder,
-                    viewModel: viewModel
+                    space: space,
+                    audioCaptureOptions: audioCaptureOptions,
+                    cameraCaptureOptions: cameraCaptureOptions
                 )
             }
         )
     }
-}
-
-class ParticipantsViewController: UIViewController {
-
-    // TODO: Dynamic layouts based on # of participants
-    @IBOutlet var participantsView: UICollectionView!
-    var dataSource: ParticipantsDataSource?
-
-    var viewModel: ParticipantsViewModel
-
-    // MARK: - Initialization
 
     @available(*, unavailable)
     required init?(coder: NSCoder) {
@@ -54,9 +58,15 @@ class ParticipantsViewController: UIViewController {
 
     required init?(
         coder: NSCoder,
-        viewModel:ParticipantsViewModel
+        space: Space,
+        audioCaptureOptions: AudioCaptureOptions?,
+        cameraCaptureOptions: CameraCaptureOptions?
     ) {
-        self.viewModel = viewModel
+        self.viewModel = ParticipantsViewModel(
+            space: space,
+            audioCaptureOptions: audioCaptureOptions,
+            cameraCaptureOptions: cameraCaptureOptions
+        )
         super.init(coder: coder)
     }
 
@@ -66,7 +76,7 @@ class ParticipantsViewController: UIViewController {
         super.viewDidLoad()
 
         participantsView.setCollectionViewLayout(
-            createLayout(),
+            ParticipantLayout.make(),
             animated: false
         )
 
@@ -87,17 +97,37 @@ class ParticipantsViewController: UIViewController {
             )
         }
 
-        viewModel.configureUpdates(
-            for: dataSource
-        )
-
         self.dataSource = dataSource
 
+        viewModel
+            .configureUpdates(for: dataSource)
+            .store(in: &cancellables)
+
         setupPublishingActionsButton()
+
+        // Setup an event handler in case there is an error
+        // when joining the space
+        viewModel
+            .space
+            .events
+            .joinFailures
+            .sink { [weak self] _ in
+
+                guard let self = self else { return }
+
+                self.navigationController?
+                    .popViewController(animated: true)
+            }
+            .store(in: &cancellables)
+
+        // We're all setup, lets join the space!
+        let viewModelCancellables = viewModel.joinSpace()
+        cancellables.formUnion(viewModelCancellables)
     }
 
     override func viewWillDisappear(_ animated: Bool) {
         self.viewModel.leaveSpace()
+        self.cancellables.forEach { $0.cancel() }
         self.dataSource = nil
         super.viewWillDisappear(animated)
     }

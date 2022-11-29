@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		190AA39028CAC499004A1DFA /* ParticipantLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 190AA38F28CAC499004A1DFA /* ParticipantLayout.swift */; };
-		190AA39228CAC56F004A1DFA /* ParticipantsViewModel+Space.swift in Sources */ = {isa = PBXBuildFile; fileRef = 190AA39128CAC56F004A1DFA /* ParticipantsViewModel+Space.swift */; };
 		190AA39A28CACC8F004A1DFA /* ParticipantsSnapshot+Make.swift in Sources */ = {isa = PBXBuildFile; fileRef = 190AA39928CACC8F004A1DFA /* ParticipantsSnapshot+Make.swift */; };
 		190B42A0287D190300A681F2 /* ParticipantsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 190B429F287D190300A681F2 /* ParticipantsViewModel.swift */; };
 		1920842F287C6F2300D03362 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1920842E287C6F2300D03362 /* AppDelegate.swift */; };
@@ -23,8 +22,13 @@
 		19208464287C727500D03362 /* ParticipantsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19208463287C727400D03362 /* ParticipantsViewController.swift */; };
 		19208466287C727B00D03362 /* ParticipantVideoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19208465287C727B00D03362 /* ParticipantVideoCell.swift */; };
 		19208475287C74AF00D03362 /* ParticipantsSnapshot+Update.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19208474287C74AF00D03362 /* ParticipantsSnapshot+Update.swift */; };
+		1936767329359E5000A9DDFB /* UIViewController+Shared.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1936767229359E5000A9DDFB /* UIViewController+Shared.swift */; };
+		193676762935CD2300A9DDFB /* SpaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 193676752935CD2300A9DDFB /* SpaceController.swift */; };
 		1955AF4F28B856BC00E20ACD /* TargetAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1955AF4E28B856BC00E20ACD /* TargetAction.swift */; };
 		1955AF5128B856E000E20ACD /* UserDefaultsKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1955AF5028B856E000E20ACD /* UserDefaultsKeys.swift */; };
+		197FAB3D2934066600684753 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 197FAB3C2934066600684753 /* WelcomeViewController.swift */; };
+		197FAB3F2934082200684753 /* SpaceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 197FAB3E2934082200684753 /* SpaceViewController.swift */; };
+		19C9B60B2935DDC000102BB3 /* ParticipantsViewModel+Space.swift in Sources */ = {isa = PBXBuildFile; fileRef = 190AA39128CAC56F004A1DFA /* ParticipantsViewModel+Space.swift */; };
 		19DAD077290D1DDA004B4686 /* ProcessInfo+EnvironmentVariables.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19DAD076290D1DDA004B4686 /* ProcessInfo+EnvironmentVariables.swift */; };
 /* End PBXBuildFile section */
 
@@ -79,8 +83,12 @@
 		19208463287C727400D03362 /* ParticipantsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParticipantsViewController.swift; sourceTree = "<group>"; };
 		19208465287C727B00D03362 /* ParticipantVideoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParticipantVideoCell.swift; sourceTree = "<group>"; };
 		19208474287C74AF00D03362 /* ParticipantsSnapshot+Update.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ParticipantsSnapshot+Update.swift"; sourceTree = "<group>"; };
+		1936767229359E5000A9DDFB /* UIViewController+Shared.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Shared.swift"; sourceTree = "<group>"; };
+		193676752935CD2300A9DDFB /* SpaceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpaceController.swift; sourceTree = "<group>"; };
 		1955AF4E28B856BC00E20ACD /* TargetAction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TargetAction.swift; sourceTree = "<group>"; };
 		1955AF5028B856E000E20ACD /* UserDefaultsKeys.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDefaultsKeys.swift; sourceTree = "<group>"; };
+		197FAB3C2934066600684753 /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
+		197FAB3E2934082200684753 /* SpaceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpaceViewController.swift; sourceTree = "<group>"; };
 		19DAD076290D1DDA004B4686 /* ProcessInfo+EnvironmentVariables.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProcessInfo+EnvironmentVariables.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -132,12 +140,14 @@
 		1920842D287C6F2300D03362 /* MuxSpacesUIKit */ = {
 			isa = PBXGroup;
 			children = (
-				19208460287C713E00D03362 /* View */,
+				197FAB3C2934066600684753 /* WelcomeViewController.swift */,
+				197FAB35293402D200684753 /* ExampleUsingContainerView */,
+				194123842934011500E9EE2A /* ExampleUsingNavigation */,
+				193676742935B41B00A9DDFB /* Model */,
+				19208460287C713E00D03362 /* Shared */,
 				1920842E287C6F2300D03362 /* AppDelegate.swift */,
 				19DAD076290D1DDA004B4686 /* ProcessInfo+EnvironmentVariables.swift */,
 				19208430287C6F2300D03362 /* SceneDelegate.swift */,
-				1955AF4E28B856BC00E20ACD /* TargetAction.swift */,
-				1955AF5028B856E000E20ACD /* UserDefaultsKeys.swift */,
 				19208434287C6F2300D03362 /* Main.storyboard */,
 				19208437287C6F2300D03362 /* Assets.xcassets */,
 				19208439287C6F2300D03362 /* LaunchScreen.storyboard */,
@@ -163,19 +173,45 @@
 			path = MuxSpacesUIKitUITests;
 			sourceTree = "<group>";
 		};
-		19208460287C713E00D03362 /* View */ = {
+		19208460287C713E00D03362 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
 				19208465287C727B00D03362 /* ParticipantVideoCell.swift */,
-				19208461287C716B00D03362 /* JoinSpaceViewController.swift */,
-				19208463287C727400D03362 /* ParticipantsViewController.swift */,
 				190AA38F28CAC499004A1DFA /* ParticipantLayout.swift */,
-				190B429F287D190300A681F2 /* ParticipantsViewModel.swift */,
-				190AA39128CAC56F004A1DFA /* ParticipantsViewModel+Space.swift */,
+				1955AF4E28B856BC00E20ACD /* TargetAction.swift */,
+				1936767229359E5000A9DDFB /* UIViewController+Shared.swift */,
+				1955AF5028B856E000E20ACD /* UserDefaultsKeys.swift */,
+				193676752935CD2300A9DDFB /* SpaceController.swift */,
+			);
+			path = Shared;
+			sourceTree = "<group>";
+		};
+		193676742935B41B00A9DDFB /* Model */ = {
+			isa = PBXGroup;
+			children = (
 				19208474287C74AF00D03362 /* ParticipantsSnapshot+Update.swift */,
 				190AA39928CACC8F004A1DFA /* ParticipantsSnapshot+Make.swift */,
 			);
-			path = View;
+			path = Model;
+			sourceTree = "<group>";
+		};
+		194123842934011500E9EE2A /* ExampleUsingNavigation */ = {
+			isa = PBXGroup;
+			children = (
+				19208461287C716B00D03362 /* JoinSpaceViewController.swift */,
+				19208463287C727400D03362 /* ParticipantsViewController.swift */,
+				190B429F287D190300A681F2 /* ParticipantsViewModel.swift */,
+				190AA39128CAC56F004A1DFA /* ParticipantsViewModel+Space.swift */,
+			);
+			path = ExampleUsingNavigation;
+			sourceTree = "<group>";
+		};
+		197FAB35293402D200684753 /* ExampleUsingContainerView */ = {
+			isa = PBXGroup;
+			children = (
+				197FAB3E2934082200684753 /* SpaceViewController.swift */,
+			);
+			path = ExampleUsingContainerView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -314,20 +350,23 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				19C9B60B2935DDC000102BB3 /* ParticipantsViewModel+Space.swift in Sources */,
 				19208466287C727B00D03362 /* ParticipantVideoCell.swift in Sources */,
+				197FAB3D2934066600684753 /* WelcomeViewController.swift in Sources */,
+				193676762935CD2300A9DDFB /* SpaceController.swift in Sources */,
+				1936767329359E5000A9DDFB /* UIViewController+Shared.swift in Sources */,
 				190AA39028CAC499004A1DFA /* ParticipantLayout.swift in Sources */,
 				1955AF5128B856E000E20ACD /* UserDefaultsKeys.swift in Sources */,
 				190AA39A28CACC8F004A1DFA /* ParticipantsSnapshot+Make.swift in Sources */,
 				190B42A0287D190300A681F2 /* ParticipantsViewModel.swift in Sources */,
 				1920842F287C6F2300D03362 /* AppDelegate.swift in Sources */,
-				190AA39228CAC56F004A1DFA /* ParticipantsViewModel+Space.swift in Sources */,
 				19DAD077290D1DDA004B4686 /* ProcessInfo+EnvironmentVariables.swift in Sources */,
-				190AA39228CAC56F004A1DFA /* ParticipantsViewModel+Space.swift in Sources */,
 				19208475287C74AF00D03362 /* ParticipantsSnapshot+Update.swift in Sources */,
 				19208431287C6F2300D03362 /* SceneDelegate.swift in Sources */,
 				19208462287C716B00D03362 /* JoinSpaceViewController.swift in Sources */,
 				1955AF4F28B856BC00E20ACD /* TargetAction.swift in Sources */,
 				19208464287C727500D03362 /* ParticipantsViewController.swift in Sources */,
+				197FAB3F2934082200684753 /* SpaceViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

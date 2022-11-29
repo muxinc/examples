@@ -13,8 +13,6 @@ class ParticipantsViewModel {
 
     @Published var snapshot: ParticipantsSnapshot
 
-    var cancellables: Set<AnyCancellable> = []
-
     var publishedAudioTrack: AudioTrack?
     var publishedVideoTrack: VideoTrack?
 
@@ -35,16 +33,11 @@ class ParticipantsViewModel {
         self.snapshot = ParticipantsSnapshot.make()
     }
 
-    deinit {
-        cancellables.forEach { $0.cancel() }
-    }
-
     func configureUpdates(
         for dataSource: ParticipantsDataSource
-    ) {
-        $snapshot
+    ) -> AnyCancellable {
+        return $snapshot
             .sink { dataSource.apply($0) }
-            .store(in: &cancellables)
     }
 
     // MARK: - Update Participant Cell State

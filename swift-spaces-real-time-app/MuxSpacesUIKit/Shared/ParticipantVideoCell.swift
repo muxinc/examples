@@ -37,6 +37,7 @@ class ParticipantVideoCell: UICollectionViewCell {
         backgroundView?.layer.cornerRadius = 8.0
         contentView.layer.cornerRadius = 8.0
         contentView.clipsToBounds = true
+        contentView.backgroundColor = .black
 
         if !contentView.subviews.contains(placeholderView) {
             placeholderView.textColor = .white
