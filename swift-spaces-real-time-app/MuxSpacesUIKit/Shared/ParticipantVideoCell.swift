@@ -1,5 +1,8 @@
 //
-//  ParticipantVideoCell.swift
+//  Created for MuxSpacesUIKit.
+//
+//  Copyright © 2022 Mux, Inc.
+//  Licensed under the MIT License.
 //
 
 import UIKit
@@ -12,7 +15,6 @@ class ParticipantVideoCell: UICollectionViewCell {
     // cells.
     lazy var videoView = SpacesVideoView()
 
-    lazy var videoContainerView = UIView()
     lazy var placeholderView = UILabel()
     lazy var nameIndicator = UILabel()
 
@@ -51,39 +53,31 @@ class ParticipantVideoCell: UICollectionViewCell {
             placeholderView.backgroundColor = .black.withAlphaComponent(0.25)
         }
 
-        if !contentView.subviews.contains(videoContainerView) {
-            videoContainerView.translatesAutoresizingMaskIntoConstraints = false
-            videoContainerView.clipsToBounds = true
-            videoContainerView.layer.cornerRadius = 8.0
+        if !contentView.subviews.contains(videoView) {
+            videoView.translatesAutoresizingMaskIntoConstraints = false
+            videoView.clipsToBounds = true
+            videoView.layer.cornerRadius = 8.0
 
-            contentView.insertSubview(videoContainerView, belowSubview: placeholderView)
-            addConstraints([
-                videoContainerView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
-                videoContainerView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
-                videoContainerView.widthAnchor.constraint(equalTo: contentView.widthAnchor),
-                videoContainerView.heightAnchor.constraint(equalTo: contentView.heightAnchor),
-            ])
-
-            videoContainerView.addSubview(
-                videoView
+            contentView.insertSubview(
+                videoView,
+                belowSubview: placeholderView
             )
+            addConstraints([
+                videoView.centerXAnchor.constraint(
+                    equalTo: contentView.centerXAnchor
+                ),
+                videoView.centerYAnchor.constraint(
+                    equalTo: contentView.centerYAnchor
+                ),
+                videoView.widthAnchor.constraint(
+                    equalTo: contentView.widthAnchor
+                ),
+                videoView.heightAnchor.constraint(
+                    equalTo: contentView.heightAnchor
+                ),
+            ])
 
             videoView.translatesAutoresizingMaskIntoConstraints = false
-
-            addConstraints([
-                videoView.leadingAnchor.constraint(
-                    equalTo: videoContainerView.leadingAnchor
-                ),
-                videoView.trailingAnchor.constraint(
-                    equalTo: videoContainerView.trailingAnchor
-                ),
-                videoView.topAnchor.constraint(
-                    equalTo: videoContainerView.topAnchor
-                ),
-                videoView.bottomAnchor.constraint(
-                    equalTo: videoContainerView.bottomAnchor
-                )
-            ])
         }
 
         if !contentView.subviews.contains(nameIndicator) {
@@ -98,7 +92,7 @@ class ParticipantVideoCell: UICollectionViewCell {
             nameIndicator.translatesAutoresizingMaskIntoConstraints = false
             contentView.insertSubview(
                 nameIndicator,
-                belowSubview: videoContainerView
+                belowSubview: videoView
             )
             addConstraints([
                 nameIndicator.widthAnchor.constraint(
@@ -126,13 +120,13 @@ class ParticipantVideoCell: UICollectionViewCell {
         if videoTrack != nil {
             placeholderView.text = ""
             nameIndicator.text = participantID
-            contentView.bringSubviewToFront(videoContainerView)
+            contentView.bringSubviewToFront(videoView)
             contentView.bringSubviewToFront(nameIndicator)
         } else {
             placeholderView.text = participantID
             nameIndicator.text = ""
             contentView.bringSubviewToFront(placeholderView)
-            contentView.sendSubviewToBack(videoContainerView)
+            contentView.sendSubviewToBack(videoView)
             contentView.sendSubviewToBack(nameIndicator)
         }
     }

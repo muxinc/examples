@@ -1,7 +1,9 @@
 //
-//  MuxSpacesUIKitTests.swift
+//  Created for MuxSpacesUIKitTests.
 //
-
+//  Copyright © 2022 Mux, Inc.
+//  Licensed under the MIT License.
+//
 import XCTest
 @testable import MuxSpacesUIKit
 

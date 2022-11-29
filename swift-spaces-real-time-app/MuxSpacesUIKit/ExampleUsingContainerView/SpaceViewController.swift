@@ -12,66 +12,59 @@ import MuxSpaces
 
 class SpaceViewController: UIViewController {
 
+    // MARK: IBOutlets for Storyboard
+
     @IBOutlet var participantsView: UICollectionView!
 
     @IBOutlet var joinSpaceButton: UIButton!
 
-    lazy var dataSource: ParticipantsDataSource? = setupParticipantsDataSource()
+    // MARK: IBAction for Storyboard
 
-    var viewModel: ViewModel
+    @IBAction @objc func joinSpaceButtonDidTouchUpInside(
+        _ sender: UIButton
+    ) {
 
-    var space: Space {
-        viewModel.space
+        guard joinSpaceButton == sender else {
+            print("""
+                Unexpected sender received by join space handler.
+                This should be the join space UIButton.
+            """
+            )
+            return
+        }
+
+        joinSpaceButton.isEnabled = false
+        self.joinSpace()
     }
+
+    // MARK: Subscription related state
 
     var cancellables: Set<AnyCancellable> = []
 
-    // MARK: Initialization
+    // MARK: View Model
 
-    static func make(
-        space: Space
-    ) -> SpaceViewController {
-        return UIStoryboard(
-            name: "Main",
-            bundle: .main
-        )
-        .instantiateViewController(
-            identifier: "SpaceViewController",
-            creator: { coder in
-                SpaceViewController(
-                    coder: coder,
-                    space: space
-                )
-            }
-        )
-    }
-
-    @available(*, unavailable)
-    required init?(coder: NSCoder) {
-        fatalError("\(#function) is not available.")
-    }
-
-    required init?(
-        coder: NSCoder,
-        space: Space
-    ) {
-        self.viewModel = ViewModel(
-            space: space
-        )
-        super.init(coder: coder)
-    }
+    var viewModel: ViewModel = ViewModel(space: try! currentSpace())
 
     // MARK: View Lifecycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        participantsView.isHidden = true
-
         setupParticipantsView()
     }
 
+    override func viewWillDisappear(_ animated: Bool) {
+
+        viewModel.space.leave()
+
+        cancellables.forEach { $0.cancel() }
+
+        super.viewWillDisappear(animated)
+    }
+
     // MARK: UI Setup
+
+    lazy var dataSource: ParticipantsDataSource? = setupParticipantsDataSource()
 
     func setupParticipantsDataSource() -> ParticipantsDataSource {
         let participantVideoCellRegistration = UICollectionView
@@ -100,102 +93,14 @@ class SpaceViewController: UIViewController {
     }
 
     func setupParticipantsView() {
+        participantsView.isHidden = true
+
         participantsView.setCollectionViewLayout(
             ParticipantLayout.make(),
             animated: false
         )
 
         self.dataSource = setupParticipantsDataSource()
-    }
-
-    // MARK: UI Action Handlers
-
-    @IBAction @objc func joinSpaceButtonDidTouchUpInside(
-        _ sender: UIButton
-    ) {
-
-        guard joinSpaceButton == sender else {
-            print("""
-                Unexpected sender received by join space handler.
-                This should be the join space UIButton.
-            """
-            )
-            return
-        }
-
-        joinSpaceButton.isEnabled = false
-        self.joinSpace()
-    }
-}
-
-// MARK: - Space View Model
-
-extension SpaceViewController {
-
-    class ViewModel {
-        var space: Space
-
-        @Published var snapshot: ParticipantsSnapshot
-
-        var publishedAudioTrack: AudioTrack?
-        var publishedVideoTrack: VideoTrack?
-
-        init(
-            space: Space
-        ) {
-            self.space = space
-            self.snapshot = ParticipantsSnapshot.make()
-        }
-
-        func setupSnapshotUpdates(
-            for dataSource: ParticipantsDataSource
-        ) -> AnyCancellable {
-            return $snapshot
-                .sink { dataSource.apply($0) }
-        }
-
-        // MARK: Fetch Most Recent Participant State
-
-        func participant(
-            from connectionID: Participant.ConnectionID
-        ) -> Participant? {
-            if let localParticipant = space.localParticipant {
-                return (
-                    [localParticipant] + space.remoteParticipants
-                ).filter { $0.connectionID == connectionID }.first
-            } else {
-                return space.remoteParticipants
-                    .filter { $0.connectionID == connectionID }.first
-            }
-        }
-
-        // MARK: - Update Participant Cell
-
-        func configure(
-            _ cell: ParticipantVideoCell,
-            indexPath: IndexPath,
-            connectionID: Participant.ConnectionID
-        ) {
-            guard let participant = participant(
-                from: connectionID
-            ) else {
-                print("No Participant!")
-                return
-            }
-
-            cell.setup()
-
-            if let track = participant.videoTracks.values.first {
-                cell.update(
-                    participantID: participant.id,
-                    videoTrack: track
-                )
-            } else {
-                cell.update(
-                    participantID: participant.id
-                )
-            }
-        }
     }
 }
 
@@ -225,7 +130,7 @@ extension SpaceViewController.ViewModel: SpaceController {
     }
 
     func resetSnapshot() {
-        self.snapshot = ParticipantsSnapshot.make()
+        self.snapshot = ParticipantsSnapshot.makeEmpty()
     }
 }
 
@@ -239,7 +144,6 @@ extension SpaceViewController {
         viewModel.space
             .events
             .joinSuccesses
-            .receive(on: DispatchQueue.main)
             .map { _ in return false }
             .assign(
                 to: \.isHidden,
@@ -250,7 +154,6 @@ extension SpaceViewController {
         viewModel.space
             .events
             .joinSuccesses
-            .receive(on: DispatchQueue.main)
             .map { _ in return true }
             .assign(
                 to: \.isHidden,

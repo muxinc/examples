@@ -1,5 +1,8 @@
 //
-//  ParticipantsViewModel+Space.swift
+//  Created for MuxSpacesUIKit.
+//
+//  Copyright © 2022 Mux, Inc.
+//  Licensed under the MIT License.
 //
 
 import Combine
@@ -25,6 +28,6 @@ extension ParticipantsViewModel: SpaceController {
     }
 
     func resetSnapshot() {
-        self.snapshot = ParticipantsSnapshot.make()
+        self.snapshot = ParticipantsSnapshot.makeEmpty()
     }
 }

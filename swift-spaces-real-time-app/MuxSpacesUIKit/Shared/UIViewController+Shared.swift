@@ -48,7 +48,16 @@ extension UIViewController {
 
     @objc func displayErrorAlert(
         _ title: String,
-        _ message: String
+        _ message: String,
+        _ actions: [UIAlertAction] = [
+            UIAlertAction(
+                title: NSLocalizedString(
+                    "OK",
+                    comment: "Error alert confirm action"
+                ),
+                style: .default
+            )
+        ]
     ) {
         let alert = UIAlertController(
             title: title,
@@ -56,16 +65,9 @@ extension UIViewController {
             preferredStyle: .alert
         )
 
-        alert.addAction(
-            UIAlertAction(
-                title: NSLocalizedString(
-                    "OK",
-                    comment: "Error alert confirmatory action"
-                ),
-                style: .default
-            )
-        )
-
+        for action in actions {
+            alert.addAction(action)
+        }
         self.present(
             alert,
             animated: true

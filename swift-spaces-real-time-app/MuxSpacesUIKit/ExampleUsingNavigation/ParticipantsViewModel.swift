@@ -1,5 +1,8 @@
 //
-//  ParticipantsViewModel.swift
+//  Created for MuxSpacesUIKit.
+//
+//  Copyright © 2022 Mux, Inc.
+//  Licensed under the MIT License.
 //
 
 import Combine
@@ -30,7 +33,7 @@ class ParticipantsViewModel {
         self.audioCaptureOptions = audioCaptureOptions
         self.cameraCaptureOptions = cameraCaptureOptions
 
-        self.snapshot = ParticipantsSnapshot.make()
+        self.snapshot = ParticipantsSnapshot.makeEmpty()
     }
 
     func configureUpdates(

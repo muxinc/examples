@@ -10,35 +10,13 @@ import UIKit
 import MuxSpaces
 
 class WelcomeViewController: UITableViewController {
-
-    var space: Space?
-
-    func setupSpace() -> Space? {
-        let token = ProcessInfo.processInfo.spacesToken
-
-        // Check that the token is not empty
-        // before proceeding
-        guard !token.isEmpty else {
-            return nil
-        }
-
-        // Initialize a Space with a pre-generated token
-        guard let space = try? Space(
-            token: token
-        ) else {
-            return nil
-        }
-
-        self.space = space
-
-        return space
-    }
-
     override func tableView(
         _ tableView: UITableView,
         didSelectRowAt indexPath: IndexPath
     ) {
-        guard let space = self.space ?? setupSpace() else {
+
+        // Declare in SpaceToken.swift
+        guard let space = try? currentSpace() else {
             self.displaySpaceSetupErrorAlert()
             return
         }
@@ -54,8 +32,17 @@ class WelcomeViewController: UITableViewController {
             )
 
         } else if indexPath.section == 0 && indexPath.row == 1 {
-            let spaceViewController = SpaceViewController.make(
-                space: space
+            let spaceViewController = UIStoryboard(
+                name: "Main",
+                bundle: .main
+            )
+            .instantiateViewController(
+                identifier: "SpaceViewController"
+            )
+
+            spaceViewController.title = NSLocalizedString(
+                "After joining tap Back to leave space",
+                comment: "Leave space prompr"
             )
 
             navigationController?.pushViewController(
@@ -64,5 +51,4 @@ class WelcomeViewController: UITableViewController {
             )
         }
     }
-
 }

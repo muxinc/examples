@@ -1,5 +1,8 @@
 //
-//  ParticipantsViewController.swift
+//  Created for MuxSpacesUIKit.
+//
+//  Copyright © 2022 Mux, Inc.
+//  Licensed under the MIT License.
 //
 
 import Foundation
@@ -7,15 +10,6 @@ import UIKit
 import MuxSpaces
 
 import Combine
-
-enum Section: Int {
-    case participants
-}
-
-typealias ParticipantsDataSource = UICollectionViewDiffableDataSource<
-    Section,
-        Participant.ConnectionID
->
 
 class ParticipantsViewController: UIViewController {
 

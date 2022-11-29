@@ -61,14 +61,14 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Example Using a Single View" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="vL4-sP-AaD" userLabel="Example Using a Single View">
-                                                    <rect key="frame" x="20" y="28.666666666666664" width="296.33333333333331" height="28.666666666666668"/>
+                                                    <rect key="frame" x="20" y="18.666666666666664" width="296.33333333333331" height="28.666666666666668"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="If you're working through the SDK Getting Started Guide, this is the completed version" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Vt7-eT-Ob0" userLabel="If you're working through the SDK Getting Started Guide, this is the completed version">
-                                                    <rect key="frame" x="20" y="61.666666666666671" width="364" height="38.333333333333336"/>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="If you're working through the SDK Getting Started Guide, this is the completed version of the example it creates." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Vt7-eT-Ob0" userLabel="If you're working through the SDK Getting Started Guide, this is the completed version of the example it creates.">
+                                                    <rect key="frame" x="20" y="51.666666666666671" width="371.66666666666669" height="57.333333333333336"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                     <nil key="textColor"/>
