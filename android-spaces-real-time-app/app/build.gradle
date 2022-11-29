@@ -32,7 +32,7 @@ dependencies {
     // Java language implementation
     implementation "androidx.activity:activity:$activity_version"
 
-    implementation "com.mux.spaces:sdk:0.4.0"
+    implementation "com.mux.spaces:sdk:0.4.1"
 
     implementation 'androidx.appcompat:appcompat:1.5.1'
     implementation 'com.google.android.material:material:1.7.0'
