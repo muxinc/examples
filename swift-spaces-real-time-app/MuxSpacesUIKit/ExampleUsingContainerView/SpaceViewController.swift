@@ -16,7 +16,7 @@ class SpaceViewController: UIViewController {
 
     @IBOutlet var joinSpaceButton: UIButton!
 
-    var dataSource: ParticipantsDataSource?
+    lazy var dataSource: ParticipantsDataSource? = setupParticipantsDataSource()
 
     var viewModel: ViewModel
 
@@ -120,13 +120,6 @@ class SpaceViewController: UIViewController {
                 This should be the join space UIButton.
             """
             )
-            return
-        }
-
-        guard dataSource != nil else {
-            joinSpaceButton.isEnabled = false
-            self.dataSource = setupParticipantsDataSource()
-            self.joinSpace()
             return
         }
 
