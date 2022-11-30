@@ -50,6 +50,8 @@ class ParticipantsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        setupParticipantsView()
+
         let participantVideoCellRegistration = UICollectionView.CellRegistration<
             ParticipantVideoCell,
                 Participant.ConnectionID
@@ -66,6 +68,8 @@ class ParticipantsViewController: UIViewController {
                 item: item
             )
         }
+
+        participantsView.dataSource = dataSource
 
         self.dataSource = dataSource
 
