@@ -22,7 +22,7 @@ class WelcomeViewController: UITableViewController {
         }
 
         if indexPath.section == 0 && indexPath.row == 0 {
-            let joinSpaceViewController = JoinSpaceViewController.make(
+            let joinSpaceViewController = JoinSpaceViewController(
                 space: space
             )
             

@@ -43,35 +43,16 @@ class JoinSpaceViewController: UIViewController {
 
     // MARK: Initialization
 
-    static func make(
-        space: Space
-    ) -> JoinSpaceViewController {
-        return UIStoryboard(
-            name: "Main",
-            bundle: .main
-        )
-        .instantiateViewController(
-            identifier: "JoinSpaceViewController",
-            creator: { coder in
-                JoinSpaceViewController(
-                    coder: coder,
-                    space: space
-                )
-            }
-        )
-    }
-
     @available(*, unavailable)
     required init?(coder: NSCoder) {
         fatalError("\(#function) is not available.")
     }
 
-    required init?(
-        coder: NSCoder,
+    init(
         space: Space
     ) {
         self.space = space
-        super.init(coder: coder)
+        super.init(nibName: nil, bundle: nil)
     }
 
     // MARK: Deinitialization
