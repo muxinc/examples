@@ -43,19 +43,23 @@ class SpaceViewController: UIViewController {
 
     // MARK: View Model
 
-    var viewModel: ViewModel = ViewModel(space: try! currentSpace())
+    lazy var viewModel = SpaceViewModel(
+        space: AppDelegate.space
+    )
 
     // MARK: View Lifecycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        /// Setup participants view with a custom layout and
+        /// configure its backing data source
         setupParticipantsView()
     }
 
     override func viewWillDisappear(_ animated: Bool) {
 
-        viewModel.space.leave()
+        viewModel.leaveSpace()
 
         cancellables.forEach { $0.cancel() }
 
@@ -64,20 +68,20 @@ class SpaceViewController: UIViewController {
 
     // MARK: UI Setup
 
-    lazy var dataSource: ParticipantsDataSource? = setupParticipantsDataSource()
+    lazy var dataSource: ParticipantsDataSource = setupParticipantsDataSource()
 
     func setupParticipantsDataSource() -> ParticipantsDataSource {
         let participantVideoCellRegistration = UICollectionView
             .CellRegistration<
-                ParticipantVideoCell,
-                    Participant.ConnectionID
+                SpaceParticipantVideoCell,
+                    Participant.ID
         >(
-            handler: viewModel.configure(_:indexPath:connectionID:)
+            handler: viewModel.configureSpaceParticipantVideo(_:indexPath:participantID:)
         )
 
         let dataSource = ParticipantsDataSource(
             collectionView: participantsView
-        ) { (collectionView: UICollectionView, indexPath: IndexPath, item: Participant.ConnectionID) -> UICollectionViewCell? in
+        ) { (collectionView: UICollectionView, indexPath: IndexPath, item: Participant.ID) -> UICollectionViewCell? in
             return collectionView.dequeueConfiguredReusableCell(
                 using: participantVideoCellRegistration,
                 for: indexPath,
@@ -85,9 +89,7 @@ class SpaceViewController: UIViewController {
             )
         }
 
-        viewModel
-            .setupSnapshotUpdates(for: dataSource)
-            .store(in: &cancellables)
+        participantsView.dataSource = dataSource
 
         return dataSource
     }
@@ -95,42 +97,14 @@ class SpaceViewController: UIViewController {
     func setupParticipantsView() {
         participantsView.isHidden = true
 
+        viewModel
+            .setupSnapshotUpdates(for: dataSource)
+            .store(in: &cancellables)
+
         participantsView.setCollectionViewLayout(
             ParticipantLayout.make(),
             animated: false
         )
-
-        self.dataSource = setupParticipantsDataSource()
-    }
-}
-
-extension SpaceViewController.ViewModel: SpaceController {
-    var audioCaptureOptions: MuxSpaces.AudioCaptureOptions? {
-        return AudioCaptureOptions()
-    }
-
-    var cameraCaptureOptions: MuxSpaces.CameraCaptureOptions? {
-        return CameraCaptureOptions()
-    }
-
-    func upsertParticipant(
-        _ connectionID: Participant.ConnectionID
-    ) {
-        self.snapshot.upsertParticipant(
-            connectionID
-        )
-    }
-
-    func removeParticipant(
-        _ connectionID: Participant.ConnectionID
-    ) {
-        self.snapshot.removeParticipant(
-            connectionID
-        )
-    }
-
-    func resetSnapshot() {
-        self.snapshot = ParticipantsSnapshot.makeEmpty()
     }
 }
 
@@ -141,20 +115,14 @@ extension SpaceViewController {
     func joinSpace() {
         // Setup an event handler for joining the space
         // successfully
-        viewModel.space
-            .events
-            .joinSuccesses
-            .map { _ in return false }
+        viewModel.$isParticipantsViewHidden
             .assign(
                 to: \.isHidden,
                 on: participantsView
             )
             .store(in: &cancellables)
 
-        viewModel.space
-            .events
-            .joinSuccesses
-            .map { _ in return true }
+        viewModel.$isJoinSpaceButtonHidden
             .assign(
                 to: \.isHidden,
                 on: joinSpaceButton
@@ -163,9 +131,8 @@ extension SpaceViewController {
 
         // Setup an event handler in case there is an error
         // when joining the space
-        viewModel.space
-            .events
-            .joinFailures
+        viewModel.$shouldDisplayError
+            .compactMap { $0 }
             .sink { [weak self] joinError in
 
                 guard let self = self else { return }

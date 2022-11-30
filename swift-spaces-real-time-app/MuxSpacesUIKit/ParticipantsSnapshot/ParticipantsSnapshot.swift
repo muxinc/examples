@@ -58,24 +58,24 @@ extension ParticipantsSnapshot {
     /// then adds participant along with their video if applicable.
     ///
     mutating func upsertParticipant(
-        _ connectionID: Participant.ConnectionID
+        _ participantID: Participant.ID
     ) {
         let items = itemIdentifiers
-            .filter { (checkedItem: Participant.ConnectionID) in
-                return checkedItem == connectionID
+            .filter { (checkedItem: Participant.ID) in
+                return checkedItem == participantID
             }
 
         if items.isEmpty {
             self.appendItems(
                 [
-                    connectionID
+                    participantID
                 ],
                 toSection: .participants
             )
         } else {
             self.reloadItems(
                 [
-                    connectionID
+                    participantID
                 ]
             )
         }
@@ -87,11 +87,11 @@ extension ParticipantsSnapshot {
     /// causes the collection view to delete the cell
     /// that corresponds to that participant's video
     mutating func removeParticipant(
-        _ connectionID: Participant.ConnectionID
+        _ participantID: Participant.ID
     ) {
         let deletedItems = itemIdentifiers
             .filter {
-                return $0 == connectionID
+                return $0 == participantID
             }
 
         deleteItems(deletedItems)

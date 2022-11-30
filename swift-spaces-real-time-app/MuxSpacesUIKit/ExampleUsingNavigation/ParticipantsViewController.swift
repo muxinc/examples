@@ -43,6 +43,14 @@ class ParticipantsViewController: UIViewController {
             collectionViewLayout: ParticipantLayout.make()
         )
         super.init(nibName: nil, bundle: nil)
+        self.viewModel.errorHandler = { [weak self] _ in
+
+            guard let self = self else { return }
+
+            self.navigationController?.popViewController(
+                animated: true
+            )
+        }
     }
 
     // MARK: - View Lifecycle
@@ -54,14 +62,14 @@ class ParticipantsViewController: UIViewController {
 
         let participantVideoCellRegistration = UICollectionView.CellRegistration<
             ParticipantVideoCell,
-                Participant.ConnectionID
+                Participant.ID
         >(
-            handler: viewModel.configure(_:indexPath:connectionID:)
+            handler: viewModel.configure(_:indexPath:participantID:)
         )
 
         let dataSource = ParticipantsDataSource(
             collectionView: participantsView
-        ) { (collectionView: UICollectionView, indexPath: IndexPath, item: Participant.ConnectionID) -> UICollectionViewCell? in
+        ) { (collectionView: UICollectionView, indexPath: IndexPath, item: Participant.ID) -> UICollectionViewCell? in
             return collectionView.dequeueConfiguredReusableCell(
                 using: participantVideoCellRegistration,
                 for: indexPath,
@@ -77,22 +85,16 @@ class ParticipantsViewController: UIViewController {
             .configureUpdates(for: dataSource)
             .store(in: &cancellables)
 
-        setupPublishingActionsButton()
+        let menu = publishingActionsMenu()
 
-        // Setup an event handler in case there is an error
-        // when joining the space
-        viewModel
-            .space
-            .events
-            .joinFailures
-            .sink { [weak self] _ in
-
-                guard let self = self else { return }
-
-                self.navigationController?
-                    .popViewController(animated: true)
-            }
-            .store(in: &cancellables)
+        let actionsBarButton = UIBarButtonItem(
+            title: menu.title,
+            image: nil,
+            primaryAction: nil,
+            menu: menu
+        )
+        actionsBarButton.menu = menu
+        navigationItem.rightBarButtonItem = actionsBarButton
 
         // We're all setup, lets join the space!
         let viewModelCancellables = viewModel.joinSpace()
@@ -157,37 +159,6 @@ class ParticipantsViewController: UIViewController {
             view.bottomAnchor.constraint(
                 equalTo: participantsView.bottomAnchor
             ),
-        ])
-    }
-
-    func setupPublishingActionsButton() {
-        let button = UIButton()
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.menu = publishingActionsMenu()
-        button.showsMenuAsPrimaryAction = true
-        button.setTitle(
-            NSLocalizedString(
-                "Participant Actions",
-                comment: "Participant actions button title"
-            ),
-            for: .normal
-        )
-        button.setTitleColor(
-            .systemBlue,
-            for: .normal
-        )
-        button.isEnabled = true
-
-        view.addSubview(button)
-
-        view.addConstraints([
-            button.centerXAnchor.constraint(
-                equalTo: view.safeAreaLayoutGuide.centerXAnchor
-            ),
-            button.topAnchor.constraint(
-                equalTo: view.safeAreaLayoutGuide.topAnchor,
-                constant: 12.0
-            )
         ])
     }
 

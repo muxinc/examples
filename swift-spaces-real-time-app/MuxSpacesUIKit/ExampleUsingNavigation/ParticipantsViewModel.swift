@@ -22,6 +22,8 @@ class ParticipantsViewModel {
     var audioCaptureOptions: AudioCaptureOptions?
     var cameraCaptureOptions: CameraCaptureOptions?
 
+    var errorHandler: (Error?) -> () = { _ in }
+
     // MARK: - Initialization
 
     init(
@@ -46,25 +48,25 @@ class ParticipantsViewModel {
     // MARK: - Update Participant Cell State
 
     func participant(
-        from connectionID: Participant.ConnectionID
+        from participantID: Participant.ID
     ) -> Participant? {
         if let localParticipant = space.localParticipant {
             return (
                 [localParticipant] + space.remoteParticipants
-            ).filter { $0.connectionID == connectionID }.first
+            ).filter { $0.id == participantID }.first
         } else {
             return space.remoteParticipants
-                .filter { $0.connectionID == connectionID }.first
+                .filter { $0.id == participantID }.first
         }
     }
 
     func configure(
         _ cell: ParticipantVideoCell,
         indexPath: IndexPath,
-        connectionID: Participant.ConnectionID
+        participantID: Participant.ID
     ) {
         guard let participant = participant(
-            from: connectionID
+            from: participantID
         ) else {
             print("No Participant!")
             return

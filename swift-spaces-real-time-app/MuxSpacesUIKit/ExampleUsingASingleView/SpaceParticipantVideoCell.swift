@@ -1,6 +1,6 @@
 //
 //  Created for MuxSpacesUIKit.
-//
+//  
 //  Copyright © 2022 Mux, Inc.
 //  Licensed under the MIT License.
 //
@@ -9,13 +9,11 @@ import UIKit
 
 import MuxSpaces
 
-class ParticipantVideoCell: UICollectionViewCell {
-
+class SpaceParticipantVideoCell: UICollectionViewCell {
     // SpacesVideoView gets recycled with collection view cells.
     lazy var videoView = SpacesVideoView()
 
     lazy var placeholderView = UILabel()
-    lazy var nameIndicator = UILabel()
 
     var showsPlaceholder: Bool {
         videoView.track == nil
@@ -27,20 +25,16 @@ class ParticipantVideoCell: UICollectionViewCell {
         // clear participant data when
         // collection view cell is reused
         placeholderView.text = ""
-        nameIndicator.text = ""
 
         // clear the video view track when
         // collection view cell is reused
         videoView.track = nil
     }
 
-    func setup() {
-        backgroundView?.layer.cornerRadius = 8.0
-        contentView.layer.cornerRadius = 8.0
-        contentView.clipsToBounds = true
-        contentView.backgroundColor = .black
-
-        if !contentView.subviews.contains(placeholderView) {
+    func setupPlaceholderViewIfNeeded() {
+        if !contentView.subviews.contains(
+            placeholderView
+        ) {
             placeholderView.textColor = .white
 
             placeholderView
@@ -57,11 +51,10 @@ class ParticipantVideoCell: UICollectionViewCell {
                 ),
             ])
             placeholderView.backgroundColor = .black
-                .withAlphaComponent(
-                    0.25
-                )
         }
+    }
 
+    func setupVideoViewIfNeeded() {
         if !contentView.subviews.contains(videoView) {
             videoView.translatesAutoresizingMaskIntoConstraints = false
             videoView.clipsToBounds = true
@@ -88,36 +81,17 @@ class ParticipantVideoCell: UICollectionViewCell {
 
             videoView.translatesAutoresizingMaskIntoConstraints = false
         }
+    }
 
-        if !contentView.subviews.contains(nameIndicator) {
-            nameIndicator.backgroundColor = .black.withAlphaComponent(0.25)
-            nameIndicator.textColor = .white
-            nameIndicator.textAlignment = .center
-            nameIndicator.lineBreakMode = .byClipping
-            nameIndicator.font = UIFont.preferredFont(
-                forTextStyle: .subheadline
-            ).withSize(14.0)
+    func setup() {
+        backgroundView?.layer.cornerRadius = 8.0
+        contentView.layer.cornerRadius = 8.0
+        contentView.clipsToBounds = true
+        contentView.backgroundColor = .black
 
-            nameIndicator.translatesAutoresizingMaskIntoConstraints = false
-            contentView.insertSubview(
-                nameIndicator,
-                belowSubview: videoView
-            )
-            addConstraints([
-                nameIndicator.widthAnchor.constraint(
-                    equalTo: contentView.widthAnchor
-                ),
-                nameIndicator.heightAnchor.constraint(
-                    equalToConstant: 32.0
-                ),
-                nameIndicator.centerXAnchor.constraint(
-                    equalTo: contentView.centerXAnchor
-                ),
-                nameIndicator.bottomAnchor.constraint(
-                    equalTo: contentView.bottomAnchor
-                )
-            ])
-        }
+        setupPlaceholderViewIfNeeded()
+
+        setupVideoViewIfNeeded()
     }
 
     func update(
@@ -130,17 +104,13 @@ class ParticipantVideoCell: UICollectionViewCell {
             /// Show black background with participant ID
             /// displayed inside a centered label
             placeholderView.text = participantID
-            nameIndicator.text = ""
             contentView.bringSubviewToFront(placeholderView)
             contentView.sendSubviewToBack(videoView)
-            contentView.sendSubviewToBack(nameIndicator)
         } else {
-            /// Show SpacesVideoView with participant ID on
-            /// a semi-translucent bar overlay
+            /// Show SpacesVideoView
             placeholderView.text = ""
-            nameIndicator.text = participantID
             contentView.bringSubviewToFront(videoView)
-            contentView.bringSubviewToFront(nameIndicator)
+            contentView.sendSubviewToBack(placeholderView)
         }
     }
 }

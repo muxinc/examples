@@ -14,16 +14,10 @@ class WelcomeViewController: UITableViewController {
         _ tableView: UITableView,
         didSelectRowAt indexPath: IndexPath
     ) {
-
-        // Declare in SpaceSetup.swift
-        guard let space = try? currentSpace() else {
-            self.displaySpaceSetupErrorAlert()
-            return
-        }
-
         if indexPath.section == 0 && indexPath.row == 0 {
+
             let joinSpaceViewController = JoinSpaceViewController(
-                space: space
+                space: AppDelegate.space
             )
             
             navigationController?.pushViewController(

@@ -27,9 +27,11 @@
 		1955AF5128B856E000E20ACD /* UserDefaultsKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1955AF5028B856E000E20ACD /* UserDefaultsKeys.swift */; };
 		197FAB3D2934066600684753 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 197FAB3C2934066600684753 /* WelcomeViewController.swift */; };
 		197FAB3F2934082200684753 /* SpaceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 197FAB3E2934082200684753 /* SpaceViewController.swift */; };
-		19C9B60B2935DDC000102BB3 /* ParticipantsViewModel+Space.swift in Sources */ = {isa = PBXBuildFile; fileRef = 190AA39128CAC56F004A1DFA /* ParticipantsViewModel+Space.swift */; };
-		19C9B6102936B1A700102BB3 /* SpaceSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19C9B60F2936B1A700102BB3 /* SpaceSetup.swift */; };
-		19C9B6142936B9BC00102BB3 /* SpaceViewController+ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19C9B6132936B9BC00102BB3 /* SpaceViewController+ViewModel.swift */; };
+		19980F462936F97600700E81 /* SpaceViewModel+SpaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19980F452936F97600700E81 /* SpaceViewModel+SpaceController.swift */; };
+		19980F482936FB2500700E81 /* SpaceParticipantVideoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19980F472936FB2500700E81 /* SpaceParticipantVideoCell.swift */; };
+		19980F4B2938212400700E81 /* MuxSpaces in Frameworks */ = {isa = PBXBuildFile; productRef = 19980F4A2938212400700E81 /* MuxSpaces */; };
+		19C9B60B2935DDC000102BB3 /* ParticipantsViewModel+SpaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 190AA39128CAC56F004A1DFA /* ParticipantsViewModel+SpaceController.swift */; };
+		19C9B6142936B9BC00102BB3 /* SpaceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19C9B6132936B9BC00102BB3 /* SpaceViewModel.swift */; };
 		19DAD077290D1DDA004B4686 /* ProcessInfo+EnvironmentVariables.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19DAD076290D1DDA004B4686 /* ProcessInfo+EnvironmentVariables.swift */; };
 /* End PBXBuildFile section */
 
@@ -65,7 +67,7 @@
 
 /* Begin PBXFileReference section */
 		190AA38F28CAC499004A1DFA /* ParticipantLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParticipantLayout.swift; sourceTree = "<group>"; };
-		190AA39128CAC56F004A1DFA /* ParticipantsViewModel+Space.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ParticipantsViewModel+Space.swift"; sourceTree = "<group>"; };
+		190AA39128CAC56F004A1DFA /* ParticipantsViewModel+SpaceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ParticipantsViewModel+SpaceController.swift"; sourceTree = "<group>"; };
 		190B429F287D190300A681F2 /* ParticipantsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParticipantsViewModel.swift; sourceTree = "<group>"; };
 		1920842C287C6F2300D03362 /* MuxSpacesUIKit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MuxSpacesUIKit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1920842E287C6F2300D03362 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -89,8 +91,9 @@
 		1955AF5028B856E000E20ACD /* UserDefaultsKeys.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDefaultsKeys.swift; sourceTree = "<group>"; };
 		197FAB3C2934066600684753 /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		197FAB3E2934082200684753 /* SpaceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpaceViewController.swift; sourceTree = "<group>"; };
-		19C9B60F2936B1A700102BB3 /* SpaceSetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpaceSetup.swift; sourceTree = "<group>"; };
-		19C9B6132936B9BC00102BB3 /* SpaceViewController+ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SpaceViewController+ViewModel.swift"; sourceTree = "<group>"; };
+		19980F452936F97600700E81 /* SpaceViewModel+SpaceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SpaceViewModel+SpaceController.swift"; sourceTree = "<group>"; };
+		19980F472936FB2500700E81 /* SpaceParticipantVideoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpaceParticipantVideoCell.swift; sourceTree = "<group>"; };
+		19C9B6132936B9BC00102BB3 /* SpaceViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpaceViewModel.swift; sourceTree = "<group>"; };
 		19DAD076290D1DDA004B4686 /* ProcessInfo+EnvironmentVariables.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProcessInfo+EnvironmentVariables.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -99,6 +102,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				19980F4B2938212400700E81 /* MuxSpaces in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -145,7 +149,7 @@
 				1920842E287C6F2300D03362 /* AppDelegate.swift */,
 				19208430287C6F2300D03362 /* SceneDelegate.swift */,
 				19C9B6162936BB4B00102BB3 /* WelcomeViewController */,
-				197FAB35293402D200684753 /* ExampleUsingContainerView */,
+				197FAB35293402D200684753 /* ExampleUsingASingleView */,
 				194123842934011500E9EE2A /* ExampleUsingNavigation */,
 				193676742935B41B00A9DDFB /* ParticipantsSnapshot */,
 				19208460287C713E00D03362 /* Shared */,
@@ -202,25 +206,26 @@
 				19208461287C716B00D03362 /* JoinSpaceViewController.swift */,
 				19208463287C727400D03362 /* ParticipantsViewController.swift */,
 				190B429F287D190300A681F2 /* ParticipantsViewModel.swift */,
-				190AA39128CAC56F004A1DFA /* ParticipantsViewModel+Space.swift */,
+				190AA39128CAC56F004A1DFA /* ParticipantsViewModel+SpaceController.swift */,
 			);
 			path = ExampleUsingNavigation;
 			sourceTree = "<group>";
 		};
-		197FAB35293402D200684753 /* ExampleUsingContainerView */ = {
+		197FAB35293402D200684753 /* ExampleUsingASingleView */ = {
 			isa = PBXGroup;
 			children = (
 				197FAB3E2934082200684753 /* SpaceViewController.swift */,
-				19C9B6132936B9BC00102BB3 /* SpaceViewController+ViewModel.swift */,
+				19C9B6132936B9BC00102BB3 /* SpaceViewModel.swift */,
+				19980F452936F97600700E81 /* SpaceViewModel+SpaceController.swift */,
+				19980F472936FB2500700E81 /* SpaceParticipantVideoCell.swift */,
 			);
-			path = ExampleUsingContainerView;
+			path = ExampleUsingASingleView;
 			sourceTree = "<group>";
 		};
 		19C9B6152936BB1600102BB3 /* SpaceSetup */ = {
 			isa = PBXGroup;
 			children = (
 				19DAD076290D1DDA004B4686 /* ProcessInfo+EnvironmentVariables.swift */,
-				19C9B60F2936B1A700102BB3 /* SpaceSetup.swift */,
 			);
 			path = SpaceSetup;
 			sourceTree = "<group>";
@@ -251,6 +256,7 @@
 			);
 			name = MuxSpacesUIKit;
 			packageProductDependencies = (
+				19980F4A2938212400700E81 /* MuxSpaces */,
 			);
 			productName = MuxSpacesUIKit;
 			productReference = 1920842C287C6F2300D03362 /* MuxSpacesUIKit.app */;
@@ -325,6 +331,7 @@
 			);
 			mainGroup = 192083EC287C6F0000D03362;
 			packageReferences = (
+				19980F492938212400700E81 /* XCRemoteSwiftPackageReference "mux-spaces-sdk-swift-distribution" */,
 			);
 			productRefGroup = 192083F6287C6F0000D03362 /* Products */;
 			projectDirPath = "";
@@ -369,13 +376,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				19C9B60B2935DDC000102BB3 /* ParticipantsViewModel+Space.swift in Sources */,
+				19C9B60B2935DDC000102BB3 /* ParticipantsViewModel+SpaceController.swift in Sources */,
 				19208466287C727B00D03362 /* ParticipantVideoCell.swift in Sources */,
 				197FAB3D2934066600684753 /* WelcomeViewController.swift in Sources */,
-				19C9B6102936B1A700102BB3 /* SpaceSetup.swift in Sources */,
+				19980F482936FB2500700E81 /* SpaceParticipantVideoCell.swift in Sources */,
 				193676762935CD2300A9DDFB /* SpaceController.swift in Sources */,
 				1936767329359E5000A9DDFB /* UIViewController+Shared.swift in Sources */,
-				19C9B6142936B9BC00102BB3 /* SpaceViewController+ViewModel.swift in Sources */,
+				19C9B6142936B9BC00102BB3 /* SpaceViewModel.swift in Sources */,
 				190AA39028CAC499004A1DFA /* ParticipantLayout.swift in Sources */,
 				1955AF5128B856E000E20ACD /* UserDefaultsKeys.swift in Sources */,
 				190B42A0287D190300A681F2 /* ParticipantsViewModel.swift in Sources */,
@@ -383,6 +390,7 @@
 				19DAD077290D1DDA004B4686 /* ProcessInfo+EnvironmentVariables.swift in Sources */,
 				19208475287C74AF00D03362 /* ParticipantsSnapshot.swift in Sources */,
 				19208431287C6F2300D03362 /* SceneDelegate.swift in Sources */,
+				19980F462936F97600700E81 /* SpaceViewModel+SpaceController.swift in Sources */,
 				19208462287C716B00D03362 /* JoinSpaceViewController.swift in Sources */,
 				1955AF4F28B856BC00E20ACD /* TargetAction.swift in Sources */,
 				19208464287C727500D03362 /* ParticipantsViewController.swift in Sources */,
@@ -738,6 +746,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		19980F492938212400700E81 /* XCRemoteSwiftPackageReference "mux-spaces-sdk-swift-distribution" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/muxinc/mux-spaces-sdk-swift-distribution";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		19980F4A2938212400700E81 /* MuxSpaces */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 19980F492938212400700E81 /* XCRemoteSwiftPackageReference "mux-spaces-sdk-swift-distribution" */;
+			productName = MuxSpaces;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 192083ED287C6F0000D03362 /* Project object */;
 }
