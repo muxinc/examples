@@ -127,43 +127,6 @@
             </objects>
             <point key="canvasLocation" x="1987" y="-52"/>
         </scene>
-        <!--Participants View Controller-->
-        <scene sceneID="BBC-KE-wvj">
-            <objects>
-                <viewController storyboardIdentifier="ParticipantsViewController" id="bcv-hQ-1qm" customClass="ParticipantsViewController" customModule="MuxSpacesUIKit" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="0Pk-QG-7xn">
-                        <rect key="frame" x="0.0" y="0.0" width="430" height="932"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="mTy-8Q-63w">
-                                <rect key="frame" x="0.0" y="109" width="430" height="823"/>
-                                <color key="backgroundColor" systemColor="systemGray5Color"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="1zu-vW-PT6">
-                                    <size key="itemSize" width="128" height="128"/>
-                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                </collectionViewFlowLayout>
-                                <cells/>
-                            </collectionView>
-                        </subviews>
-                        <viewLayoutGuide key="safeArea" id="dY0-71-fHm"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <constraints>
-                            <constraint firstItem="mTy-8Q-63w" firstAttribute="leading" secondItem="dY0-71-fHm" secondAttribute="leading" id="E1R-JC-NJx"/>
-                            <constraint firstAttribute="bottomMargin" secondItem="mTy-8Q-63w" secondAttribute="bottom" constant="-34" id="XSm-0k-NDj"/>
-                            <constraint firstItem="dY0-71-fHm" firstAttribute="trailing" secondItem="mTy-8Q-63w" secondAttribute="trailing" id="uEo-0z-Gk0"/>
-                            <constraint firstItem="mTy-8Q-63w" firstAttribute="top" secondItem="dY0-71-fHm" secondAttribute="top" constant="50" id="vEq-TB-bAI"/>
-                        </constraints>
-                    </view>
-                    <connections>
-                        <outlet property="participantsView" destination="mTy-8Q-63w" id="FSo-TI-Hvk"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dgi-Iw-pjU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1877" y="-975"/>
-        </scene>
         <!--Navigation Controller-->
         <scene sceneID="dbA-5m-s5s">
             <objects>
@@ -187,9 +150,6 @@
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-        <systemColor name="systemGray5Color">
-            <color red="0.89803921568627454" green="0.89803921568627454" blue="0.91764705882352937" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

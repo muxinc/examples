@@ -472,7 +472,7 @@ class JoinSpaceViewController: UIViewController {
         cameraCaptureOptions: CameraCaptureOptions?
     ) {
         navigationController?.pushViewController(
-            ParticipantsViewController.make(
+            ParticipantsViewController(
                 space: space,
                 audioCaptureOptions: audioCaptureOptions,
                 cameraCaptureOptions: cameraCaptureOptions

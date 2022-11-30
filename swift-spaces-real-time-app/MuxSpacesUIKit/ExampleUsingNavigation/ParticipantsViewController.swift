@@ -14,7 +14,7 @@ import Combine
 class ParticipantsViewController: UIViewController {
 
     // TODO: Dynamic layouts based on # of participants
-    @IBOutlet var participantsView: UICollectionView!
+    var participantsView: UICollectionView
     var dataSource: ParticipantsDataSource?
 
     var viewModel: ParticipantsViewModel
@@ -23,35 +23,12 @@ class ParticipantsViewController: UIViewController {
 
     // MARK: - Initialization
 
-    static func make(
-        space: Space,
-        audioCaptureOptions: AudioCaptureOptions?,
-        cameraCaptureOptions: CameraCaptureOptions?
-    ) -> ParticipantsViewController {
-        return UIStoryboard(
-            name: "Main",
-            bundle: .main
-        )
-        .instantiateViewController(
-            identifier: "ParticipantsViewController",
-            creator: { coder in
-                ParticipantsViewController(
-                    coder: coder,
-                    space: space,
-                    audioCaptureOptions: audioCaptureOptions,
-                    cameraCaptureOptions: cameraCaptureOptions
-                )
-            }
-        )
-    }
-
     @available(*, unavailable)
     required init?(coder: NSCoder) {
         fatalError("\(#function) is not available.")
     }
 
-    required init?(
-        coder: NSCoder,
+    init(
         space: Space,
         audioCaptureOptions: AudioCaptureOptions?,
         cameraCaptureOptions: CameraCaptureOptions?
@@ -61,18 +38,17 @@ class ParticipantsViewController: UIViewController {
             audioCaptureOptions: audioCaptureOptions,
             cameraCaptureOptions: cameraCaptureOptions
         )
-        super.init(coder: coder)
+        self.participantsView = UICollectionView(
+            frame: .zero,
+            collectionViewLayout: ParticipantLayout.make()
+        )
+        super.init(nibName: nil, bundle: nil)
     }
 
     // MARK: - View Lifecycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        participantsView.setCollectionViewLayout(
-            ParticipantLayout.make(),
-            animated: false
-        )
 
         let participantVideoCellRegistration = UICollectionView.CellRegistration<
             ParticipantVideoCell,
@@ -155,6 +131,29 @@ class ParticipantsViewController: UIViewController {
                 self.viewModel.space.unmuteTrack(track)
             }
         }
+    }
+
+    func setupParticipantsView() {
+        participantsView.translatesAutoresizingMaskIntoConstraints = false
+
+        participantsView.backgroundColor = .systemGroupedBackground
+
+        view.addSubview(participantsView)
+
+        view.addConstraints([
+            view.safeAreaLayoutGuide.leadingAnchor.constraint(
+                equalTo: participantsView.leadingAnchor
+            ),
+            view.safeAreaLayoutGuide.trailingAnchor.constraint(
+                equalTo: participantsView.trailingAnchor
+            ),
+            view.topAnchor.constraint(
+                equalTo: participantsView.topAnchor
+            ),
+            view.bottomAnchor.constraint(
+                equalTo: participantsView.bottomAnchor
+            ),
+        ])
     }
 
     func setupPublishingActionsButton() {
