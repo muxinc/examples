@@ -20,7 +20,7 @@
                         <sections>
                             <tableViewSection headerTitle="Examples" id="SXm-pd-gcL">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="dWI-Uz-jxu" rowHeight="132" style="IBUITableViewCellStyleDefault" id="XDU-oC-je2">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="dWI-Uz-jxu" detailTextLabel="QED-0K-NyP" rowHeight="132" style="IBUITableViewCellStyleSubtitle" id="XDU-oC-je2">
                                         <rect key="frame" x="0.0" y="50" width="430" height="132"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="XDU-oC-je2" id="Pgb-Mf-Agr">
@@ -28,9 +28,16 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Example Using Navigation" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="dWI-Uz-jxu" userLabel="Example Using Navigation">
-                                                    <rect key="frame" x="20" y="0.0" width="371.66666666666669" height="132"/>
+                                                    <rect key="frame" x="20" y="37.666666666666664" width="269.66666666666669" height="28.666666666666668"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="This example does not use storyboard." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="QED-0K-NyP">
+                                                    <rect key="frame" x="20" y="70.666666666666671" width="281" height="19.333333333333332"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
