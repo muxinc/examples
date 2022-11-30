@@ -15,7 +15,7 @@ class WelcomeViewController: UITableViewController {
         didSelectRowAt indexPath: IndexPath
     ) {
 
-        // Declare in SpaceToken.swift
+        // Declare in SpaceSetup.swift
         guard let space = try? currentSpace() else {
             self.displaySpaceSetupErrorAlert()
             return
