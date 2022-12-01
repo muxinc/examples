@@ -36,7 +36,7 @@ class WelcomeViewController: UITableViewController {
 
             spaceViewController.title = NSLocalizedString(
                 "After joining tap Back to leave space",
-                comment: "Leave space prompr"
+                comment: "Leave space prompt"
             )
 
             navigationController?.pushViewController(
