@@ -1,5 +1,8 @@
 //
-//  ParticipantsViewModel.swift
+//  Created for MuxSpacesUIKit.
+//
+//  Copyright © 2022 Mux, Inc.
+//  Licensed under the MIT License.
 //
 
 import Combine
@@ -13,13 +16,13 @@ class ParticipantsViewModel {
 
     @Published var snapshot: ParticipantsSnapshot
 
-    var cancellables: Set<AnyCancellable> = []
-
     var publishedAudioTrack: AudioTrack?
     var publishedVideoTrack: VideoTrack?
 
     var audioCaptureOptions: AudioCaptureOptions?
     var cameraCaptureOptions: CameraCaptureOptions?
+
+    var errorHandler: (Error?) -> () = { _ in }
 
     // MARK: - Initialization
 
@@ -32,43 +35,38 @@ class ParticipantsViewModel {
         self.audioCaptureOptions = audioCaptureOptions
         self.cameraCaptureOptions = cameraCaptureOptions
 
-        self.snapshot = ParticipantsSnapshot.make()
-    }
-
-    deinit {
-        cancellables.forEach { $0.cancel() }
+        self.snapshot = ParticipantsSnapshot.makeEmpty()
     }
 
     func configureUpdates(
         for dataSource: ParticipantsDataSource
-    ) {
-        $snapshot
+    ) -> AnyCancellable {
+        return $snapshot
             .sink { dataSource.apply($0) }
-            .store(in: &cancellables)
     }
 
     // MARK: - Update Participant Cell State
 
     func participant(
-        from connectionID: Participant.ConnectionID
+        from participantID: Participant.ID
     ) -> Participant? {
         if let localParticipant = space.localParticipant {
             return (
                 [localParticipant] + space.remoteParticipants
-            ).filter { $0.connectionID == connectionID }.first
+            ).filter { $0.id == participantID }.first
         } else {
             return space.remoteParticipants
-                .filter { $0.connectionID == connectionID }.first
+                .filter { $0.id == participantID }.first
         }
     }
 
     func configure(
         _ cell: ParticipantVideoCell,
         indexPath: IndexPath,
-        connectionID: Participant.ConnectionID
+        participantID: Participant.ID
     ) {
         guard let participant = participant(
-            from: connectionID
+            from: participantID
         ) else {
             print("No Participant!")
             return

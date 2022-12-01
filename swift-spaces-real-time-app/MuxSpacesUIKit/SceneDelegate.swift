@@ -1,5 +1,8 @@
 //
-//  SceneDelegate.swift
+//  Created for MuxSpacesUIKit.
+//
+//  Copyright © 2022 Mux, Inc.
+//  Licensed under the MIT License.
 //
 
 import UIKit

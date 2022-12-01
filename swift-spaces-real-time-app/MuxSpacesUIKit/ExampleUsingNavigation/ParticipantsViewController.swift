@@ -1,5 +1,8 @@
 //
-//  ParticipantsViewController.swift
+//  Created for MuxSpacesUIKit.
+//
+//  Copyright © 2022 Mux, Inc.
+//  Licensed under the MIT License.
 //
 
 import Foundation
@@ -8,42 +11,15 @@ import MuxSpaces
 
 import Combine
 
-enum Section: Int {
-    case participants
-}
-
-typealias ParticipantsDataSource = UICollectionViewDiffableDataSource<
-    Section,
-        Participant.ConnectionID
->
-
-extension UIStoryboard {
-    static func makeParticipantsViewController(
-        viewModel: ParticipantsViewModel
-    ) -> ParticipantsViewController {
-        return UIStoryboard(
-            name: "Main",
-            bundle: .main
-        )
-        .instantiateViewController(
-            identifier: "ParticipantsViewController",
-            creator: { coder in
-                ParticipantsViewController(
-                    coder: coder,
-                    viewModel: viewModel
-                )
-            }
-        )
-    }
-}
-
 class ParticipantsViewController: UIViewController {
 
     // TODO: Dynamic layouts based on # of participants
-    @IBOutlet var participantsView: UICollectionView!
+    var participantsView: UICollectionView
     var dataSource: ParticipantsDataSource?
 
     var viewModel: ParticipantsViewModel
+
+    var cancellables: Set<AnyCancellable> = []
 
     // MARK: - Initialization
 
@@ -52,12 +28,29 @@ class ParticipantsViewController: UIViewController {
         fatalError("\(#function) is not available.")
     }
 
-    required init?(
-        coder: NSCoder,
-        viewModel:ParticipantsViewModel
+    init(
+        space: Space,
+        audioCaptureOptions: AudioCaptureOptions?,
+        cameraCaptureOptions: CameraCaptureOptions?
     ) {
-        self.viewModel = viewModel
-        super.init(coder: coder)
+        self.viewModel = ParticipantsViewModel(
+            space: space,
+            audioCaptureOptions: audioCaptureOptions,
+            cameraCaptureOptions: cameraCaptureOptions
+        )
+        self.participantsView = UICollectionView(
+            frame: .zero,
+            collectionViewLayout: ParticipantLayout.make()
+        )
+        super.init(nibName: nil, bundle: nil)
+        self.viewModel.errorHandler = { [weak self] _ in
+
+            guard let self = self else { return }
+
+            self.navigationController?.popViewController(
+                animated: true
+            )
+        }
     }
 
     // MARK: - View Lifecycle
@@ -65,21 +58,18 @@ class ParticipantsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        participantsView.setCollectionViewLayout(
-            createLayout(),
-            animated: false
-        )
+        setupParticipantsView()
 
         let participantVideoCellRegistration = UICollectionView.CellRegistration<
             ParticipantVideoCell,
-                Participant.ConnectionID
+                Participant.ID
         >(
-            handler: viewModel.configure(_:indexPath:connectionID:)
+            handler: viewModel.configure(_:indexPath:participantID:)
         )
 
         let dataSource = ParticipantsDataSource(
             collectionView: participantsView
-        ) { (collectionView: UICollectionView, indexPath: IndexPath, item: Participant.ConnectionID) -> UICollectionViewCell? in
+        ) { (collectionView: UICollectionView, indexPath: IndexPath, item: Participant.ID) -> UICollectionViewCell? in
             return collectionView.dequeueConfiguredReusableCell(
                 using: participantVideoCellRegistration,
                 for: indexPath,
@@ -87,17 +77,33 @@ class ParticipantsViewController: UIViewController {
             )
         }
 
-        viewModel.configureUpdates(
-            for: dataSource
-        )
+        participantsView.dataSource = dataSource
 
         self.dataSource = dataSource
 
-        setupPublishingActionsButton()
+        viewModel
+            .configureUpdates(for: dataSource)
+            .store(in: &cancellables)
+
+        let menu = publishingActionsMenu()
+
+        let actionsBarButton = UIBarButtonItem(
+            title: menu.title,
+            image: nil,
+            primaryAction: nil,
+            menu: menu
+        )
+        actionsBarButton.menu = menu
+        navigationItem.rightBarButtonItem = actionsBarButton
+
+        // We're all setup, lets join the space!
+        let viewModelCancellables = viewModel.joinSpace()
+        cancellables.formUnion(viewModelCancellables)
     }
 
     override func viewWillDisappear(_ animated: Bool) {
         self.viewModel.leaveSpace()
+        self.cancellables.forEach { $0.cancel() }
         self.dataSource = nil
         super.viewWillDisappear(animated)
     }
@@ -133,34 +139,26 @@ class ParticipantsViewController: UIViewController {
         }
     }
 
-    func setupPublishingActionsButton() {
-        let button = UIButton()
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.menu = publishingActionsMenu()
-        button.showsMenuAsPrimaryAction = true
-        button.setTitle(
-            NSLocalizedString(
-                "Participant Actions",
-                comment: "Participant actions button title"
-            ),
-            for: .normal
-        )
-        button.setTitleColor(
-            .systemBlue,
-            for: .normal
-        )
-        button.isEnabled = true
+    func setupParticipantsView() {
+        participantsView.translatesAutoresizingMaskIntoConstraints = false
 
-        view.addSubview(button)
+        participantsView.backgroundColor = .systemGroupedBackground
+
+        view.addSubview(participantsView)
 
         view.addConstraints([
-            button.centerXAnchor.constraint(
-                equalTo: view.safeAreaLayoutGuide.centerXAnchor
+            view.safeAreaLayoutGuide.leadingAnchor.constraint(
+                equalTo: participantsView.leadingAnchor
             ),
-            button.topAnchor.constraint(
-                equalTo: view.safeAreaLayoutGuide.topAnchor,
-                constant: 12.0
-            )
+            view.safeAreaLayoutGuide.trailingAnchor.constraint(
+                equalTo: participantsView.trailingAnchor
+            ),
+            view.topAnchor.constraint(
+                equalTo: participantsView.topAnchor
+            ),
+            view.bottomAnchor.constraint(
+                equalTo: participantsView.bottomAnchor
+            ),
         ])
     }
 

@@ -1,5 +1,8 @@
 //
-//  ParticipantVideoCell.swift
+//  Created for MuxSpacesUIKit.
+//
+//  Copyright © 2022 Mux, Inc.
+//  Licensed under the MIT License.
 //
 
 import UIKit
@@ -8,11 +11,9 @@ import MuxSpaces
 
 class ParticipantVideoCell: UICollectionViewCell {
 
-    // SpacesVideoView is recycled alongside collection view
-    // cells.
+    // SpacesVideoView gets recycled with collection view cells.
     lazy var videoView = SpacesVideoView()
 
-    lazy var videoContainerView = UIView()
     lazy var placeholderView = UILabel()
     lazy var nameIndicator = UILabel()
 
@@ -37,52 +38,55 @@ class ParticipantVideoCell: UICollectionViewCell {
         backgroundView?.layer.cornerRadius = 8.0
         contentView.layer.cornerRadius = 8.0
         contentView.clipsToBounds = true
+        contentView.backgroundColor = .black
 
         if !contentView.subviews.contains(placeholderView) {
             placeholderView.textColor = .white
 
-            placeholderView.translatesAutoresizingMaskIntoConstraints = false
-            contentView.addSubview(placeholderView)
+            placeholderView
+                .translatesAutoresizingMaskIntoConstraints = false
+            contentView.addSubview(
+                placeholderView
+            )
             addConstraints([
-                placeholderView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
-                placeholderView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+                placeholderView.centerXAnchor.constraint(
+                    equalTo: contentView.centerXAnchor
+                ),
+                placeholderView.centerYAnchor.constraint(
+                    equalTo: contentView.centerYAnchor
+                ),
             ])
-            placeholderView.backgroundColor = .black.withAlphaComponent(0.25)
+            placeholderView.backgroundColor = .black
+                .withAlphaComponent(
+                    0.25
+                )
         }
 
-        if !contentView.subviews.contains(videoContainerView) {
-            videoContainerView.translatesAutoresizingMaskIntoConstraints = false
-            videoContainerView.clipsToBounds = true
-            videoContainerView.layer.cornerRadius = 8.0
+        if !contentView.subviews.contains(videoView) {
+            videoView.translatesAutoresizingMaskIntoConstraints = false
+            videoView.clipsToBounds = true
+            videoView.layer.cornerRadius = 8.0
 
-            contentView.insertSubview(videoContainerView, belowSubview: placeholderView)
-            addConstraints([
-                videoContainerView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
-                videoContainerView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
-                videoContainerView.widthAnchor.constraint(equalTo: contentView.widthAnchor),
-                videoContainerView.heightAnchor.constraint(equalTo: contentView.heightAnchor),
-            ])
-
-            videoContainerView.addSubview(
-                videoView
+            contentView.insertSubview(
+                videoView,
+                belowSubview: placeholderView
             )
+            addConstraints([
+                videoView.centerXAnchor.constraint(
+                    equalTo: contentView.centerXAnchor
+                ),
+                videoView.centerYAnchor.constraint(
+                    equalTo: contentView.centerYAnchor
+                ),
+                videoView.widthAnchor.constraint(
+                    equalTo: contentView.widthAnchor
+                ),
+                videoView.heightAnchor.constraint(
+                    equalTo: contentView.heightAnchor
+                ),
+            ])
 
             videoView.translatesAutoresizingMaskIntoConstraints = false
-
-            addConstraints([
-                videoView.leadingAnchor.constraint(
-                    equalTo: videoContainerView.leadingAnchor
-                ),
-                videoView.trailingAnchor.constraint(
-                    equalTo: videoContainerView.trailingAnchor
-                ),
-                videoView.topAnchor.constraint(
-                    equalTo: videoContainerView.topAnchor
-                ),
-                videoView.bottomAnchor.constraint(
-                    equalTo: videoContainerView.bottomAnchor
-                )
-            ])
         }
 
         if !contentView.subviews.contains(nameIndicator) {
@@ -97,7 +101,7 @@ class ParticipantVideoCell: UICollectionViewCell {
             nameIndicator.translatesAutoresizingMaskIntoConstraints = false
             contentView.insertSubview(
                 nameIndicator,
-                belowSubview: videoContainerView
+                belowSubview: videoView
             )
             addConstraints([
                 nameIndicator.widthAnchor.constraint(
@@ -122,17 +126,21 @@ class ParticipantVideoCell: UICollectionViewCell {
     ) {
         videoView.track = videoTrack
 
-        if videoTrack != nil {
-            placeholderView.text = ""
-            nameIndicator.text = participantID
-            contentView.bringSubviewToFront(videoContainerView)
-            contentView.bringSubviewToFront(nameIndicator)
-        } else {
+        if showsPlaceholder {
+            /// Show black background with participant ID
+            /// displayed inside a centered label
             placeholderView.text = participantID
             nameIndicator.text = ""
             contentView.bringSubviewToFront(placeholderView)
-            contentView.sendSubviewToBack(videoContainerView)
+            contentView.sendSubviewToBack(videoView)
             contentView.sendSubviewToBack(nameIndicator)
+        } else {
+            /// Show SpacesVideoView with participant ID on
+            /// a semi-translucent bar overlay
+            placeholderView.text = ""
+            nameIndicator.text = participantID
+            contentView.bringSubviewToFront(videoView)
+            contentView.bringSubviewToFront(nameIndicator)
         }
     }
 }

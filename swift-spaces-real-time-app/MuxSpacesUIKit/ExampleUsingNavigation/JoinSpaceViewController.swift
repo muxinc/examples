@@ -1,6 +1,9 @@
 //
-//  JoinSpaceViewController.swift
-//  
+//  Created for MuxSpacesUIKit.
+//
+//  Copyright © 2022 Mux, Inc.
+//  Licensed under the MIT License.
+//
 
 import Combine
 import UIKit
@@ -31,16 +34,34 @@ class JoinSpaceViewController: UIViewController {
     var captureDeviceSelectionLabel: UILabel = UILabel()
     var captureDeviceSelectionControl: UISegmentedControl = UISegmentedControl()
 
-    var space: Space?
+    var space: Space
 
     var cancellables: [AnyCancellable] = []
 
     @Published var cameraCaptureOptions: CameraCaptureOptions? = CameraCaptureOptions()
     @Published var audioCaptureOptions: AudioCaptureOptions? = AudioCaptureOptions()
 
+    // MARK: Initialization
+
+    @available(*, unavailable)
+    required init?(coder: NSCoder) {
+        fatalError("\(#function) is not available.")
+    }
+
+    init(
+        space: Space
+    ) {
+        self.space = space
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    // MARK: Deinitialization
+
     deinit {
         cancellables.forEach { $0.cancel() }
     }
+
+    // MARK: View Lifecycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -85,8 +106,17 @@ class JoinSpaceViewController: UIViewController {
         joinSpaceButton.tintColor = .systemBlue
         joinSpaceButton.addAction(
             UIAction(
-                handler: { _ in
-                    self.joinSpace()
+                handler: { [weak self] _ in
+
+                    guard let self = self else {
+                        return
+                    }
+
+                    self.displayParticipantsViewController(
+                        space: self.space,
+                        audioCaptureOptions: self.audioCaptureOptions,
+                        cameraCaptureOptions: self.cameraCaptureOptions
+                    )
                 }
             ),
             for: .touchUpInside
@@ -436,110 +466,17 @@ class JoinSpaceViewController: UIViewController {
         ])
     }
 
-    func setupSpace() -> Space? {
-        let token = ProcessInfo.processInfo.spacesToken
-
-        // Check that the token is not empty
-        // before proceeding
-        guard !token.isEmpty else {
-            return nil
-        }
-
-        // Initialize a Space with a pre-generated token
-        guard let space = try? Space(
-            token: token
-        ) else {
-            return nil
-        }
-
-        return space
-    }
-
-    func joinSpace() {
-
-        guard let space = self.space ?? setupSpace() else {
-            self.displayJoinSpaceErrorAlert()
-            return
-        }
-
-        let viewModel = ParticipantsViewModel(
-            space: space,
-            audioCaptureOptions: audioCaptureOptions,
-            cameraCaptureOptions: cameraCaptureOptions
-        )
-
-        // Setup an event handler for joining the space
-        // successfully
-        viewModel.space
-            .events
-            .joinSuccesses
-            .sink { [weak self] joinSuccess in
-
-                guard let self = self else { return }
-
-                self.displayParticipantsViewController(
-                    viewModel: viewModel
-                )
-            }
-            .store(in: &viewModel.cancellables)
-
-        // Setup an event handler in case there is an error
-        // when joining the space
-        viewModel.space
-            .events
-            .joinFailures
-            .sink { [weak self] joinError in
-
-                guard let self = self else { return }
-
-                viewModel.tearDownEventHandlers()
-
-                self.displayJoinSpaceErrorAlert()
-            }
-            .store(in: &viewModel.cancellables)
-
-        // We're all setup, lets join the space!
-        viewModel.joinSpace()
-
-        self.space = space
-    }
-
     func displayParticipantsViewController(
-        viewModel: ParticipantsViewModel
+        space: Space,
+        audioCaptureOptions: AudioCaptureOptions?,
+        cameraCaptureOptions: CameraCaptureOptions?
     ) {
         navigationController?.pushViewController(
-            UIStoryboard.makeParticipantsViewController(
-                viewModel: viewModel
+            ParticipantsViewController(
+                space: space,
+                audioCaptureOptions: audioCaptureOptions,
+                cameraCaptureOptions: cameraCaptureOptions
             ),
-            animated: true
-        )
-    }
-
-    func displayJoinSpaceErrorAlert() {
-        let alert = UIAlertController(
-            title: NSLocalizedString(
-                "Couldn't Join Space",
-                comment: "Join space error alert title"
-            ),
-            message: NSLocalizedString(
-                "Couldn't join space, double check your JWT.",
-                comment: "Join space error alert message"
-            ),
-            preferredStyle: .alert
-        )
-
-        alert.addAction(
-            UIAlertAction(
-                title: NSLocalizedString(
-                    "OK",
-                    comment: "Join space error alert confirmatory action"
-                ),
-                style: .default
-            )
-        )
-
-        self.present(
-            alert,
             animated: true
         )
     }

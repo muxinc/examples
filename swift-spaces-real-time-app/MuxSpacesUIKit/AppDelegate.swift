@@ -1,13 +1,37 @@
 //
-//  AppDelegate.swift
+//  Created for MuxSpacesUIKit.
+//
+//  Copyright © 2022 Mux, Inc.
+//  Licensed under the MIT License.
 //
 
 import UIKit
 
+import MuxSpaces
+
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
+
+    // MARK: - Declare token and Space
+
+    /// Paste in a token generated in the same way as you did in the
+    /// Web SDK Getting Started Guide
+    static var token: String = ProcessInfo.processInfo.spacesToken
+
+    /// Initialize a Space using the defined token
+    static var space: Space = {
+
+        precondition(
+            !token.isEmpty,
+            "Please set a valid JWT token before initializing a space"
+        )
+
+        return try! Space(token: token)
+    }()
+
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+
         return true
     }
 
@@ -27,4 +51,3 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
 }
-
