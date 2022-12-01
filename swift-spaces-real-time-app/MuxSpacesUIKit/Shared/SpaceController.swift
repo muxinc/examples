@@ -45,9 +45,11 @@ extension SpaceController {
     }
 
     func handleJoinSuccess() {
+        #if !targetEnvironment(simulator)
         publishAudioIfNeeded()
 
         publishVideoIfNeeded()
+        #endif
     }
 
     // MARK: - Leave space handling
