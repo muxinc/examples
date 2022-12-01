@@ -59,7 +59,12 @@ extension SpaceViewModel: SpaceController {
             }
             .store(in: &cancellables)
 
-        Combine.Publishers.Merge5(
+        Combine.Publishers.Merge6(
+            /// Joining a space successfully triggers a
+            /// placeholder cell to be added for the local participant
+            space.events
+                .joinSuccesses
+                .map(\.localParticipant.id),
             /// Participant joined events trigger a new
             /// cell to be added for each new participant
             space.events
