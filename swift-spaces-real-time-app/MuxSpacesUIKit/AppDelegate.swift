@@ -14,9 +14,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     // MARK: - Declare token and Space
 
+    /// Paste in a token generated in the same way as you did in the
+    /// Web SDK Getting Started Guide
     static var token: String = ProcessInfo.processInfo.spacesToken
 
+    /// Initialize a Space using the defined token
     static var space: Space = {
+
+        precondition(
+            !token.isEmpty,
+            "Please set a valid JWT token before initializing a space"
+        )
+
         return try! Space(token: token)
     }()
 
