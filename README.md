@@ -6,18 +6,19 @@ Get to know Mux by looking through examples! Contributions are always welcome, e
 
 ## Examples
 
-| Name                                                    | Description                                                                                                                                                                   | Tags                  | Languages  |
-| ------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------- | ---------- |
-| [ios-live-streaming](ios-live-streaming)                | An example iOS app that allows you to publish an RTMP stream directly to Mux.                                                                                                 | Live, Mobile          | Swift      |
-| [android-live-streaming](android-live-streaming)        | An example Android app that allows you to publish an RTMP stream directly to Mux.                                                                                             | Live, Mobile          | Java       |
-| [contentful-uploader](contentful-uploader)              | Contentful UI extension that allows you to add Video to your [Contentful](https://contentful.com) space.                                                                      | VOD, CMS, Integration | JavaScript |
-| [now-airtable](now-airtable)                            | [Zeit Now](https://zeit.co/now) + [Airtable](https://airtable.com/). Build your own personal Video CMS using Now, [Next.js](https://nextjs.org/), and your own Airtable base. | VOD, CMS              | JavaScript |
-| [signed-playback-lambda](signed-playback-lambda)        | AWS Lambda that allows you to generate signed Mux playback URLs.														  | VOD, Serverless       | JavaScript |
-| [gatsy-example-graphql](gatsby-example-graphql)         | Gatsby project that uses Mux's OneGraph-powered GraphQL API | JAMstack, VOD, GraphQL       | JavaScript |
-| [swift-video-app](swift-video-app)                      | Swift app that uses Mux Video, Mux Data and plays audio when the app goes into the background | VOD, Mobile | Swift |
-| [aws-recommendation-engine](aws-recommendation-engine)  | An example of using Mux Data streaming exports to recommend content with Amazon Personalize | VOD, Serverless | TypeScript |
-| [nextjs-mdx-player](nextjs-mdx-player)                  | A [Next.js](https://nextjs.org/) app configured to support [MDX](https://mdxjs.com) to illustrate supporting [MuxPlayer](https://www.mux.com/player) in blog posts. | VOD, CMS | JavaScript |
-| [swift-spaces-real-time-app](swift-spaces-real-time-app)| An example iOS and iPadOS app demonstrating usage of the Spaces Swift SDk for real-time                                                                                       | Real-time, Mobile     | Swift      |
+| Name                                                        | Description                                                                                                                                                                   | Tags                  | Languages  |
+| ----------------------------------------------------------  | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------- | ---------- |
+| [ios-live-streaming](ios-live-streaming)                    | An example iOS app that allows you to publish an RTMP stream directly to Mux.                                                                                                 | Live, Mobile          | Swift      |
+| [android-live-streaming](android-live-streaming)            | An example Android app that allows you to publish an RTMP stream directly to Mux.                                                                                             | Live, Mobile          | Java       |
+| [contentful-uploader](contentful-uploader)                  | Contentful UI extension that allows you to add Video to your [Contentful](https://contentful.com) space.                                                                      | VOD, CMS, Integration | JavaScript |
+| [now-airtable](now-airtable)                                | [Zeit Now](https://zeit.co/now) + [Airtable](https://airtable.com/). Build your own personal Video CMS using Now, [Next.js](https://nextjs.org/), and your own Airtable base. | VOD, CMS              | JavaScript |
+| [signed-playback-lambda](signed-playback-lambda)            | AWS Lambda that allows you to generate signed Mux playback URLs.														  | VOD, Serverless       | JavaScript |
+| [gatsy-example-graphql](gatsby-example-graphql)             | Gatsby project that uses Mux's OneGraph-powered GraphQL API | JAMstack, VOD, GraphQL       | JavaScript |
+| [swift-video-app](swift-video-app)                          | Swift app that uses Mux Video, Mux Data and plays audio when the app goes into the background | VOD, Mobile | Swift |
+| [aws-recommendation-engine](aws-recommendation-engine)      | An example of using Mux Data streaming exports to recommend content with Amazon Personalize | VOD, Serverless | TypeScript |
+| [nextjs-mdx-player](nextjs-mdx-player)                      | A [Next.js](https://nextjs.org/) app configured to support [MDX](https://mdxjs.com) to illustrate supporting [MuxPlayer](https://www.mux.com/player) in blog posts. | VOD, CMS | JavaScript |
+| [swift-spaces-real-time-app](swift-spaces-real-time-app)    | An example iOS and iPadOS app demonstrating usage of the Spaces Swift SDK for real-time                                                                                       | Real-time, Mobile     | Swift      |
+| [android-spaces-real-time-app](android-spaces-real-time-app)| An example Android app demonstrating usage of the Spaces Android SDK for real-time                                                                                            | Real-time, Mobile     | Java       |
 
 ## Examples in the wild
 
