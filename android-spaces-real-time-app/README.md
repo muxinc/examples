@@ -1,4 +1,4 @@
-# Mux Spaces SDK Example
+# Mux Spaces Android SDK Example
 
 This is an Android app demonstrating using the Spaces SDK to add real-time video and audio to your app. It is the same code as developed in the Getting Started guide [here](https://www.notion.so/Real-Time-Video-Getting-Started-Guide-for-Android-b21776d9a32d492ca4924176d4342b1d)
 
