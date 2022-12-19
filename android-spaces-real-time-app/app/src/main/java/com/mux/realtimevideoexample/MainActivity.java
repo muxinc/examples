@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
     private final Space.Listener spaceListener = new Space.Listener() {
         @Override
         public void onJoined(Space space, LocalParticipant localParticipant) {
-            Toast.makeText(MainActivity.this, "Joined space "+space.getId()+" as "+localParticipant.getId(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(MainActivity.this, "Joined space "+space.getId()+" as "+localParticipant.getId(), Toast.LENGTH_LONG).show();
 
             localParticipant.publish(localParticipant.getCameraTrack());
             localParticipant.publish(localParticipant.getMicrophoneTrack());
@@ -65,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public void onError(Space space, MuxError muxError) {
-            Toast.makeText(MainActivity.this, "Error! "+muxError.toString(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(MainActivity.this, "Error! "+muxError.toString(), Toast.LENGTH_LONG).show();
         }
     };
 
@@ -127,7 +127,7 @@ public class MainActivity extends AppCompatActivity {
         } catch (Exception e) {
             e.printStackTrace();
 
-            Toast.makeText(MainActivity.this, "Your JWT is not valid", Toast.LENGTH_SHORT).show();
+            Toast.makeText(MainActivity.this, "Your JWT is not valid", Toast.LENGTH_LONG).show();
 
             return;
         }
