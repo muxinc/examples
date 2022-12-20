@@ -20,6 +20,8 @@ import com.mux.sdk.webrtc.spaces.Spaces;
 import com.mux.sdk.webrtc.spaces.Track;
 import com.mux.sdk.webrtc.spaces.views.TrackRendererSurfaceView;
 
+import org.webrtc.Camera2Enumerator;
+
 import java.util.HashMap;
 
 public class MainActivity extends AppCompatActivity {
@@ -135,6 +137,20 @@ public class MainActivity extends AppCompatActivity {
         localRenderView = (TrackRendererSurfaceView) findViewById(R.id.activity_main_local_renderer);
 
         space = spaces.getSpace(spaceConfiguration);
+
+        Camera2Enumerator camera2Enumerator = new Camera2Enumerator(this);
+        String [] cameraNames = camera2Enumerator.getDeviceNames();
+
+        String rearFacingCamera = null;
+        for(String camera: cameraNames) {
+            if (rearFacingCamera == null && camera2Enumerator.isBackFacing(camera)) {
+                rearFacingCamera = camera;
+            }
+        }
+
+        if(rearFacingCamera != null) {
+            space.getLocalParticipant().getCameraTrack().setCamera(rearFacingCamera);
+        }
 
         localRenderView.setTrack(space.getLocalParticipant().getCameraTrack());
 
