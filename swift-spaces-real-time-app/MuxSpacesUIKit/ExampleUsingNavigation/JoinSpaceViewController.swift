@@ -14,9 +14,7 @@ class JoinSpaceViewController: UIViewController {
 
     var controlsStackView: UIStackView = UIStackView()
 
-    var joinSpaceButton: UIButton = UIButton(
-        configuration: .filled()
-    )
+    var joinSpaceButton: UIButton = UIButton()
 
     var audioLabel: UILabel = UILabel()
     var audioToggle: UISwitch = UISwitch()
