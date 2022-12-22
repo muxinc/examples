@@ -97,7 +97,7 @@ class JoinSpaceViewController: UIViewController {
             for: .normal
         )
         joinSpaceButton.setTitleColor(
-            .white,
+            .systemBlue,
             for: .normal
         )
         joinSpaceButton.titleLabel?.textAlignment = .center
