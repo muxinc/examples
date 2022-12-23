@@ -18,7 +18,7 @@ extension ParticipantsViewModel: SpaceController {
 
         space
             .events
-            .joinSuccesses
+            .joinSuccess
             .sink { [weak self] _ in
                 guard let self = self else {
                     return
@@ -32,7 +32,7 @@ extension ParticipantsViewModel: SpaceController {
             /// Joining a space successfully triggers a
             /// placeholder cell to be added for the local participant
             space.events
-                .joinSuccesses
+                .joinSuccess
                 .map(\.localParticipant.id),
             /// Participant joined events trigger a new
             /// cell to be added for each new participant
@@ -42,24 +42,24 @@ extension ParticipantsViewModel: SpaceController {
             /// When the SDK subscribes to a new video track,
             /// the participants video becomes available to display
             space.events
-                .videoTrackSubscriptions
+                .videoTrackSubscribed
                 .map(\.participant.id),
             /// When the SDK unsubscribes from a video track,
             /// the participants video should be taken down
             /// this update is handled in ParticipantsViewModel
             space.events
-                .videoTrackUnsubscriptions
+                .videoTrackUnsubscribed
                 .map(\.participant.id),
             // We only want to know when our own tracks are
             // published
             space.events
-                .videoTrackPublications
+                .videoTrackPublished
                 .filter { $0.participant.isLocal }
                 .map(\.participant.id),
             // We only want to know when our own tracks are
             // published
             space.events
-                .videoTrackUnpublications
+                .videoTrackUnpublished
                 .filter { $0.participant.isLocal }
                 .map(\.participant.id)
         )

@@ -10,29 +10,6 @@ import UIKit
 
 class ParticipantLayout: UICollectionViewCompositionalLayout {
 
-    static func computeParticipantCellSize(
-        fitting rect: CGRect,
-        respecting aspectRatio: CGSize
-    ) -> CGRect {
-
-        let insetRect = rect.inset(
-                by: UIEdgeInsets(
-                    top: 5,
-                    left: 5,
-                    bottom: 5,
-                    right: 5
-                )
-            )
-
-        return AVMakeRect(
-            aspectRatio: CGSize(
-                width: 16,
-                height: 9
-            ),
-            insideRect: insetRect
-        )
-    }
-
     static func make() -> UICollectionViewCompositionalLayout {
         return UICollectionViewCompositionalLayout { (sectionIdentifier: Int, env: NSCollectionLayoutEnvironment) in
 
@@ -54,20 +31,24 @@ class ParticipantLayout: UICollectionViewCompositionalLayout {
                     height: 9
                 )
 
-                let cellRectRespectingAspectRatio = computeParticipantCellSize(
-                    fitting: CGRect(
+                let rectRespectingAspectRatio = AVMakeRect(
+                    aspectRatio: aspectRatio,
+                    insideRect: CGRect(
                         origin: .zero,
                         size: contentSizeSplitIntoQuarters
-                    ),
-                    respecting: aspectRatio
+                    ).inset(
+                        by: UIEdgeInsets(
+                            top: 5, left: 5, bottom: 5, right: 5
+                        )
+                    )
                 )
 
                 let itemSize = NSCollectionLayoutSize(
                     widthDimension: .absolute(
-                        cellRectRespectingAspectRatio.width
+                        rectRespectingAspectRatio.width
                     ),
                     heightDimension: .absolute(
-                        cellRectRespectingAspectRatio.height
+                        rectRespectingAspectRatio.height
                     )
                 )
                 let item = NSCollectionLayoutItem(
@@ -83,7 +64,7 @@ class ParticipantLayout: UICollectionViewCompositionalLayout {
                 let groupSize = NSCollectionLayoutSize(
                     widthDimension: .fractionalWidth(1.0),
                     heightDimension: .absolute(
-                        (cellRectRespectingAspectRatio.height)
+                        (rectRespectingAspectRatio.height)
                     )
                 )
                 let group = NSCollectionLayoutGroup.horizontal(
