@@ -19,6 +19,7 @@ Get to know Mux by looking through examples! Contributions are always welcome, e
 | [nextjs-mdx-player](nextjs-mdx-player)                      | A [Next.js](https://nextjs.org/) app configured to support [MDX](https://mdxjs.com) to illustrate supporting [MuxPlayer](https://www.mux.com/player) in blog posts. | VOD, CMS | JavaScript |
 | [swift-spaces-real-time-app](swift-spaces-real-time-app)    | An example iOS and iPadOS app demonstrating usage of the Spaces Swift SDK for real-time                                                                                       | Real-time, Mobile     | Swift      |
 | [android-spaces-real-time-app](android-spaces-real-time-app)| An example Android app demonstrating usage of the Spaces Android SDK for real-time                                                                                            | Real-time, Mobile     | Java       |
+| [mux-player-ember](mux-player-emberer)                      | An [ember](https://emberjs.com/) app with [MuxPlayer](https://www.mux.com/player) installed.                                                                                  | VOD                   | JavaScript |
 
 ## Examples in the wild
 
