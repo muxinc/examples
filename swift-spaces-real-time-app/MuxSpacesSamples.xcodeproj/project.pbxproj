@@ -29,7 +29,6 @@
 		197FAB3F2934082200684753 /* SpaceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 197FAB3E2934082200684753 /* SpaceViewController.swift */; };
 		19980F462936F97600700E81 /* SpaceViewModel+SpaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19980F452936F97600700E81 /* SpaceViewModel+SpaceController.swift */; };
 		19980F482936FB2500700E81 /* SpaceParticipantVideoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19980F472936FB2500700E81 /* SpaceParticipantVideoCell.swift */; };
-		19980F4B2938212400700E81 /* MuxSpaces in Frameworks */ = {isa = PBXBuildFile; productRef = 19980F4A2938212400700E81 /* MuxSpaces */; };
 		19C9B60B2935DDC000102BB3 /* ParticipantsViewModel+SpaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 190AA39128CAC56F004A1DFA /* ParticipantsViewModel+SpaceController.swift */; };
 		19C9B6142936B9BC00102BB3 /* SpaceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19C9B6132936B9BC00102BB3 /* SpaceViewModel.swift */; };
 		19DAD077290D1DDA004B4686 /* ProcessInfo+EnvironmentVariables.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19DAD076290D1DDA004B4686 /* ProcessInfo+EnvironmentVariables.swift */; };
@@ -102,7 +101,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				19980F4B2938212400700E81 /* MuxSpaces in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -256,7 +254,6 @@
 			);
 			name = MuxSpacesUIKit;
 			packageProductDependencies = (
-				19980F4A2938212400700E81 /* MuxSpaces */,
 			);
 			productName = MuxSpacesUIKit;
 			productReference = 1920842C287C6F2300D03362 /* MuxSpacesUIKit.app */;
@@ -331,7 +328,6 @@
 			);
 			mainGroup = 192083EC287C6F0000D03362;
 			packageReferences = (
-				19980F492938212400700E81 /* XCRemoteSwiftPackageReference "mux-spaces-sdk-swift-distribution" */,
 			);
 			productRefGroup = 192083F6287C6F0000D03362 /* Products */;
 			projectDirPath = "";
@@ -570,7 +566,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = XX95P4Y787;
 				ENABLE_BITCODE = NO;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -588,7 +584,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.1.0;
+				MARKETING_VERSION = 0.2.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.mux.MuxSpacesUIKit;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -603,7 +599,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = XX95P4Y787;
 				ENABLE_BITCODE = NO;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -621,7 +617,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.1.0;
+				MARKETING_VERSION = 0.2.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.mux.MuxSpacesUIKit;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -746,25 +742,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCRemoteSwiftPackageReference section */
-		19980F492938212400700E81 /* XCRemoteSwiftPackageReference "mux-spaces-sdk-swift-distribution" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/muxinc/mux-spaces-sdk-swift-distribution";
-			requirement = {
-				branch = main;
-				kind = branch;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		19980F4A2938212400700E81 /* MuxSpaces */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 19980F492938212400700E81 /* XCRemoteSwiftPackageReference "mux-spaces-sdk-swift-distribution" */;
-			productName = MuxSpaces;
-		};
-/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 192083ED287C6F0000D03362 /* Project object */;
 }
