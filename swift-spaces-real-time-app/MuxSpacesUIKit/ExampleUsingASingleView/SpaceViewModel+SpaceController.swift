@@ -11,14 +11,6 @@ import Foundation
 import MuxSpaces
 
 extension SpaceViewModel: SpaceController {
-    var audioCaptureOptions: MuxSpaces.AudioCaptureOptions? {
-        return AudioCaptureOptions()
-    }
-
-    var cameraCaptureOptions: MuxSpaces.CameraCaptureOptions? {
-        return CameraCaptureOptions()
-    }
-
     // MARK: - Setup Observers on Space State Updates
 
     func setupEventHandlers() -> Set<AnyCancellable> {

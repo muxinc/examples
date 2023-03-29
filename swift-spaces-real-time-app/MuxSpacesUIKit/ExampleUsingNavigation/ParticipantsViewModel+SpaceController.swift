@@ -86,6 +86,15 @@ extension ParticipantsViewModel: SpaceController {
             })
             .store(in: &cancellables)
 
+        space.events
+            .audioTrackSubscribed
+            .sink { event in
+                var trackState = self.trackState
+                trackState.audioTracks.append(event.track)
+                self.trackState = trackState
+            }
+            .store(in: &cancellables)
+
         return cancellables
     }
 

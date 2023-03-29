@@ -99,6 +99,13 @@ class ParticipantsViewController: UIViewController {
         // We're all setup, lets join the space!
         let viewModelCancellables = viewModel.joinSpace()
         cancellables.formUnion(viewModelCancellables)
+
+        viewModel
+            .$trackState
+            .sink { trackState in
+                actionsBarButton.menu = self.publishingActionsMenu()
+            }
+            .store(in: &cancellables)
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -110,7 +117,7 @@ class ParticipantsViewController: UIViewController {
 
     var isAudioMuted: Bool = false {
         didSet {
-            guard let track = self.viewModel.publishedAudioTrack else {
+            guard let track = self.viewModel.trackState.publishedAudioTrack else {
                 print("No audio track")
                 return
             }
@@ -126,7 +133,7 @@ class ParticipantsViewController: UIViewController {
     var isVideoMuted: Bool = false {
         didSet {
 
-            guard let track = self.viewModel.publishedVideoTrack else {
+            guard let track = self.viewModel.trackState.publishedVideoTrack else {
                 print("No video track")
                 return
             }
@@ -197,16 +204,40 @@ class ParticipantsViewController: UIViewController {
             }
         )
 
+        var actions = [
+            toggleAudioMuteAction,
+            toggleVideoMuteAction,
+            unpublishAllTracksAction
+        ]
+
+        for remoteAudioTrack in viewModel.trackState.audioTracks {
+            let silenceAction = UIAction(
+                title: "Silence Track \(remoteAudioTrack.name)"
+            ) { [weak self] _ in
+                guard let self = self else { return }
+                self.viewModel.space.silence(
+                    remoteAudioTrack
+                )
+            }
+            actions.append(silenceAction)
+
+            let unsilenceAction = UIAction(
+                title: "Unsilence Track \(remoteAudioTrack.name)"
+            ) { [weak self] _ in
+                guard let self = self else { return }
+                self.viewModel.space.unsilence(
+                    remoteAudioTrack
+                )
+            }
+            actions.append(unsilenceAction)
+        }
+
         return UIMenu(
             title: NSLocalizedString(
                 "Participant Actions",
                 comment: "Participant actions menu title"
             ),
-            children: [
-                toggleAudioMuteAction,
-                toggleVideoMuteAction,
-                unpublishAllTracksAction
-            ]
+            children: actions
         )
     }
 }

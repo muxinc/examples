@@ -10,17 +10,26 @@ import UIKit
 
 import MuxSpaces
 
+struct TrackState {
+    var publishedAudioTrack: AudioTrack?
+    var publishedVideoTrack: VideoTrack?
+
+    var audioCaptureOptions: AudioCaptureOptions?
+    var cameraCaptureOptions: CameraCaptureOptions?
+
+    var audioTracks: [AudioTrack] = []
+}
+
 class ParticipantsViewModel {
     
     var space: Space
 
     @Published var snapshot: ParticipantsSnapshot
 
-    var publishedAudioTrack: AudioTrack?
-    var publishedVideoTrack: VideoTrack?
-
-    var audioCaptureOptions: AudioCaptureOptions?
-    var cameraCaptureOptions: CameraCaptureOptions?
+    @Published var trackState = TrackState(
+        audioCaptureOptions: AudioCaptureOptions(),
+        cameraCaptureOptions: CameraCaptureOptions()
+    )
 
     var errorHandler: (Error?) -> () = { _ in }
 
@@ -32,10 +41,10 @@ class ParticipantsViewModel {
         cameraCaptureOptions: CameraCaptureOptions?
     ) {
         self.space = space
-        self.audioCaptureOptions = audioCaptureOptions
-        self.cameraCaptureOptions = cameraCaptureOptions
-
         self.snapshot = ParticipantsSnapshot.makeEmpty()
+        
+        self.trackState.audioCaptureOptions = audioCaptureOptions
+        self.trackState.cameraCaptureOptions = cameraCaptureOptions
     }
 
     func configureUpdates(

@@ -32,6 +32,13 @@ class SpaceViewModel {
 
     @Published var shouldDisplayError: Error? = nil
 
+    // MARK: Track State
+    
+    var trackState = TrackState(
+        audioCaptureOptions: AudioCaptureOptions(),
+        cameraCaptureOptions: CameraCaptureOptions()
+    )
+
     // MARK: Space
 
     /// The space the app is joining

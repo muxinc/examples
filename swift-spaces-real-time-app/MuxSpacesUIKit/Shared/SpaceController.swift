@@ -14,11 +14,7 @@ import MuxSpaces
 protocol SpaceController: AnyObject {
     var space: Space { get }
 
-    var publishedAudioTrack: AudioTrack? { get set }
-    var publishedVideoTrack: VideoTrack? { get set }
-
-    var audioCaptureOptions: AudioCaptureOptions? { get }
-    var cameraCaptureOptions: CameraCaptureOptions? { get }
+    var trackState: TrackState { get set }
 
     func setupEventHandlers() -> Set<AnyCancellable>
 
@@ -56,8 +52,8 @@ extension SpaceController {
 
     func leaveSpace() {
 
-        self.publishedAudioTrack = nil
-        self.publishedVideoTrack = nil
+        self.trackState.publishedAudioTrack = nil
+        self.trackState.publishedVideoTrack = nil
 
         /// Calling `leave` will unpublish your local tracks
         /// and tear down any open space connections
@@ -70,7 +66,7 @@ extension SpaceController {
 
     func publishAudioIfNeeded() {
 
-        guard let audioCaptureOptions else {
+        guard let audioCaptureOptions = trackState.audioCaptureOptions else {
             print("Skipping publishing an audio track")
             return
         }
@@ -86,15 +82,16 @@ extension SpaceController {
             guard let self = self else { return }
 
             guard error == nil else {
+                print("Error publishing audio track")
                 return
             }
 
-            self.publishedAudioTrack = audioTrack
+            self.trackState.publishedAudioTrack = audioTrack
         }
     }
 
     func unpublishAudio() {
-        guard let publishedAudioTrack else {
+        guard let publishedAudioTrack = trackState.publishedAudioTrack else {
             return
         }
 
@@ -105,7 +102,7 @@ extension SpaceController {
 
     func publishVideoIfNeeded() {
 
-        guard let cameraCaptureOptions else {
+        guard let cameraCaptureOptions = trackState.cameraCaptureOptions else {
             print("Skipping publishing a video track")
             return
         }
@@ -116,17 +113,23 @@ extension SpaceController {
 
         space.publishTrack(
             videoTrack
-        ) { (error: VideoTrack.PublishError?) in
-            guard error == nil else {
+        ) { [weak self] (error: VideoTrack.PublishError?) in
+
+            guard let self = self else {
                 return
             }
 
-            self.publishedVideoTrack = videoTrack
+            guard error == nil else {
+                print("Error publishing video track")
+                return
+            }
+
+            self.trackState.publishedVideoTrack = videoTrack
         }
     }
 
     func unpublishVideo() {
-        guard let publishedVideoTrack else {
+        guard let publishedVideoTrack = trackState.publishedVideoTrack else {
             return
         }
 
