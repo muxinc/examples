@@ -237,7 +237,6 @@ public class MainActivity extends Activity {
 
         try {
             spaceConfiguration = SpaceConfiguration.newBuilder()
-                    .setSignalsHost("wss://spaces.staging.mux.com")
                     .setJWT(jwt)
                     .build();
         } catch (Exception e) {
