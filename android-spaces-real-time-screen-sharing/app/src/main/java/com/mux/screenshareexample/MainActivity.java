@@ -140,6 +140,7 @@ public class MainActivity extends Activity {
             builder = new Notification.Builder(this, channel.getId());
         } else {
             builder = new Notification.Builder(this);
+            builder.setPriority(Notification.PRIORITY_DEFAULT);
         }
 
         // For this to work the launchMode of MainActivity must be set to "singleTop" in AndroidManifest.xml
@@ -151,8 +152,7 @@ public class MainActivity extends Activity {
 
         // The setSmallIcon is necessary or the operating system will silently disregard the notification, and so the whole screen sharing request
         // setOngoing ensures the user can't remove the notification while screensharing
-        builder.setPriority(Notification.PRIORITY_DEFAULT)
-                .setContentIntent(pendingIntent)
+        builder.setContentIntent(pendingIntent)
                 .setSmallIcon(R.mipmap.ic_launcher)
                 .setOngoing(true)
                 .setContentTitle("Mux Spaces SDK Screen sharing example")
