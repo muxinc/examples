@@ -32,12 +32,12 @@
 		193676762935CD2300A9DDFB /* SpaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 193676752935CD2300A9DDFB /* SpaceController.swift */; };
 		1955AF4F28B856BC00E20ACD /* TargetAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1955AF4E28B856BC00E20ACD /* TargetAction.swift */; };
 		1955AF5128B856E000E20ACD /* UserDefaultsKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1955AF5028B856E000E20ACD /* UserDefaultsKeys.swift */; };
-		196DA7A829CD0A5400F1A685 /* ParticipantVideoViewItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 196DA7A729CD0A5400F1A685 /* ParticipantVideoViewItem.swift */; };
 		197FAB3D2934066600684753 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 197FAB3C2934066600684753 /* WelcomeViewController.swift */; };
 		197FAB3F2934082200684753 /* SpaceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 197FAB3E2934082200684753 /* SpaceViewController.swift */; };
 		19980F462936F97600700E81 /* SpaceViewModel+SpaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19980F452936F97600700E81 /* SpaceViewModel+SpaceController.swift */; };
 		19980F482936FB2500700E81 /* SpaceParticipantVideoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19980F472936FB2500700E81 /* SpaceParticipantVideoCell.swift */; };
 		19A120D029D51DE200C2FE64 /* ParticipantViewItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19A120CF29D51DE200C2FE64 /* ParticipantViewItem.swift */; };
+		19A120D329D51FA600C2FE64 /* MuxSpaces in Frameworks */ = {isa = PBXBuildFile; productRef = 19A120D229D51FA600C2FE64 /* MuxSpaces */; };
 		19C9B60B2935DDC000102BB3 /* ParticipantsViewModel+SpaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 190AA39128CAC56F004A1DFA /* ParticipantsViewModel+SpaceController.swift */; };
 		19C9B6142936B9BC00102BB3 /* SpaceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19C9B6132936B9BC00102BB3 /* SpaceViewModel.swift */; };
 		19DAD077290D1DDA004B4686 /* ProcessInfo+EnvironmentVariables.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19DAD076290D1DDA004B4686 /* ProcessInfo+EnvironmentVariables.swift */; };
@@ -125,7 +125,6 @@
 		193676752935CD2300A9DDFB /* SpaceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpaceController.swift; sourceTree = "<group>"; };
 		1955AF4E28B856BC00E20ACD /* TargetAction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TargetAction.swift; sourceTree = "<group>"; };
 		1955AF5028B856E000E20ACD /* UserDefaultsKeys.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDefaultsKeys.swift; sourceTree = "<group>"; };
-		196DA7A729CD0A5400F1A685 /* ParticipantVideoViewItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParticipantVideoViewItem.swift; sourceTree = "<group>"; };
 		197FAB3C2934066600684753 /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		197FAB3E2934082200684753 /* SpaceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpaceViewController.swift; sourceTree = "<group>"; };
 		19980F452936F97600700E81 /* SpaceViewModel+SpaceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SpaceViewModel+SpaceController.swift"; sourceTree = "<group>"; };
@@ -164,6 +163,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				19A120D329D51FA600C2FE64 /* MuxSpaces in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -303,7 +303,6 @@
 			isa = PBXGroup;
 			children = (
 				19208474287C74AF00D03362 /* ParticipantsSnapshot.swift */,
-				196DA7A729CD0A5400F1A685 /* ParticipantVideoViewItem.swift */,
 			);
 			path = ParticipantsSnapshot;
 			sourceTree = "<group>";
@@ -417,6 +416,7 @@
 			);
 			name = MuxSpacesUIKit;
 			packageProductDependencies = (
+				19A120D229D51FA600C2FE64 /* MuxSpaces */,
 			);
 			productName = MuxSpacesUIKit;
 			productReference = 1920842C287C6F2300D03362 /* MuxSpacesUIKit.app */;
@@ -502,6 +502,7 @@
 			);
 			mainGroup = 192083EC287C6F0000D03362;
 			packageReferences = (
+				19A120D129D51FA600C2FE64 /* XCRemoteSwiftPackageReference "mux-spaces-sdk-swift-distribution" */,
 			);
 			productRefGroup = 192083F6287C6F0000D03362 /* Products */;
 			projectDirPath = "";
@@ -612,7 +613,6 @@
 				19C9B6142936B9BC00102BB3 /* SpaceViewModel.swift in Sources */,
 				190AA39028CAC499004A1DFA /* ParticipantLayout.swift in Sources */,
 				1955AF5128B856E000E20ACD /* UserDefaultsKeys.swift in Sources */,
-				196DA7A829CD0A5400F1A685 /* ParticipantVideoViewItem.swift in Sources */,
 				190B42A0287D190300A681F2 /* ParticipantsViewModel.swift in Sources */,
 				1920842F287C6F2300D03362 /* AppDelegate.swift in Sources */,
 				19DAD077290D1DDA004B4686 /* ProcessInfo+EnvironmentVariables.swift in Sources */,
@@ -1171,6 +1171,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		19A120D129D51FA600C2FE64 /* XCRemoteSwiftPackageReference "mux-spaces-sdk-swift-distribution" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/muxinc/mux-spaces-sdk-swift-distribution";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		19A120D229D51FA600C2FE64 /* MuxSpaces */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 19A120D129D51FA600C2FE64 /* XCRemoteSwiftPackageReference "mux-spaces-sdk-swift-distribution" */;
+			productName = MuxSpaces;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 192083ED287C6F0000D03362 /* Project object */;
 }
