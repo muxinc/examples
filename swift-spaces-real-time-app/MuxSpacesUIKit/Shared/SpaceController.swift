@@ -14,7 +14,11 @@ import MuxSpaces
 protocol SpaceController: AnyObject {
     var space: Space { get }
 
-    var trackState: TrackState { get set }
+    var audioCaptureOptions: AudioCaptureOptions? { get set }
+    var cameraCaptureOptions: CameraCaptureOptions? { get set }
+
+    var publishedAudioTrack: AudioTrack? { get set }
+    var publishedVideoTrack: VideoTrack? { get set }
 
     func setupEventHandlers() -> Set<AnyCancellable>
 
@@ -52,8 +56,8 @@ extension SpaceController {
 
     func leaveSpace() {
 
-        self.trackState.publishedAudioTrack = nil
-        self.trackState.publishedVideoTrack = nil
+        self.publishedAudioTrack = nil
+        self.publishedVideoTrack = nil
 
         /// Calling `leave` will unpublish your local tracks
         /// and tear down any open space connections
@@ -66,7 +70,7 @@ extension SpaceController {
 
     func publishAudioIfNeeded() {
 
-        guard let audioCaptureOptions = trackState.audioCaptureOptions else {
+        guard let audioCaptureOptions else {
             print("Skipping publishing an audio track")
             return
         }
@@ -86,12 +90,12 @@ extension SpaceController {
                 return
             }
 
-            self.trackState.publishedAudioTrack = audioTrack
+            self.publishedAudioTrack = audioTrack
         }
     }
 
     func unpublishAudio() {
-        guard let publishedAudioTrack = trackState.publishedAudioTrack else {
+        guard let publishedAudioTrack else {
             return
         }
 
@@ -102,7 +106,7 @@ extension SpaceController {
 
     func publishVideoIfNeeded() {
 
-        guard let cameraCaptureOptions = trackState.cameraCaptureOptions else {
+        guard let cameraCaptureOptions else {
             print("Skipping publishing a video track")
             return
         }
@@ -124,12 +128,12 @@ extension SpaceController {
                 return
             }
 
-            self.trackState.publishedVideoTrack = videoTrack
+            self.publishedVideoTrack = videoTrack
         }
     }
 
     func unpublishVideo() {
-        guard let publishedVideoTrack = trackState.publishedVideoTrack else {
+        guard let publishedVideoTrack else {
             return
         }
 

@@ -68,9 +68,15 @@ class SpaceViewController: UIViewController {
 
     // MARK: UI Setup
 
-    lazy var dataSource: ParticipantsDataSource = setupParticipantsDataSource()
+    lazy var dataSource: UICollectionViewDiffableDataSource<
+        Section,
+            Participant.ID
+    > = setupParticipantsDataSource()
 
-    func setupParticipantsDataSource() -> ParticipantsDataSource {
+    func setupParticipantsDataSource() -> UICollectionViewDiffableDataSource<
+        Section,
+            Participant.ID
+    > {
         let participantVideoCellRegistration = UICollectionView
             .CellRegistration<
                 SpaceParticipantVideoCell,
@@ -79,7 +85,10 @@ class SpaceViewController: UIViewController {
             handler: viewModel.configureSpaceParticipantVideo(_:indexPath:participantID:)
         )
 
-        let dataSource = ParticipantsDataSource(
+        let dataSource = UICollectionViewDiffableDataSource<
+            Section,
+                Participant.ID
+        >(
             collectionView: participantsView
         ) { (collectionView: UICollectionView, indexPath: IndexPath, item: Participant.ID) -> UICollectionViewCell? in
             return collectionView.dequeueConfiguredReusableCell(
@@ -98,7 +107,8 @@ class SpaceViewController: UIViewController {
         participantsView.isHidden = true
 
         viewModel
-            .setupSnapshotUpdates(for: dataSource)
+            .$snapshot
+            .sink { self.dataSource.apply($0) }
             .store(in: &cancellables)
 
         participantsView.setCollectionViewLayout(

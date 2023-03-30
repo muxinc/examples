@@ -10,28 +10,34 @@ import UIKit
 
 import MuxSpaces
 
-struct TrackState {
-    var publishedAudioTrack: AudioTrack?
-    var publishedVideoTrack: VideoTrack?
-
-    var audioCaptureOptions: AudioCaptureOptions?
-    var cameraCaptureOptions: CameraCaptureOptions?
-
-    var audioTracks: [AudioTrack] = []
-}
-
 class ParticipantsViewModel {
     
     var space: Space
 
+    @Published var participantItems: [Participant.ID: ParticipantVideoViewItem] = [:] {
+        didSet {
+            snapshot = recomputeSnapshot()
+        }
+    }
+
     @Published var snapshot: ParticipantsSnapshot
 
-    @Published var trackState = TrackState(
-        audioCaptureOptions: AudioCaptureOptions(),
-        cameraCaptureOptions: CameraCaptureOptions()
-    )
+    var localParticipant: Participant? {
+        participantItems.values.first {
+            $0.participant.isLocal
+        }?.participant
+    }
 
-    var errorHandler: (Error?) -> () = { _ in }
+    @Published var publishedAudioTrack: AudioTrack?
+    @Published var publishedVideoTrack: VideoTrack?
+
+    @Published var audioCaptureOptions: AudioCaptureOptions?
+    @Published var cameraCaptureOptions: CameraCaptureOptions?
+
+    @Published var frontFacingCamera: Bool = true
+
+    @Published var audioPublishError: AudioTrack.PublishError?
+    @Published var videoPublishError: VideoTrack.PublishError?
 
     // MARK: - Initialization
 
@@ -43,56 +49,47 @@ class ParticipantsViewModel {
         self.space = space
         self.snapshot = ParticipantsSnapshot.makeEmpty()
         
-        self.trackState.audioCaptureOptions = audioCaptureOptions
-        self.trackState.cameraCaptureOptions = cameraCaptureOptions
+        self.audioCaptureOptions = audioCaptureOptions
+        self.cameraCaptureOptions = cameraCaptureOptions
     }
 
-    func configureUpdates(
+    func joinAndConfigureUpdates(
         for dataSource: ParticipantsDataSource
     ) -> AnyCancellable {
+        space.join()
+
         return $snapshot
             .sink { dataSource.apply($0) }
     }
 
-    // MARK: - Update Participant Cell State
+    func recomputeSnapshot() -> ParticipantsSnapshot {
+        var snapshot = ParticipantsSnapshot()
 
-    func participant(
-        from participantID: Participant.ID
-    ) -> Participant? {
-        if let localParticipant = space.localParticipant {
-            return (
-                [localParticipant] + space.remoteParticipants
-            ).filter { $0.id == participantID }.first
-        } else {
-            return space.remoteParticipants
-                .filter { $0.id == participantID }.first
-        }
+        snapshot.appendSections(
+            [.participants]
+        )
+
+        snapshot.appendItems(
+            Array(participantItems.values),
+            toSection: .participants
+        )
+
+        return snapshot
     }
+
+    // MARK: - Update Participant Cell State
 
     func configure(
         _ cell: ParticipantVideoCell,
         indexPath: IndexPath,
-        participantID: Participant.ID
+        participantItem: ParticipantVideoViewItem
     ) {
-        guard let participant = participant(
-            from: participantID
-        ) else {
-            print("No Participant!")
-            return
-        }
-
         cell.setup()
-        cell.contentView.backgroundColor = .black
 
-        if let track = participant.videoTracks.values.first {
-            cell.update(
-                participantID: participant.id,
-                videoTrack: track
-            )
-        } else {
-            cell.update(
-                participantID: participant.id
-            )
-        }
+        cell.update(
+            participantID: participantItem.participant.displayName,
+            videoTrack: participantItem.videoTrack,
+            audioTrack: participantItem.audioTrack
+        )
     }
 }

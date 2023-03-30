@@ -17,8 +17,10 @@ class ParticipantVideoCell: UICollectionViewCell {
     lazy var placeholderView = UILabel()
     lazy var nameIndicator = UILabel()
 
+    lazy var muteIndicator = UIImageView()
+
     var showsPlaceholder: Bool {
-        videoView.track == nil
+        videoView.track == nil || videoView.track?.isMuted == true
     }
 
     override func prepareForReuse() {
@@ -122,9 +124,16 @@ class ParticipantVideoCell: UICollectionViewCell {
 
     func update(
         participantID: String,
-        videoTrack: VideoTrack? = nil
+        videoTrack: VideoTrack? = nil,
+        audioTrack: AudioTrack? = nil
     ) {
-        videoView.track = videoTrack
+        if let videoTrack {
+            videoView.track = videoTrack.hasMedia ? videoTrack : nil
+        }
+
+        if let audioTrack {
+            muteIndicator.isHidden = !audioTrack.isMuted
+        }
 
         if showsPlaceholder {
             /// Show black background with participant ID

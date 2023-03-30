@@ -43,14 +43,6 @@ class ParticipantsViewController: UIViewController {
             collectionViewLayout: ParticipantLayout.make()
         )
         super.init(nibName: nil, bundle: nil)
-        self.viewModel.errorHandler = { [weak self] _ in
-
-            guard let self = self else { return }
-
-            self.navigationController?.popViewController(
-                animated: true
-            )
-        }
     }
 
     // MARK: - View Lifecycle
@@ -62,14 +54,18 @@ class ParticipantsViewController: UIViewController {
 
         let participantVideoCellRegistration = UICollectionView.CellRegistration<
             ParticipantVideoCell,
-                Participant.ID
-        >(
-            handler: viewModel.configure(_:indexPath:participantID:)
-        )
+                ParticipantVideoViewItem
+        > { cell, indexPath, itemIdentifier in
+            self.viewModel.configure(
+                cell,
+                indexPath: indexPath,
+                participantItem: itemIdentifier
+            )
+        }
 
         let dataSource = ParticipantsDataSource(
             collectionView: participantsView
-        ) { (collectionView: UICollectionView, indexPath: IndexPath, item: Participant.ID) -> UICollectionViewCell? in
+        ) { (collectionView: UICollectionView, indexPath: IndexPath, item: ParticipantVideoViewItem) -> UICollectionViewCell? in
             return collectionView.dequeueConfiguredReusableCell(
                 using: participantVideoCellRegistration,
                 for: indexPath,
@@ -80,10 +76,6 @@ class ParticipantsViewController: UIViewController {
         participantsView.dataSource = dataSource
 
         self.dataSource = dataSource
-
-        viewModel
-            .configureUpdates(for: dataSource)
-            .store(in: &cancellables)
 
         let menu = publishingActionsMenu()
 
@@ -96,12 +88,21 @@ class ParticipantsViewController: UIViewController {
         actionsBarButton.menu = menu
         navigationItem.rightBarButtonItem = actionsBarButton
 
-        // We're all setup, lets join the space!
-        let viewModelCancellables = viewModel.joinSpace()
-        cancellables.formUnion(viewModelCancellables)
+        viewModel
+            .space
+            .events
+            .all
+            .sink { event in
+                self.viewModel.handle(event: event)
+            }
+            .store(in: &cancellables)
 
         viewModel
-            .$trackState
+            .joinAndConfigureUpdates(for: dataSource)
+            .store(in: &cancellables)
+
+        viewModel
+            .$participantItems
             .sink { trackState in
                 actionsBarButton.menu = self.publishingActionsMenu()
             }
@@ -109,7 +110,7 @@ class ParticipantsViewController: UIViewController {
     }
 
     override func viewWillDisappear(_ animated: Bool) {
-        self.viewModel.leaveSpace()
+        self.viewModel.space.leave()
         self.cancellables.forEach { $0.cancel() }
         self.dataSource = nil
         super.viewWillDisappear(animated)
@@ -117,7 +118,7 @@ class ParticipantsViewController: UIViewController {
 
     var isAudioMuted: Bool = false {
         didSet {
-            guard let track = self.viewModel.trackState.publishedAudioTrack else {
+            guard let track = self.viewModel.publishedAudioTrack else {
                 print("No audio track")
                 return
             }
@@ -133,7 +134,7 @@ class ParticipantsViewController: UIViewController {
     var isVideoMuted: Bool = false {
         didSet {
 
-            guard let track = self.viewModel.trackState.publishedVideoTrack else {
+            guard let track = self.viewModel.publishedVideoTrack else {
                 print("No video track")
                 return
             }
@@ -210,7 +211,7 @@ class ParticipantsViewController: UIViewController {
             unpublishAllTracksAction
         ]
 
-        for remoteAudioTrack in viewModel.trackState.audioTracks {
+        for remoteAudioTrack in viewModel.participantItems.flatMap({ (key: Participant.ID, value: ParticipantVideoViewItem) in value.participant.audioTracks.values }) {
             let silenceAction = UIAction(
                 title: "Silence Track \(remoteAudioTrack.name)"
             ) { [weak self] _ in
