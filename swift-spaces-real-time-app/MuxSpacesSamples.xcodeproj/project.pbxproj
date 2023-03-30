@@ -41,6 +41,10 @@
 		19C9B60B2935DDC000102BB3 /* ParticipantsViewModel+SpaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 190AA39128CAC56F004A1DFA /* ParticipantsViewModel+SpaceController.swift */; };
 		19C9B6142936B9BC00102BB3 /* SpaceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19C9B6132936B9BC00102BB3 /* SpaceViewModel.swift */; };
 		19DAD077290D1DDA004B4686 /* ProcessInfo+EnvironmentVariables.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19DAD076290D1DDA004B4686 /* ProcessInfo+EnvironmentVariables.swift */; };
+		6F11C41229D5173400939E8E /* ProcessInfo+EnvironmentVariables.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19DAD076290D1DDA004B4686 /* ProcessInfo+EnvironmentVariables.swift */; };
+		6F11C41429D5174F00939E8E /* SpaceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F11C41329D5174F00939E8E /* SpaceModel.swift */; };
+		6F11C41729D5177100939E8E /* SpacesVideo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F11C41529D5177100939E8E /* SpacesVideo.swift */; };
+		6F11C41829D5177100939E8E /* ParticipantViewItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F11C41629D5177100939E8E /* ParticipantViewItem.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -128,6 +132,9 @@
 		19980F472936FB2500700E81 /* SpaceParticipantVideoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpaceParticipantVideoCell.swift; sourceTree = "<group>"; };
 		19C9B6132936B9BC00102BB3 /* SpaceViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpaceViewModel.swift; sourceTree = "<group>"; };
 		19DAD076290D1DDA004B4686 /* ProcessInfo+EnvironmentVariables.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProcessInfo+EnvironmentVariables.swift"; sourceTree = "<group>"; };
+		6F11C41329D5174F00939E8E /* SpaceModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpaceModel.swift; sourceTree = "<group>"; };
+		6F11C41529D5177100939E8E /* SpacesVideo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpacesVideo.swift; sourceTree = "<group>"; };
+		6F11C41629D5177100939E8E /* ParticipantViewItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParticipantViewItem.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -181,6 +188,9 @@
 			isa = PBXGroup;
 			children = (
 				190715DE29D4B92700F5D7A2 /* SwiftUIExampleApp.swift */,
+				6F11C41629D5177100939E8E /* ParticipantViewItem.swift */,
+				6F11C41529D5177100939E8E /* SpacesVideo.swift */,
+				6F11C41329D5174F00939E8E /* SpaceModel.swift */,
 				190715E029D4B92700F5D7A2 /* ContentView.swift */,
 				190715E229D4B92700F5D7A2 /* Assets.xcassets */,
 				190715E429D4B92700F5D7A2 /* Preview Content */,
@@ -216,6 +226,7 @@
 		192083EC287C6F0000D03362 = {
 			isa = PBXGroup;
 			children = (
+				19C9B6152936BB1600102BB3 /* SpaceSetup */,
 				1920842D287C6F2300D03362 /* MuxSpacesUIKit */,
 				19208444287C6F2400D03362 /* MuxSpacesUIKitTests */,
 				1920844E287C6F2400D03362 /* MuxSpacesUIKitUITests */,
@@ -249,7 +260,6 @@
 				194123842934011500E9EE2A /* ExampleUsingNavigation */,
 				193676742935B41B00A9DDFB /* ParticipantsSnapshot */,
 				19208460287C713E00D03362 /* Shared */,
-				19C9B6152936BB1600102BB3 /* SpaceSetup */,
 				19208434287C6F2300D03362 /* Main.storyboard */,
 				19208437287C6F2300D03362 /* Assets.xcassets */,
 				19208439287C6F2300D03362 /* LaunchScreen.storyboard */,
@@ -563,8 +573,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6F11C41429D5174F00939E8E /* SpaceModel.swift in Sources */,
+				6F11C41229D5173400939E8E /* ProcessInfo+EnvironmentVariables.swift in Sources */,
 				190715E129D4B92700F5D7A2 /* ContentView.swift in Sources */,
+				6F11C41829D5177100939E8E /* ParticipantViewItem.swift in Sources */,
 				190715DF29D4B92700F5D7A2 /* SwiftUIExampleApp.swift in Sources */,
+				6F11C41729D5177100939E8E /* SpacesVideo.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
