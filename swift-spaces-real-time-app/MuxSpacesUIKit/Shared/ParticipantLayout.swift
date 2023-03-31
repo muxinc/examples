@@ -21,8 +21,8 @@ class ParticipantLayout: UICollectionViewCompositionalLayout {
                 /// Split into content area into quarters
                 let contentSizeSplitIntoQuarters = contentSize.applying(
                     CGAffineTransform(
-                        scaleX: 0.5,
-                        y: 0.5
+                        scaleX: 0.9,
+                        y: 0.6
                     )
                 )
 

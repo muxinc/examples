@@ -123,7 +123,7 @@ class ParticipantVideoCell: UICollectionViewCell {
     }
 
     func update(
-        participantID: String,
+        displayName: String,
         videoTrack: VideoTrack? = nil,
         audioTrack: AudioTrack? = nil
     ) {
@@ -138,7 +138,7 @@ class ParticipantVideoCell: UICollectionViewCell {
         if showsPlaceholder {
             /// Show black background with participant ID
             /// displayed inside a centered label
-            placeholderView.text = participantID
+            placeholderView.text = displayName
             nameIndicator.text = ""
             contentView.bringSubviewToFront(placeholderView)
             contentView.sendSubviewToBack(videoView)
@@ -147,7 +147,7 @@ class ParticipantVideoCell: UICollectionViewCell {
             /// Show SpacesVideoView with participant ID on
             /// a semi-translucent bar overlay
             placeholderView.text = ""
-            nameIndicator.text = participantID
+            nameIndicator.text = displayName
             contentView.bringSubviewToFront(videoView)
             contentView.bringSubviewToFront(nameIndicator)
         }

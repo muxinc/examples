@@ -17,16 +17,37 @@ class ParticipantsViewModel {
     @Published var participantItems: [Participant.ID: ParticipantVideoViewItem] = [:] {
         didSet {
             snapshot = recomputeSnapshot()
+            localParticipant = participantItems.first(
+                where: { keyValue in
+                    keyValue.value.participant.isLocal
+                }
+            )?.value.participant
+            print(publishedAudioTrack)
+            publishedAudioTrack = participantItems.first(
+                where: { keyValue in
+                    keyValue.value.participant.isLocal
+                }
+            )?.value.participant.audioTracks.values.first(
+                where: { track in
+                    track.source == .microphone
+                }
+            )
+            print(publishedAudioTrack)
+            publishedVideoTrack = participantItems.first(
+                where: { keyValue in
+                    keyValue.value.participant.isLocal
+                }
+            )?.value.participant.videoTracks.values.first(
+                where: { track in
+                    track.source == .camera
+                }
+            )
         }
     }
 
     @Published var snapshot: ParticipantsSnapshot
 
-    var localParticipant: Participant? {
-        participantItems.values.first {
-            $0.participant.isLocal
-        }?.participant
-    }
+    @Published var localParticipant: Participant?
 
     @Published var publishedAudioTrack: AudioTrack?
     @Published var publishedVideoTrack: VideoTrack?
@@ -56,10 +77,38 @@ class ParticipantsViewModel {
     func joinAndConfigureUpdates(
         for dataSource: ParticipantsDataSource
     ) -> AnyCancellable {
-        space.join()
+        space.join(
+            options: SpaceOptions(
+                displayName: "UIKitExample"
+            )
+        )
 
         return $snapshot
             .sink { dataSource.apply($0) }
+    }
+
+    func toggleAudioMute() {
+        guard let publishedAudioTrack else {
+            return
+        }
+
+        if publishedAudioTrack.isMuted {
+            space.unmuteTrack(publishedAudioTrack)
+        } else {
+            space.muteTrack(publishedAudioTrack)
+        }
+    }
+
+    func toggleVideoMute() {
+        guard let publishedVideoTrack else {
+            return
+        }
+
+        if publishedVideoTrack.isMuted {
+            space.unmuteTrack(publishedVideoTrack)
+        } else {
+            space.muteTrack(publishedVideoTrack)
+        }
     }
 
     func recomputeSnapshot() -> ParticipantsSnapshot {
@@ -87,7 +136,7 @@ class ParticipantsViewModel {
         cell.setup()
 
         cell.update(
-            participantID: participantItem.participant.displayName,
+            displayName: participantItem.participant.displayName,
             videoTrack: participantItem.videoTrack,
             audioTrack: participantItem.audioTrack
         )

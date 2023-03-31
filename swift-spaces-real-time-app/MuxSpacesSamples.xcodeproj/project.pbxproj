@@ -38,7 +38,6 @@
 		19980F482936FB2500700E81 /* SpaceParticipantVideoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19980F472936FB2500700E81 /* SpaceParticipantVideoCell.swift */; };
 		19A120D029D51DE200C2FE64 /* ParticipantViewItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19A120CF29D51DE200C2FE64 /* ParticipantViewItem.swift */; };
 		19A120DF29D6164800C2FE64 /* ParticipantsViewModel+SpaceEvents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19A120DE29D6164800C2FE64 /* ParticipantsViewModel+SpaceEvents.swift */; };
-		19A120E229D6552300C2FE64 /* MuxSpaces in Frameworks */ = {isa = PBXBuildFile; productRef = 19A120E129D6552300C2FE64 /* MuxSpaces */; };
 		19C9B6142936B9BC00102BB3 /* SpaceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19C9B6132936B9BC00102BB3 /* SpaceViewModel.swift */; };
 		19DAD077290D1DDA004B4686 /* ProcessInfo+EnvironmentVariables.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19DAD076290D1DDA004B4686 /* ProcessInfo+EnvironmentVariables.swift */; };
 		6F11C41229D5173400939E8E /* ProcessInfo+EnvironmentVariables.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19DAD076290D1DDA004B4686 /* ProcessInfo+EnvironmentVariables.swift */; };
@@ -80,6 +79,16 @@
 
 /* Begin PBXCopyFilesBuildPhase section */
 		1920846F287C740800D03362 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		19A120F729D7547100C2FE64 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
@@ -163,7 +172,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				19A120E229D6552300C2FE64 /* MuxSpaces in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -355,12 +363,15 @@
 				190715D829D4B92600F5D7A2 /* Sources */,
 				190715D929D4B92600F5D7A2 /* Frameworks */,
 				190715DA29D4B92600F5D7A2 /* Resources */,
+				19A120F729D7547100C2FE64 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = SwiftUIExample;
+			packageProductDependencies = (
+			);
 			productName = SwiftUIExample;
 			productReference = 190715DC29D4B92600F5D7A2 /* SwiftUIExample.app */;
 			productType = "com.apple.product-type.application";
@@ -416,7 +427,6 @@
 			);
 			name = MuxSpacesUIKit;
 			packageProductDependencies = (
-				19A120E129D6552300C2FE64 /* MuxSpaces */,
 			);
 			productName = MuxSpacesUIKit;
 			productReference = 1920842C287C6F2300D03362 /* MuxSpacesUIKit.app */;
@@ -502,7 +512,6 @@
 			);
 			mainGroup = 192083EC287C6F0000D03362;
 			packageReferences = (
-				19A120E029D6552300C2FE64 /* XCRemoteSwiftPackageReference "mux-spaces-sdk-swift-distribution" */,
 			);
 			productRefGroup = 192083F6287C6F0000D03362 /* Products */;
 			projectDirPath = "";
@@ -1171,25 +1180,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCRemoteSwiftPackageReference section */
-		19A120E029D6552300C2FE64 /* XCRemoteSwiftPackageReference "mux-spaces-sdk-swift-distribution" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/muxinc/mux-spaces-sdk-swift-distribution";
-			requirement = {
-				kind = exactVersion;
-				version = 1.0.0;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		19A120E129D6552300C2FE64 /* MuxSpaces */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 19A120E029D6552300C2FE64 /* XCRemoteSwiftPackageReference "mux-spaces-sdk-swift-distribution" */;
-			productName = MuxSpaces;
-		};
-/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 192083ED287C6F0000D03362 /* Project object */;
 }

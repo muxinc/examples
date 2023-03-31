@@ -113,11 +113,9 @@ extension ParticipantsViewModel {
     func handle(
         event: Space.Event.AudioTrackMutedEvent
     ) {
-        if event.participant.isLocal {
-            self.publishedAudioTrack = event.track
-        }
         if var item = participantItems[event.participant.id] {
             item.update(event: event)
+            print(item)
             participantItems[event.participant.id] = item
         } else {
             participantItems[event.participant.id] = ParticipantVideoViewItem(
@@ -129,11 +127,9 @@ extension ParticipantsViewModel {
     func handle(
         event: Space.Event.AudioTrackUnmutedEvent
     ) {
-        if event.participant.isLocal {
-            self.publishedAudioTrack = event.track
-        }
         if var item = participantItems[event.participant.id] {
             item.update(event: event)
+            print(item)
             participantItems[event.participant.id] = item
         } else {
             participantItems[event.participant.id] = ParticipantVideoViewItem(
@@ -145,9 +141,6 @@ extension ParticipantsViewModel {
     func handle(
         event: Space.Event.VideoTrackMutedEvent
     ) {
-        if event.participant.isLocal {
-            self.publishedVideoTrack = event.track
-        }
         if var item = participantItems[event.participant.id] {
             item.update(event: event)
             participantItems[event.participant.id] = item
@@ -161,9 +154,6 @@ extension ParticipantsViewModel {
     func handle(
         event: Space.Event.VideoTrackUnmutedEvent
     ) {
-        if event.participant.isLocal {
-            self.publishedVideoTrack = event.track
-        }
         if var item = participantItems[event.participant.id] {
             item.update(event: event)
             participantItems[event.participant.id] = item
@@ -177,9 +167,6 @@ extension ParticipantsViewModel {
     func handle(
         event: Space.Event.AudioTrackPublishedEvent
     ) {
-        if event.participant.isLocal {
-            self.publishedAudioTrack = event.track
-        }
         if var item = participantItems[event.participant.id] {
             item.update(event: event)
             participantItems[event.participant.id] = item
@@ -193,9 +180,6 @@ extension ParticipantsViewModel {
     func handle(
         event: Space.Event.AudioTrackUnpublishedEvent
     ) {
-        if event.participant.isLocal {
-            self.publishedAudioTrack = nil
-        }
         if var item = participantItems[event.participant.id] {
             item.update(event: event)
             participantItems[event.participant.id] = item
@@ -205,9 +189,6 @@ extension ParticipantsViewModel {
     func handle(
         event: Space.Event.VideoTrackPublishedEvent
     ) {
-        if event.participant.isLocal {
-            self.publishedVideoTrack = event.track
-        }
         if var item = participantItems[event.participant.id] {
             item.update(event: event)
             participantItems[event.participant.id] = item
@@ -221,9 +202,6 @@ extension ParticipantsViewModel {
     func handle(
         event: Space.Event.VideoTrackUnpublishedEvent
     ) {
-        if event.participant.isLocal {
-            self.publishedVideoTrack = nil
-        }
         if var item = participantItems[event.participant.id] {
             item.update(event: event)
             participantItems[event.participant.id] = item

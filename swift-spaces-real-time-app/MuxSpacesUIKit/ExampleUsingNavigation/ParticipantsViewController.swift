@@ -116,37 +116,6 @@ class ParticipantsViewController: UIViewController {
         super.viewWillDisappear(animated)
     }
 
-    var isAudioMuted: Bool = false {
-        didSet {
-            guard let track = self.viewModel.publishedAudioTrack else {
-                print("No audio track")
-                return
-            }
-
-            if isAudioMuted {
-                self.viewModel.space.muteTrack(track)
-            } else {
-                self.viewModel.space.unmuteTrack(track)
-            }
-        }
-    }
-
-    var isVideoMuted: Bool = false {
-        didSet {
-
-            guard let track = self.viewModel.publishedVideoTrack else {
-                print("No video track")
-                return
-            }
-
-            if isVideoMuted {
-                self.viewModel.space.muteTrack(track)
-            } else {
-                self.viewModel.space.unmuteTrack(track)
-            }
-        }
-    }
-
     func setupParticipantsView() {
         participantsView.translatesAutoresizingMaskIntoConstraints = false
 
@@ -190,7 +159,7 @@ class ParticipantsViewController: UIViewController {
             ),
             handler: { [weak self] _ in
                 guard let self = self else { return }
-                self.isAudioMuted.toggle()
+                self.viewModel.toggleAudioMute()
             }
         )
 
@@ -201,7 +170,7 @@ class ParticipantsViewController: UIViewController {
             ),
             handler: { [weak self] _ in
                 guard let self = self else { return }
-                self.isVideoMuted.toggle()
+                self.viewModel.toggleVideoMute()
             }
         )
 
