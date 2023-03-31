@@ -14,11 +14,11 @@ import MuxSpaces
 protocol SpaceController: AnyObject {
     var space: Space { get }
 
+    var audioCaptureOptions: AudioCaptureOptions? { get set }
+    var cameraCaptureOptions: CameraCaptureOptions? { get set }
+
     var publishedAudioTrack: AudioTrack? { get set }
     var publishedVideoTrack: VideoTrack? { get set }
-
-    var audioCaptureOptions: AudioCaptureOptions? { get }
-    var cameraCaptureOptions: CameraCaptureOptions? { get }
 
     func setupEventHandlers() -> Set<AnyCancellable>
 
@@ -86,6 +86,7 @@ extension SpaceController {
             guard let self = self else { return }
 
             guard error == nil else {
+                print("Error publishing audio track")
                 return
             }
 
@@ -116,8 +117,14 @@ extension SpaceController {
 
         space.publishTrack(
             videoTrack
-        ) { (error: VideoTrack.PublishError?) in
+        ) { [weak self] (error: VideoTrack.PublishError?) in
+
+            guard let self = self else {
+                return
+            }
+
             guard error == nil else {
+                print("Error publishing video track")
                 return
             }
 

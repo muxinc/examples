@@ -28,6 +28,26 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "19208440287C6F2400D03362"
+               BuildableName = "MuxSpacesUIKitTests.xctest"
+               BlueprintName = "MuxSpacesUIKitTests"
+               ReferencedContainer = "container:MuxSpacesSamples.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "1920844A287C6F2400D03362"
+               BuildableName = "MuxSpacesUIKitUITests.xctest"
+               BlueprintName = "MuxSpacesUIKitUITests"
+               ReferencedContainer = "container:MuxSpacesSamples.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction

@@ -9,15 +9,9 @@ import Combine
 import Foundation
 
 import MuxSpaces
+import UIKit
 
 extension SpaceViewModel: SpaceController {
-    var audioCaptureOptions: MuxSpaces.AudioCaptureOptions? {
-        return AudioCaptureOptions()
-    }
-
-    var cameraCaptureOptions: MuxSpaces.CameraCaptureOptions? {
-        return CameraCaptureOptions()
-    }
 
     // MARK: - Setup Observers on Space State Updates
 
@@ -136,6 +130,62 @@ extension SpaceViewModel: SpaceController {
     }
 
     func resetSnapshot() {
-        self.snapshot = ParticipantsSnapshot.makeEmpty()
+        self.snapshot = NSDiffableDataSourceSnapshot<
+            Section,
+                Participant.ID
+        >()
+    }
+}
+
+// MARK: - Update Logic
+
+extension NSDiffableDataSourceSnapshot where SectionIdentifierType == Section, ItemIdentifierType == Participant.ID {
+
+    // MARK: Update or Insert Participant
+
+    /// Updates an existing cell by removing or adding a UIView
+    /// displaying the participants video.
+    ///
+    /// If no cell corresponding to the participant is found
+    /// then adds participant along with their video if applicable.
+    ///
+    mutating func upsertParticipant(
+        _ participantID: Participant.ID
+    ) {
+        let items = itemIdentifiers
+            .filter { (checkedItem: Participant.ID) in
+                return checkedItem == participantID
+            }
+
+        if items.isEmpty {
+            self.appendItems(
+                [
+                    participantID
+                ],
+                toSection: .participants
+            )
+        } else {
+            self.reloadItems(
+                [
+                    participantID
+                ]
+            )
+        }
+    }
+
+    // MARK: Remove Participant
+
+    /// Removes a participant from the snapshot and
+    /// causes the collection view to delete the cell
+    /// that corresponds to that participant's video
+    mutating func removeParticipant(
+        _ participantID: Participant.ID
+    ) {
+        let deletedItems = itemIdentifiers
+            .filter {
+                return $0 == participantID
+            }
+
+        deleteItems(deletedItems)
     }
 }

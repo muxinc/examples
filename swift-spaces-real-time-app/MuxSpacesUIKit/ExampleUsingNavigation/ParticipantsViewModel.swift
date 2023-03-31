@@ -14,15 +14,49 @@ class ParticipantsViewModel {
     
     var space: Space
 
+    @Published var participantItems: [Participant.ID: ParticipantVideoViewItem] = [:] {
+        didSet {
+            snapshot = recomputeSnapshot()
+            localParticipant = participantItems.first(
+                where: { keyValue in
+                    keyValue.value.participant.isLocal
+                }
+            )?.value.participant
+            publishedAudioTrack = participantItems.first(
+                where: { keyValue in
+                    keyValue.value.participant.isLocal
+                }
+            )?.value.participant.audioTracks.values.first(
+                where: { track in
+                    track.source == .microphone
+                }
+            )
+            publishedVideoTrack = participantItems.first(
+                where: { keyValue in
+                    keyValue.value.participant.isLocal
+                }
+            )?.value.participant.videoTracks.values.first(
+                where: { track in
+                    track.source == .camera
+                }
+            )
+        }
+    }
+
     @Published var snapshot: ParticipantsSnapshot
 
-    var publishedAudioTrack: AudioTrack?
-    var publishedVideoTrack: VideoTrack?
+    @Published var localParticipant: Participant?
 
-    var audioCaptureOptions: AudioCaptureOptions?
-    var cameraCaptureOptions: CameraCaptureOptions?
+    @Published var publishedAudioTrack: AudioTrack?
+    @Published var publishedVideoTrack: VideoTrack?
 
-    var errorHandler: (Error?) -> () = { _ in }
+    @Published var audioCaptureOptions: AudioCaptureOptions?
+    @Published var cameraCaptureOptions: CameraCaptureOptions?
+
+    @Published var frontFacingCamera: Bool = true
+
+    @Published var audioPublishError: AudioTrack.PublishError?
+    @Published var videoPublishError: VideoTrack.PublishError?
 
     // MARK: - Initialization
 
@@ -32,58 +66,77 @@ class ParticipantsViewModel {
         cameraCaptureOptions: CameraCaptureOptions?
     ) {
         self.space = space
+        self.snapshot = ParticipantsSnapshot.makeEmpty()
+        
         self.audioCaptureOptions = audioCaptureOptions
         self.cameraCaptureOptions = cameraCaptureOptions
-
-        self.snapshot = ParticipantsSnapshot.makeEmpty()
     }
 
-    func configureUpdates(
+    func joinAndConfigureUpdates(
         for dataSource: ParticipantsDataSource
     ) -> AnyCancellable {
+        space.join(
+            options: SpaceOptions(
+                displayName: "UIKitExample"
+            )
+        )
+
         return $snapshot
             .sink { dataSource.apply($0) }
     }
 
-    // MARK: - Update Participant Cell State
+    func toggleAudioMute() {
+        guard let publishedAudioTrack else {
+            return
+        }
 
-    func participant(
-        from participantID: Participant.ID
-    ) -> Participant? {
-        if let localParticipant = space.localParticipant {
-            return (
-                [localParticipant] + space.remoteParticipants
-            ).filter { $0.id == participantID }.first
+        if publishedAudioTrack.isMuted {
+            space.unmuteTrack(publishedAudioTrack)
         } else {
-            return space.remoteParticipants
-                .filter { $0.id == participantID }.first
+            space.muteTrack(publishedAudioTrack)
         }
     }
+
+    func toggleVideoMute() {
+        guard let publishedVideoTrack else {
+            return
+        }
+
+        if publishedVideoTrack.isMuted {
+            space.unmuteTrack(publishedVideoTrack)
+        } else {
+            space.muteTrack(publishedVideoTrack)
+        }
+    }
+
+    func recomputeSnapshot() -> ParticipantsSnapshot {
+        var snapshot = ParticipantsSnapshot()
+
+        snapshot.appendSections(
+            [.participants]
+        )
+
+        snapshot.appendItems(
+            Array(participantItems.values),
+            toSection: .participants
+        )
+
+        return snapshot
+    }
+
+    // MARK: - Update Participant Cell State
 
     func configure(
         _ cell: ParticipantVideoCell,
         indexPath: IndexPath,
-        participantID: Participant.ID
+        participantItem: ParticipantVideoViewItem
     ) {
-        guard let participant = participant(
-            from: participantID
-        ) else {
-            print("No Participant!")
-            return
-        }
-
         cell.setup()
-        cell.contentView.backgroundColor = .black
 
-        if let track = participant.videoTracks.values.first {
-            cell.update(
-                participantID: participant.id,
-                videoTrack: track
-            )
-        } else {
-            cell.update(
-                participantID: participant.id
-            )
-        }
+        cell.update(
+            displayName: participantItem.participant.displayName,
+            videoTrack: participantItem.videoTrack,
+            audioTrack: participantItem.audioTrack
+        )
     }
 }

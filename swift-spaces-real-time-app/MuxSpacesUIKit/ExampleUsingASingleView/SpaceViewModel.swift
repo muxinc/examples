@@ -22,7 +22,10 @@ class SpaceViewModel {
 
     /// For more about the @Published property wrapper
     /// see [here](https://developer.apple.com/documentation/combine/published)
-    @Published var snapshot: ParticipantsSnapshot
+    @Published var snapshot: NSDiffableDataSourceSnapshot<
+        Section,
+            Participant.ID
+    >
 
     // MARK: Participants View
 
@@ -37,6 +40,11 @@ class SpaceViewModel {
     /// The space the app is joining
     var space: Space
 
+    // MARK: Local Track Options
+
+    var audioCaptureOptions: MuxSpaces.AudioCaptureOptions?
+    var cameraCaptureOptions: MuxSpaces.CameraCaptureOptions?
+
     // MARK: Published Tracks
 
     /// If the app publishes audio or video tracks,
@@ -48,13 +56,19 @@ class SpaceViewModel {
 
     init(space: Space) {
         self.space = space
-        self.snapshot = ParticipantsSnapshot.makeEmpty()
+        self.snapshot = NSDiffableDataSourceSnapshot<
+            Section,
+                Participant.ID
+        >()
     }
 
     // MARK: Setup Snapshot Updates
 
     func setupSnapshotUpdates(
-        for dataSource: ParticipantsDataSource
+        for dataSource: UICollectionViewDiffableDataSource<
+            Section,
+                Participant.ID
+        >
     ) -> AnyCancellable {
         return $snapshot
             .sink { dataSource.apply($0) }
