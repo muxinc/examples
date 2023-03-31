@@ -115,7 +115,6 @@ extension ParticipantsViewModel {
     ) {
         if var item = participantItems[event.participant.id] {
             item.update(event: event)
-            print(item)
             participantItems[event.participant.id] = item
         } else {
             participantItems[event.participant.id] = ParticipantVideoViewItem(
@@ -129,7 +128,6 @@ extension ParticipantsViewModel {
     ) {
         if var item = participantItems[event.participant.id] {
             item.update(event: event)
-            print(item)
             participantItems[event.participant.id] = item
         } else {
             participantItems[event.participant.id] = ParticipantVideoViewItem(

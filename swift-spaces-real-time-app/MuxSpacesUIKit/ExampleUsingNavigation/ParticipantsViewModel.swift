@@ -22,7 +22,6 @@ class ParticipantsViewModel {
                     keyValue.value.participant.isLocal
                 }
             )?.value.participant
-            print(publishedAudioTrack)
             publishedAudioTrack = participantItems.first(
                 where: { keyValue in
                     keyValue.value.participant.isLocal
@@ -32,7 +31,6 @@ class ParticipantsViewModel {
                     track.source == .microphone
                 }
             )
-            print(publishedAudioTrack)
             publishedVideoTrack = participantItems.first(
                 where: { keyValue in
                     keyValue.value.participant.isLocal
