@@ -50,6 +50,7 @@ struct ContentView: View {
                 }).disabled(disableJoin)
             }
         }
+        .navigationViewStyle(.stack)
         .environmentObject(model)
     }
 }
