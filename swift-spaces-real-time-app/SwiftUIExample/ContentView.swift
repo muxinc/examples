@@ -66,7 +66,7 @@ struct SpaceView: View {
 
     var body: some View {
         ZStack {
-            if model != nil && model.hasJoined {
+            if model.hasJoined {
                 ParticipantsView()
             } else {
                 ProgressView()
