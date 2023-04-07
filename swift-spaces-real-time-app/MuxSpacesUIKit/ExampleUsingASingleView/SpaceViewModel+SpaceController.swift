@@ -134,6 +134,7 @@ extension SpaceViewModel: SpaceController {
             Section,
                 Participant.ID
         >()
+        self.snapshot.appendSections([.participants])
     }
 }
 

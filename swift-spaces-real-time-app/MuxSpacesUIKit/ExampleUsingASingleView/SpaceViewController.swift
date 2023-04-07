@@ -68,7 +68,11 @@ class SpaceViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
+        view.backgroundColor = .systemBackground
+
+        setupJoinButton()
+
         /// Setup participants view with a custom layout and
         /// configure its backing data source
         setupParticipantsView()
@@ -120,18 +124,66 @@ class SpaceViewController: UIViewController {
         return dataSource
     }
 
+    func setupJoinButton() {
+        joinSpaceButton.translatesAutoresizingMaskIntoConstraints = false
+
+        joinSpaceButton.setTitle(
+            "Join Space",
+            for: .normal
+        )
+        joinSpaceButton.setTitleColor(
+            .systemBlue,
+            for: .normal
+        )
+
+        view.addSubview(
+            joinSpaceButton
+        )
+
+        view.addConstraints([
+            joinSpaceButton.centerXAnchor.constraint(
+                equalTo: view.safeAreaLayoutGuide.centerXAnchor
+            ),
+            joinSpaceButton.centerYAnchor.constraint(
+                equalTo: view.safeAreaLayoutGuide.centerYAnchor
+            ),
+            joinSpaceButton.widthAnchor.constraint(
+                equalToConstant: 150.0
+            ),
+            joinSpaceButton.heightAnchor.constraint(
+                equalToConstant: 50
+            ),
+        ])
+    }
+
     func setupParticipantsView() {
+
+        participantsView.translatesAutoresizingMaskIntoConstraints = false
+
+        view.addSubview(
+            participantsView
+        )
+
+        view.addConstraints([
+            participantsView.leadingAnchor.constraint(
+                equalTo: view.safeAreaLayoutGuide.leadingAnchor
+            ),
+            participantsView.trailingAnchor.constraint(
+                equalTo: view.safeAreaLayoutGuide.trailingAnchor
+            ),
+            participantsView.topAnchor.constraint(
+                equalTo: view.safeAreaLayoutGuide.topAnchor
+            ),
+            participantsView.bottomAnchor.constraint(
+                equalTo: view.safeAreaLayoutGuide.bottomAnchor
+            ),
+        ])
         participantsView.isHidden = true
 
         viewModel
             .$snapshot
             .sink { self.dataSource.apply($0) }
             .store(in: &cancellables)
-
-        participantsView.setCollectionViewLayout(
-            ParticipantLayout.make(),
-            animated: false
-        )
     }
 }
 

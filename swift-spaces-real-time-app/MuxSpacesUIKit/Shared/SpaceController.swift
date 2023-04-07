@@ -39,7 +39,11 @@ extension SpaceController {
     func joinSpace() -> Set<AnyCancellable> {
         let cancellables = setupEventHandlers()
 
-        space.join()
+        space.join(
+            options: SpaceOptions(
+                displayName: "MuxSpacesUIKitExample"
+            )
+        )
 
         return cancellables
     }
