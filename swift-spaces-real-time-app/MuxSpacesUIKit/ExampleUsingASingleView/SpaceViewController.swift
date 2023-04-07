@@ -12,29 +12,46 @@ import MuxSpaces
 
 class SpaceViewController: UIViewController {
 
-    // MARK: IBOutlets for Storyboard
+    var participantsView: UICollectionView
 
-    @IBOutlet var participantsView: UICollectionView!
+    var joinSpaceButton: UIButton
 
-    @IBOutlet var joinSpaceButton: UIButton!
-
-    // MARK: IBAction for Storyboard
-
-    @IBAction @objc func joinSpaceButtonDidTouchUpInside(
-        _ sender: UIButton
+    override init(
+        nibName nibNameOrNil: String?,
+        bundle nibBundleOrNil: Bundle?
     ) {
+        self.participantsView = UICollectionView(
+            frame: .zero,
+            collectionViewLayout: ParticipantLayout.make()
+        )
+        self.joinSpaceButton = UIButton(
+            frame: .zero
+        )
 
-        guard joinSpaceButton == sender else {
-            print("""
-                Unexpected sender received by join space handler.
-                This should be the join space UIButton.
-            """
-            )
-            return
+        super.init(
+            nibName: nibNameOrNil,
+            bundle: nibBundleOrNil
+        )
+
+        let action = UIAction { [weak self] _ in
+
+            guard let self else {
+                return
+            }
+
+            self.joinSpaceButton.isEnabled = false
+            self.joinSpace()
         }
 
-        joinSpaceButton.isEnabled = false
-        self.joinSpace()
+        self.joinSpaceButton.addAction(
+            action,
+            for: .touchUpInside
+        )
+    }
+
+    @available(*, unavailable)
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 
     // MARK: Subscription related state
