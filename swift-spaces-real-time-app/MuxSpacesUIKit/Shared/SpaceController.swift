@@ -36,13 +36,17 @@ protocol SpaceController: AnyObject {
 extension SpaceController {
     // MARK: - Join space handling
 
-    func joinSpace() -> Set<AnyCancellable> {
+    func joinSpace(
+        displayName: String? = nil
+    ) -> Set<AnyCancellable> {
         let cancellables = setupEventHandlers()
 
+        let options = SpaceOptions(
+            displayName: displayName ?? "MuxSpacesUIKitExample"
+        )
+
         space.join(
-            options: SpaceOptions(
-                displayName: "MuxSpacesUIKitExample"
-            )
+            options: options
         )
 
         return cancellables
