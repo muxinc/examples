@@ -220,6 +220,9 @@ extension SpaceViewController {
             }
             .store(in: &cancellables)
 
+        viewModel.audioCaptureOptions = AudioCaptureOptions()
+        viewModel.cameraCaptureOptions = CameraCaptureOptions()
+
         // We're all setup, lets join the space!
         let dataSourceCancellables = viewModel.joinSpace()
 
