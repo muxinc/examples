@@ -12,29 +12,46 @@ import MuxSpaces
 
 class SpaceViewController: UIViewController {
 
-    // MARK: IBOutlets for Storyboard
+    var participantsView: UICollectionView
 
-    @IBOutlet var participantsView: UICollectionView!
+    var joinSpaceButton: UIButton
 
-    @IBOutlet var joinSpaceButton: UIButton!
-
-    // MARK: IBAction for Storyboard
-
-    @IBAction @objc func joinSpaceButtonDidTouchUpInside(
-        _ sender: UIButton
+    override init(
+        nibName nibNameOrNil: String?,
+        bundle nibBundleOrNil: Bundle?
     ) {
+        self.participantsView = UICollectionView(
+            frame: .zero,
+            collectionViewLayout: ParticipantLayout.make()
+        )
+        self.joinSpaceButton = UIButton(
+            frame: .zero
+        )
 
-        guard joinSpaceButton == sender else {
-            print("""
-                Unexpected sender received by join space handler.
-                This should be the join space UIButton.
-            """
-            )
-            return
+        super.init(
+            nibName: nibNameOrNil,
+            bundle: nibBundleOrNil
+        )
+
+        let action = UIAction { [weak self] _ in
+
+            guard let self else {
+                return
+            }
+
+            self.joinSpaceButton.isEnabled = false
+            self.joinSpace()
         }
 
-        joinSpaceButton.isEnabled = false
-        self.joinSpace()
+        self.joinSpaceButton.addAction(
+            action,
+            for: .touchUpInside
+        )
+    }
+
+    @available(*, unavailable)
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 
     // MARK: Subscription related state
@@ -51,7 +68,11 @@ class SpaceViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
+        view.backgroundColor = .systemBackground
+
+        setupJoinButton()
+
         /// Setup participants view with a custom layout and
         /// configure its backing data source
         setupParticipantsView()
@@ -103,18 +124,66 @@ class SpaceViewController: UIViewController {
         return dataSource
     }
 
+    func setupJoinButton() {
+        joinSpaceButton.translatesAutoresizingMaskIntoConstraints = false
+
+        joinSpaceButton.setTitle(
+            "Join Space",
+            for: .normal
+        )
+        joinSpaceButton.setTitleColor(
+            .systemBlue,
+            for: .normal
+        )
+
+        view.addSubview(
+            joinSpaceButton
+        )
+
+        view.addConstraints([
+            joinSpaceButton.centerXAnchor.constraint(
+                equalTo: view.safeAreaLayoutGuide.centerXAnchor
+            ),
+            joinSpaceButton.centerYAnchor.constraint(
+                equalTo: view.safeAreaLayoutGuide.centerYAnchor
+            ),
+            joinSpaceButton.widthAnchor.constraint(
+                equalToConstant: 150.0
+            ),
+            joinSpaceButton.heightAnchor.constraint(
+                equalToConstant: 50
+            ),
+        ])
+    }
+
     func setupParticipantsView() {
+
+        participantsView.translatesAutoresizingMaskIntoConstraints = false
+
+        view.addSubview(
+            participantsView
+        )
+
+        view.addConstraints([
+            participantsView.leadingAnchor.constraint(
+                equalTo: view.safeAreaLayoutGuide.leadingAnchor
+            ),
+            participantsView.trailingAnchor.constraint(
+                equalTo: view.safeAreaLayoutGuide.trailingAnchor
+            ),
+            participantsView.topAnchor.constraint(
+                equalTo: view.safeAreaLayoutGuide.topAnchor
+            ),
+            participantsView.bottomAnchor.constraint(
+                equalTo: view.safeAreaLayoutGuide.bottomAnchor
+            ),
+        ])
         participantsView.isHidden = true
 
         viewModel
             .$snapshot
             .sink { self.dataSource.apply($0) }
             .store(in: &cancellables)
-
-        participantsView.setCollectionViewLayout(
-            ParticipantLayout.make(),
-            animated: false
-        )
     }
 }
 
@@ -150,6 +219,9 @@ extension SpaceViewController {
                 self.displayJoinSpaceErrorAlert()
             }
             .store(in: &cancellables)
+
+        viewModel.audioCaptureOptions = AudioCaptureOptions()
+        viewModel.cameraCaptureOptions = CameraCaptureOptions()
 
         // We're all setup, lets join the space!
         let dataSourceCancellables = viewModel.joinSpace()

@@ -1,0 +1,11 @@
+//
+//  Created for MuxSpacesSamples.
+//  
+//  Copyright © 2023 Mux, Inc.
+//  Licensed under the MIT License.
+//
+
+// Configuration settings file format documentation can be found at:
+// https://help.apple.com/xcode/#/dev745c5c974
+
+SAMPLE_CODE_DISAMBIGUATOR=${DEVELOPMENT_TEAM}

@@ -26,13 +26,7 @@ class WelcomeViewController: UITableViewController {
             )
 
         } else if indexPath.section == 0 && indexPath.row == 1 {
-            let spaceViewController = UIStoryboard(
-                name: "Main",
-                bundle: .main
-            )
-            .instantiateViewController(
-                identifier: "SpaceViewController"
-            )
+            let spaceViewController = SpaceViewController()
 
             spaceViewController.title = NSLocalizedString(
                 "After joining tap Back to leave space",

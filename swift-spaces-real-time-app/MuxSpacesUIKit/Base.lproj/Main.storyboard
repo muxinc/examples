@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="hte-ut-GaV">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="hte-ut-GaV">
     <device id="retina6_72" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
-        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21678"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -82,58 +81,6 @@
             </objects>
             <point key="canvasLocation" x="96" y="-410"/>
         </scene>
-        <!--Space View Controller-->
-        <scene sceneID="C2j-O4-oaX">
-            <objects>
-                <viewController storyboardIdentifier="SpaceViewController" id="8mc-h3-O7I" customClass="SpaceViewController" customModule="MuxSpacesUIKit" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="KKb-Sz-OnW">
-                        <rect key="frame" x="0.0" y="0.0" width="430" height="932"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="9PS-mL-tMO">
-                                <rect key="frame" x="0.0" y="59" width="430" height="839"/>
-                                <color key="backgroundColor" systemColor="secondarySystemGroupedBackgroundColor"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="87c-IH-Dwz">
-                                    <size key="itemSize" width="128" height="128"/>
-                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                </collectionViewFlowLayout>
-                                <cells/>
-                            </collectionView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T01-Ll-aIO">
-                                <rect key="frame" x="20" y="452.33333333333331" width="390" height="52.333333333333314"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="Join Space">
-                                    <fontDescription key="titleFontDescription" type="system" pointSize="32"/>
-                                </buttonConfiguration>
-                                <connections>
-                                    <action selector="joinSpaceButtonDidTouchUpInside:" destination="8mc-h3-O7I" eventType="touchUpInside" id="T3S-gw-hho"/>
-                                </connections>
-                            </button>
-                        </subviews>
-                        <viewLayoutGuide key="safeArea" id="Z1m-gT-Wr2"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <constraints>
-                            <constraint firstItem="Z1m-gT-Wr2" firstAttribute="trailing" secondItem="9PS-mL-tMO" secondAttribute="trailing" id="Jai-s1-IMI"/>
-                            <constraint firstItem="T01-Ll-aIO" firstAttribute="leading" secondItem="Z1m-gT-Wr2" secondAttribute="leading" constant="20" id="MHR-2m-3pI"/>
-                            <constraint firstAttribute="bottomMargin" secondItem="9PS-mL-tMO" secondAttribute="bottom" id="QaS-dt-04x"/>
-                            <constraint firstItem="9PS-mL-tMO" firstAttribute="leading" secondItem="Z1m-gT-Wr2" secondAttribute="leading" id="bk2-LF-OzB"/>
-                            <constraint firstItem="Z1m-gT-Wr2" firstAttribute="trailing" secondItem="T01-Ll-aIO" secondAttribute="trailing" constant="20" id="g94-FF-lha"/>
-                            <constraint firstAttribute="topMargin" secondItem="9PS-mL-tMO" secondAttribute="top" id="oOP-34-tbA"/>
-                            <constraint firstItem="T01-Ll-aIO" firstAttribute="centerY" secondItem="Z1m-gT-Wr2" secondAttribute="centerY" id="uU6-Uc-r6H"/>
-                        </constraints>
-                    </view>
-                    <navigationItem key="navigationItem" id="pRG-mc-gNu"/>
-                    <connections>
-                        <outlet property="joinSpaceButton" destination="T01-Ll-aIO" id="PdK-YU-gv0"/>
-                        <outlet property="participantsView" destination="9PS-mL-tMO" id="E75-K9-yuj"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="mmF-Ge-ZM5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1987" y="-52"/>
-        </scene>
         <!--Navigation Controller-->
         <scene sceneID="dbA-5m-s5s">
             <objects>
@@ -152,9 +99,6 @@
         </scene>
     </scenes>
     <resources>
-        <systemColor name="secondarySystemGroupedBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

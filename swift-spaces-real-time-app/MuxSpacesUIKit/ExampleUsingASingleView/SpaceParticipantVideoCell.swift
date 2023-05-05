@@ -14,6 +14,7 @@ class SpaceParticipantVideoCell: UICollectionViewCell {
     lazy var videoView = SpacesVideoView()
 
     lazy var placeholderView = UILabel()
+    lazy var nameIndicator = UILabel()
 
     var showsPlaceholder: Bool {
         videoView.track == nil
@@ -83,6 +84,38 @@ class SpaceParticipantVideoCell: UICollectionViewCell {
         }
     }
 
+    func setupNameIndicatorIfNeeded() {
+        if !contentView.subviews.contains(nameIndicator) {
+            nameIndicator.backgroundColor = .black.withAlphaComponent(0.25)
+            nameIndicator.textColor = .white
+            nameIndicator.textAlignment = .center
+            nameIndicator.lineBreakMode = .byClipping
+            nameIndicator.font = UIFont.preferredFont(
+                forTextStyle: .subheadline
+            ).withSize(14.0)
+
+            nameIndicator.translatesAutoresizingMaskIntoConstraints = false
+            contentView.insertSubview(
+                nameIndicator,
+                belowSubview: videoView
+            )
+            addConstraints([
+                nameIndicator.widthAnchor.constraint(
+                    equalTo: contentView.widthAnchor
+                ),
+                nameIndicator.heightAnchor.constraint(
+                    equalToConstant: 32.0
+                ),
+                nameIndicator.centerXAnchor.constraint(
+                    equalTo: contentView.centerXAnchor
+                ),
+                nameIndicator.bottomAnchor.constraint(
+                    equalTo: contentView.bottomAnchor
+                )
+            ])
+        }
+    }
+
     func setup() {
         backgroundView?.layer.cornerRadius = 8.0
         contentView.layer.cornerRadius = 8.0
@@ -92,10 +125,12 @@ class SpaceParticipantVideoCell: UICollectionViewCell {
         setupPlaceholderViewIfNeeded()
 
         setupVideoViewIfNeeded()
+
+        setupNameIndicatorIfNeeded()
     }
 
     func update(
-        participantID: String,
+        displayName: String,
         videoTrack: VideoTrack? = nil
     ) {
         videoView.track = videoTrack
@@ -103,14 +138,18 @@ class SpaceParticipantVideoCell: UICollectionViewCell {
         if showsPlaceholder {
             /// Show black background with participant ID
             /// displayed inside a centered label
-            placeholderView.text = participantID
+            placeholderView.text = displayName
+            nameIndicator.text = ""
             contentView.bringSubviewToFront(placeholderView)
             contentView.sendSubviewToBack(videoView)
+            contentView.sendSubviewToBack(nameIndicator)
         } else {
             /// Show SpacesVideoView
             placeholderView.text = ""
+            nameIndicator.text = displayName
             contentView.bringSubviewToFront(videoView)
             contentView.sendSubviewToBack(placeholderView)
+            contentView.bringSubviewToFront(nameIndicator)
         }
     }
 }

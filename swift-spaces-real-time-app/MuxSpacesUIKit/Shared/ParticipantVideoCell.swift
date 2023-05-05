@@ -128,7 +128,7 @@ class ParticipantVideoCell: UICollectionViewCell {
         audioTrack: AudioTrack? = nil
     ) {
         if let videoTrack {
-            videoView.track = videoTrack.hasMedia ? videoTrack : nil
+            videoView.track = videoTrack
         }
 
         if let audioTrack {

@@ -60,6 +60,9 @@ class SpaceViewModel {
             Section,
                 Participant.ID
         >()
+        self.snapshot.appendSections([.participants])
+        self.audioCaptureOptions = AudioCaptureOptions()
+        self.cameraCaptureOptions = CameraCaptureOptions()
     }
 
     // MARK: Setup Snapshot Updates
@@ -105,7 +108,7 @@ class SpaceViewModel {
 
         cell.setup()
         cell.update(
-            participantID: participant.id,
+            displayName: participant.displayName,
             videoTrack: participant.videoTracks.values.first
         )
     }
