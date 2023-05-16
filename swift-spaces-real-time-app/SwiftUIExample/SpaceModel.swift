@@ -78,6 +78,24 @@ class SpaceModel: ObservableObject {
         }
     }
 
+    func flipCamera() {
+        if self.localCameraTrack != nil {
+            space?.unpublishTrack(self.localCameraTrack!)
+        }
+
+        self.frontFacingCamera.toggle()
+
+        self.localCameraTrack = space?.makeCameraCaptureVideoTrack(
+            options: CameraCaptureOptions(specifier: self.frontFacingCamera ? .position(.front) : .position(.back))
+        )
+
+        space?.publishTrack(
+            self.localCameraTrack!
+        ) { error in
+            self.videoPublishError = error
+        }
+    }
+
     func toggleCamera() {
         guard let cameraTrack = self.localCameraTrack else {
             print("Initialize a camera track before trying to toggle it.")

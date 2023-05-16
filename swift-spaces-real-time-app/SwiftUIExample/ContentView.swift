@@ -82,23 +82,6 @@ struct SpaceView: View {
     }
 }
 
-struct ControlsView: View {
-    @EnvironmentObject var model: SpaceModel
-
-    var body: some View {
-        Button {
-            model.toggleCamera()
-        } label: {
-            Text(model.cameraOff ? "Camera On" : "Camera Off")
-        }
-        Button {
-            model.toggleMicMute()
-        } label: {
-            Text(model.micMuted ? "Unmute" : "Mute")
-        }
-    }
-}
-
 struct ParticipantsView: View {
     @EnvironmentObject var model: SpaceModel
 

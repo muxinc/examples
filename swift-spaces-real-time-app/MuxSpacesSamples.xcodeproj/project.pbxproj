@@ -44,6 +44,7 @@
 		6F11C41429D5174F00939E8E /* SpaceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F11C41329D5174F00939E8E /* SpaceModel.swift */; };
 		6F11C41729D5177100939E8E /* SpacesVideo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F11C41529D5177100939E8E /* SpacesVideo.swift */; };
 		6F11C41829D5177100939E8E /* ParticipantViewItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F11C41629D5177100939E8E /* ParticipantViewItem.swift */; };
+		6F2869052A1440D500BB6003 /* ControlsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F2869042A1440D500BB6003 /* ControlsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -145,6 +146,7 @@
 		6F11C41329D5174F00939E8E /* SpaceModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpaceModel.swift; sourceTree = "<group>"; };
 		6F11C41529D5177100939E8E /* SpacesVideo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpacesVideo.swift; sourceTree = "<group>"; };
 		6F11C41629D5177100939E8E /* ParticipantViewItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParticipantViewItem.swift; sourceTree = "<group>"; };
+		6F2869042A1440D500BB6003 /* ControlsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -201,6 +203,7 @@
 				6F11C41529D5177100939E8E /* SpacesVideo.swift */,
 				6F11C41329D5174F00939E8E /* SpaceModel.swift */,
 				190715E029D4B92700F5D7A2 /* ContentView.swift */,
+				6F2869042A1440D500BB6003 /* ControlsView.swift */,
 				190715E229D4B92700F5D7A2 /* Assets.xcassets */,
 				190715E429D4B92700F5D7A2 /* Preview Content */,
 			);
@@ -592,6 +595,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6F2869052A1440D500BB6003 /* ControlsView.swift in Sources */,
 				6F11C41429D5174F00939E8E /* SpaceModel.swift in Sources */,
 				6F11C41229D5173400939E8E /* ProcessInfo+EnvironmentVariables.swift in Sources */,
 				190715E129D4B92700F5D7A2 /* ContentView.swift in Sources */,
