@@ -5,7 +5,7 @@
   "license": "MIT",
   "dependencies": {
     "@aws-sdk/client-personalize-events": "^3.121.0",
-    "@aws-sdk/client-rekognition": "^3.118.1",
+    "@aws-sdk/client-rekognition": "^3.347.1",
     "@mux/mux-node": "^5.1.0",
     "protobufjs": "^7.0.0",
     "typescript": "^4.7.4"
