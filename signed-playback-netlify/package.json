@@ -7,7 +7,7 @@
   "license": "MIT",
   "private": false,
   "dependencies": {
-    "@mux/mux-node": "^2.4.0"
+    "@mux/mux-node": "^7.1.0"
   },
   "devDependencies": {
     "netlify-lambda": "^1.6.3"
