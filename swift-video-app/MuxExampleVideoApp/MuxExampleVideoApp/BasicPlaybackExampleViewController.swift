@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  BasicPlaybackExampleViewController.swift
 //  MuxExampleVideoApp
 //
 //  Created by Dylan Jhaveri on 4/7/21.
@@ -9,7 +9,7 @@ import UIKit
 import AVKit
 import MUXSDKStats
 
-class ViewController: UIViewController {
+class BasicPlaybackExampleViewController: UIViewController {
 
     lazy var playbackURL = URL(
         string: "https://stream.mux.com/qxb01i6T202018GFS02vp9RIe01icTcDCjVzQpmaB00CUisJ4.m3u8"
@@ -86,7 +86,7 @@ class ViewController: UIViewController {
     }
 }
 
-extension ViewController: AVPlayerViewControllerDelegate {
+extension BasicPlaybackExampleViewController: AVPlayerViewControllerDelegate {
     func playerViewControllerWillStartPictureInPicture(
         _ playerViewController: AVPlayerViewController
     ) {
