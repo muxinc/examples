@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		19CDDBF42A72071000A01A60 /* MuxCore in Frameworks */ = {isa = PBXBuildFile; productRef = 19CDDBF32A72071000A01A60 /* MuxCore */; };
 		FA8188EB261E2C2A00FBF62B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8188EA261E2C2A00FBF62B /* AppDelegate.swift */; };
 		FA8188ED261E2C2A00FBF62B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8188EC261E2C2A00FBF62B /* SceneDelegate.swift */; };
 		FA8188EF261E2C2A00FBF62B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8188EE261E2C2A00FBF62B /* ViewController.swift */; };
@@ -57,6 +58,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				19CDDBF42A72071000A01A60 /* MuxCore in Frameworks */,
 				FAC5AC5E263889170052F8A3 /* MUXSDKStats in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -148,6 +150,7 @@
 			name = MuxExampleVideoApp;
 			packageProductDependencies = (
 				FAC5AC5D263889170052F8A3 /* MUXSDKStats */,
+				19CDDBF32A72071000A01A60 /* MuxCore */,
 			);
 			productName = MuxExampleVideoApp;
 			productReference = FA8188E7261E2C2A00FBF62B /* MuxExampleVideoApp.app */;
@@ -222,6 +225,7 @@
 			mainGroup = FA8188DE261E2C2A00FBF62B;
 			packageReferences = (
 				FAC5AC5C263889170052F8A3 /* XCRemoteSwiftPackageReference "mux-stats-sdk-avplayer" */,
+				19CDDBF22A72071000A01A60 /* XCRemoteSwiftPackageReference "stats-sdk-objc" */,
 			);
 			productRefGroup = FA8188E8261E2C2A00FBF62B /* Products */;
 			projectDirPath = "";
@@ -445,7 +449,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = CX6AHWLHM6;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = MuxExampleVideoApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -464,7 +468,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = CX6AHWLHM6;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = MuxExampleVideoApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -603,17 +607,30 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		19CDDBF22A72071000A01A60 /* XCRemoteSwiftPackageReference "stats-sdk-objc" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/muxinc/stats-sdk-objc";
+			requirement = {
+				kind = exactVersion;
+				version = 4.5.1;
+			};
+		};
 		FAC5AC5C263889170052F8A3 /* XCRemoteSwiftPackageReference "mux-stats-sdk-avplayer" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/muxinc/mux-stats-sdk-avplayer.git";
 			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 2.2.1;
+				kind = exactVersion;
+				version = 3.2.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		19CDDBF32A72071000A01A60 /* MuxCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 19CDDBF22A72071000A01A60 /* XCRemoteSwiftPackageReference "stats-sdk-objc" */;
+			productName = MuxCore;
+		};
 		FAC5AC5D263889170052F8A3 /* MUXSDKStats */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = FAC5AC5C263889170052F8A3 /* XCRemoteSwiftPackageReference "mux-stats-sdk-avplayer" */;

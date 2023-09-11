@@ -9,36 +9,94 @@ import UIKit
 import AVKit
 import MUXSDKStats
 
-class ViewController: AVPlayerViewController {
+class ViewController: UIViewController {
+
+    lazy var playbackURL = URL(
+        string: "https://stream.mux.com/qxb01i6T202018GFS02vp9RIe01icTcDCjVzQpmaB00CUisJ4.m3u8"
+    )!
+    lazy var playerViewController = AVPlayerViewController()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        let url = URL(string: "https://stream.mux.com/qxb01i6T202018GFS02vp9RIe01icTcDCjVzQpmaB00CUisJ4.m3u8")
-        player = AVPlayer(url: url!)
-        let playName = "iOS AVPlayer"
-        let playerData = MUXSDKCustomerPlayerData(environmentKey: "ENV_KEY")
-        let videoData = MUXSDKCustomerVideoData();
-        MUXSDKStats.monitorAVPlayerViewController(self, withPlayerName: playName, playerData: playerData!, videoData: videoData);
-        //
-        // Pick One:
-        //   - picture-in-picture capabilities or
-        //   - play audio when the scene enters background
-        //
-        // For this app, we are disabling picture in picture so that
-        // we can listen for the scene to go into the background and
-        // let the audio keep playing. The problem right now is that
-        // there is no easy way in the SceneDelegate to know if the background
-        // happened because the phone was locked or the background happened
-        // because of picture in picture.
-        //
-        self.allowsPictureInPicturePlayback = false
-        player!.play()
 
-        let scene = UIApplication.shared.connectedScenes.first
-        if let sceneDelegate : SceneDelegate = (scene?.delegate as? SceneDelegate) {
-            sceneDelegate.videoViewController = self;
+        let playerName = "iOS AVPlayer"
+        let playerData = MUXSDKCustomerPlayerData(
+            environmentKey: "ENV_KEY"
+        )
+        let videoData = MUXSDKCustomerVideoData()
+        let customerData = MUXSDKCustomerData(
+            customerPlayerData: playerData,
+            videoData: videoData,
+            viewData: nil
+        )
+
+        let player = AVPlayer(url: playbackURL)
+        playerViewController.player = player
+        playerViewController.delegate = self
+        self.playerViewController = playerViewController
+
+        displayPlayerViewController()
+
+        MUXSDKStats.monitorAVPlayerViewController(
+            playerViewController,
+            withPlayerName: playerName,
+            customerData: customerData!
+        )
+    }
+
+    func displayPlayerViewController() {
+        self.addChild(playerViewController)
+        playerViewController.view
+            .translatesAutoresizingMaskIntoConstraints = false
+        self.view.addSubview(playerViewController.view)
+        self.view.addConstraints([
+            self.view.topAnchor.constraint(
+                equalTo: playerViewController.view.topAnchor
+            ),
+            self.view.bottomAnchor.constraint(
+                equalTo: playerViewController.view.bottomAnchor
+            ),
+            self.view.leadingAnchor.constraint(
+                equalTo: playerViewController.view.leadingAnchor
+            ),
+            self.view.trailingAnchor.constraint(
+                equalTo: playerViewController.view.trailingAnchor
+            )
+        ])
+        playerViewController.didMove(toParent:self)
+    }
+
+    func hidePlayerViewController() {
+        playerViewController.willMove(toParent: nil)
+        playerViewController.view.removeFromSuperview()
+        playerViewController.removeFromParent()
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+
+        playerViewController.player?.play()
+
+        guard let scene = UIApplication.shared.connectedScenes.first else {
+            return
+        }
+
+        if let sceneDelegate = scene.delegate as? SceneDelegate {
+            sceneDelegate.videoViewController = self
         }
     }
 }
 
+extension ViewController: AVPlayerViewControllerDelegate {
+    func playerViewControllerWillStartPictureInPicture(
+        _ playerViewController: AVPlayerViewController
+    ) {
+        guard let scene = UIApplication.shared.connectedScenes.first else {
+            return
+        }
+
+        if let sceneDelegate = scene.delegate as? SceneDelegate {
+            sceneDelegate.enteringPictureInPicture = true
+        }
+    }
+}
