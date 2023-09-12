@@ -14,6 +14,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     var videoViewController: ViewController? = nil
     var avPlayerSavedReference: AVPlayer? = nil
 
+    var enteringPictureInPicture: Bool = false
+
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
@@ -45,19 +47,20 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Now that the application is coming into the foreground, we should
         // have a avPlayerSavedReference (from the last time it went into the background)
         // Let's re-attached our avPlayerSavedReference onto our ViewController
-        if (videoViewController != nil && avPlayerSavedReference != nil) {
-            avPlayerSavedReference?.currentItem?.preferredPeakBitRate = 0
-            videoViewController!.player = avPlayerSavedReference;
-            avPlayerSavedReference = nil;
+
+        if let videoViewController, let avPlayerSavedReference, !enteringPictureInPicture {
+            avPlayerSavedReference.currentItem?.preferredPeakBitRate = 0
+            videoViewController.playerViewController.player = avPlayerSavedReference
+            self.avPlayerSavedReference = nil
         }
     }
 
     func sceneDidEnterBackground(_ scene: UIScene) {
         // Detach our avPlayer from the view controller, but save
         // a reference to it so we can re-attach it later
-        if (videoViewController != nil) {
-            avPlayerSavedReference = videoViewController!.player
-            videoViewController?.player = nil
+        if let videoViewController, !enteringPictureInPicture {
+            avPlayerSavedReference = videoViewController.playerViewController.player
+            videoViewController.playerViewController.player = nil
         }
         // Called as the scene transitions from the foreground to the background.
         // Use this method to save data, release shared resources, and store enough scene-specific state information
