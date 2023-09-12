@@ -33,7 +33,6 @@ class ViewController: UIViewController {
         let player = AVPlayer(url: playbackURL)
         playerViewController.player = player
         playerViewController.delegate = self
-        self.playerViewController = playerViewController
 
         displayPlayerViewController()
 
