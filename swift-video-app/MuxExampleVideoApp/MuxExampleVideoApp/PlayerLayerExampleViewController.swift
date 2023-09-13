@@ -80,6 +80,7 @@ class PlayerLayerExampleViewController: UIViewController {
     }
 
     override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         playerView.player?.play()
     }
 }
