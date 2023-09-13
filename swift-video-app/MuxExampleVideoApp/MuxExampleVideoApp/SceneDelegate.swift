@@ -11,7 +11,7 @@ import AVKit
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
-    var videoViewController: ViewController? = nil
+    var videoViewController: BasicPlaybackExampleViewController? = nil
     var avPlayerSavedReference: AVPlayer? = nil
 
     var enteringPictureInPicture: Bool = false

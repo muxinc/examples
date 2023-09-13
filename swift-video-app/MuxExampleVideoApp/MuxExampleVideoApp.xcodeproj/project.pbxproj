@@ -7,10 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1927344C2AAFDBF300798B98 /* PlayerLayerExampleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1927344B2AAFDBF300798B98 /* PlayerLayerExampleViewController.swift */; };
 		19CDDBF42A72071000A01A60 /* MuxCore in Frameworks */ = {isa = PBXBuildFile; productRef = 19CDDBF32A72071000A01A60 /* MuxCore */; };
 		FA8188EB261E2C2A00FBF62B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8188EA261E2C2A00FBF62B /* AppDelegate.swift */; };
 		FA8188ED261E2C2A00FBF62B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8188EC261E2C2A00FBF62B /* SceneDelegate.swift */; };
-		FA8188EF261E2C2A00FBF62B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8188EE261E2C2A00FBF62B /* ViewController.swift */; };
+		FA8188EF261E2C2A00FBF62B /* BasicPlaybackExampleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8188EE261E2C2A00FBF62B /* BasicPlaybackExampleViewController.swift */; };
 		FA8188F2261E2C2A00FBF62B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA8188F0261E2C2A00FBF62B /* Main.storyboard */; };
 		FA8188F4261E2C2D00FBF62B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FA8188F3261E2C2D00FBF62B /* Assets.xcassets */; };
 		FA8188F7261E2C2D00FBF62B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA8188F5261E2C2D00FBF62B /* LaunchScreen.storyboard */; };
@@ -37,10 +38,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1927344B2AAFDBF300798B98 /* PlayerLayerExampleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerLayerExampleViewController.swift; sourceTree = "<group>"; };
 		FA8188E7261E2C2A00FBF62B /* MuxExampleVideoApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MuxExampleVideoApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA8188EA261E2C2A00FBF62B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FA8188EC261E2C2A00FBF62B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		FA8188EE261E2C2A00FBF62B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		FA8188EE261E2C2A00FBF62B /* BasicPlaybackExampleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicPlaybackExampleViewController.swift; sourceTree = "<group>"; };
 		FA8188F1261E2C2A00FBF62B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		FA8188F3261E2C2D00FBF62B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FA8188F6261E2C2D00FBF62B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -105,7 +107,8 @@
 			children = (
 				FA8188EA261E2C2A00FBF62B /* AppDelegate.swift */,
 				FA8188EC261E2C2A00FBF62B /* SceneDelegate.swift */,
-				FA8188EE261E2C2A00FBF62B /* ViewController.swift */,
+				FA8188EE261E2C2A00FBF62B /* BasicPlaybackExampleViewController.swift */,
+				1927344B2AAFDBF300798B98 /* PlayerLayerExampleViewController.swift */,
 				FA8188F0261E2C2A00FBF62B /* Main.storyboard */,
 				FA8188F3261E2C2D00FBF62B /* Assets.xcassets */,
 				FA8188F5261E2C2D00FBF62B /* LaunchScreen.storyboard */,
@@ -270,8 +273,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FA8188EF261E2C2A00FBF62B /* ViewController.swift in Sources */,
+				FA8188EF261E2C2A00FBF62B /* BasicPlaybackExampleViewController.swift in Sources */,
 				FA8188EB261E2C2A00FBF62B /* AppDelegate.swift in Sources */,
+				1927344C2AAFDBF300798B98 /* PlayerLayerExampleViewController.swift in Sources */,
 				FA8188ED261E2C2A00FBF62B /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
