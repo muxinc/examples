@@ -2,8 +2,6 @@
 //  SwiftDataLibraryInstallationUITests.swift
 //  SwiftDataLibraryInstallationUITests
 //
-//  Created by AJ Barinov on 9/25/23.
-//
 
 import XCTest
 

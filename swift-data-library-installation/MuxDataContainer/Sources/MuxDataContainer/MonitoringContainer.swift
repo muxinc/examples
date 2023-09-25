@@ -70,18 +70,6 @@ public class MonitoringContainer {
         )
     }
 
-    @discardableResult public func monitor(
-        playerLayer: AVPlayerLayer,
-        playerName: String,
-        customerData: MUXSDKCustomerData
-    ) -> MUXSDKPlayerBinding? {
-        MUXSDKStats.monitorAVPlayerLayer(
-            playerLayer,
-            withPlayerName: playerName,
-            customerData: customerData
-        )
-    }
-
     public func destroyPlayer(
         _ playerName: String
     ) {

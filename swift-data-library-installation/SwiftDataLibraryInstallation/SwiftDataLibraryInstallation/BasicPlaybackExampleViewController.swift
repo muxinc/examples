@@ -75,6 +75,13 @@ class BasicPlaybackExampleViewController: UIViewController {
             sceneDelegate.videoViewController = self
         }
     }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        MonitoringContainer.shared.destroyPlayer(
+            playerName
+        )
+        super.viewWillDisappear(animated)
+    }
 }
 
 extension BasicPlaybackExampleViewController: AVPlayerViewControllerDelegate {

@@ -2,8 +2,6 @@
 //  AppDelegate.swift
 //  SwiftDataLibraryInstallation
 //
-//  Created by AJ Barinov on 9/25/23.
-//
 
 import UIKit
 
