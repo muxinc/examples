@@ -1,12 +1,12 @@
 //
 //  PlayerLayerExampleViewController.swift
-//  MuxExampleVideoApp
+//  SwiftDataLibraryInstallation
 //
 
 import AVFoundation
 import UIKit
 
-import MUXSDKStats
+import MuxDataContainer
 
 /// UIView container for AVPlayerLayer
 class PlayerView: UIView {
@@ -37,17 +37,6 @@ class PlayerLayerExampleViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let playerData = MUXSDKCustomerPlayerData()
-        playerData.environmentKey = ProcessInfo
-            .processInfo
-            .environmentKey
-        let videoData = MUXSDKCustomerVideoData()
-        let customerData = MUXSDKCustomerData(
-            customerPlayerData: playerData,
-            videoData: videoData,
-            viewData: nil
-        )!
-
         playerView.backgroundColor = .black
 
         playerView.translatesAutoresizingMaskIntoConstraints = false
@@ -75,10 +64,12 @@ class PlayerLayerExampleViewController: UIViewController {
             return
         }
 
-        MUXSDKStats.monitorAVPlayerLayer(
-            playerLayer,
-            withPlayerName: playerName,
-            customerData: customerData
+        MonitoringContainer.shared.monitor(
+            playerLayer: playerLayer,
+            playerName: playerName,
+            videoID: "VideoBehindTheScenes",
+            videoTitle: "Video Behind the Scenes",
+            environmentKey: ProcessInfo.processInfo.environmentKey
         )
     }
 
@@ -88,11 +79,12 @@ class PlayerLayerExampleViewController: UIViewController {
     }
 
     override func viewWillDisappear(_ animated: Bool) {
-        MUXSDKStats.destroyPlayer(
+        MonitoringContainer.shared.destroyPlayer(
             playerName
         )
         super.viewWillDisappear(animated)
     }
 }
+
 
 
