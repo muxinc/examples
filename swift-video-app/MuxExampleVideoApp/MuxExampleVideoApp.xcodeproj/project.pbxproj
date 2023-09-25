@@ -3,11 +3,12 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		1927344C2AAFDBF300798B98 /* PlayerLayerExampleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1927344B2AAFDBF300798B98 /* PlayerLayerExampleViewController.swift */; };
+		19BB89FA2AC0E5E8004044A5 /* ProcessInfo+Mux.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19BB89F92AC0E5E8004044A5 /* ProcessInfo+Mux.swift */; };
 		19CDDBF42A72071000A01A60 /* MuxCore in Frameworks */ = {isa = PBXBuildFile; productRef = 19CDDBF32A72071000A01A60 /* MuxCore */; };
 		FA8188EB261E2C2A00FBF62B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8188EA261E2C2A00FBF62B /* AppDelegate.swift */; };
 		FA8188ED261E2C2A00FBF62B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8188EC261E2C2A00FBF62B /* SceneDelegate.swift */; };
@@ -39,6 +40,7 @@
 
 /* Begin PBXFileReference section */
 		1927344B2AAFDBF300798B98 /* PlayerLayerExampleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerLayerExampleViewController.swift; sourceTree = "<group>"; };
+		19BB89F92AC0E5E8004044A5 /* ProcessInfo+Mux.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "ProcessInfo+Mux.swift"; path = "../../../swift-data-library-installation/MuxDataContainer/Sources/MuxDataContainer/ProcessInfo+Mux.swift"; sourceTree = "<group>"; };
 		FA8188E7261E2C2A00FBF62B /* MuxExampleVideoApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MuxExampleVideoApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA8188EA261E2C2A00FBF62B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FA8188EC261E2C2A00FBF62B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -109,6 +111,7 @@
 				FA8188EC261E2C2A00FBF62B /* SceneDelegate.swift */,
 				FA8188EE261E2C2A00FBF62B /* BasicPlaybackExampleViewController.swift */,
 				1927344B2AAFDBF300798B98 /* PlayerLayerExampleViewController.swift */,
+				19BB89F92AC0E5E8004044A5 /* ProcessInfo+Mux.swift */,
 				FA8188F0261E2C2A00FBF62B /* Main.storyboard */,
 				FA8188F3261E2C2D00FBF62B /* Assets.xcassets */,
 				FA8188F5261E2C2D00FBF62B /* LaunchScreen.storyboard */,
@@ -201,8 +204,9 @@
 		FA8188DF261E2C2A00FBF62B /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				BuildIndependentTargetsInParallel = YES;
 				LastSwiftUpdateCheck = 1240;
-				LastUpgradeCheck = 1240;
+				LastUpgradeCheck = 1500;
 				TargetAttributes = {
 					FA8188E6261E2C2A00FBF62B = {
 						CreatedOnToolsVersion = 12.4;
@@ -273,6 +277,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				19BB89FA2AC0E5E8004044A5 /* ProcessInfo+Mux.swift in Sources */,
 				FA8188EF261E2C2A00FBF62B /* BasicPlaybackExampleViewController.swift in Sources */,
 				FA8188EB261E2C2A00FBF62B /* AppDelegate.swift in Sources */,
 				1927344C2AAFDBF300798B98 /* PlayerLayerExampleViewController.swift in Sources */,
@@ -335,6 +340,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -368,6 +374,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -396,6 +403,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -429,6 +437,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -453,7 +462,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = XX95P4Y787;
 				INFOPLIST_FILE = MuxExampleVideoApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -472,7 +481,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = XX95P4Y787;
 				INFOPLIST_FILE = MuxExampleVideoApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -616,7 +625,7 @@
 			repositoryURL = "https://github.com/muxinc/stats-sdk-objc";
 			requirement = {
 				kind = exactVersion;
-				version = 4.5.1;
+				version = 4.5.2;
 			};
 		};
 		FAC5AC5C263889170052F8A3 /* XCRemoteSwiftPackageReference "mux-stats-sdk-avplayer" */ = {
@@ -624,7 +633,7 @@
 			repositoryURL = "https://github.com/muxinc/mux-stats-sdk-avplayer.git";
 			requirement = {
 				kind = exactVersion;
-				version = 3.2.0;
+				version = 3.3.2;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */

@@ -1,13 +1,12 @@
 //
 //  BasicPlaybackExampleViewController.swift
-//  MuxExampleVideoApp
-//
-//  Created by Dylan Jhaveri on 4/7/21.
+//  SwiftDataLibraryInstallation
 //
 
-import UIKit
 import AVKit
-import MUXSDKStats
+import UIKit
+
+import MuxDataContainer
 
 class BasicPlaybackExampleViewController: UIViewController {
 
@@ -20,27 +19,18 @@ class BasicPlaybackExampleViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let playerData = MUXSDKCustomerPlayerData()
-        playerData.environmentKey = ProcessInfo
-            .processInfo
-            .environmentKey
-        let videoData = MUXSDKCustomerVideoData()
-        let customerData = MUXSDKCustomerData(
-            customerPlayerData: playerData,
-            videoData: videoData,
-            viewData: nil
-        )!
-
         let player = AVPlayer(url: playbackURL)
         playerViewController.player = player
         playerViewController.delegate = self
 
         displayPlayerViewController()
 
-        MUXSDKStats.monitorAVPlayerViewController(
-            playerViewController,
-            withPlayerName: playerName,
-            customerData: customerData
+        MonitoringContainer.shared.monitor(
+            playerViewController: playerViewController,
+            playerName: playerName,
+            videoID: "VideoBehindTheScenes",
+            videoTitle: "Video Behind the Scenes",
+            environmentKey: ProcessInfo.processInfo.environmentKey
         )
     }
 
@@ -100,3 +90,4 @@ extension BasicPlaybackExampleViewController: AVPlayerViewControllerDelegate {
         }
     }
 }
+

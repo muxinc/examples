@@ -5,8 +5,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/muxinc/mux-stats-sdk-avplayer.git",
       "state" : {
-        "revision" : "b4a0070f35e8407a612eb975a97982aeacd8390c",
-        "version" : "3.2.0"
+        "revision" : "5a310713d8330cb2c8e4755d9a80088697536d65",
+        "version" : "3.3.2"
       }
     },
     {
@@ -14,8 +14,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/muxinc/stats-sdk-objc.git",
       "state" : {
-        "revision" : "9e430931d3ef0a2e4607acf953aebe2b0b21c285",
-        "version" : "4.5.1"
+        "revision" : "a1f6cf4e20e71257c8657bbbff1ac9771bb39a52",
+        "version" : "4.5.2"
       }
     }
   ],
