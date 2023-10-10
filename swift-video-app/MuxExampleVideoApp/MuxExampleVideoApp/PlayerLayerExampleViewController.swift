@@ -12,6 +12,10 @@ class PlayerView: UIView {
         AVPlayerLayer.self
     }
 
+    var playerLayer: AVPlayerLayer? {
+        layer as? AVPlayerLayer
+    }
+
     var player: AVPlayer? {
         get {
             (layer as? AVPlayerLayer)?.player
@@ -50,17 +54,17 @@ class PlayerLayerExampleViewController: UIViewController {
         playerView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(playerView)
         view.addConstraints([
-            view.leadingAnchor.constraint(
-                equalTo: playerView.leadingAnchor
+            view.centerXAnchor.constraint(
+                equalTo: playerView.centerXAnchor
             ),
-            view.trailingAnchor.constraint(
-                equalTo: playerView.trailingAnchor
+            view.centerYAnchor.constraint(
+                equalTo: playerView.centerYAnchor
             ),
-            view.topAnchor.constraint(
-                equalTo: playerView.topAnchor
+            view.widthAnchor.constraint(
+                equalTo: playerView.widthAnchor
             ),
-            view.bottomAnchor.constraint(
-                equalTo: playerView.bottomAnchor
+            view.heightAnchor.constraint(
+                equalTo: playerView.heightAnchor
             ),
         ])
 
@@ -80,6 +84,7 @@ class PlayerLayerExampleViewController: UIViewController {
     }
 
     override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         startObservingPlayerAccessLog()
         playerView.player?.play()
     }
@@ -87,8 +92,8 @@ class PlayerLayerExampleViewController: UIViewController {
     func startObservingPlayerAccessLog() {
         NotificationCenter.default.addObserver(
             self,
-            selector: #selector(handlePlayerAccessLogEntryUpdate),
-            name: NSNotification.Name.AVPlayerItemNewAccessLogEntry,
+            selector: #selector(PlayerLayerExampleViewController.handlePlayerAccessLogEntryUpdate),
+            name: AVPlayerItem.newAccessLogEntryNotification,
             object: nil
         )
     }
