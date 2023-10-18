@@ -6,7 +6,7 @@ target 'MuxLive' do
   use_frameworks!
 
   # Pods for MuxLive
-  pod 'HaishinKit', '~> 1.1.0'
+  pod 'HaishinKit', '~> 1.4.0'
   pod 'Hue', '~> 5.0.0'
   pod 'Loaf'
 
