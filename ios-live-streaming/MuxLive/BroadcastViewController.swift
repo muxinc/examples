@@ -6,43 +6,43 @@ import AVFoundation
 import VideoToolbox
 import Loaf
 
-class BroadcastViewController: UIViewController, RTMPStreamDelegate {
-    
+class BroadcastViewController: UIViewController {
+
     // Camera Preview View
     @IBOutlet private weak var previewView: MTHKView!
-    
+
     // Camera Selector
     @IBOutlet weak var cameraSelector: UISegmentedControl!
-    
+
     // Go Live Button
     @IBOutlet weak var startStopButton: UIButton!
-    
+
     // FPS and Bitrate Labels
     @IBOutlet weak var fpsLabel: UILabel!
     @IBOutlet weak var bitrateLabel: UILabel!
-    
+
     // RTMP Connection & RTMP Stream
     private var rtmpConnection = RTMPConnection()
     private var rtmpStream: RTMPStream!
 
     // Default Camera
     private var defaultCamera: AVCaptureDevice.Position = .back
-    
+
     // Flag indicates if we should be attempting to go live
     private var liveDesired = false
-    
+
     // Reconnect attempt tracker
     private var reconnectAttempt = 0
-    
+
     // The RTMP Stream key to broadcast to.
     public var streamKey: String!
-    
+
     // The Preset to use
     public var preset: Preset!
-    
+
     // A tracker of the last time we changed the bitrate in ABR
     private var lastBwChange = 0
-    
+
     // The RTMP endpoint
     let rtmpEndpoint = "rtmp://global-live.mux.com:5222/app/"
 
@@ -53,14 +53,14 @@ class BroadcastViewController: UIViewController, RTMPStreamDelegate {
         case sd_540p_30fps_2mbps
         case sd_360p_30fps_1mbps
     }
-    
+
     // An encoding profile - width, height, framerate, video bitrate
     private class Profile {
         public var width : Int = 0
         public var height : Int = 0
         public var frameRate : Int = 0
         public var bitrate : Int = 0
-        
+
         init(width: Int, height: Int, frameRate: Int, bitrate: Int) {
             self.width = width
             self.height = height
@@ -68,7 +68,7 @@ class BroadcastViewController: UIViewController, RTMPStreamDelegate {
             self.bitrate = bitrate
         }
     }
-    
+
     // Converts a Preset to a Profile
     private func presetToProfile(preset: Preset) -> Profile {
         switch preset {
@@ -85,132 +85,142 @@ class BroadcastViewController: UIViewController, RTMPStreamDelegate {
 
     // Configures the live stream
     private func configureStream(preset: Preset) {
-        
+
         let profile = presetToProfile(preset: preset)
-        
+
         // Configure the capture settings from the camera
-        rtmpStream.captureSettings = [
-            .sessionPreset: AVCaptureSession.Preset.hd1920x1080,
-            .continuousAutofocus: true,
-            .continuousExposure: true,
-            .fps: profile.frameRate
-        ]
-        
+        rtmpStream.sessionPreset = AVCaptureSession.Preset.hd1920x1080
+        rtmpStream.frameRate = Float64(profile.frameRate)
+
         // Get the orientation of the app, and set the video orientation appropriately
         if let orientation = UIApplication.shared.windows.first?.windowScene?.interfaceOrientation {
-            let videoOrientation = DeviceUtil.videoOrientation(by: orientation)
-            rtmpStream.orientation = videoOrientation!
-            rtmpStream.videoSettings = [
-                .width: (orientation.isPortrait) ? profile.height : profile.width,
-                .height: (orientation.isPortrait) ? profile.width : profile.height,
-                .bitrate: profile.bitrate,
-                .profileLevel: kVTProfileLevel_H264_Main_AutoLevel,
-                .maxKeyFrameIntervalDuration: 2, // 2 seconds
-            ]
+            if let videoOrientation = DeviceUtil.videoOrientation(by: orientation) {
+                rtmpStream.videoOrientation = videoOrientation
+            }
+
+            rtmpStream.videoSettings.videoSize.width = CGFloat((orientation.isPortrait) ? profile.height : profile.width)
+            rtmpStream.videoSettings.videoSize.height = CGFloat((orientation.isPortrait) ? profile.width : profile.height)
+            rtmpStream.videoSettings.bitRate = profile.bitrate
+            rtmpStream.videoSettings.profileLevel = kVTProfileLevel_H264_Main_AutoLevel as String
+            rtmpStream.videoSettings.maxKeyFrameIntervalDuration = 2 // 2 seconds
         }
-        
+
         // Configure the RTMP audio stream
-        rtmpStream.audioSettings = [
-            .bitrate: 128000 // Always use 128kbps
-        ]
+        rtmpStream.audioSettings.bitRate = 128000 // Always use 128kbps
     }
-    
+
     // Publishes the live stream
     private func publishStream() {
         print("Calling publish()")
         rtmpStream.publish(self.streamKey)
-        
+
         DispatchQueue.main.async {
             self.startStopButton.setTitle("Stop Streaming!", for: .normal)
         }
     }
-    
+
     // Triggers and attempt to connect to an RTMP hostname
     private func connectRTMP() {
         print("Calling connect()")
         rtmpConnection.connect(rtmpEndpoint)
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         print("Broadcast View Controller Init")
-        
+
         print("Stream Key: " + streamKey)
-        
+
         // Work out the orientation of the device, and set this on the RTMP Stream
         rtmpStream = RTMPStream(connection: rtmpConnection)
-        
+
         // Get the orientation of the app, and set the video orientation appropriately
-        if let orientation = UIApplication.shared.windows.first?.windowScene?.interfaceOrientation {
-            let videoOrientation = DeviceUtil.videoOrientation(by: orientation)
-            rtmpStream.orientation = videoOrientation!
+        if let orientation = UIApplication.shared.windows.first?.windowScene?.interfaceOrientation, let videoOrientation = DeviceUtil.videoOrientation(by: orientation) {
+            rtmpStream.videoOrientation = videoOrientation
         }
-        
+
         // And a listener for orientation changes
         // Note: Changing the orientation once the stream has been started will not change the orientation of the live stream, only the preview.
         NotificationCenter.default.addObserver(self, selector: #selector(on(_:)), name: UIDevice.orientationDidChangeNotification, object: nil)
-        
+
         // Configure the encoder profile
         configureStream(preset: self.preset)
-     
+
         // Attatch to the default audio device
         rtmpStream.attachAudio(AVCaptureDevice.default(for: .audio)) { error in
-            print(error.description)
+            print(error)
         }
-        
-        // Attatch to the default camera
-        rtmpStream.attachCamera(DeviceUtil.device(withPosition: defaultCamera)) { error in
-            print(error.description)
+
+        // Attach to the default camera
+        let defaultCameraDevice = AVCaptureDevice.default(
+            .builtInWideAngleCamera,
+            for: .video,
+            position: defaultCamera
+        )
+        rtmpStream.attachCamera(defaultCameraDevice) { error in
+            print(error)
         }
 
         // Register a tap gesture recogniser so we can use tap to focus
         let tap = UITapGestureRecognizer(target: self, action: #selector(self.handleTap(_:)))
         previewView.addGestureRecognizer(tap)
         previewView.isUserInteractionEnabled = true
-        
+
         // Attatch the preview view
         previewView?.attachStream(rtmpStream)
-        
+
         // Add event listeners for RTMP status changes and IO Errors
         rtmpConnection.addEventListener(.rtmpStatus, selector: #selector(rtmpStatusHandler), observer: self)
         rtmpConnection.addEventListener(.ioError, selector: #selector(rtmpErrorHandler), observer: self)
-        
-        rtmpStream.delegate = self
-                
+
+        rtmpConnection.delegate = self
+
         startStopButton.setTitle("Go Live!", for: .normal)
     }
-    
+
     // 👉📱 Tap to focus / exposure
     @objc func handleTap(_ sender: UITapGestureRecognizer) {
         if sender.state == UIGestureRecognizer.State.ended {
             let point = sender.location(in: previewView)
             let pointOfInterest = CGPoint(x: point.x / previewView.bounds.size.width, y: point.y / previewView.bounds.size.height)
-            rtmpStream.setPointOfInterest(pointOfInterest, exposure: pointOfInterest)
+
+            guard
+                let device = rtmpStream.videoCapture(for: 0)?.device, device.isFocusPointOfInterestSupported else {
+                return
+            }
+            do {
+                try device.lockForConfiguration()
+                device.focusPointOfInterest = pointOfInterest
+                device.focusMode = .continuousAutoFocus
+                device.unlockForConfiguration()
+            } catch let error as NSError {
+                print("while locking device for focusPointOfInterest: \(error)")
+            }
         }
     }
 
     // Triggered when the user tries to change camera
     @IBAction func changeCameraToggle(_ sender: UISegmentedControl) {
-        
+
         switch cameraSelector.selectedSegmentIndex
         {
         case 0:
-            rtmpStream.attachCamera(DeviceUtil.device(withPosition: AVCaptureDevice.Position.back))
+            rtmpStream.attachCamera(AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: AVCaptureDevice.Position.back))
         case 1:
-            rtmpStream.attachCamera(DeviceUtil.device(withPosition: AVCaptureDevice.Position.front))
+            rtmpStream.attachCamera(AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: AVCaptureDevice.Position.front))
         default:
-            rtmpStream.attachCamera(DeviceUtil.device(withPosition: defaultCamera))
+            rtmpStream.attachCamera((AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: defaultCamera)))
         }
     }
-    
+
     // Triggered when the user taps the go live button
     @IBAction func goLiveButton(_ sender: UIButton) {
-        
+
         print("Go Live Button tapped!")
-        
+
         if !liveDesired {
-            
+
             if rtmpConnection.connected {
                 // If we're already connected to the RTMP server, wr can just call publish() to start the stream
                 publishStream()
@@ -232,16 +242,16 @@ class BroadcastViewController: UIViewController, RTMPStreamDelegate {
             startStopButton.setTitle("Go Live!", for: .normal)
         }
     }
-    
+
     // Called when the RTMPStream or RTMPConnection changes status
     @objc
     private func rtmpStatusHandler(_ notification: Notification) {
         print("RTMP Status Handler called.")
-        
+
         let e = Event.from(notification)
-                guard let data: ASObject = e.data as? ASObject, let code: String = data["code"] as? String else {
-                    return
-                }
+        guard let data: ASObject = e.data as? ASObject, let code: String = data["code"] as? String else {
+            return
+        }
 
         // Send a nicely styled notification about the RTMP Status
         var loafStyle = Loaf.State.info
@@ -258,7 +268,7 @@ class BroadcastViewController: UIViewController, RTMPStreamDelegate {
         DispatchQueue.main.async {
             Loaf("RTMP Status: " + code, state: loafStyle, location: .top,  sender: self).show(.short)
         }
-        
+
         switch code {
         case RTMPConnection.Code.connectSuccess.rawValue:
             reconnectAttempt = 0
@@ -268,12 +278,12 @@ class BroadcastViewController: UIViewController, RTMPStreamDelegate {
             }
         case RTMPConnection.Code.connectFailed.rawValue, RTMPConnection.Code.connectClosed.rawValue:
             print("RTMP Connection was not successful.")
-            
+
             // Retry the connection if "live" is still the desired state
             if liveDesired {
-                
+
                 reconnectAttempt += 1
-                
+
                 DispatchQueue.main.async {
                     self.startStopButton.setTitle("Reconnect attempt " + String(self.reconnectAttempt) + " (Cancel)" , for: .normal)
                 }
@@ -292,68 +302,70 @@ class BroadcastViewController: UIViewController, RTMPStreamDelegate {
     private func rtmpErrorHandler(_ notification: Notification) {
         print("RTMP Error Handler called.")
     }
-    
+
     // Called when the device changes rotation
     @objc
     private func on(_ notification: Notification) {
         if let orientation = UIApplication.shared.windows.first?.windowScene?.interfaceOrientation {
             let videoOrientation = DeviceUtil.videoOrientation(by: orientation)
-            rtmpStream.orientation = videoOrientation!
-            
+            rtmpStream.videoOrientation = videoOrientation!
+
             // Do not change the outpur rotation if the stream has already started.
             if liveDesired == false {
                 let profile = presetToProfile(preset: self.preset)
-                rtmpStream.videoSettings = [
-                    .width: (orientation.isPortrait) ? profile.height : profile.width,
-                    .height: (orientation.isPortrait) ? profile.width : profile.height
-                ]
+                rtmpStream.videoSettings.videoSize.width = CGFloat((orientation.isPortrait) ? profile.height : profile.width)
+                rtmpStream.videoSettings.videoSize.height = CGFloat((orientation.isPortrait) ? profile.width : profile.height)
             }
         }
     }
-    
+
     // Button tapped to return to the configuration screen
     @IBAction func closeButton(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
     }
-    
+
     // RTMPStreamDelegate callbacks
-    
+
     func rtmpStreamDidClear(_ stream: RTMPStream) {
     }
-    
-    // Statistics callback
-    func rtmpStream(_ stream: RTMPStream, didStatics connection: RTMPConnection) {
-        DispatchQueue.main.async {
-            self.fpsLabel.text = String(stream.currentFPS) + " fps"
-            self.bitrateLabel.text = String((connection.currentBytesOutPerSecond / 125)) + " kbps"
-        }
-    }
-    
+}
+
+extension BroadcastViewController: RTMPConnectionDelegate {
+
     // Insufficient bandwidth callback
-    func rtmpStream(_ stream: RTMPStream, didPublishInsufficientBW connection: RTMPConnection) {
+    func connection(_ connection: RTMPConnection, publishInsufficientBWOccured stream: RTMPStream) {
+
+    }
+
+    // Today this example doesn't attempt to increase bandwidth to find a sweet spot.
+    // An implementation might be to gently increase bandwidth by a few percent, but that's hard without getting into an aggressive cycle.
+    func connection(_ connection: RTMPConnection, publishSufficientBWOccured stream: RTMPStream) {
         print("ABR: didPublishInsufficientBW")
-        
+
         // If we last changed bandwidth over 10 seconds ago
         if (Int(NSDate().timeIntervalSince1970) - lastBwChange) > 5 {
             print("ABR: Will try to change bitrate")
-            
+
             // Reduce bitrate by 30% every 10 seconds
-            let b = Double(stream.videoSettings[.bitrate] as! UInt32) * Double(0.7)
-            print("ABR: Proposed bandwidth: " + String(b))
-            stream.videoSettings[.bitrate] = b
+            let proposedBitrate = Double(stream.videoSettings.bitRate) * Double(0.7)
+            print("ABR: Proposed bandwidth: \(proposedBitrate)")
+            stream.videoSettings.bitRate = Int(proposedBitrate)
             lastBwChange = Int(NSDate().timeIntervalSince1970)
-            
+
             DispatchQueue.main.async {
-                Loaf("Insuffient Bandwidth, changing video bandwidth to: " + String(b), state: Loaf.State.warning, location: .top,  sender: self).show(.short)
+                Loaf("Insuffient Bandwidth, changing video bandwidth to: \(proposedBitrate)", state: Loaf.State.warning, location: .top,  sender: self).show(.short)
             }
-            
+
         } else {
             print("ABR: Still giving grace time for last bandwidth change")
         }
     }
-    
-    // Today this example doesn't attempt to increase bandwidth to find a sweet spot.
-    // An implementation might be to gently increase bandwidth by a few percent, but that's hard without getting into an aggressive cycle.
-    func rtmpStream(_ stream: RTMPStream, didPublishSufficientBW connection: RTMPConnection) {
+
+    // Statistics callback
+    func connection(_ connection: RTMPConnection, updateStats stream: RTMPStream) {
+        DispatchQueue.main.async {
+            self.fpsLabel.text = String(stream.currentFPS) + " fps"
+            self.bitrateLabel.text = String((connection.currentBytesOutPerSecond / 125)) + " kbps"
+        }
     }
 }
