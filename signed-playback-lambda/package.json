@@ -8,10 +8,10 @@
     "build": "webpack; yarn zip"
   },
   "dependencies": {
-    "@mux/mux-node": "^2.2.0"
+    "@mux/mux-node": "^7.1.0"
   },
   "devDependencies": {
     "webpack": "^4.32.0",
-    "webpack-cli": "^3.3.2"
+    "webpack-cli": "^4.0.0"
   }
 }
