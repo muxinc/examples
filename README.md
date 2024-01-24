@@ -18,9 +18,6 @@ Get to know Mux by looking through examples! Contributions are always welcome, e
 | [swift-data-library-installation](swift-data-library-installation)				| An example Swift app that installs Mux Data using a wrapper library using [Swift Package Manager](https://www.swift.org/package-manager/)										| Mobile, Integration   | Swift      |
 | [aws-recommendation-engine](aws-recommendation-engine)      						| An example of using Mux Data streaming exports to recommend content with Amazon Personalize 																				  	| VOD, Serverless 	    | TypeScript |
 | [nextjs-mdx-player](nextjs-mdx-player)                      						| A [Next.js](https://nextjs.org/) app configured to support [MDX](https://mdxjs.com) to illustrate supporting [MuxPlayer](https://www.mux.com/player) in blog posts. 		  	| VOD, CMS 			  	| JavaScript |
-| [swift-spaces-real-time-app](swift-spaces-real-time-app)    						| An example iOS and iPadOS app demonstrating usage of the Spaces Swift SDK for real-time                                                                                       | Real-time, Mobile     | Swift      |
-| [android-spaces-real-time-app](android-spaces-real-time-app)						| An example Android app demonstrating usage of the Spaces Android SDK for real-time                                                                                            | Real-time, Mobile     | Java       |
-| [android-spaces-real-time-screen-sharing](android-spaces-real-time-screen-sharing)| An example Android app demonstrating usage of the Spaces Android SDK for screen sharing                                                                 						| Real-time, Mobile     | Java       |
 
 ## Examples in the wild
 
