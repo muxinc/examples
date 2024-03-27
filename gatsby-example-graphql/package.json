@@ -16,7 +16,7 @@
   },
   "dependencies": {
     "dotenv": "^8.2.0",
-    "gatsby": "^2.24.37",
+    "gatsby": "^3.0.0",
     "gatsby-source-graphql": "^2.7.0",
     "hls.js": "^0.14.8",
     "react": "^16.12.0",
