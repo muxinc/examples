@@ -58,7 +58,7 @@ These steps correspond to the following routes:
 
 ## Preparing for Production
 
-### Set the cors_origin
+### Set the `cors_origin`
 
 When creating uploads, this demo sets `cors_origin: "*"` in the [`app/routes/_index.tsx`](app/routes/_index.tsx) file. For extra security, you should update this value to be something like `cors_origin: 'https://your-app.com'`, to restrict uploads to only be allowed from your application.
 
