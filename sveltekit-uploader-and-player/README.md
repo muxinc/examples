@@ -76,7 +76,7 @@ These steps correspond to the following routes:
 
 ## Preparing for Production
 
-### Set the cors_origin
+### Set the `cors_origin`
 
 When creating uploads, this demo sets `cors_origin: "*"` in the [`src/routes/+page.server.ts`](src/routes/+page.server.ts) file. For extra security, you should update this value to be something like `cors_origin: 'https://your-app.com'`, to restrict uploads to only be allowed from your application.
 
