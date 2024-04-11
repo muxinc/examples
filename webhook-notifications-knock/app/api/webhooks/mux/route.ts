@@ -17,8 +17,7 @@ export async function POST(request: Request) {
 
     switch (event.type) {
         case 'video.live_stream.active':
-        case 'video.live_stream.idle':
-        case 'video.live_stream.disabled':
+        case 'video.asset.ready':
             // The key of the workflow (from Knock dashboard)
             await knockClient.notify("dinosaurs-loose", {
                 // user id of who performed the action
@@ -37,8 +36,3 @@ export async function POST(request: Request) {
 
     return Response.json({ message: 'ok' });
 }
-
-// video.asset.ready
-// video.asset.errored
-// video.asset.live_stream_completed
-// video.live_stream.active
