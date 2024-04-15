@@ -5,117 +5,13 @@
  */
 import Link from 'next/link';
 import Image from 'next/image';
-import Player from './components/player';
-import SubscribeButton from './components/SubscribeButton';
-import SubscriberCount from './components/SubscriberCount';
+import FeedContainer from '../components/FeedContainer';
+import ApiTriggers from '../components/ApiTriggers';
 export default function Home() {
   return (
     <main className="grid md:grid-cols-6 gap-10 items-start">
       <div className="col-span-4 grid gap-4">
-        <div className="grid gap-2">
-          <div className="rounded-xl overflow-hidden">
-            <span className="w-full aspect-video rounded-md bg-muted">
-              <Player />
-            </span>
-          </div>
-          <div className="py-2 grid gap-2">
-            <h1 className="text-xl font-semibold line-clamp-2">
-              The Mux Informational: Subscribing to New Videos
-            </h1>
-            <div className="flex gap-2 items-center">
-              <div className="flex gap-2 items-center">
-                <img
-                  alt="Thumbnail"
-                  className="rounded-full object-cover aspect-square"
-                  height={40}
-                  src="/placeholder.svg"
-                  width={40}
-                />
-                <div className="text-sm">
-                  <div className="font-semibold">Mux</div>
-                  <SubscriberCount></SubscriberCount>
-                </div>
-              </div>
-              <div className="ml-auto">
-                <SubscribeButton></SubscribeButton>
-              </div>
-            </div>
-          </div>
-          <div className="bg-gray-100 rounded-xl p-4 text-sm dark:bg-gray-800">
-            <p>
-              In this video, we'll show you how to subscribe to new videos from
-              Mux. We'll cover the basics of subscribing to a channel, how to
-              get notified when new videos are uploaded, and how to manage your
-              subscriptions.
-            </p>
-          </div>
-        </div>
-        <div className="grid gap-6">
-          <h2 className="font-semibold text-xl">110 Comments</h2>
-          <div className="text-sm flex items-start gap-4">
-            <Image
-              src="/placeholder-user.jpg"
-              alt="@shadcn"
-              width={10}
-              height={10}
-              className="w-10 h-10 border"
-            />
-            <div className="grid gap-1.5">
-              <div className="flex items-center gap-2">
-                <div className="font-semibold">@burttunes</div>
-                <div className="text-gray-500 text-xs dark:text-gray-400">
-                  5 months ago
-                </div>
-              </div>
-              <div>
-                I'm so excited to see how Mux is going to change the way we
-                build video applications. 🚀
-              </div>
-            </div>
-          </div>
-          <div className="text-sm flex items-start gap-4">
-            <Image
-              src="/placeholder-user.jpg"
-              alt="@shadcn"
-              width={10}
-              height={10}
-              className="w-10 h-10 border"
-            />
-            <div className="grid gap-1.5">
-              <div className="flex items-center gap-2">
-                <div className="font-semibold">@gogetem</div>
-                <div className="text-gray-500 text-xs dark:text-gray-400">
-                  2 months ago
-                </div>
-              </div>
-              <div>
-                We are more than excited to leverage all the new stuff, building
-                better products for our clients ✨
-              </div>
-            </div>
-          </div>
-          <div className="text-sm flex items-start gap-4">
-            <Image
-              src="/placeholder-user.jpg"
-              alt="@shadcn"
-              width={10}
-              height={10}
-              className="w-10 h-10 border"
-            />
-            <div className="grid gap-1.5">
-              <div className="flex items-center gap-2">
-                <div className="font-semibold">@watergal123</div>
-                <div className="text-gray-500 text-xs dark:text-gray-400">
-                  6 days ago
-                </div>
-              </div>
-              <div>
-                does anyone know which monospace are they using when showing
-                code?
-              </div>
-            </div>
-          </div>
-        </div>
+        <ApiTriggers></ApiTriggers>
       </div>
       <div className="col-span-2 grid gap-4">
         <div className="flex items-start gap-4 relative">
