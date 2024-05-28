@@ -1,0 +1,59 @@
+{
+    "type": "video.live_stream.active",
+    "request_id": null,
+    "object": {
+      "type": "live",
+      "id": "1TaauZVrUfXwkpUxKVWQiSOD02YWhTpan"
+    },
+    "id": "072d5897-baeb-4b5b-b10e-72399463ed35",
+    "environment": {
+      "name": "Testing",
+      "id": "j29sb4"
+    },
+    "data": {
+      "stream_key": "******",
+      "status": "active",
+      "srt_passphrase": "******",
+      "simulcast_targets": [
+        {
+          "url": "rtmps://va.pscp.tv:443/x",
+          "stream_key": "******",
+          "status": "broadcasting",
+          "passthrough": "Twitter",
+          "id": "PYbkjeAddS5JPo1kLRdmjLP5Zu6bb9yMQ8VG00ekC7mCrn6HtZFtRWw"
+        },
+        {
+          "url": "rtmp://a.rtmp.youtube.com/live2",
+          "stream_key": "******",
+          "status": "broadcasting",
+          "passthrough": "YouTube",
+          "id": "xl9IyCxhrfXKkTbmm5Pk6wez7R48ClywWLt1B1EgMyM39Duevx4Deg"
+        }
+      ],
+      "recording": true,
+      "recent_asset_ids": [],
+      "playback_ids": [
+        {
+          "policy": "public",
+          "id": "qzrAqvB41wlq5d2hYJ6RT6Y00KRl2Gf2k"
+        }
+      ],
+      "new_asset_settings": {
+        "playback_policies": [
+          "public"
+        ]
+      },
+      "max_continuous_duration": 43200,
+      "low_latency": true,
+      "latency_mode": "low",
+      "id": "1TaauZVrUfXwkpUxKVWQiSOD02YWhTpan",
+      "created_at": 1706884405,
+      "connected": true,
+      "active_ingest_protocol": "rtmp",
+      "active_asset_id": "uGTBjfqFSPO4kgAj6Sll01LITWMLf500Gl"
+    },
+    "created_at": "2024-04-04T19:00:37.613000Z",
+    "attempts": [],
+    "accessor_source": null,
+    "accessor": null
+  }
