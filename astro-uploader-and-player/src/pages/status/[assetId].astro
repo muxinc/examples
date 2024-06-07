@@ -1,0 +1,68 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import mux from '../../lib/mux';
+
+const { assetId } = Astro.params;
+
+// now that we have an assetId, we can see how the video is doing.
+// in production, you might have some setup where a Mux webhook
+// tells your server the status of your asset.
+// https://docs.mux.com/guides/listen-for-webhooks
+// for this example, however, we'll just ask the Mux API ourselves
+if (typeof assetId !== 'string') {
+  return new Response(null, {
+    status: 404,
+    statusText: 'Not found',
+  });
+}
+const asset = await mux.video.assets.retrieve(assetId);
+
+// if the asset is ready and it has a public playback ID,
+// (which it should, considering the upload settings we used)
+// redirect to its playback page
+if (asset.status === 'ready') {
+  const playbackIds = asset.playback_ids;
+  if (Array.isArray(playbackIds)) {
+    const playbackId = playbackIds.find((id) => id.policy === 'public');
+    if (playbackId) {
+      return Astro.redirect(`/playback/${playbackId.id}`);
+    }
+  }
+}
+---
+
+<Layout title={`Asset ${assetId}`}>
+  <!-- if the asset is not ready, we'll show a page with the status... -->{
+    // in most cases, the asset is just preparing.
+    // Let's say something to that effect.
+    asset.status === 'preparing' ? (
+      <p>Asset is preparing...</p>
+    ) : (
+      // if not "preparing", then "errored" or "ready"
+      // if "errored", we'll show the errors
+      // we don't expect to see "ready" because "ready" should redirect in the loader
+      <Fragment>
+        <p>
+          Asset is in an unexpected state: <code>{status}</code>.
+        </p>
+        {Array.isArray(asset.errors) ? (
+          <ul>
+            {asset.errors.map((error, key) => (
+              <li>{JSON.stringify(error)}</li>
+            ))}
+          </ul>
+        ) : null}
+        <p>
+          This is awkward. Let&apos;s <a href="/">refresh</a> and try again.
+        </p>
+      </Fragment>
+    )
+  }
+
+  <!-- And refresh that page on an interval -->
+  <script>
+    setInterval(() => {
+      location.reload();
+    }, 2000);
+  </script>
+</Layout>
