@@ -1,0 +1,55 @@
+---
+import Layout from '../layouts/Layout.astro';
+import mux from '../lib/mux';
+
+const upload = await mux.video.uploads.create({
+  new_asset_settings: {
+    playback_policy: ['public'],
+    encoding_tier: 'baseline',
+  },
+  cors_origin: '*',
+});
+---
+
+<Layout title="Upload a video to Mux">
+  <main>
+    <div>
+      <mux-uploader endpoint={upload.url}></mux-uploader>
+    </div>
+
+    <form method="POST">
+      <input type="hidden" value={upload.id} name="uploadId" />
+      <button type="submit" disabled>Watch video!</button>
+    </form>
+  </main>
+</Layout>
+
+<script>
+  import '@mux/mux-uploader';
+  import { actions } from 'astro:actions';
+
+  /* Enable the the form on mux-uploader successs */
+  const muxUploader = document.querySelector('mux-uploader');
+  if (muxUploader) {
+    muxUploader.addEventListener('success', function () {
+      const button = document.querySelector('button');
+      if (button) button.disabled = false;
+    });
+  }
+
+  /* attach form submit listener */
+  const form = document.querySelector('form');
+  if (form) {
+    form.addEventListener('submit', async function (event) {
+      event.preventDefault();
+      const formData = new FormData(form);
+      const response = await actions.getAssetForUpload(formData);
+
+      if (response.assetId) {
+        window.location.href = `/status/${response.assetId}`;
+      } else {
+        alert(response.message ?? 'An error occurred');
+      }
+    });
+  }
+</script>

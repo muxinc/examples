@@ -1,0 +1,20 @@
+{
+  "name": "astro-uploader-and-player",
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro check && astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/check": "^0.7.0",
+    "@mux/mux-node": "^8.7.1",
+    "@mux/mux-player": "^2.7.0",
+    "@mux/mux-uploader": "^1.0.0-beta.18",
+    "astro": "^4.10.0",
+    "typescript": "^5.4.5"
+  }
+}
