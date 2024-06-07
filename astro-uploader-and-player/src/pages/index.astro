@@ -12,16 +12,12 @@ const upload = await mux.video.uploads.create({
 ---
 
 <Layout title="Upload a video to Mux">
-  <main>
-    <div>
-      <mux-uploader endpoint={upload.url}></mux-uploader>
-    </div>
+  <mux-uploader endpoint={upload.url}></mux-uploader>
 
-    <form method="POST">
-      <input type="hidden" value={upload.id} name="uploadId" />
-      <button type="submit" disabled>Watch video!</button>
-    </form>
-  </main>
+  <form method="POST">
+    <input type="hidden" value={upload.id} name="uploadId" />
+    <button type="submit" disabled>Watch video!</button>
+  </form>
 </Layout>
 
 <script>
