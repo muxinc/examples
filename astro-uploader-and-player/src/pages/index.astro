@@ -18,34 +18,33 @@ const upload = await mux.video.uploads.create({
     <input type="hidden" value={upload.id} name="uploadId" />
     <button type="submit" disabled>Watch video!</button>
   </form>
+  <script>
+    import '@mux/mux-uploader';
+    import { actions } from 'astro:actions';
+
+    /* Enable the the form on mux-uploader successs */
+    const muxUploader = document.querySelector('mux-uploader');
+    if (muxUploader) {
+      muxUploader.addEventListener('success', function () {
+        const button = document.querySelector('button');
+        if (button) button.disabled = false;
+      });
+    }
+
+    /* attach form submit listener */
+    const form = document.querySelector('form');
+    if (form) {
+      form.addEventListener('submit', async function (event) {
+        event.preventDefault();
+        const formData = new FormData(form);
+        const response = await actions.getAssetForUpload(formData);
+
+        if (response.assetId) {
+          window.location.href = `/status/${response.assetId}`;
+        } else {
+          alert(response.message ?? 'An error occurred');
+        }
+      });
+    }
+  </script>
 </Layout>
-
-<script>
-  import '@mux/mux-uploader';
-  import { actions } from 'astro:actions';
-
-  /* Enable the the form on mux-uploader successs */
-  const muxUploader = document.querySelector('mux-uploader');
-  if (muxUploader) {
-    muxUploader.addEventListener('success', function () {
-      const button = document.querySelector('button');
-      if (button) button.disabled = false;
-    });
-  }
-
-  /* attach form submit listener */
-  const form = document.querySelector('form');
-  if (form) {
-    form.addEventListener('submit', async function (event) {
-      event.preventDefault();
-      const formData = new FormData(form);
-      const response = await actions.getAssetForUpload(formData);
-
-      if (response.assetId) {
-        window.location.href = `/status/${response.assetId}`;
-      } else {
-        alert(response.message ?? 'An error occurred');
-      }
-    });
-  }
-</script>
