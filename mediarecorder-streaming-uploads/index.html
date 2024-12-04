@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>MediaRecorder Chunk Upload Example</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 40px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background-color: #f8fafc;
+    }
+    button {
+      padding: 10px 20px;
+      margin: 10px;
+      font-size: 16px;
+      cursor: pointer;
+      border-radius: 6px;
+      border: 1px solid #cbd5e1;
+      background-color: white;
+      transition: all 0.2s;
+    }
+    button:hover:not(:disabled) {
+      background-color: #f1f5f9;
+    }
+    button:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+    #log {
+      width: 80%;
+      max-width: 800px;
+      height: 300px;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      padding: 16px;
+      overflow-y: scroll;
+      background-color: #1e293b;
+      margin-top: 20px;
+      white-space: pre-wrap;
+      font-family: 'JetBrains Mono', 'Fira Code', 'Consolas', 'Monaco', monospace;
+      font-size: 13px;
+      line-height: 1.5;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    video {
+      margin-top: 20px;
+      max-width: 80%;
+      border-radius: 8px;
+      border: 1px solid #e2e8f0;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    #uploadUrlContainer {
+      margin-bottom: 20px;
+      width: 80%;
+      max-width: 800px;
+    }
+    #uploadUrl {
+      width: 100%;
+      padding: 8px 12px;
+      font-size: 14px;
+      border: 1px solid #e2e8f0;
+      border-radius: 6px;
+      font-family: 'JetBrains Mono', 'Consolas', monospace;
+    }
+    label {
+      display: block;
+      margin-bottom: 8px;
+      color: #475569;
+      font-size: 14px;
+    }
+    #log .log-chunk {
+      color: #93c5fd;  /* lighter blue */
+    }
+    #log .log-buffer {
+      color: #86efac;  /* lighter green */
+    }
+    #log .log-upload {
+      color: #c4b5fd;  /* lighter purple */
+    }
+    #log .log-error {
+      color: #fca5a5;  /* lighter red */
+    }
+    #log .log-info {
+      color: #cbd5e1;  /* lighter gray */
+    }
+    #log .timestamp {
+      color: #64748b;  /* muted blue gray */
+      font-size: 0.9em;
+      user-select: none;
+    }
+    /* Custom scrollbar for the log area */
+    #log::-webkit-scrollbar {
+      width: 8px;
+    }
+    #log::-webkit-scrollbar-track {
+      background: #334155;
+      border-radius: 4px;
+    }
+    #log::-webkit-scrollbar-thumb {
+      background: #475569;
+      border-radius: 4px;
+    }
+    #log::-webkit-scrollbar-thumb:hover {
+      background: #64748b;
+    }
+    /* Add smooth transitions */
+    * {
+      transition: all 0.2s ease;
+    }
+  </style>
+</head>
+<body>
+  <h1>MediaRecorder Chunk Upload Example</h1>
+
+  <div id="uploadUrlContainer">
+    <label for="uploadUrl">Upload URL:</label>
+    <input 
+      type="text" 
+      id="uploadUrl" 
+      placeholder="Enter your upload URL here"
+      spellcheck="false"
+    >
+  </div>
+
+  <button id="startBtn">Start Recording</button>
+  <button id="stopBtn" disabled>Stop Recording</button>
+
+  <video id="preview" autoplay muted></video>
+
+  <div id="log"></div>
+
+  <script src="./app.js"></script>
+</body>
+</html>
