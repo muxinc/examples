@@ -28,3 +28,12 @@ function playVideo(context) {
         console.log(`Error code: ${errorCode}`);
     });
 }
+let context = cast.framework.CastContext.getInstance();
+context.addEventListener(cast.framework.CastContextEventType.SESSION_STATE_CHANGED, function(event) {
+  switch (event.sessionState) {
+    case cast.framework.SessionState.SESSION_STARTED:
+    case cast.framework.SessionState.SESSION_RESUMED:
+      playVideo(context);
+      break;
+  }
+});
