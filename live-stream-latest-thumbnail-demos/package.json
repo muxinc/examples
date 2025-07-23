@@ -1,0 +1,28 @@
+{
+  "name": "live-stream-latest-thumbnail-demos",
+  "version": "0.1.0",
+  "description": "Analyzes live stream thumbnails using the OpenAI's API to generate tags and summaries for content discovery, or to moderate content.",
+  "scripts": {
+    "tags": "node tags.js",
+    "moderate": "node moderate.js"
+  },
+  "dependencies": {
+    "openai": "^4.0.0",
+    "zod": "^3.0.0"
+  },
+  "engines": {
+    "node": ">=24.1.0"
+  },
+  "keywords": [
+    "mux",
+    "openai",
+    "live-stream",
+    "thumbnail",
+    "tags",
+    "analysis",
+    "moderation"
+  ],
+  "author": "Phil Cluff / Mux Inc.",
+  "license": "MIT",
+  "type": "module"
+}
