@@ -36,7 +36,7 @@ async function analyzeLiveStream(playbackId) {
           content: [
             {
               type: "input_text",
-              text: "What's in this image? Return a list of around 10 single words, and a summary of the image in 500 characters or less. Be sassy in the summary.",
+              text: "What's in this image? Return a list of around 10 single words, and a summary of the image in 500 characters or less.",
             },
             {
               type: "input_image",
