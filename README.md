@@ -18,6 +18,7 @@ Get to know Mux by looking through examples! Contributions are always welcome, e
 | [swift-data-library-installation](swift-data-library-installation)				| An example Swift app that installs Mux Data using a wrapper library using [Swift Package Manager](https://www.swift.org/package-manager/)										| Mobile, Integration   | Swift      |
 | [aws-recommendation-engine](aws-recommendation-engine)      						| An example of using Mux Data streaming exports to recommend content with Amazon Personalize 																				  	| VOD, Serverless 	    | TypeScript |
 | [nextjs-mdx-player](nextjs-mdx-player)                      						| A [Next.js](https://nextjs.org/) app configured to support [MDX](https://mdxjs.com) to illustrate supporting [MuxPlayer](https://www.mux.com/player) in blog posts. 		  	| VOD, CMS 			  	| JavaScript |
+| [live-stream-latest-thumbnail-demos](live-stream-latest-thumbnail-demos)          | A couple of small demos, which use the OpenAI APIs to poll the latest thumbnail of a live stream, and analyse its contents, or moderate the content.                          | Live, Moderation, AI  | JavaScript |
 
 ## Examples in the wild
 
