@@ -1,5 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { MuxUploader } from '@mux/mux-uploader-astro';
 import mux from '../lib/mux';
 
 const upload = await mux.video.uploads.create({
@@ -12,14 +13,13 @@ const upload = await mux.video.uploads.create({
 ---
 
 <Layout title="Upload a video to Mux">
-  <mux-uploader endpoint={upload.url}></mux-uploader>
+  <MuxUploader endpoint={upload.url} />
 
   <form method="POST">
     <input type="hidden" value={upload.id} name="uploadId" />
     <button type="submit" disabled>Watch video!</button>
   </form>
   <script>
-    import '@mux/mux-uploader';
     import { actions } from 'astro:actions';
 
     /* Enable the the form on mux-uploader successs */
@@ -37,12 +37,11 @@ const upload = await mux.video.uploads.create({
       form.addEventListener('submit', async function (event) {
         event.preventDefault();
         const formData = new FormData(form);
-        const response = await actions.getAssetForUpload(formData);
-
-        if (response.assetId) {
-          window.location.href = `/status/${response.assetId}`;
+        const { data } = await actions.getAssetForUpload(formData);
+        if (data?.assetId) {
+          window.location.href = `/status/${data.assetId}`;
         } else {
-          alert(response.message ?? 'An error occurred');
+          alert(data?.message ?? 'An error occurred');
         }
       });
     }

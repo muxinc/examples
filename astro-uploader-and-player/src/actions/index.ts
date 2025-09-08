@@ -1,4 +1,5 @@
-import { defineAction, z } from 'astro:actions';
+import { defineAction } from 'astro:actions';
+import { z } from 'astro/zod';
 import mux from '../lib/mux';
 
 export const server = {

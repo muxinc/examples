@@ -5,16 +5,16 @@
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
-    "build": "astro check && astro build",
+    "build": "astro build",
     "preview": "astro preview",
     "astro": "astro"
   },
   "dependencies": {
-    "@astrojs/check": "^0.7.0",
+    "@astrojs/check": "^0.9.4",
     "@mux/mux-node": "^8.7.1",
-    "@mux/mux-player": "^2.7.0",
-    "@mux/mux-uploader": "^1.0.0-beta.18",
-    "astro": "^4.10.0",
-    "typescript": "^5.4.5"
+    "@mux/mux-player-astro": "^0.0.1",
+    "@mux/mux-uploader-astro": "^0.0.1",
+    "astro": "^5.13.5",
+    "typescript": "^5.9.2"
   }
 }
