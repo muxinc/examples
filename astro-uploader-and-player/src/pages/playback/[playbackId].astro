@@ -1,19 +1,17 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import { MuxPlayer } from '@mux/mux-player-astro';
 
 const { playbackId } = Astro.params;
 
 const title = 'View this video created with Mux + Astro';
 const description =
-  'This video was uploaded and processed by Mux in an example Remix application.';
+  'This video was uploaded and processed by Mux in an example Astro application.';
 ---
 
 <Layout title={title}>
   <!-- First, the player -->
-  <mux-player playback-id={playbackId}></mux-player>
-  <script>
-    import '@mux/mux-player';
-  </script>
+  <MuxPlayer playbackId={playbackId} />
   <!-- 
     Next, let's make sure this video has some good metadata
     so it shows up nicely on social
