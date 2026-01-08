@@ -8,7 +8,7 @@
     "build": "webpack; yarn zip"
   },
   "dependencies": {
-    "@mux/mux-node": "^2.2.0"
+    "@mux/mux-node": "^3.1.2"
   },
   "devDependencies": {
     "webpack": "^4.32.0",
