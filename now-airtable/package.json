@@ -15,12 +15,12 @@
     "lodash": "^4.17.21",
     "micro": "^9.3.3",
     "micro-basic-auth": "^1.1.1",
-    "next": "^8.0.3",
+    "next": "^9.3.4",
     "react": "^16.8.4",
     "react-dom": "^16.8.4"
   },
   "devDependencies": {
-    "micro-dev": "^3.0.0",
+    "micro-dev": "^3.1.0",
     "node-env-run": "3.0.2",
     "now": "^14.1.1"
   }
