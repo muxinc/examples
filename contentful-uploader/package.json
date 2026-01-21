@@ -8,7 +8,7 @@
     "@babel/plugin-transform-runtime": "7.3.4",
     "@babel/preset-env": "7.3.4",
     "@babel/preset-react": "7.0.0",
-    "@contentful/contentful-extension-scripts": "0.7.1",
+    "@contentful/contentful-extension-scripts": "0.15.1",
     "@types/react": "^16.8.8",
     "@types/react-dom": "^16.8.3",
     "@types/webpack-env": "1.13.9",
