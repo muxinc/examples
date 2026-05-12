@@ -1,0 +1,31 @@
+{
+  "name": "cowatch-spoiler-gate",
+  "version": "0.1.0",
+  "type": "module",
+  "description": "Latency-equalized co-watch room with PDT-gated spoiler-safe chat, built on Mux Player and the Mux Data API.",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js"
+  },
+  "dependencies": {
+    "@mux/mux-node": "^14.0.0",
+    "express": "^4.21.2",
+    "ws": "^8.18.0"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "keywords": [
+    "mux",
+    "mux-player",
+    "mux-data",
+    "co-watch",
+    "watch-party",
+    "synchronization",
+    "websocket",
+    "program-date-time",
+    "ll-hls"
+  ],
+  "author": "Kushankur Das (@kushankurdas)",
+  "license": "MIT"
+}
