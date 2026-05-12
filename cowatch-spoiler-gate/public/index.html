@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Co-watch room — Mux example</title>
+<style>
+  * { box-sizing: border-box; }
+  body {
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    background: #0e0f12; color: #d8dee9; margin: 0; min-height: 100vh;
+    display: grid; place-items: center; padding: 24px;
+  }
+  .card {
+    background: #1a1d23; border: 1px solid #2c313a; border-radius: 8px;
+    padding: 32px; max-width: 480px; width: 100%;
+  }
+  h1 { margin: 0 0 4px; font-size: 24px; }
+  .tag { margin: 0 0 24px; color: #7a8290; font-size: 13px; }
+  label { display: block; font-size: 12px; color: #9aa3b2; margin: 12px 0 6px; }
+  input {
+    width: 100%; padding: 10px; background: #0e0f12; border: 1px solid #2c313a;
+    border-radius: 6px; color: #d8dee9; font: inherit; font-size: 14px;
+  }
+  input:focus { outline: none; border-color: #5c8df4; }
+  button {
+    width: 100%; margin-top: 18px; padding: 11px; background: #5c8df4;
+    border: 0; border-radius: 6px; color: #fff; font: inherit;
+    font-weight: 600; cursor: pointer;
+  }
+  button:hover { background: #6f9bf5; }
+  .hint {
+    margin-top: 22px; font-size: 12px; color: #6a7383; line-height: 1.55;
+  }
+  code { background: #0e0f12; padding: 2px 5px; border-radius: 3px; color: #c5cee0; }
+</style>
+</head>
+<body>
+<div class="card">
+  <h1>Co-watch room</h1>
+  <p class="tag">latency-equalized co-watch · Mux Player + WebSocket sync floor</p>
+  <form id="join">
+    <label for="room">Room</label>
+    <input id="room" required value="lobby" autocomplete="off">
+    <label for="name">Display name</label>
+    <input id="name" required placeholder="alice" autocomplete="off" autofocus>
+    <button type="submit">Join room</button>
+  </form>
+  <p class="hint">
+    Open multiple tabs / devices in the same room. Each tab acts as one viewer
+    with a configurable simulated latency. The slowest viewer becomes the
+    group sync floor and chat is gated to that floor — fast viewers can't
+    react before slow ones reach the same moment.
+  </p>
+</div>
+<script>
+  document.getElementById('join').addEventListener('submit', (e) => {
+    e.preventDefault();
+    const room = encodeURIComponent(document.getElementById('room').value.trim());
+    const name = encodeURIComponent(document.getElementById('name').value.trim());
+    location.href = `/room.html?room=${room}&name=${name}`;
+  });
+</script>
+</body>
+</html>
