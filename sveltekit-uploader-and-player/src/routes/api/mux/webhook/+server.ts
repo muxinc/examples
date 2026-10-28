@@ -11,7 +11,7 @@ export const POST: RequestHandler = async ({ request }) => {
 	// It will also provide type-safe access to the payload.
 	// Generate MUX_WEBHOOK_SIGNING_SECRET in the Mux dashboard
 	// https://dashboard.mux.com/settings/webhooks
-	const event = mux.webhooks.unwrap(body, request.headers, MUX_WEBHOOK_SIGNING_SECRET);
+	const event = await mux.webhooks.unwrap(body, request.headers, MUX_WEBHOOK_SIGNING_SECRET);
 
 	// you can also unwrap the payload yourself:
 	// const event = await request.json();

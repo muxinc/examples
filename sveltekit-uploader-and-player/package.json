@@ -36,8 +36,8 @@
 	},
 	"type": "module",
 	"dependencies": {
-		"@mux/mux-node": "^8.2.3",
 		"@mux/mux-player": "^2.4.1",
-		"@mux/mux-uploader": "^1.0.0-beta.15"
+		"@mux/mux-uploader": "^1.0.0-beta.15",
+		"@mux/ts": "^16.0.0"
 	}
 }

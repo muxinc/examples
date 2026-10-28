@@ -5,7 +5,7 @@ import mux from '../lib/mux';
 
 const upload = await mux.video.uploads.create({
   new_asset_settings: {
-    playback_policy: ['public'],
+    playback_policies: ['public'],
     encoding_tier: 'baseline',
   },
   cors_origin: '*',
