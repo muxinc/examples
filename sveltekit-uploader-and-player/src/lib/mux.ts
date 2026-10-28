@@ -1,4 +1,4 @@
-import Mux from '@mux/mux-node';
+import Mux from '@mux/ts';
 import { MUX_TOKEN_ID, MUX_TOKEN_SECRET } from '$env/static/private';
 
 const mux = new Mux({
