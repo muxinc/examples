@@ -8,6 +8,13 @@ const description =
   'This video was uploaded and processed by Mux in an example Astro application.';
 ---
 
+<script>
+  import '@videojs/html/video/player';
+  import '@videojs/html/video/skin';
+  import '@videojs/html/media/mux-video';
+  import '@videojs/html/extensions/mux-data';
+</script>
+
 <Layout title={title}>
   <!-- First, the player -->
   <video-player>
@@ -17,7 +24,7 @@ const description =
         playsinline
         crossorigin="anonymous"
       ></mux-video>
-      <mux-data></mux-data>
+      <mux-data player-software-name='muxinc/examples/astro-uploader-and-player'></mux-data>
     </video-skin>
   </video-player>
   <!-- 
@@ -51,16 +58,3 @@ const description =
     -->
   </Fragment>
 </Layout>
-
-<script>
-  import '@videojs/html/video/player';
-  import '@videojs/html/video/skin';
-  import '@videojs/html/media/mux-video';
-  import '@videojs/html/extensions/mux-data';
-
-  // Mux Data is opt-in with Video.js: the <mux-data> extension sends the beacons.
-  // `metadata` takes an object, so it's set as a property rather than an attribute.
-  document.querySelector('mux-data')!.metadata = {
-    player_name: 'muxinc/examples/astro-uploader-and-player',
-  };
-</script>
