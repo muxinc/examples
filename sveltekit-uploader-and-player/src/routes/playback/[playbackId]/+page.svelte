@@ -1,6 +1,9 @@
 <script lang="ts">
 	import { page } from '$app/stores';
-	import '@mux/mux-player';
+	import '@videojs/html/video/player';
+	import '@videojs/html/video/skin';
+	import '@videojs/html/media/mux-video';
+	import '@videojs/html/extensions/mux-data';
 
 	let playbackId = $derived($page.params.playbackId);
 	const title = 'View this video created with Mux + SvelteKit';
@@ -12,12 +15,17 @@
 	This video is ready for playback
 </div>
 <div class="bg-black aspect-video mb-8 -mx-4 flex">
-	<mux-player
-		class="w-full"
-		playback-id={playbackId}
-		metadata={{ player_name: 'muxinc/examples/sveltekit-uploader-and-player' }}
-		accentColor="rgb(220 38 38)"
-	/>
+	<video-player class="w-full">
+		<video-skin class="aspect-video" style="--media-accent-color: rgb(220 38 38)">
+			<mux-video
+				src="https://stream.mux.com/{playbackId}.m3u8"
+				playsinline
+				crossorigin="anonymous"
+			></mux-video>
+			<mux-data metadata={{ player_name: 'muxinc/examples/sveltekit-uploader-and-player' }}
+			></mux-data>
+		</video-skin>
+	</video-player>
 </div>
 <p>
 	Go <a class="underline hover:no-underline focus-visible:no-underline text-blue-600" href="/">
