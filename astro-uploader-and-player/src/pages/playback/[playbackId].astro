@@ -1,6 +1,5 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-import { MuxPlayer } from '@mux/mux-player-astro';
 
 const { playbackId } = Astro.params;
 
@@ -11,7 +10,27 @@ const description =
 
 <Layout title={title}>
   <!-- First, the player -->
-  <MuxPlayer playbackId={playbackId} />
+  <video-player>
+    <video-skin style="aspect-ratio: 16 / 9">
+      <mux-video
+        src={`https://stream.mux.com/${playbackId}.m3u8`}
+        playsinline
+        crossorigin="anonymous"
+      ></mux-video>
+      <mux-data></mux-data>
+    </video-skin>
+  </video-player>
+  <script>
+    import '@videojs/html/video/player';
+    import '@videojs/html/video/skin';
+    import '@videojs/html/media/mux-video';
+    import '@videojs/html/extensions/mux-data';
+
+    // `metadata` takes an object, so it's set as a property rather than an attribute.
+    document.querySelector('mux-data')!.metadata = {
+      player_name: 'muxinc/examples/astro-uploader-and-player',
+    };
+  </script>
   <!-- 
     Next, let's make sure this video has some good metadata
     so it shows up nicely on social
