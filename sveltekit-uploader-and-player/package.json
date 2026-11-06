@@ -36,8 +36,10 @@
 	},
 	"type": "module",
 	"dependencies": {
-		"@mux/mux-player": "^2.4.1",
 		"@mux/mux-uploader": "^1.0.0-beta.15",
-		"@mux/ts": "^16.0.0"
+		"@mux/ts": "^16.0.0",
+		"@videojs/html": "^10.2.0",
+		"@videojs/mux-data": "^10.2.0",
+		"@videojs/mux-video": "^10.2.0"
 	}
 }

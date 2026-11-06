@@ -63,10 +63,10 @@ At this point, you're good to `npm run dev`.
 
 Uploading and viewing a video takes four steps:
 
-1. **Upload a video**: Use the Mux [Direct Uploads API](https://docs.mux.com/api-reference#video/tag/direct-uploads?utm_source=muxinc/examples&utm_medium=muxinc/examples&utm_campaign=sveltekit-uploader-and-player) to create an endpoint for [Mux Uploader React](https://docs.mux.com/guides/mux-uploader?utm_source=muxinc/examples&utm_medium=muxinc/examples&utm_campaign=sveltekit-uploader-and-player). The user can then use Mux Uploader to upload a video.
+1. **Upload a video**: Use the Mux [Direct Uploads API](https://docs.mux.com/api-reference#video/tag/direct-uploads?utm_source=muxinc/examples&utm_medium=muxinc/examples&utm_campaign=sveltekit-uploader-and-player) to create an endpoint for [Mux Uploader](https://docs.mux.com/guides/mux-uploader?utm_source=muxinc/examples&utm_medium=muxinc/examples&utm_campaign=sveltekit-uploader-and-player). The user can then use Mux Uploader to upload a video.
 1. **Exchange the `upload.id` for an `asset.id`**: Once the upload is complete, it will have a Mux asset associated with it. We can use the [Direct Uploads API](https://docs.mux.com/api-reference#video/tag/direct-uploads?utm_source=muxinc/examples&utm_medium=muxinc/examples&utm_campaign=sveltekit-uploader-and-player) to check for that asset.
 1. **Use the `asset.id` to check if the asset is ready** by polling the [Asset API](https://docs.mux.com/api-reference#video/tag/assets?utm_source=muxinc/examples&utm_medium=muxinc/examples&utm_campaign=sveltekit-uploader-and-player)
-1. **Play back the video with [Mux Player React](https://docs.mux.com/guides/mux-player-web?utm_source=muxinc/examples&utm_medium=muxinc/examples&utm_campaign=sveltekit-uploader-and-player)** (on a page that uses the [Mux Image API](https://docs.mux.com/guides/get-images-from-a-video) to provide og images)
+1. **Play back the video with [Video.js](https://videojs.org/docs/framework/html/guides/migrate-from-mux-player/)** using `@videojs/mux-video` for Mux playback and the Mux Data extension for analytics (on a page that uses the [Mux Image API](https://docs.mux.com/guides/get-images-from-a-video) to provide og images)
 
 These steps correspond to the following routes:
 
