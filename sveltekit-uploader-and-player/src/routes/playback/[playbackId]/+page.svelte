@@ -14,7 +14,7 @@
 <div class="px-8 py-4 mb-8 text-center bg-green-500/30 rounded-full">
 	This video is ready for playback
 </div>
-<div class="bg-black aspect-video mb-8 -mx-4 flex">
+<div class="aspect-video mb-8 -mx-4 flex">
 	<video-player class="w-full">
 		<video-skin class="aspect-video" style="--media-accent-color: rgb(220 38 38)">
 			<mux-video
