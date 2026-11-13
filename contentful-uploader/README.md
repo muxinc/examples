@@ -89,4 +89,4 @@ Both `uploadId` and `assetId` are things we need to manage the asset in the Mux 
 
 ## Talk to us!
 
-This extension was made with 💖 by the folks from [Mux](https://mux.com). If you have any questions or feedback, [let us know](mailto:help@mux.com)!
+This extension was made with 💖 by the folks from [Mux](https://mux.com). If you have any questions or feedback, [let us know](https://www.mux.com/support)!
